@@ -30,10 +30,8 @@ async def index(request: Request, tgWebAppStartParam: Union[float, None] = None)
         cur = conn.cursor()
         cur.execute(f"""
             select * 
-            --from users_wishes uw
-            --join users u on uw.tg_user_id = u.tg_user_id
-            --join permissions p on u.tg_user_id = p.tg_user_id
-            from permissions p
+            from users_wishes uw
+            join permissions p on uw.tg_user_id = p.tg_user_id
             where p.tg_chat_id = {tgWebAppStartParam}
             ;
         """)
