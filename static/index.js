@@ -50,7 +50,7 @@ async function get_wishes(initData) {
             body: JSON.stringify({user_id: initData.user.id})
         }
     )
-    return response;
+    return response.json();
 }
 
 
