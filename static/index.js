@@ -28,7 +28,7 @@ async function load() {
     console.log(response);
     const res = await response.json();
     console.log(res);
-    const wishes = await res["data"];
+    const wishes = await JSON.parse(res)["data"];
     console.log(wishes);
     for (let i=0; i<wishes.length; i++) {
         let wish = wishes[i];
