@@ -19,19 +19,26 @@ function switchView() {
 }
 
 async function load() {
-    console.log("SFSDGSDGSD");
     Telegram.WebApp.ready();
     Telegram.WebApp.enableClosingConfirmation();
     let initData = Telegram.WebApp.initDataUnsafe;
     document.getElementById("myUsername").textContent = initData.user.first_name;
     Telegram.WebApp.expand();
-    await get_wishes();
+    let response = await get_wishes();
+    let wishes = response["data"];
+    for (let wish in wishes) {
+        let card = document.createElement("div");
+        card.className = "card";
+        card.textContent = wish["name"];
+        let div = document.getElementById("cards-container");
+        div.appendChild(card);
+    }
 }
 
 
 async function get_wishes() {
     await fetch(
-        "/get_wishes",
+        "/get_wishes?tgWebAppStartParam=" + initData.start_param,
         {
             method: "POST",
             headers: {

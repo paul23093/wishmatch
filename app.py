@@ -23,7 +23,6 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 
-
 @app.get("/")
 async def index(request: Request, tgWebAppStartParam: Union[float, None] = None):
     with psycopg2.connect(**con) as conn:
@@ -38,6 +37,26 @@ async def index(request: Request, tgWebAppStartParam: Union[float, None] = None)
         print(cur.fetchall())
     return templates.TemplateResponse("index.html", {"request": request})
 
+
+@app.post("/get_wishes")
+async def get_wishes(request: Request, tgWebAppStartParam: float):
+    data = await request.json()
+    print(f"data: {data}")
+    try:
+        with psycopg2.connect(**con) as conn:
+            cur = conn.cursor()
+            cur.execute(f"""
+                select uw.name, uw.link, uw.price
+                from users_wishes uw
+                join permissions p on uw.tg_user_id = p.tg_user_id
+                where p.tg_chat_id = {tgWebAppStartParam}
+                ;
+            """)
+            print(cur.fetchall())
+        response = {"status": "ok"}
+    except:
+        response = {"status": "ne ok)"}
+    return {"status": "ok", "data": cur.fetchall()}
 
 @app.post("/add_wish")
 async def add_wish(request: Request):
