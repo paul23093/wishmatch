@@ -6,6 +6,8 @@ services:
       context: .
       dockerfile: Dockerfile
     command: python run.py
+    env_file:
+      - .env
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
     ports:
