@@ -25,6 +25,7 @@ async function load() {
     document.getElementById("myUsername").textContent = initData.user.first_name;
     Telegram.WebApp.expand();
     const response = await get_wishes(initData);
+    console.log(response);
     const wishes = await response["data"];
     console.log(wishes);
     for (const wish in wishes) {
@@ -49,7 +50,7 @@ async function get_wishes(initData) {
             body: JSON.stringify({user_id: initData.user.id})
         }
     )
-    return JSON.parse(response);
+    return response;
 }
 
 
