@@ -34,9 +34,6 @@ async function load() {
         card.textContent = wish["name"];
         let div = document.getElementById("cards-container");
         div.appendChild(card);
-        setTimeout(() => {
-            card.style.display = "block";
-        }, 10);
     }
 }
 

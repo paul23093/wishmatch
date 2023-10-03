@@ -122,7 +122,7 @@ body {
 .card {
     background-color: #348294;
     font-family: Arial, serif;
-    display: none;
+    display: block;
     width: 140px;
     height: 150px;
     margin: 10px auto;
@@ -131,4 +131,14 @@ body {
     align-items: stretch;
     border-radius: 10px;
     user-select: none;
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
