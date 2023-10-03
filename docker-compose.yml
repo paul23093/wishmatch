@@ -1,0 +1,12 @@
+version: "3"
+services:
+
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python run.py
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
+    ports:
+      - 7811:7811

@@ -1,0 +1,134 @@
+.username {
+    font-weight: bold;
+}
+
+.subtitle {
+
+}
+
+.left {
+    margin: auto 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.right {
+    margin: auto 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+.icon {
+    padding: 0 5px;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    cursor: pointer;
+}
+
+.button {
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    width: 90%;
+    padding: 10px 15px;
+    margin: auto;
+    border-radius: 5px;
+}
+
+.input {
+    font-family: Arial, serif;
+    font-weight: bold;
+    background-color: rgb(255, 255, 255);
+    width: 90%;
+    padding: 15px 15px;
+    margin: 10px auto;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+
+body {
+    background-color: #B4D9E1;
+    margin: auto;
+    overscroll-behavior-x: none;
+    overscroll-behavior-y: contain;
+}
+
+ .userData {
+    background-color: #348294;
+    width: 90%;
+    font-family: Arial, serif;
+    display: flex;
+    margin: 5px auto;
+    padding: 10px;
+    align-content: space-between;
+    justify-content: space-between;
+    flex-direction: row;
+    border-radius: 10px;
+    user-select: none;
+}
+
+.wish {
+    background-color: #348294;
+    width: 90%;
+    font-family: Arial, serif;
+    display: flex;
+    margin: 5px auto;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    user-select: none;
+}
+
+.form {
+    background-color: #348294;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 95vh;
+    width: 90%;
+    font-family: Arial, serif;
+    display: flex;
+    margin: 5px auto;
+    padding: 10px;
+    align-items: center;
+    align-content: space-between;
+    justify-content: space-between;
+    flex-direction: column;
+    border-radius: 10px;
+    user-select: none;
+}
+
+.grid-view {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 5px;
+}
+
+.grid-view div {
+}
+
+.list-view {
+    display: block;
+}
+
+.list-view div {
+    width: 90%;
+    margin: 10px auto;
+}
+
+.card {
+    background-color: #348294;
+    font-family: Arial, serif;
+    display: block;
+    width: 140px;
+    height: 150px;
+    margin: 10px auto;
+    padding: 10px;
+    justify-content: stretch;
+    align-items: stretch;
+    border-radius: 10px;
+    user-select: none;
+}
