@@ -38,7 +38,7 @@ async function load() {
 
 
 async function get_wishes(initData) {
-    let response = await fetch(
+    const response = await fetch(
         "/get_wishes?tgWebAppStartParam=" + initData.start_param,
         {
             method: "POST",
@@ -49,7 +49,7 @@ async function get_wishes(initData) {
             body: JSON.stringify({user_id: initData.user.id})
         }
     )
-    return response;
+    return JSON.parse(response);
 }
 
 

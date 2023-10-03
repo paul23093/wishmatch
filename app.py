@@ -1,4 +1,5 @@
 import os
+import json
 from typing import Union
 from fastapi import FastAPI, Depends
 from fastapi.templating import Jinja2Templates
@@ -57,7 +58,7 @@ async def get_wishes(request: Request, tgWebAppStartParam: float):
         response = {"status": "ok"}
     except:
         response = {"status": "ne ok)"}
-    return {"status": "ok", "data": data}
+    return json.dumps({"status": "ok", "data": data})
 
 
 @app.post("/add_wish")
