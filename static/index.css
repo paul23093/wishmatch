@@ -93,9 +93,6 @@ body {
     display: flex;
     margin: 5px auto;
     padding: 10px;
-    align-items: center;
-    align-content: space-between;
-    justify-content: space-between;
     flex-direction: column;
     border-radius: 10px;
     user-select: none;
@@ -132,9 +129,9 @@ body {
     border-radius: 10px;
     user-select: none;
     opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-    animation: fadeIn 0.5s ease-in-out forwards;
-    -webkit-animation: fadeIn 0.5s ease-in-out forwards;
+    transition: opacity 0.2s ease-in-out;
+    animation: fadeIn 0.2s ease-in-out forwards;
+    -webkit-animation: fadeIn 0.2s ease-in-out forwards;
 }
 
 @keyframes fadeIn {

@@ -59,7 +59,6 @@ function load_new_wish() {
         if (event.code === "Enter") {
             event.preventDefault();
             const index = parseInt(event.target.getAttribute("data-index"));
-            console.log(index);
             if (index < 3) {
                 document.querySelector('[data-index="' + (index+1) + '"]').focus();
             }
