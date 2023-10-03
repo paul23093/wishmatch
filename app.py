@@ -40,8 +40,8 @@ async def index(request: Request, tgWebAppStartParam: Union[float, None] = None)
 
 @app.post("/get_wishes")
 async def get_wishes(request: Request, tgWebAppStartParam: float):
-    data = await request.json()
-    print(f"data: {data}")
+    raw_data = await request.json()
+    print(f"data: {raw_data}")
     try:
         with psycopg2.connect(**con) as conn:
             cur = conn.cursor()
@@ -52,11 +52,13 @@ async def get_wishes(request: Request, tgWebAppStartParam: float):
                 where p.tg_chat_id = {tgWebAppStartParam}
                 ;
             """)
-            print(cur.fetchall())
+            data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()]
+            print(data)
         response = {"status": "ok"}
     except:
         response = {"status": "ne ok)"}
-    return {"status": "ok", "data": cur.fetchall()}
+    return {"status": "ok", "data": data}
+
 
 @app.post("/add_wish")
 async def add_wish(request: Request):

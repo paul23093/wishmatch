@@ -24,9 +24,9 @@ async function load() {
     let initData = Telegram.WebApp.initDataUnsafe;
     document.getElementById("myUsername").textContent = initData.user.first_name;
     Telegram.WebApp.expand();
-    let response = await get_wishes(initData);
-    let wishes = response["data"];
-    for (let wish in wishes) {
+    const response = await get_wishes(initData);
+    const wishes = await response.json()["data"];
+    for (const wish in wishes) {
         let card = document.createElement("div");
         card.className = "card";
         card.textContent = wish["name"];
