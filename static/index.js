@@ -25,11 +25,8 @@ async function load() {
     document.getElementById("myUsername").textContent = initData.user.first_name;
     Telegram.WebApp.expand();
     const response = await get_wishes(initData);
-    console.log(response);
     const res = await response.json();
-    console.log(res);
     const wishes = await JSON.parse(res)["data"];
-    console.log(wishes);
     for (let i=0; i<wishes.length; i++) {
         let wish = wishes[i];
         let card = document.createElement("div");
@@ -37,6 +34,9 @@ async function load() {
         card.textContent = wish["name"];
         let div = document.getElementById("cards-container");
         div.appendChild(card);
+        setTimeout(() => {
+            card.style.display = "block";
+        }, 10);
     }
 }
 
