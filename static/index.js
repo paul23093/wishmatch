@@ -139,7 +139,7 @@ async function load() {
             const user_wishes_count = user_wishes.length;
 
             let card = document.createElement("div");
-            card.classList.add("card");
+            card.classList.add("card active");
             let div = document.getElementById("cards-container");
             div.appendChild(card);
 
@@ -150,7 +150,7 @@ async function load() {
 
             let price = document.createElement("div");
             price.className = "price";
-            price.textContent = user_wishes_count + "wishes";
+            price.textContent = user_wishes_count + "\nwishes";
             card.appendChild(price);
         }
     }
