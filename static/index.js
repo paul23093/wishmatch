@@ -36,109 +36,117 @@ async function load() {
 
     Telegram.WebApp.ready();
     Telegram.WebApp.enableClosingConfirmation();
-    let initData = Telegram.WebApp.initDataUnsafe;
-    document.getElementById("myUsername").textContent = initData.user.first_name;
+    const initData = Telegram.WebApp.initDataUnsafe;
+    const chat_type = initData.chat_type;
+    let titleText = initData.user.first_name;
+    if (chat_type === "group") {
+        titleText = 'Group wishes'
+    }
+    document.getElementById("title").textContent = titleText;
     Telegram.WebApp.expand();
     const response = await get_wishes(initData);
     const res = await response.json();
-    const wishes = await JSON.parse(res)["data"];
-    for (let i=0; i<wishes.length; i++) {
-        let wish = wishes[i];
-        let card = document.createElement("div");
-        card.classList.add("card");
-        let div = document.getElementById("cards-container");
-        div.appendChild(card);
-
-        let title = document.createElement("div");
-        title.className = "title";
-        title.textContent = wish["name"];
-        card.appendChild(title);
-
-        let price = document.createElement("div");
-        price.className = "price";
-        price.textContent = priceFormat(wish["price"]) + " " + wish["currency"];
-        card.appendChild(price);
-
-
-
-        let bottomBar = document.createElement("div");
-        bottomBar.className = "bottom-bar";
-        card.appendChild(bottomBar);
-
-        let bookMark = document.createElement("div");
-        bookMark.className = "link";
-        bottomBar.appendChild(bookMark);
-        if (wish["is_booked"] === false) {
-            bookMark.textContent = "Book";
-            bookMark.parentElement.parentElement.classList.add("active");
-        } else {
-            bookMark.textContent = "Unbook";
-            bookMark.parentElement.parentElement.classList.add("booked");
-        }
-
-        bookMark.addEventListener("click", async function () {
-            if (wish["is_booked"] === false) {
-                console.log('BOOKED');
-                await fetch(
-                    "/book",
-                    {
-                        method: "POST",
-                        headers: {
-                            "Accept": "application/json",
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            wish_id: wish["id"]
-                        })
-                    }
-                )
-                wish["is_booked"] = true;
-                bookMark.parentElement.parentElement.classList.remove("active");
-                bookMark.parentElement.parentElement.classList.add("booked");
-                bookMark.textContent = "Unbook";
-            } else {
-                console.log('FREE');
-                await fetch(
-                    "/unbook",
-                    {
-                        method: "POST",
-                        headers: {
-                            "Accept": "application/json",
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            wish_id: wish["id"]
-                        })
-                    }
-                )
-                wish["is_booked"] = false;
-                bookMark.parentElement.parentElement.classList.remove("booked");
-                bookMark.parentElement.parentElement.classList.add("active");
-                bookMark.textContent = "Book";
-            }
+    const data = await JSON.parse(res)["data"];
+    const users = uniqueUsers(data);
+    for (let j=0; j<users.length; j++) {
+        const user_wishes = data.filter(function (wish) {
+            return wish["tg_user_id"] === users[j];
         });
 
-        let link = document.createElement("div");
-        link.className = "link";
-        link.textContent = "Link";
-        link.onclick = function () {
-          window.open(wish["link"]);
+        for (let i = 0; i < user_wishes.length; i++) {
+            let wish = user_wishes[i];
+            let card = document.createElement("div");
+            card.classList.add("card");
+            let div = document.getElementById("cards-container");
+            div.appendChild(card);
+
+            let title = document.createElement("div");
+            title.className = "card-title";
+            title.textContent = wish["name"] + wish["tg_user_id"];
+            card.appendChild(title);
+
+            let price = document.createElement("div");
+            price.className = "price";
+            price.textContent = priceFormat(wish["price"]) + " " + wish["currency"];
+            card.appendChild(price);
+
+            let bottomBar = document.createElement("div");
+            bottomBar.className = "bottom-bar";
+            card.appendChild(bottomBar);
+
+            let bookMark = document.createElement("div");
+            bookMark.className = "link";
+            bottomBar.appendChild(bookMark);
+            if (wish["is_booked"] === false) {
+                bookMark.textContent = "Book";
+                bookMark.parentElement.parentElement.classList.add("active");
+            } else {
+                bookMark.textContent = "Unbook";
+                bookMark.parentElement.parentElement.classList.add("booked");
+            }
+
+            bookMark.addEventListener("click", async function () {
+                if (wish["is_booked"] === false) {
+                    await fetch(
+                        "/book",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Accept": "application/json",
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                wish_id: wish["id"]
+                            })
+                        }
+                    )
+                    wish["is_booked"] = true;
+                    bookMark.parentElement.parentElement.classList.remove("active");
+                    bookMark.parentElement.parentElement.classList.add("booked");
+                    bookMark.textContent = "Unbook";
+                } else {
+                    await fetch(
+                        "/unbook",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Accept": "application/json",
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                wish_id: wish["id"]
+                            })
+                        }
+                    )
+                    wish["is_booked"] = false;
+                    bookMark.parentElement.parentElement.classList.remove("booked");
+                    bookMark.parentElement.parentElement.classList.add("active");
+                    bookMark.textContent = "Book";
+                }
+            });
+
+            let link = document.createElement("div");
+            link.className = "link";
+            link.textContent = "Link";
+            link.onclick = function () {
+                window.open(wish["link"]);
+            }
+            bottomBar.appendChild(link);
         }
-        bottomBar.appendChild(link);
     }
 }
 
 
 async function get_wishes(initData) {
     const response = await fetch(
-        "/get_wishes?tgWebAppStartParam=" + initData.start_param,
+        "/get_wishes",
         {
             method: "POST",
             headers: {
                 "Access": "application/json",
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({user_id: initData.user.id})
+            body: JSON.stringify({chat_id: initData.start_param})
         }
     )
     return response;
@@ -197,3 +205,11 @@ function back() {
 function priceFormat(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
+
+function uniqueUsers(wishes) {
+    return wishes
+        .map((item) => item.tg_user_id)
+        .filter(
+            (value, index, current_value) => current_value.indexOf(value) === index
+        );
+};

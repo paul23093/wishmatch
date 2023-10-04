@@ -40,17 +40,17 @@ async def index(request: Request, tgWebAppStartParam: Union[float, None] = None)
 
 
 @app.post("/get_wishes")
-async def get_wishes(request: Request, tgWebAppStartParam: float):
-    raw_data = await request.json()
-    print(f"data: {raw_data}")
+async def get_wishes(request: Request):
+    res = await request.json()
+    print(f"data: {res}")
     try:
         with psycopg2.connect(**con) as conn:
             cur = conn.cursor()
             cur.execute(f"""
-                select uw.id, uw.name, uw.link, uw.price, uw.currency, uw.is_booked
+                select uw.id, uw.name, uw.link, uw.price, uw.currency, uw.is_booked, uw.tg_user_id
                 from users_wishes uw
                 join permissions p on uw.tg_user_id = p.tg_user_id
-                where p.tg_chat_id = {tgWebAppStartParam}
+                where p.tg_chat_id = {res["chat_id"]}
                 order by is_booked
                 ;
             """)

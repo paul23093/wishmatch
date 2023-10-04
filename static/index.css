@@ -150,6 +150,10 @@ body {
     background-color: rgb(52, 130, 148);
 }
 
+.card-title {
+
+}
+
 .price {
     font-family: Open Sans, Arial, serif;
     font-size: 18pt;
