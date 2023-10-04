@@ -190,6 +190,7 @@ async function add_wish() {
 }
 
 function back() {
+    let initData = Telegram.WebApp.initDataUnsafe;
     window.location.href="/?tgWebAppStartParam="+initData.start_param;
 }
 
