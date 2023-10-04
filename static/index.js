@@ -47,9 +47,10 @@ async function load() {
     Telegram.WebApp.expand();
     const response = await get_wishes(initData);
     const res = await response.json();
-    const wishes = await JSON.parse(res)["data"];
+    const data = await JSON.parse(res);
+    const wishes = await data.data;
     const users = uniqueUsers(wishes);
-    if (users.length === 1) {
+    if (users.length === 1 && users[0] === initData.user.id) {
         for (let i = 0; i < wishes.length; i++) {
             let wish = wishes[i];
             let card = document.createElement("div");
@@ -167,7 +168,10 @@ async function get_wishes(initData) {
                 "Access": "application/json",
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({chat_id: initData.start_param})
+            body: JSON.stringify({
+                user_id: initData.user.id,
+                chat_id: initData.start_param
+            })
         }
     )
     return response;

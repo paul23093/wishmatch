@@ -43,24 +43,20 @@ async def index(request: Request, tgWebAppStartParam: Union[float, None] = None)
 async def get_wishes(request: Request):
     res = await request.json()
     print(f"data: {res}")
-    try:
-        with psycopg2.connect(**con) as conn:
-            cur = conn.cursor()
-            cur.execute(f"""
-                select uw.id, uw.name, uw.link, uw.price, uw.currency, uw.is_booked, uw.tg_user_id
-                from users_wishes uw
-                join permissions p on uw.tg_user_id = p.tg_user_id
-                where p.tg_chat_id = {res["chat_id"]}
-                and not is_deleted
-                order by is_booked
-                ;
-            """)
-            data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()]
-            print(data)
-        response = {"status": "ok"}
-    except:
-        response = {"status": "ne ok)"}
-    return json.dumps({"status": "ok", "data": data})
+    with psycopg2.connect(**con) as conn:
+        cur = conn.cursor()
+        cur.execute(f"""
+            select uw.id, uw.name, uw.link, uw.price, uw.currency, uw.is_booked, uw.tg_user_id
+            from users_wishes uw
+            join permissions p on uw.tg_user_id = p.tg_user_id
+            where p.tg_chat_id = {res["chat_id"]}
+            and not is_deleted
+            order by is_booked
+            ;
+        """)
+        data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()]
+        return json.dumps({"status": "ok", "data": data})
+
 
 
 @app.post("/add_wish")
