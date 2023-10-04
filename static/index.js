@@ -52,6 +52,7 @@ async function load() {
 
         let bookMark = document.createElement("div");
         bookMark.className = "link";
+        bottomBar.appendChild(bookMark);
         console.log(wish["is_booked"]);
         if (wish["is_booked"] === false) {
             bookMark.textContent = "Book";
@@ -98,7 +99,6 @@ async function load() {
                 bookMark.textContent = "Book";
             }
         });
-        bottomBar.appendChild(bookMark);
 
         let link = document.createElement("div");
         link.className = "link";
