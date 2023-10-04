@@ -51,6 +51,7 @@ async def get_wishes(request: Request, tgWebAppStartParam: float):
                 from users_wishes uw
                 join permissions p on uw.tg_user_id = p.tg_user_id
                 where p.tg_chat_id = {tgWebAppStartParam}
+                order by is_booked desc
                 ;
             """)
             data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()]

@@ -117,7 +117,6 @@ body {
 }
 
 .card {
-    background-color: rgb(213, 235, 240);
     font-family: Arial, serif;
     position: relative;
     display: flex;
@@ -127,7 +126,7 @@ body {
     margin: 10px auto;
     padding: 10px;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     border-radius: 10px;
     user-select: none;
     opacity: 0;
@@ -136,25 +135,22 @@ body {
     -webkit-animation: fadeIn 0.2s ease-in-out forwards;
 }
 
+.active {
+    background-color: rgb(213, 235, 240);
+}
 
-.card-booked {
+.booked {
     background-color: rgb(52, 130, 148);
-    font-family: Arial, serif;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 140px;
-    height: 150px;
+}
+
+.price {
+    font-family: Open Sans, Arial, serif;
+    font-size: 18pt;
+    display: block;
+    font-weight: bold;
     margin: 10px auto;
     padding: 10px;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 10px;
     user-select: none;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-    animation: fadeIn 0.2s ease-in-out forwards;
-    -webkit-animation: fadeIn 0.2s ease-in-out forwards;
 }
 
 .bottom-bar {

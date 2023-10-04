@@ -30,7 +30,8 @@ async function load() {
     for (let i=0; i<wishes.length; i++) {
         let wish = wishes[i];
         let card = document.createElement("div");
-        card.className = "card";
+        card.classList.add("card");
+        card.classList.add("active");
         let div = document.getElementById("cards-container");
         div.appendChild(card);
 
@@ -38,6 +39,13 @@ async function load() {
         title.className = "title";
         title.textContent = wish["name"];
         card.appendChild(title);
+
+        let price = document.createElement("div");
+        price.className = "price";
+        price.textContent = priceFormat(wish["price"]) + " " + wish["currency"];
+        card.appendChild(price);
+
+
 
         let bottomBar = document.createElement("div");
         bottomBar.className = "bottom-bar";
@@ -47,13 +55,14 @@ async function load() {
         bookMark.className = "link";
         bookMark.textContent = "Book";
         bookMark.onclick = function () {
-          window.open(wish["link"]);
+          bookMark.parentElement.parentElement.classList.remove("active");
+          bookMark.parentElement.parentElement.classList.add("booked");
         }
         bottomBar.appendChild(bookMark);
 
         let link = document.createElement("div");
         link.className = "link";
-        link.textContent = priceFormat(wish["price"]) + " " + wish["currency"];
+        link.textContent = "Link";
         link.onclick = function () {
           window.open(wish["link"]);
         }
