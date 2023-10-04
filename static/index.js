@@ -31,7 +31,6 @@ async function load() {
         let wish = wishes[i];
         let card = document.createElement("div");
         card.classList.add("card");
-        card.classList.add("active");
         let div = document.getElementById("cards-container");
         div.appendChild(card);
 
@@ -55,9 +54,9 @@ async function load() {
         bookMark.className = "link";
         if (wish["is_booked"] === false) {
             bookMark.textContent = "Book";
+            bookMark.parentElement.parentElement.classList.add("active");
         } else {
             bookMark.textContent = "Unbook";
-            bookMark.parentElement.parentElement.classList.remove("active");
             bookMark.parentElement.parentElement.classList.add("booked");
         }
 
