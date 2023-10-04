@@ -50,7 +50,7 @@ body {
     background-color: #B4D9E1;
     margin: auto;
     overscroll-behavior-x: none;
-    overscroll-behavior-y: contain;
+    overscroll-behavior-y: auto;
 }
 
 .userData {
