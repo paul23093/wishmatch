@@ -57,6 +57,8 @@ async function load() {
             bookMark.textContent = "Book";
         } else {
             bookMark.textContent = "Unbook";
+            bookMark.parentElement.parentElement.classList.remove("active");
+            bookMark.parentElement.parentElement.classList.add("booked");
         }
         bookMark.onclick = async function () {
             if (!wish["is_booked"]) {
