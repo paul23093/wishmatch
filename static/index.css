@@ -119,13 +119,15 @@ body {
 .card {
     background-color: #348294;
     font-family: Arial, serif;
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 140px;
     height: 150px;
     margin: 10px auto;
     padding: 10px;
-    align-items: stretch;
+    align-items: center;
+    justify-content: space-between;
     border-radius: 10px;
     user-select: none;
     opacity: 0;
@@ -137,12 +139,13 @@ body {
 .link {
     background-color: rgba(255, 255, 255, 0.4);
     position: absolute;
-    bottom: 5px;
-    width: 80%;
+    bottom: 5%;
+    width: 90%;
     height: 20%;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: auto;
-    padding: 10px 5px;
     border-radius: 10px;
     cursor: pointer;
     user-select: none;

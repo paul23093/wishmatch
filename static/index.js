@@ -34,6 +34,12 @@ async function load() {
         card.textContent = wish["name"];
         let div = document.getElementById("cards-container");
         div.appendChild(card);
+        let link = document.createElement("div");
+        link.className = "link";
+        link.onclick = function () {
+          location.href = wish["link"];
+        }
+        card.appendChild(link);
     }
 }
 
