@@ -47,7 +47,7 @@ async def get_wishes(request: Request, tgWebAppStartParam: float):
         with psycopg2.connect(**con) as conn:
             cur = conn.cursor()
             cur.execute(f"""
-                select uw.name, uw.link, uw.price, uw.currency
+                select uw.id, uw.name, uw.link, uw.price, uw.currency
                 from users_wishes uw
                 join permissions p on uw.tg_user_id = p.tg_user_id
                 where p.tg_chat_id = {tgWebAppStartParam}
