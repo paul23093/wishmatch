@@ -77,6 +77,7 @@ async function load() {
                         })
                     }
                 )
+                wish["is_booked"] = true;
                 bookMark.parentElement.parentElement.classList.remove("active");
                 bookMark.parentElement.parentElement.classList.add("booked");
                 bookMark.textContent = "Unbook";
@@ -95,6 +96,7 @@ async function load() {
                         })
                     }
                 )
+                wish["is_booked"] = false;
                 bookMark.parentElement.parentElement.classList.remove("booked");
                 bookMark.parentElement.parentElement.classList.add("active");
                 bookMark.textContent = "Book";
