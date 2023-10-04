@@ -52,6 +52,7 @@ async function load() {
 
         let bookMark = document.createElement("div");
         bookMark.className = "link";
+        console.log(wish["is_booked"]);
         if (wish["is_booked"] === false) {
             bookMark.textContent = "Book";
             bookMark.parentElement.parentElement.classList.add("active");
