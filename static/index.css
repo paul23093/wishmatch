@@ -25,10 +25,17 @@
     cursor: pointer;
 }
 
+.buttons {
+    display: flex;
+    align-content: space-between;
+    align-items: stretch;
+    justify-items: stretch;
+}
+
 .button {
-    text-align: center;
+    align-content: center;
+    justify-items: center;
     background-color: rgb(255, 255, 255);
-    width: 90%;
     padding: 10px 15px;
     margin: auto;
     border-radius: 5px;
