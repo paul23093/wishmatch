@@ -54,9 +54,9 @@ async function load() {
         let bookMark = document.createElement("div");
         bookMark.className = "link";
         bookMark.textContent = "Book";
-        bookMark.onclick = function () {
+        bookMark.onclick = async function () {
             if (bookMark.textContent === "Book") {
-                fetch(
+                await fetch(
                     "/book",
                     {
                         method: "POST",
@@ -73,7 +73,7 @@ async function load() {
                 bookMark.parentElement.parentElement.classList.add("booked");
                 bookMark.textContent = "Unbook";
             } else {
-                fetch(
+                await fetch(
                     "/unbook",
                     {
                         method: "POST",

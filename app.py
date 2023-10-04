@@ -95,7 +95,7 @@ async def book(request: Request):
 
 
 @app.post("/unbook")
-async def book(request: Request):
+async def unbook(request: Request):
     data = await request.json()
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
