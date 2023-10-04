@@ -55,7 +55,7 @@ async function load() {
         bookMark.className = "link";
         bookMark.textContent = "Book";
         bookMark.onclick = function () {
-            if (bookMark.textContent === "Book") {
+            if (bookMark.textContent == "Book") {
                 bookMark.parentElement.parentElement.classList.remove("active");
                 bookMark.parentElement.parentElement.classList.add("booked");
                 bookMark.textContent = "Unbook";
