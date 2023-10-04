@@ -31,9 +31,25 @@ async function load() {
         let wish = wishes[i];
         let card = document.createElement("div");
         card.className = "card";
-        card.textContent = wish["name"];
         let div = document.getElementById("cards-container");
         div.appendChild(card);
+
+        let title = document.createElement("div");
+        title.className = "title";
+        title.textContent = wish["name"];
+        card.appendChild(title);
+
+        let bottomBar = document.createElement("div");
+        bottomBar.className = "bottom-bar";
+        card.appendChild(bottomBar);
+
+        let bookMark = document.createElement("div");
+        bookMark.className = "link";
+        bookMark.textContent = "Book";
+        bookMark.onclick = function () {
+          window.open(wish["link"]);
+        }
+        bottomBar.appendChild(bookMark);
 
         let link = document.createElement("div");
         link.className = "link";
@@ -41,7 +57,7 @@ async function load() {
         link.onclick = function () {
           window.open(wish["link"]);
         }
-        card.appendChild(link);
+        bottomBar.appendChild(link);
     }
 }
 

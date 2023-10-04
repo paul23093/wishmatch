@@ -117,7 +117,7 @@ body {
 }
 
 .card {
-    background-color: #348294;
+    background-color: rgb(213, 235, 240);
     font-family: Arial, serif;
     position: relative;
     display: flex;
@@ -136,16 +136,46 @@ body {
     -webkit-animation: fadeIn 0.2s ease-in-out forwards;
 }
 
-.link {
-    background-color: rgba(255, 255, 255, 0.4);
+
+.card-booked {
+    background-color: rgb(52, 130, 148);
+    font-family: Arial, serif;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 140px;
+    height: 150px;
+    margin: 10px auto;
+    padding: 10px;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    user-select: none;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    animation: fadeIn 0.2s ease-in-out forwards;
+    -webkit-animation: fadeIn 0.2s ease-in-out forwards;
+}
+
+.bottom-bar {
+    display: flex;
+    flex-direction: row;
     position: absolute;
     bottom: 5%;
     width: 90%;
     height: 20%;
+    justify-content: center;
+    align-items: center;
+}
+
+.link {
+    background-color: rgba(255, 255, 255, 0.4);
     display: flex;
     justify-content: center;
     align-items: center;
     margin: auto;
+    padding: 5px 10px;
+    border: 1px solid rgba(52, 130, 148, 0.4);
     border-radius: 10px;
     cursor: pointer;
     user-select: none;
