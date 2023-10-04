@@ -55,11 +55,37 @@ async function load() {
         bookMark.className = "link";
         bookMark.textContent = "Book";
         bookMark.onclick = function () {
-            if (bookMark.textContent == "Book") {
+            if (bookMark.textContent === "Book") {
+                fetch(
+                    "/book",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Accept": "application/json",
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            wish_id: wish["id"]
+                        })
+                    }
+                )
                 bookMark.parentElement.parentElement.classList.remove("active");
                 bookMark.parentElement.parentElement.classList.add("booked");
                 bookMark.textContent = "Unbook";
             } else {
+                fetch(
+                    "/unbook",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Accept": "application/json",
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            wish_id: wish["id"]
+                        })
+                    }
+                )
                 bookMark.parentElement.parentElement.classList.remove("booked");
                 bookMark.parentElement.parentElement.classList.add("active");
                 bookMark.textContent = "Book";

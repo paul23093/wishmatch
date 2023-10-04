@@ -78,6 +78,38 @@ async def add_wish(request: Request):
     return response
 
 
+@app.post("/book")
+async def book(request: Request):
+    data = await request.json()
+    with psycopg2.connect(**con) as conn:
+        cur = conn.cursor()
+        cur.execute(f"""
+            update users_wishes
+            set is_booked = True
+            where id = {data["wish_id"]}
+           ; 
+        """)
+        conn.commit()
+    response = {"status": "ok"}
+    return response
+
+
+@app.post("/unbook")
+async def book(request: Request):
+    data = await request.json()
+    with psycopg2.connect(**con) as conn:
+        cur = conn.cursor()
+        cur.execute(f"""
+            update users_wishes
+            set is_booked = False
+            where id = {data["wish_id"]}
+           ; 
+        """)
+        conn.commit()
+    response = {"status": "ok"}
+    return response
+
+
 @app.get("/new")
 async def new(request: Request):
     return templates.TemplateResponse("new_wish.html", {"request": request})
