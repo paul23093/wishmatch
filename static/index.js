@@ -53,9 +53,13 @@ async function load() {
 
         let bookMark = document.createElement("div");
         bookMark.className = "link";
-        bookMark.textContent = "Book";
+        if (!wish["is_booked"]) {
+            bookMark.textContent = "Book";
+        } else {
+            bookMark.textContent = "Unbook";
+        }
         bookMark.onclick = async function () {
-            if (bookMark.textContent === "Book") {
+            if (!wish["is_booked"]) {
                 await fetch(
                     "/book",
                     {
