@@ -189,6 +189,10 @@ async function add_wish() {
     window.location.href="/?tgWebAppStartParam="+initData.start_param;
 }
 
+function back() {
+    window.location.href="/?tgWebAppStartParam="+initData.start_param;
+}
+
 function priceFormat(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
