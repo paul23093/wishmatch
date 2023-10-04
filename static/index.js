@@ -139,7 +139,8 @@ async function load() {
             const user_wishes_count = user_wishes.length;
 
             let card = document.createElement("div");
-            card.classList.add("card active");
+            card.classList.add("card");
+            card.classList.add("active");
             let div = document.getElementById("cards-container");
             div.appendChild(card);
 
