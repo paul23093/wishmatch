@@ -38,6 +38,7 @@ async function load() {
     Telegram.WebApp.enableClosingConfirmation();
     const initData = Telegram.WebApp.initDataUnsafe;
     const chat_type = initData.chat_type;
+    console.log(chat_type);
     let titleText = initData.user.first_name;
     if (chat_type === "group") {
         titleText = 'Group wishes'
@@ -46,15 +47,11 @@ async function load() {
     Telegram.WebApp.expand();
     const response = await get_wishes(initData);
     const res = await response.json();
-    const data = await JSON.parse(res)["data"];
-    const users = uniqueUsers(data);
-    for (let j=0; j<users.length; j++) {
-        const user_wishes = data.filter(function (wish) {
-            return wish["tg_user_id"] === users[j];
-        });
-
-        for (let i = 0; i < user_wishes.length; i++) {
-            let wish = user_wishes[i];
+    const wishes = await JSON.parse(res)["data"];
+    const users = uniqueUsers(wishes);
+    if (users.length === 1) {
+        for (let i = 0; i < wishes.length; i++) {
+            let wish = wishes[i];
             let card = document.createElement("div");
             card.classList.add("card");
             let div = document.getElementById("cards-container");
@@ -62,7 +59,7 @@ async function load() {
 
             let title = document.createElement("div");
             title.className = "card-title";
-            title.textContent = wish["name"] + wish["tg_user_id"];
+            title.textContent = wish["name"];
             card.appendChild(title);
 
             let price = document.createElement("div");
@@ -132,6 +129,29 @@ async function load() {
                 window.open(wish["link"]);
             }
             bottomBar.appendChild(link);
+        }
+    }
+    else {
+        for (let j=0; j<users.length; j++) {
+            const user_wishes = wishes.filter(function (wish) {
+                return wish["tg_user_id"] === users[j]
+            });
+            const user_wishes_count = user_wishes.length;
+
+            let card = document.createElement("div");
+            card.classList.add("card");
+            let div = document.getElementById("cards-container");
+            div.appendChild(card);
+
+            let title = document.createElement("div");
+            title.className = "card-title";
+            title.textContent = user_wishes[0].tg_user_id;
+            card.appendChild(title);
+
+            let price = document.createElement("div");
+            price.className = "price";
+            price.textContent = user_wishes_count + "wishes";
+            card.appendChild(price);
         }
     }
 }
