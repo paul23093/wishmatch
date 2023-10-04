@@ -19,6 +19,21 @@ function switchView() {
 }
 
 async function load() {
+
+    let touchstartY = 0;
+    document.addEventListener('touchstart', e => {
+      touchstartY = e.touches[0].clientY;
+    });
+    document.addEventListener('touchmove', e => {
+      const touchY = e.touches[0].clientY;
+      const touchDiff = touchY - touchstartY;
+      if (touchDiff > 0 && window.scrollY === 0) {
+        e.preventDefault();
+      }
+    });
+    document.addEventListener('touchend', e => {
+    });
+
     Telegram.WebApp.ready();
     Telegram.WebApp.enableClosingConfirmation();
     let initData = Telegram.WebApp.initDataUnsafe;
@@ -177,4 +192,3 @@ async function add_wish() {
 function priceFormat(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
-
