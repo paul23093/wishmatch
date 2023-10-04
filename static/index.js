@@ -34,9 +34,10 @@ async function load() {
         card.textContent = wish["name"];
         let div = document.getElementById("cards-container");
         div.appendChild(card);
+
         let link = document.createElement("div");
         link.className = "link";
-        link.textContent = "Link";
+        link.textContent = priceFormat(wish["price"]);
         link.onclick = function () {
           window.open(wish["link"]);
         }
@@ -104,3 +105,8 @@ async function add_wish() {
     );
     window.location.href="/?tgWebAppStartParam="+initData.start_param;
 }
+
+function priceFormat(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+
