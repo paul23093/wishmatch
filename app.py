@@ -51,6 +51,7 @@ async def get_wishes(request: Request):
                 from users_wishes uw
                 join permissions p on uw.tg_user_id = p.tg_user_id
                 where p.tg_chat_id = {res["chat_id"]}
+                and not is_deleted
                 order by is_booked
                 ;
             """)
