@@ -60,7 +60,8 @@ async function load() {
             bookMark.parentElement.parentElement.classList.remove("active");
             bookMark.parentElement.parentElement.classList.add("booked");
         }
-        bookMark.onclick = async function () {
+
+        bookMark.addEventListener("click", async function () {
             if (wish["is_booked"] === false) {
                 await fetch(
                     "/book",
@@ -96,7 +97,7 @@ async function load() {
                 bookMark.parentElement.parentElement.classList.add("active");
                 bookMark.textContent = "Book";
             }
-        }
+        });
         bottomBar.appendChild(bookMark);
 
         let link = document.createElement("div");
