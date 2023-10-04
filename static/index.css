@@ -53,7 +53,7 @@ body {
     overscroll-behavior-y: contain;
 }
 
- .userData {
+.userData {
     background-color: #348294;
     width: 90%;
     font-family: Arial, serif;
@@ -132,6 +132,18 @@ body {
     transition: opacity 0.2s ease-in-out;
     animation: fadeIn 0.2s ease-in-out forwards;
     -webkit-animation: fadeIn 0.2s ease-in-out forwards;
+}
+
+.link {
+    background-color: rgba(255, 255, 255, 0.4);
+    width: 80%;
+    height: 20%;
+    display: block;
+    text-align: center;
+    margin: auto;
+    padding: 10px 5px;
+    border-radius: 10px;
+    user-select: none;
 }
 
 @keyframes fadeIn {
