@@ -53,7 +53,6 @@ async function load() {
         let bookMark = document.createElement("div");
         bookMark.className = "link";
         bottomBar.appendChild(bookMark);
-        console.log(wish["is_booked"]);
         if (wish["is_booked"] === false) {
             bookMark.textContent = "Book";
             bookMark.parentElement.parentElement.classList.add("active");
@@ -64,6 +63,7 @@ async function load() {
 
         bookMark.addEventListener("click", async function () {
             if (wish["is_booked"] === false) {
+                console.log('BOOKED');
                 await fetch(
                     "/book",
                     {
@@ -81,6 +81,7 @@ async function load() {
                 bookMark.parentElement.parentElement.classList.add("booked");
                 bookMark.textContent = "Unbook";
             } else {
+                console.log('FREE');
                 await fetch(
                     "/unbook",
                     {
