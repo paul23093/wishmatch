@@ -65,18 +65,15 @@ async def get_wishes(request: Request, tgWebAppStartParam: float):
 async def add_wish(request: Request):
     data = await request.json()
     print(data)
-    try:
-        with psycopg2.connect(**con) as conn:
-            cur = conn.cursor()
-            cur.execute(f"""
-                insert into users_wishes (tg_user_id, name, link, price)
-              values ({data["tg_user_id"]}, '{data["name"]}', '{data["link"]}', '{data["price"]}')
-               ; 
-            """)
-            conn.commit()
-        response = {"status": "ok"}
-    except:
-        response = {"status": "ne ok)"}
+    with psycopg2.connect(**con) as conn:
+        cur = conn.cursor()
+        cur.execute(f"""
+            insert into users_wishes (tg_user_id, name, link, price)
+          values ({data["tg_user_id"]}, '{data["name"]}', '{data["link"]}', '{data["price"]}')
+           ; 
+        """)
+        conn.commit()
+    response = {"status": "ok"}
     return response
 
 
