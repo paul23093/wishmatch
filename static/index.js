@@ -55,8 +55,15 @@ async function load() {
         bookMark.className = "link";
         bookMark.textContent = "Book";
         bookMark.onclick = function () {
-          bookMark.parentElement.parentElement.classList.remove("active");
-          bookMark.parentElement.parentElement.classList.add("booked");
+            if (bookMark.textContent === "Book") {
+                bookMark.parentElement.parentElement.classList.remove("active");
+                bookMark.parentElement.parentElement.classList.add("booked");
+                bookMark.textContent = "Unbook";
+            } else {
+                bookMark.parentElement.parentElement.classList.remove("booked");
+                bookMark.parentElement.parentElement.classList.add("active");
+                bookMark.textContent = "Book";
+            }
         }
         bottomBar.appendChild(bookMark);
 
