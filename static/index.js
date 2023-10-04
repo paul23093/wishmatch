@@ -40,7 +40,7 @@ async function load() {
     const chat_type = initData.chat_type;
     console.log(chat_type);
     let titleText = initData.user.first_name;
-    if (chat_type === "group") {
+    if (["group", "supergroup"].includes(chat_type)) {
         titleText = 'Group wishes'
     }
     document.getElementById("title").textContent = titleText;
