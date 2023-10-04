@@ -37,7 +37,7 @@ async function load() {
 
         let link = document.createElement("div");
         link.className = "link";
-        link.textContent = priceFormat(wish["price"]);
+        link.textContent = priceFormat(wish["price"]) + " " + wish["currency"];
         link.onclick = function () {
           window.open(wish["link"]);
         }
