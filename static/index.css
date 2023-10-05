@@ -1,3 +1,11 @@
+body {
+    font-family: Open Sans, Arial, serif;
+    background-color: #B4D9E1;
+    margin: auto;
+    overscroll-behavior-x: none;
+    overscroll-behavior-y: auto;
+}
+
 .username {
     font-size: 14pt;
     font-weight: bold;
@@ -38,6 +46,7 @@
 }
 
 .button {
+    font-weight: bold;
     text-align: center;
     align-content: center;
     justify-items: center;
@@ -56,7 +65,6 @@
 .input {
     font-family: Arial, serif;
     font-size: 12pt;
-    font-weight: bold;
     background-color: rgb(255, 255, 255);
     width: 90%;
     padding: 15px 15px;
@@ -64,13 +72,6 @@
     border: none;
     border-radius: 5px;
     outline: none;
-}
-
-body {
-    background-color: #B4D9E1;
-    margin: auto;
-    overscroll-behavior-x: none;
-    overscroll-behavior-y: auto;
 }
 
 .topBar {
