@@ -48,7 +48,10 @@ async function load() {
     if (["group", "supergroup"].includes(chat_type)) {
         titleText = 'Group wishes'
     }
-    document.getElementById("title").textContent = titleText + " - " + users.length " users";
+    document.getElementById("title").textContent = titleText + " - " + users.length + " user";
+    if (users.length > 1) {
+        document.getElementById("title").textContent += "s";
+    }
     if (users.length === 1 && users[0] === initData.user.id) {
         for (let i = 0; i < wishes.length; i++) {
             let wish = wishes[i];
