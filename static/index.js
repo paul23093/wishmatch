@@ -40,7 +40,7 @@ async function load() {
 
     let titleText = initData.user.first_name;
     if (["group", "supergroup"].includes(chat_type)) {
-        titleText = chat[0];
+        titleText = chat[0].tg_chat_name;
         let subtitleText = users.length + " user";
         if (users.length > 1) {
             subtitleText += "s";
@@ -144,7 +144,7 @@ async function load() {
             card.classList.add("card");
             card.classList.add("active");
             card.onclick = function () {
-                location.href = '/user_wishes?user_id=' + users[j];
+                location.href = "/user_wishes?user_id=" + users[j] + "&chat_id=" + chat[0].tg_chat_id;
             };
             let div = document.getElementById("cards-container");
             div.appendChild(card);
@@ -367,7 +367,7 @@ function uniqueUsers(wishes) {
 
 function uniqueChats(wishes) {
     return wishes
-        .map((item) => item.tg_chat_name)
+        .map((item) => item)
         .filter(
             (value, index, current_value) => current_value.indexOf(value) === index
         );
