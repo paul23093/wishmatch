@@ -176,7 +176,7 @@ async function load_user_wishes() {
         let wish = wishes[i];
         let card = document.createElement("div");
         card.classList.add("card");
-        card.classList.add("card clickable");
+        card.classList.add("clickable");
         let div = document.getElementById("cards-container");
         div.appendChild(card);
 
