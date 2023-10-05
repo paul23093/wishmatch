@@ -165,7 +165,7 @@ async function load() {
 
 
 async function get_wishes(initData) {
-    let json_chat_id = {{ chat_id|tojson|safe }}
+    let json_chat_id = {{{ chat_id|tojson|safe }}}
     const response = await fetch(
         "/get_wishes",
         {
