@@ -6,7 +6,10 @@ body {
     overscroll-behavior-y: auto;
 }
 
-.username {
+.page-title {
+    margin: auto;
+    display: flex;
+    align-items: center;
     font-size: 14pt;
     font-weight: bold;
 }
@@ -15,19 +18,23 @@ body {
 
 }
 
-.left {
-    margin: auto 5px;
+.icons-tray {
+    position: absolute;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
+    margin: auto;
+    top: 50%;
+}
+
+.left {
+    left: 0;
+    transform: translate(20%, -50%);
 }
 
 .right {
-    margin: auto 5px;
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
-    align-items: center;
+    right: 0;
+    transform: translate(-20%, -50%);
 }
 
 .icon {
@@ -76,13 +83,14 @@ body {
 
 .topBar {
     background-color: #348294;
+    position: relative;
     height: 30px;
     width: 90%;
     font-family: Arial, serif;
     display: flex;
     margin: 5px auto;
     padding: 10px;
-    align-content: space-between;
+    align-content: center;
     justify-content: space-between;
     flex-direction: row;
     border-radius: 10px;
@@ -113,9 +121,11 @@ body {
     width: 90%;
     font-family: Arial, serif;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin: 5px auto;
     padding: 10px;
-    flex-direction: column;
     border-radius: 10px;
     user-select: none;
 }
