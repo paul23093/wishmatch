@@ -42,7 +42,17 @@ async def get_wishes(request: Request):
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
-            select uw.id, uw.name, uw.link, uw.price, uw.currency, uw.is_booked, uw.tg_user_id, u.tg_username, u.tg_first_name
+            select 
+                uw.id, 
+                uw.name, 
+                uw.link, 
+                uw.price, 
+                uw.currency, 
+                uw.is_booked, 
+                uw.tg_user_id, 
+                u.tg_username, 
+                u.tg_first_name, 
+                c.tg_chat_name
             from users_wishes uw
             join permissions p on uw.tg_user_id = p.tg_user_id
             join users u on uw.tg_user_id = u.tg_user_id

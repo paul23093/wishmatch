@@ -36,10 +36,11 @@ async function load() {
     const data = await JSON.parse(res);
     const wishes = await data.data;
     const users = uniqueUsers(wishes);
+    const chat = uniqueChats(wishes);
 
     let titleText = initData.user.first_name;
     if (["group", "supergroup"].includes(chat_type)) {
-        titleText = 'Group wishes';
+        titleText = chat[0];
         let subtitleText = users.length + " user";
         if (users.length > 1) {
             subtitleText += "s";
@@ -237,6 +238,14 @@ function priceFormat(x) {
 function uniqueUsers(wishes) {
     return wishes
         .map((item) => item.tg_user_id)
+        .filter(
+            (value, index, current_value) => current_value.indexOf(value) === index
+        );
+};
+
+function uniqueChats(wishes) {
+    return wishes
+        .map((item) => item.tg_chat_id)
         .filter(
             (value, index, current_value) => current_value.indexOf(value) === index
         );
