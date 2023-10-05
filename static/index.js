@@ -152,7 +152,7 @@ async function load() {
 
             let title = document.createElement("div");
             title.className = "card-title";
-            title.textContent = user_wishes[0].first_name;
+            title.textContent = user_wishes[0].tg_first_name;
             card.appendChild(title);
 
             let price = document.createElement("div");
