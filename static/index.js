@@ -200,10 +200,10 @@ function load_new_wish() {
 async function add_wish() {
     let initData = Telegram.WebApp.initDataUnsafe;
     let tg_user_id = initData.user.id;
-    let name = document.getElementById("title").value;
-    let link = document.getElementById("link").value;
-    let price = document.getElementById("price").value;
-    let currency = document.getElementById("currency").value;
+    let name = document.getElementById("wish-title").value;
+    let link = document.getElementById("wish-link").value;
+    let price = document.getElementById("wish-price").value;
+    let currency = document.getElementById("wish-currency").value;
 
     await fetch(
 	    "/add_wish",

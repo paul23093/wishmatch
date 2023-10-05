@@ -10,11 +10,12 @@ body {
     margin: auto;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
 .page-title #title {
-    font-size: 14pt;
+    font-size: 13pt;
     font-weight: bold;
 }
 

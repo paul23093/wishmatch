@@ -14,14 +14,14 @@
     <div class="icons-tray left">
         <span class="icon material-symbols-outlined" onclick="back()">arrow_back</span>
     </div>
-    <div class="page-title">New wish</div>
+    <div class="page-title" id="title">New wish</div>
 </div>
 <div class="form">
-    <input id="title" data-index="1" type="text" class="input" placeholder="Title"/>
-    <input id="link" data-index="2" type="text" inputmode="url" class="input" placeholder="Link"/>
+    <input id="wish-title" data-index="1" type="text" class="input" placeholder="Title"/>
+    <input id="wish-link" data-index="2" type="text" inputmode="url" class="input" placeholder="Link"/>
     <div class="price-block">
-        <input id="price" style="flex: 2" data-index="3" type="text" class="input" placeholder="Price"/>
-        <input id="currency" style="flex: 1" data-index="4" type="text" class="input" placeholder="Currency"/>
+        <input id="wish-price" style="flex: 2" data-index="3" type="text" class="input" placeholder="Price"/>
+        <input id="wish-currency" style="flex: 1" data-index="4" type="text" class="input" placeholder="Currency"/>
     </div>
     <div onclick="add_wish()" class="button">Add</div>
 </div>
