@@ -1,11 +1,3 @@
-function newWish() {
-    let newWindow = document.createElement("div");
-    newWindow.className = "wish";
-    let userDataArray = document.getElementsByClassName("userData");
-    let userData = userDataArray[userDataArray.length-1];
-    userData.parentNode.insertBefore(newWindow, userData.nextSibling);
-}
-
 function switchView() {
     let button = document.getElementById("view-button");
     let container = document.getElementById("cards-container");
@@ -184,17 +176,18 @@ async function get_wishes(initData) {
 
 
 function load_new_wish() {
+    let inputCount = Array.prototype.slice.call(document.querySelectorAll("input[data-index]")).reduce((prev, curr) => curr > prev ? curr.getAttribute("data-index") : prev.getAttribute("data-index"));
     addEventListener("keydown", (event) => {
         if (event.code === "Enter") {
             event.preventDefault();
             const index = parseInt(event.target.getAttribute("data-index"));
-            if (index < 3) {
+            if (index < inputCount) {
                 document.querySelector('[data-index="' + (index+1) + '"]').focus();
             }
         }
     });
 
-    document.querySelector('[data-index="3"]').addEventListener('keydown', (event) => {
+    document.querySelector('[data-index="' + inputCount + '"]').addEventListener('keydown', (event) => {
         if (event.code === 'Enter') {
             event.target.blur();
         }
@@ -207,7 +200,8 @@ async function add_wish() {
     let name = document.getElementById("title").value;
     let link = document.getElementById("link").value;
     let price = document.getElementById("price").value;
-    
+    let currency = document.getElementById("currency").value;
+
     await fetch(
 	    "/add_wish",
 	    {
@@ -220,7 +214,8 @@ async function add_wish() {
 			    tg_user_id: tg_user_id, 
 			    name: name, 
 			    link: link, 
-			    price: price
+			    price: price,
+                currency: currency
 		    })
 	    }
     );

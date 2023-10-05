@@ -55,7 +55,6 @@ async def get_wishes(request: Request):
         return json.dumps({"status": "ok", "data": data})
 
 
-
 @app.post("/add_wish")
 async def add_wish(request: Request):
     data = await request.json()
@@ -63,8 +62,8 @@ async def add_wish(request: Request):
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
-            insert into users_wishes (tg_user_id, name, link, price)
-          values ({data["tg_user_id"]}, '{data["name"]}', '{data["link"]}', '{data["price"]}')
+            insert into users_wishes (tg_user_id, name, link, price, currency)
+          values ({data["tg_user_id"]}, '{data["name"]}', '{data["link"]}', '{data["price"]}', '{data["currency"]}')
            ; 
         """)
         conn.commit()
