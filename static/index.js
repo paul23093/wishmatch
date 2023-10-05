@@ -169,7 +169,7 @@ async function load_user_wishes() {
     const initData = Telegram.WebApp.initDataUnsafe;
     const chat_type = initData.chat_type;
     Telegram.WebApp.expand();
-    const response = await get_user_wishes(user_id);
+    const response = await get_user_wishes(user_id, chat_id);
     const res = await response.json();
     const data = await JSON.parse(res);
     const wishes = await data.data;
