@@ -25,7 +25,7 @@ templates = Jinja2Templates(directory="templates")
 
 
 @app.get("/")
-async def index(request: Request):
+async def index(request: Request, tgWebAppStartParam: Union[float, None] = None):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
