@@ -344,17 +344,23 @@ function priceFormat(x) {
 }
 
 function uniqueUsers(wishes) {
-    return wishes
-        .map((item) => item)
-        .filter(
-            (value, index, current_value) => current_value.tg_user_id.indexOf(value) === index
-        );
+    const uniqueUserIds = {};
+    return wishes.filter(obj => {
+        if (!uniqueUserIds[obj.tg_user_id]) {
+            uniqueUserIds[obj.tg_user_id] = true;
+            return true;
+        }
+        return false;
+    };
 };
 
 function uniqueChats(wishes) {
-    return wishes
-        .map((item) => item)
-        .filter(
-            (value, index, current_value) => current_value.tg_chat_id.indexOf(value) === index
-        );
+    const uniqueChatIds = {};
+    return wishes.filter(obj => {
+        if (!uniqueChatIds[obj.tg_chat_id]) {
+            uniqueChatIds[obj.tg_chat_id] = true;
+            return true;
+        }
+        return false;
+    };
 };
