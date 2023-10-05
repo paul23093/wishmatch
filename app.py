@@ -50,8 +50,7 @@ async def get_wishes(request: Request):
                 uw.is_booked, 
                 uw.tg_user_id, 
                 u.tg_username, 
-                u.tg_first_name,
-                c.tg_chat_id, 
+                u.tg_first_name, 
                 c.tg_chat_name
             from users_wishes uw
             join permissions p on uw.tg_user_id = p.tg_user_id
@@ -82,6 +81,7 @@ async def get_user_wishes(request: Request):
                 uw.tg_user_id, 
                 u.tg_username, 
                 u.tg_first_name, 
+                c.tg_chat_id,
                 c.tg_chat_name
             from users_wishes uw
             join permissions p on uw.tg_user_id = p.tg_user_id
