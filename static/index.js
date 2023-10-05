@@ -175,7 +175,7 @@ async function get_wishes(initData) {
             },
             body: JSON.stringify({
                 user_id: initData.user.id,
-                chat_id: json_chat_id.chat_id
+                chat_id: chat_id
             })
         }
     )
