@@ -173,11 +173,11 @@ async function load_user_wishes() {
     const res = await response.json();
     const data = await JSON.parse(res);
     const wishes = await data.data;
-    const users = uniqueUsers(wishes);
+    const user = uniqueUsers(wishes);
     const chat = uniqueChats(wishes);
 
-    let titleText = initData.user.first_name;
-    let subtitleText = chat[0];
+    let titleText = user[0].tg_first_name;
+    let subtitleText = chat[0].tg_chat_name;
 
     document.getElementById("title").textContent = titleText;
     document.getElementById("subtitle").textContent = subtitleText;
@@ -359,9 +359,9 @@ function priceFormat(x) {
 
 function uniqueUsers(wishes) {
     return wishes
-        .map((item) => item.tg_user_id)
+        .map((item) => item)
         .filter(
-            (value, index, current_value) => current_value.indexOf(value) === index
+            (value, index, current_value) => current_value.tg_user_id.indexOf(value) === index
         );
 };
 
@@ -369,6 +369,6 @@ function uniqueChats(wishes) {
     return wishes
         .map((item) => item)
         .filter(
-            (value, index, current_value) => current_value.indexOf(value) === index
+            (value, index, current_value) => current_value.tg_chat_id.indexOf(value) === index
         );
 };
