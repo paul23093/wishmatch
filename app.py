@@ -25,18 +25,18 @@ templates = Jinja2Templates(directory="templates")
 
 
 @app.get("/")
-async def index(request: Request, tgWebAppStartParam: Union[float, None] = None):
-    chat_id = tgWebAppStartParam if tgWebAppStartParam else 0
-    with psycopg2.connect(**con) as conn:
-        cur = conn.cursor()
-        cur.execute(f"""
-            select * 
-            from users_wishes uw
-            join permissions p on uw.tg_user_id = p.tg_user_id
-            where p.tg_chat_id = {chat_id}
-            ;
-        """)
-        print(cur.fetchall())
+async def index(request: Request):
+    # chat_id = tgWebAppStartParam if tgWebAppStartParam else 0
+    # with psycopg2.connect(**con) as conn:
+    #     cur = conn.cursor()
+    #     cur.execute(f"""
+    #         select *
+    #         from users_wishes uw
+    #         join permissions p on uw.tg_user_id = p.tg_user_id
+    #         where p.tg_chat_id = {chat_id}
+    #         ;
+    #     """)
+    #     print(cur.fetchall())
     return templates.TemplateResponse("index.html", {"request": request})
 
 
