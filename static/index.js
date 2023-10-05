@@ -38,20 +38,23 @@ async function load() {
     Telegram.WebApp.enableClosingConfirmation();
     const initData = Telegram.WebApp.initDataUnsafe;
     const chat_type = initData.chat_type;
-    let titleText = initData.user.first_name;
     Telegram.WebApp.expand();
     const response = await get_wishes(initData);
     const res = await response.json();
     const data = await JSON.parse(res);
     const wishes = await data.data;
     const users = uniqueUsers(wishes);
+
+    let titleText = initData.user.first_name;
     if (["group", "supergroup"].includes(chat_type)) {
-        titleText = 'Group wishes'
+        titleText = 'Group wishes';
     }
-    document.getElementById("title").textContent = titleText + " - " + users.length + " user";
+    titleText += " - " + users.length + " user";
     if (users.length > 1) {
-        document.getElementById("title").textContent += "s";
+        titleText += "s";
     }
+    document.getElementById("title").textContent = titleText;
+
     if (users.length === 1 && users[0] === initData.user.id) {
         for (let i = 0; i < wishes.length; i++) {
             let wish = wishes[i];
