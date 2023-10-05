@@ -293,8 +293,7 @@ async function get_user_wishes(user_id) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                user_id: user_id,
-                chat_id: chat_id
+                user_id: user_id
             })
         }
     );
