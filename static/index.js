@@ -351,8 +351,8 @@ function uniqueUsers(wishes) {
             return true;
         }
         return false;
-    };
-};
+    });
+}
 
 function uniqueChats(wishes) {
     const uniqueChatIds = {};
@@ -362,5 +362,5 @@ function uniqueChats(wishes) {
             return true;
         }
         return false;
-    };
-};
+    });
+}
