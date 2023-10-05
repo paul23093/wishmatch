@@ -128,6 +128,7 @@ async function load() {
 
             let card = document.createElement("div");
             card.classList.add("card");
+            card.classList.add("clickable");
             card.classList.add("active");
             card.onclick = function () {
                 location.href = "/user_wishes?user_id=" + users[j].tg_user_id + "&chat_id=" + chat[0].tg_chat_id;
@@ -176,7 +177,6 @@ async function load_user_wishes() {
         let wish = wishes[i];
         let card = document.createElement("div");
         card.classList.add("card");
-        card.classList.add("clickable");
         let div = document.getElementById("cards-container");
         div.appendChild(card);
 
