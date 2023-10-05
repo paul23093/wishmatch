@@ -1,4 +1,4 @@
-name: WebApp Image CI
+name: WishMatch WebApp CI
 
 on:
   push:
