@@ -25,7 +25,7 @@ templates = Jinja2Templates(directory="templates")
 
 
 @app.get("/")
-async def index(request: Request, chat_id: float, tgWebAppStartParam: float):
+async def index(request: Request, chat_id: Union[float, None] = None, tgWebAppStartParam: Union[float, None] = None):
     result_chat_id = 0
     if chat_id:
         result_chat_id = chat_id
