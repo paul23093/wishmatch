@@ -86,7 +86,7 @@ async def get_user_wishes(request: Request):
             join permissions p on uw.tg_user_id = p.tg_user_id
             join users u on uw.tg_user_id = u.tg_user_id
             join chats c on c.tg_chat_id = p.tg_chat_id
-            where p.tg_chat_id = {res["user_id"]}
+            where p.tg_chat_id = {res["chat_id"]}
             and p.tg_user_id = {res["user_id"]}
             and not uw.is_deleted
             order by is_booked
@@ -150,5 +150,5 @@ async def new(request: Request):
 
 
 @app.get("/user_wishes")
-async def new(request: Request, user_id: int):
-    return templates.TemplateResponse("user_wishes.html", {"request": request, "user_id": user_id})
+async def new(request: Request, user_id: int, chat_id: float):
+    return templates.TemplateResponse("user_wishes.html", {"request": request, "user_id": user_id, "chat_id": chat_id})

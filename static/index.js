@@ -283,7 +283,7 @@ async function get_wishes(initData) {
     return response;
 }
 
-async function get_user_wishes(user_id) {
+async function get_user_wishes(user_id, chat_id) {
     return await fetch(
         "/get_user_wishes",
         {
@@ -293,7 +293,8 @@ async function get_user_wishes(user_id) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                user_id: user_id
+                user_id: user_id,
+                chat_id: chat_id
             })
         }
     );
