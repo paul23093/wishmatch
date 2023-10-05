@@ -18,6 +18,8 @@
     margin: auto 5px;
     display: flex;
     flex-direction: row;
+    justify-content: end;
+    align-items: center;
 }
 
 .icon {
