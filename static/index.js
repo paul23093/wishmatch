@@ -42,7 +42,7 @@ async function load() {
         titleText = 'Group wishes';
         let subtitleText = users.length + " user";
         if (users.length > 1) {
-            titleText += "s";
+            subtitleText += "s";
         }
         let subtitle = document.getElementById("subtitle");
         subtitle.textContent = subtitleText;
