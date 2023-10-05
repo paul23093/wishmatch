@@ -25,9 +25,14 @@ templates = Jinja2Templates(directory="templates")
 
 
 @app.get("/")
-async def index(request: Request, chat_id: float):
-    print(chat_id)
-    return templates.TemplateResponse("index.html", {"request": request, "chat_id": chat_id})
+async def index(request: Request, chat_id: float, tgWebAppStartParam: float):
+    result_chat_id = 0
+    if chat_id:
+        result_chat_id = chat_id
+    elif tgWebAppStartParam:
+        result_chat_id = tgWebAppStartParam
+    print(result_chat_id)
+    return templates.TemplateResponse("index.html", {"request": request, "result_chat_id": result_chat_id})
 
 
 @app.post("/get_wishes")
