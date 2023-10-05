@@ -25,7 +25,7 @@ templates = Jinja2Templates(directory="templates")
 
 
 @app.get("/")
-async def index(chat_id: float):
+async def index(request: Request, chat_id: float):
     print(chat_id)
     return templates.TemplateResponse("index.html", {"chat_id": chat_id})
 
