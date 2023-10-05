@@ -245,7 +245,7 @@ function uniqueUsers(wishes) {
 
 function uniqueChats(wishes) {
     return wishes
-        .map((item) => item.tg_chat_id)
+        .map((item) => item.tg_chat_name)
         .filter(
             (value, index, current_value) => current_value.indexOf(value) === index
         );
