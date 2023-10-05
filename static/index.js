@@ -12,20 +12,6 @@ function switchView() {
 
 async function load() {
 
-    let touchstartY = 0;
-    document.addEventListener('touchstart', e => {
-      touchstartY = e.touches[0].clientY;
-    });
-    document.addEventListener('touchmove', e => {
-      const touchY = e.touches[0].clientY;
-      const touchDiff = touchY - touchstartY;
-      if (touchDiff > 0 && window.scrollY === 0) {
-        e.preventDefault();
-      }
-    });
-    document.addEventListener('touchend', e => {
-    });
-
     Telegram.WebApp.ready();
     Telegram.WebApp.enableClosingConfirmation();
     const initData = Telegram.WebApp.initDataUnsafe;
@@ -51,7 +37,7 @@ async function load() {
     }
     document.getElementById("title").textContent = titleText;
 
-    if (users.length === 1 && users[0] === initData.user.id) {
+    if (users.length === 1 && users[0].tg_user_id === initData.user.id) {
         for (let i = 0; i < wishes.length; i++) {
             let wish = wishes[i];
             let card = document.createElement("div");
@@ -136,7 +122,7 @@ async function load() {
     else {
         for (let j=0; j<users.length; j++) {
             const user_wishes = wishes.filter(function (wish) {
-                return wish["tg_user_id"] === users[j]
+                return wish["tg_user_id"] === users[j].tg_user_id
             });
             const user_wishes_count = user_wishes.length;
 
@@ -144,7 +130,7 @@ async function load() {
             card.classList.add("card");
             card.classList.add("active");
             card.onclick = function () {
-                location.href = "/user_wishes?user_id=" + users[j] + "&chat_id=" + chat[0].tg_chat_id;
+                location.href = "/user_wishes?user_id=" + users[j].tg_user_id + "&chat_id=" + chat[0].tg_chat_id;
             };
             let div = document.getElementById("cards-container");
             div.appendChild(card);
