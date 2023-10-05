@@ -71,7 +71,7 @@ body {
     overscroll-behavior-y: auto;
 }
 
-.userData {
+.topBar {
     background-color: #348294;
     height: 4vh;
     width: 90%;
