@@ -143,6 +143,9 @@ async function load() {
             let card = document.createElement("div");
             card.classList.add("card");
             card.classList.add("active");
+            card.onclick = function () {
+                location.href = '/user_wishes?user_id=' + users[j];
+            };
             let div = document.getElementById("cards-container");
             div.appendChild(card);
 
@@ -156,6 +159,108 @@ async function load() {
             price.textContent = user_wishes_count + "\nwishes";
             card.appendChild(price);
         }
+    }
+}
+
+
+async function load_user_wishes() {
+    Telegram.WebApp.ready();
+    Telegram.WebApp.enableClosingConfirmation();
+    const initData = Telegram.WebApp.initDataUnsafe;
+    const chat_type = initData.chat_type;
+    Telegram.WebApp.expand();
+    const response = await get_user_wishes(user_id);
+    const res = await response.json();
+    const data = await JSON.parse(res);
+    const wishes = await data.data;
+    const users = uniqueUsers(wishes);
+    const chat = uniqueChats(wishes);
+
+    let titleText = initData.user.first_name;
+    let subtitleText = chat[0];
+
+    document.getElementById("title").textContent = titleText;
+    document.getElementById("subtitle").textContent = subtitleText;
+
+    for (let i = 0; i < wishes.length; i++) {
+        let wish = wishes[i];
+        let card = document.createElement("div");
+        card.classList.add("card");
+        let div = document.getElementById("cards-container");
+        div.appendChild(card);
+
+        let title = document.createElement("div");
+        title.className = "card-title";
+        title.textContent = wish["name"];
+        card.appendChild(title);
+
+        let price = document.createElement("div");
+        price.className = "price";
+        price.textContent = priceFormat(wish["price"]) + " " + wish["currency"];
+        card.appendChild(price);
+
+        let bottomBar = document.createElement("div");
+        bottomBar.className = "bottom-bar";
+        card.appendChild(bottomBar);
+
+        let bookMark = document.createElement("div");
+        bookMark.className = "link";
+        bottomBar.appendChild(bookMark);
+        if (wish["is_booked"] === false) {
+            bookMark.textContent = "Book";
+            bookMark.parentElement.parentElement.classList.add("active");
+        } else {
+            bookMark.textContent = "Unbook";
+            bookMark.parentElement.parentElement.classList.add("booked");
+        }
+
+        bookMark.addEventListener("click", async function () {
+            if (wish["is_booked"] === false) {
+                await fetch(
+                    "/book",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Accept": "application/json",
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            wish_id: wish["id"]
+                        })
+                    }
+                )
+                wish["is_booked"] = true;
+                bookMark.parentElement.parentElement.classList.remove("active");
+                bookMark.parentElement.parentElement.classList.add("booked");
+                bookMark.textContent = "Unbook";
+            } else {
+                await fetch(
+                    "/unbook",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Accept": "application/json",
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            wish_id: wish["id"]
+                        })
+                    }
+                )
+                wish["is_booked"] = false;
+                bookMark.parentElement.parentElement.classList.remove("booked");
+                bookMark.parentElement.parentElement.classList.add("active");
+                bookMark.textContent = "Book";
+            }
+        });
+
+        let link = document.createElement("div");
+        link.className = "link";
+        link.textContent = "Link";
+        link.onclick = function () {
+            window.open(wish["link"]);
+        }
+        bottomBar.appendChild(link);
     }
 }
 
@@ -176,6 +281,23 @@ async function get_wishes(initData) {
         }
     )
     return response;
+}
+
+async function get_user_wishes(user_id) {
+    return await fetch(
+        "/get_user_wishes",
+        {
+            method: "POST",
+            headers: {
+                "Access": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                user_id: user_id,
+                chat_id: chat_id
+            })
+        }
+    );
 }
 
 

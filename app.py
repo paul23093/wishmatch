@@ -38,7 +38,6 @@ async def index(request: Request, chat_id: Union[float, None] = None, tgWebAppSt
 @app.post("/get_wishes")
 async def get_wishes(request: Request):
     res = await request.json()
-    print(f"data: {res}")
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
@@ -58,6 +57,37 @@ async def get_wishes(request: Request):
             join users u on uw.tg_user_id = u.tg_user_id
             join chats c on c.tg_chat_id = p.tg_chat_id
             where p.tg_chat_id in ({res["chat_id"]})
+            and not uw.is_deleted
+            order by is_booked
+            ;
+        """)
+        data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()]
+        return json.dumps({"status": "ok", "data": data})
+
+
+@app.post("/get_user_wishes")
+async def get_user_wishes(request: Request):
+    res = await request.json()
+    with psycopg2.connect(**con) as conn:
+        cur = conn.cursor()
+        cur.execute(f"""
+            select 
+                uw.id, 
+                uw.name, 
+                uw.link, 
+                uw.price, 
+                uw.currency, 
+                uw.is_booked, 
+                uw.tg_user_id, 
+                u.tg_username, 
+                u.tg_first_name, 
+                c.tg_chat_name
+            from users_wishes uw
+            join permissions p on uw.tg_user_id = p.tg_user_id
+            join users u on uw.tg_user_id = u.tg_user_id
+            join chats c on c.tg_chat_id = p.tg_chat_id
+            where p.tg_chat_id = {res["chat_id"]}
+            and p.tg_user_id = {res["user_id"]}
             and not uw.is_deleted
             order by is_booked
             ;
@@ -118,3 +148,7 @@ async def unbook(request: Request):
 async def new(request: Request):
     return templates.TemplateResponse("new_wish.html", {"request": request})
 
+
+@app.get("/user_wishes")
+async def new(request: Request, user_id: int):
+    return templates.TemplateResponse("user_wishes.html", {"request": request, "user_id": user_id})
