@@ -88,6 +88,9 @@ body {
     border: none;
     border-radius: 5px;
     outline: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
 }
 
 .topBar {
