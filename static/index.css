@@ -9,13 +9,18 @@ body {
 .page-title {
     margin: auto;
     display: flex;
+    flex-direction: column;
     align-items: center;
+}
+
+.page-title#title {
     font-size: 14pt;
     font-weight: bold;
 }
 
-.subtitle {
-
+.page-title#subtitle {
+    display: none;
+    font-size: 10pt;
 }
 
 .icons-tray {

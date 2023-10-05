@@ -40,10 +40,13 @@ async function load() {
     let titleText = initData.user.first_name;
     if (["group", "supergroup"].includes(chat_type)) {
         titleText = 'Group wishes';
-        titleText += " - " + users.length + " user";
+        let subtitleText = users.length + " user";
         if (users.length > 1) {
             titleText += "s";
         }
+        let subtitle = document.getElementById("subtitle");
+        subtitle.textContent = subtitleText;
+        subtitle.style.display = "flex";
     }
     document.getElementById("title").textContent = titleText;
 
