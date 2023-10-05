@@ -36,9 +36,10 @@ async def get_wishes(request: Request):
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
-            select uw.id, uw.name, uw.link, uw.price, uw.currency, uw.is_booked, uw.tg_user_id
+            select uw.id, uw.name, uw.link, uw.price, uw.currency, uw.is_booked, uw.tg_user_id, u.username, u.first_name
             from users_wishes uw
             join permissions p on uw.tg_user_id = p.tg_user_id
+            join users u on uw.tg_user_id = u.tg_user_id
             where p.tg_chat_id in ({res["chat_id"]}, {res["user_id"]})
             and not is_deleted
             order by is_booked
