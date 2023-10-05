@@ -179,6 +179,10 @@ body {
     -webkit-animation: fadeIn 0.2s ease-in-out forwards;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 .active {
     background-color: rgb(213, 235, 240);
 }

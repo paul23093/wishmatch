@@ -165,13 +165,18 @@ async function load_user_wishes() {
     let titleText = user[0].tg_first_name;
     let subtitleText = chat[0].tg_chat_name;
 
-    document.getElementById("title").textContent = titleText;
-    document.getElementById("subtitle").textContent = subtitleText;
+    let title = document.getElementById("title");
+    title.textContent = titleText;
+
+    let subtitle = document.getElementById("subtitle");
+    subtitle.textContent = subtitleText;
+    subtitle.style.display = "flex";
 
     for (let i = 0; i < wishes.length; i++) {
         let wish = wishes[i];
         let card = document.createElement("div");
         card.classList.add("card");
+        card.classList.add("card clickable");
         let div = document.getElementById("cards-container");
         div.appendChild(card);
 
