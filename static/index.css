@@ -13,12 +13,12 @@ body {
     align-items: center;
 }
 
-.page-title#title {
+.page-title #title {
     font-size: 14pt;
     font-weight: bold;
 }
 
-.page-title#subtitle {
+.page-title #subtitle {
     display: none;
     font-size: 10pt;
 }
