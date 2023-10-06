@@ -100,7 +100,7 @@ async function load() {
             let linkIcon = document.createElement("span");
             linkIcon.classList.add("material-symbols-outlined");
             linkIcon.textContent = "open_in_new";
-            bookMark.appendChild(linkIcon);
+            link.appendChild(linkIcon);
             link.onclick = function () {
                 window.open(wish["link"]);
             }
@@ -188,10 +188,16 @@ async function load_user_wishes() {
         bottomBar.appendChild(bookMark);
         if (user_id !== initData.user.id) {
             if (wish["is_booked"] === false) {
-                bookMark.textContent = "Book";
+                let bookIcon = document.createElement("span");
+                bookIcon.classList.add("material-symbols-outlined");
+                bookIcon.textContent = "hand_gesture";
+                bookMark.appendChild(bookIcon);
                 bookMark.parentElement.parentElement.classList.add("active");
             } else {
-                bookMark.textContent = "Unbook";
+                let bookIcon = document.createElement("span");
+                bookIcon.classList.add("material-symbols-outlined");
+                bookIcon.textContent = "do_not_touch";
+                bookMark.appendChild(bookIcon);
                 bookMark.parentElement.parentElement.classList.add("booked");
             }
             bookMark.addEventListener("click", async function () {
@@ -270,7 +276,7 @@ async function load_user_wishes() {
         let linkIcon = document.createElement("span");
         linkIcon.classList.add("material-symbols-outlined");
         linkIcon.textContent = "open_in_new";
-        bookMark.appendChild(linkIcon);
+        link.appendChild(linkIcon);
         link.onclick = function () {
             window.open(wish["link"]);
         }
