@@ -159,7 +159,7 @@ body {
 }
 
 .card {
-    font-family: Arial, serif;
+    font-family: Open Sans, Arial, serif;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -192,7 +192,12 @@ body {
 }
 
 .card-title {
-
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    font-family: Open Sans, Arial, serif;
+    font-weight: bold;
+    font-size: 10pt;
 }
 
 .price {
@@ -200,6 +205,13 @@ body {
     font-size: 18pt;
     display: block;
     font-weight: bold;
+    margin: 10px auto;
+    padding: 10px;
+    user-select: none;
+}
+
+.wish-count {
+    font-size: 15pt;
     margin: 10px auto;
     padding: 10px;
     user-select: none;

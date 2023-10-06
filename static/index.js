@@ -142,8 +142,9 @@ async function load() {
             card.appendChild(title);
 
             let price = document.createElement("div");
-            price.className = "price";
-            price.textContent = user_wishes_count + "\nwishes";
+            price.className = "wish-count";
+            price.textContent = user_wishes_count + "\nwish";
+            price.textContent += user_wishes_count>1 ? "es" : "";
             card.appendChild(price);
         }
     }
