@@ -65,7 +65,7 @@ async function load() {
             card.appendChild(bottomBar);
 
             let bookMark = document.createElement("div");
-            bookMark.className = "link";
+            bookMark.className = "bookmark";
             bottomBar.appendChild(bookMark);
             if (wish["is_deleted"] === false) {
                 let deleteIcon = document.createElement("span");
