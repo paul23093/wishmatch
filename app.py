@@ -59,6 +59,7 @@ async def get_wishes(request: Request):
             join chats c on c.tg_chat_id = p.tg_chat_id
             where p.tg_chat_id in ({res["chat_id"]})
             and not uw.is_deleted
+            and not p.is_deleted
             order by is_booked
             ;
         """)
