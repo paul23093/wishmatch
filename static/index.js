@@ -68,7 +68,10 @@ async function load() {
             bookMark.className = "link";
             bottomBar.appendChild(bookMark);
             if (wish["is_deleted"] === false) {
-                bookMark.textContent = "Delete";
+                let deleteIcon = document.createElement("span");
+                deleteIcon.classList.add("material-symbols-outlined");
+                deleteIcon.textContent = "delete";
+                bookMark.appendChild(deleteIcon);
                 bookMark.parentElement.parentElement.classList.add("active");
             }
 
@@ -94,7 +97,10 @@ async function load() {
 
             let link = document.createElement("div");
             link.className = "link";
-            link.textContent = "Link";
+            let linkIcon = document.createElement("span");
+            linkIcon.classList.add("material-symbols-outlined");
+            linkIcon.textContent = "open_in_new";
+            bookMark.appendChild(linkIcon);
             link.onclick = function () {
                 window.open(wish["link"]);
             }
@@ -261,7 +267,10 @@ async function load_user_wishes() {
 
         let link = document.createElement("div");
         link.className = "link";
-        link.textContent = "Link";
+        let linkIcon = document.createElement("span");
+        linkIcon.classList.add("material-symbols-outlined");
+        linkIcon.textContent = "open_in_new";
+        bookMark.appendChild(linkIcon);
         link.onclick = function () {
             window.open(wish["link"]);
         }
