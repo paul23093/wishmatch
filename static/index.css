@@ -55,6 +55,7 @@ body {
 }
 
 .icon {
+    color: var(--tg-theme-button-text-color);
     padding: 0 5px;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
@@ -202,7 +203,7 @@ body {
 
 .booked {
     background-color: var(--tg-theme-secondary-bg-color);
-    opacity: 0.4;
+    opacity: 0.2;
 }
 
 .card-title {
@@ -243,7 +244,7 @@ body {
 }
 
 .link {
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: var(--tg-theme-button-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -256,7 +257,7 @@ body {
 }
 
 .bookmark {
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: var(--tg-theme-button-color);
     display: flex;
     justify-content: center;
     align-items: center;
