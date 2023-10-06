@@ -55,7 +55,7 @@ body {
 }
 
 .icon {
-    color: var(--tg-theme-button-text-color);
+    color: var(--tg-theme-text-color);
     padding: 0 5px;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
