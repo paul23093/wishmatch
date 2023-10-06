@@ -34,6 +34,11 @@ async function load() {
         let subtitle = document.getElementById("subtitle");
         subtitle.textContent = subtitleText;
         subtitle.style.display = "flex";
+
+        let chatPhoto = document.getElementById("chat-photo");
+        let img = document.createElement("img");
+        img.src = chat[0].tg_chat_photo_url;
+        chatPhoto.appendChild(img);
     }
     document.getElementById("title").textContent = titleText;
 

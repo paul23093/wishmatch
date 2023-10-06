@@ -11,6 +11,9 @@
 </head>
 <body onload="load()">
 <div class="topBar">
+    <div class="icons-tray left">
+        <div class="chat-photo" id="chat-photo"></div>
+    </div>
     <div class="page-title">
         <div id="title"></div>
         <div id="subtitle"></div>
@@ -21,10 +24,6 @@
     </div>
 </div>
 <div class="grid-view" id="cards-container"></div>
-<div class="card active clickable">
-    <div class="card-title">@paul23093</div>
-    <div class="wish-count">2 wishes</div>
-</div>
 <script>
     let chat_id = {{ result_chat_id }};
 </script>

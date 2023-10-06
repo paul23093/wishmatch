@@ -43,6 +43,17 @@ body {
     transform: translate(-20%, -50%);
 }
 
+.chat-photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-photo img {
+    width: 40px;
+    border-radius: 100vw;
+}
+
 .icon {
     padding: 0 5px;
     -webkit-tap-highlight-color: transparent;
