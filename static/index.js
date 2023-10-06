@@ -232,7 +232,7 @@ async function load_user_wishes() {
             if (wish["is_deleted"] === false) {
                 // bookMark.textContent = "Delete";
                 let deleteIcon = document.createElement("span");
-                deleteIcon.classList.add("material-symbols-classNamened");
+                deleteIcon.classList.add("material-symbols-outlined");
                 deleteIcon.textContent = "delete";
                 bookMark.appendChild(deleteIcon);
                 bookMark.parentElement.parentElement.classList.add("active");
