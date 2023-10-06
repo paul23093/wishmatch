@@ -218,7 +218,7 @@ async function load_user_wishes() {
                     wish["is_booked"] = true;
                     bookMark.parentElement.parentElement.classList.remove("active");
                     bookMark.parentElement.parentElement.classList.add("booked");
-                    bookMark.getElementsByClassName("bookmark")[0].textContent = "do_not_touch";
+                    bookMark.querySelector("span").textContent = "do_not_touch";
                 } else {
                     await fetch(
                         "/unbook",
@@ -236,7 +236,7 @@ async function load_user_wishes() {
                     wish["is_booked"] = false;
                     bookMark.parentElement.parentElement.classList.remove("booked");
                     bookMark.parentElement.parentElement.classList.add("active");
-                    bookMark.getElementsByClassName("bookmark")[0].textContent = "hand_gesture";
+                    bookMark.querySelector("span").textContent = "hand_gesture";
                 }
             });
 
