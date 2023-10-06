@@ -1,6 +1,6 @@
 body {
     font-family: Open Sans, Arial, serif;
-    background-color: #B4D9E1;
+    background-color: var(--tg-theme-bg-color);
     margin: auto;
     overscroll-behavior-x: none;
     overscroll-behavior-y: auto;
