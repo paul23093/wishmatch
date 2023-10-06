@@ -139,7 +139,7 @@ body {
 }
 
 .form {
-    /*background-color: #348294;*/
+    background-color: var(--tg-theme-secondary-bg-color);
     height: 85vh;
     width: 90%;
     font-family: Arial, serif;
