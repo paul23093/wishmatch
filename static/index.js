@@ -184,7 +184,7 @@ async function load_user_wishes() {
         card.appendChild(bottomBar);
 
         let bookMark = document.createElement("div");
-        bookMark.className = "link";
+        bookMark.className = "bookmark";
         bottomBar.appendChild(bookMark);
         if (user_id !== initData.user.id) {
             if (wish["is_booked"] === false) {
@@ -218,10 +218,7 @@ async function load_user_wishes() {
                     wish["is_booked"] = true;
                     bookMark.parentElement.parentElement.classList.remove("active");
                     bookMark.parentElement.parentElement.classList.add("booked");
-                    let bookIcon = document.createElement("span");
-                    bookIcon.classList.add("material-symbols-outlined");
-                    bookIcon.textContent = "do_not_touch";
-                    bookMark.appendChild(bookIcon);
+                    bookMark.getElementsByClassName("bookmark")[0].textContent = "do_not_touch";
                 } else {
                     await fetch(
                         "/unbook",
@@ -239,10 +236,7 @@ async function load_user_wishes() {
                     wish["is_booked"] = false;
                     bookMark.parentElement.parentElement.classList.remove("booked");
                     bookMark.parentElement.parentElement.classList.add("active");
-                    let bookIcon = document.createElement("span");
-                    bookIcon.classList.add("material-symbols-outlined");
-                    bookIcon.textContent = "hand_gesture";
-                    bookMark.appendChild(bookIcon);
+                    bookMark.getElementsByClassName("bookmark")[0].textContent = "hand_gesture";
                 }
             });
 
