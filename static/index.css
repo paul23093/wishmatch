@@ -172,6 +172,7 @@ body {
 
 .card {
     font-family: Open Sans, Arial, serif;
+    background-color: var(--tg-theme-secondary-bg-color);
     color: var(--tg-theme-text-color);
     position: relative;
     display: flex;
