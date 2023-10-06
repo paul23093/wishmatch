@@ -230,7 +230,11 @@ async function load_user_wishes() {
 
         } else {
             if (wish["is_deleted"] === false) {
-                bookMark.textContent = "Delete";
+                // bookMark.textContent = "Delete";
+                let deleteIcon = document.createElement("span");
+                deleteIcon.classList.add("material-symbols-classNamened");
+                deleteIcon.textContent = "delete";
+                bookMark.appendChild(deleteIcon);
                 bookMark.parentElement.parentElement.classList.add("active");
             }
 
