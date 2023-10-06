@@ -1,6 +1,6 @@
 body {
     font-family: Open Sans, Arial, serif;
-    background-color: var(--tg-theme-secondary-bg-color);
+    background-color: var(--tg-theme-bg-color);
     margin: auto;
     overscroll-behavior-x: none;
     overscroll-behavior-y: auto;
@@ -105,7 +105,7 @@ body {
 }
 
 .topBar {
-    background-color: #348294;
+    background-color: var(--tg-theme-secondary-bg-color);
     position: relative;
     height: 35px;
     width: 90%;
