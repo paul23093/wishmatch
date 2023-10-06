@@ -252,6 +252,19 @@ body {
     user-select: none;
 }
 
+.bookmark {
+    background-color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 5px 10px;
+    border: 1px solid rgba(52, 130, 148, 0.4);
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
