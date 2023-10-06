@@ -82,6 +82,7 @@ async def get_user_wishes(request: Request):
                 uw.price, 
                 uw.currency, 
                 uw.is_booked, 
+                uw.is_deleted, 
                 uw.tg_user_id, 
                 u.tg_username, 
                 u.tg_first_name, 

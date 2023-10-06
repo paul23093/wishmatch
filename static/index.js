@@ -180,53 +180,80 @@ async function load_user_wishes() {
         let bookMark = document.createElement("div");
         bookMark.className = "link";
         bottomBar.appendChild(bookMark);
-        if (wish["is_booked"] === false) {
-            bookMark.textContent = "Book";
-            bookMark.parentElement.parentElement.classList.add("active");
-        } else {
-            bookMark.textContent = "Unbook";
-            bookMark.parentElement.parentElement.classList.add("booked");
-        }
-
-        bookMark.addEventListener("click", async function () {
+        if (user_id !== initData.user.id) {
             if (wish["is_booked"] === false) {
-                await fetch(
-                    "/book",
-                    {
-                        method: "POST",
-                        headers: {
-                            "Accept": "application/json",
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            wish_id: wish["id"]
-                        })
-                    }
-                )
-                wish["is_booked"] = true;
-                bookMark.parentElement.parentElement.classList.remove("active");
-                bookMark.parentElement.parentElement.classList.add("booked");
-                bookMark.textContent = "Unbook";
-            } else {
-                await fetch(
-                    "/unbook",
-                    {
-                        method: "POST",
-                        headers: {
-                            "Accept": "application/json",
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            wish_id: wish["id"]
-                        })
-                    }
-                )
-                wish["is_booked"] = false;
-                bookMark.parentElement.parentElement.classList.remove("booked");
-                bookMark.parentElement.parentElement.classList.add("active");
                 bookMark.textContent = "Book";
+                bookMark.parentElement.parentElement.classList.add("active");
+            } else {
+                bookMark.textContent = "Unbook";
+                bookMark.parentElement.parentElement.classList.add("booked");
             }
-        });
+            bookMark.addEventListener("click", async function () {
+                if (wish["is_booked"] === false) {
+                    await fetch(
+                        "/book",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Accept": "application/json",
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                wish_id: wish["id"]
+                            })
+                        }
+                    )
+                    wish["is_booked"] = true;
+                    bookMark.parentElement.parentElement.classList.remove("active");
+                    bookMark.parentElement.parentElement.classList.add("booked");
+                    bookMark.textContent = "Unbook";
+                } else {
+                    await fetch(
+                        "/unbook",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Accept": "application/json",
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                wish_id: wish["id"]
+                            })
+                        }
+                    )
+                    wish["is_booked"] = false;
+                    bookMark.parentElement.parentElement.classList.remove("booked");
+                    bookMark.parentElement.parentElement.classList.add("active");
+                    bookMark.textContent = "Book";
+                }
+            });
+
+        } else {
+            if (wish["is_deleted"] === false) {
+                bookMark.textContent = "Delete";
+                bookMark.parentElement.parentElement.classList.add("active");
+            }
+
+            bookMark.addEventListener("click", async function () {
+                if (wish["is_deleted"] === false) {
+                    await fetch(
+                        "/delete",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Accept": "application/json",
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                wish_id: wish["id"]
+                            })
+                        }
+                    )
+                    wish["is_deleted"] = true;
+                    bookMark.parentElement.parentElement.remove();
+                }
+            });
+        }
 
         let link = document.createElement("div");
         link.className = "link";
