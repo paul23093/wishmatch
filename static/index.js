@@ -218,7 +218,10 @@ async function load_user_wishes() {
                     wish["is_booked"] = true;
                     bookMark.parentElement.parentElement.classList.remove("active");
                     bookMark.parentElement.parentElement.classList.add("booked");
-                    bookMark.textContent = "Unbook";
+                    let bookIcon = document.createElement("span");
+                    bookIcon.classList.add("material-symbols-outlined");
+                    bookIcon.textContent = "do_not_touch";
+                    bookMark.appendChild(bookIcon);
                 } else {
                     await fetch(
                         "/unbook",
@@ -236,7 +239,10 @@ async function load_user_wishes() {
                     wish["is_booked"] = false;
                     bookMark.parentElement.parentElement.classList.remove("booked");
                     bookMark.parentElement.parentElement.classList.add("active");
-                    bookMark.textContent = "Book";
+                    let bookIcon = document.createElement("span");
+                    bookIcon.classList.add("material-symbols-outlined");
+                    bookIcon.textContent = "hand_gesture";
+                    bookMark.appendChild(bookIcon);
                 }
             });
 
