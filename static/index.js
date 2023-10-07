@@ -40,11 +40,6 @@ async function load() {
             let img = document.createElement("img");
             img.src = "data:image/png;base64," + chat[0].tg_chat_photo;
             chatPhoto.appendChild(img);
-        } else {
-            let placeholder = document.createElement("span");
-            placeholder.classList.add("material-symbols-outlined");
-            placeholder.textContent = "groups";
-            chatPhoto.appendChild(placeholder);
         }
     } else {
         let userPhoto = document.getElementById("chat-photo");
@@ -52,11 +47,6 @@ async function load() {
             let img = document.createElement("img");
             img.src = "data:image/png;base64," + chat[0].tg_profile_photo;
             userPhoto.appendChild(img);
-        } else {
-            let placeholder = document.createElement("span");
-            placeholder.classList.add("material-symbols-outlined");
-            placeholder.textContent = "account_circle";
-            chatPhoto.appendChild(placeholder);
         }
     }
     document.getElementById("title").textContent = titleText;
