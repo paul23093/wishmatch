@@ -137,9 +137,16 @@ async function load() {
             userPhoto.className = "user-photo";
             header.appendChild(userPhoto);
 
-            let userPhotoImg = document.createElement("img");
-            userPhotoImg.src = "data:image/png;base64," + user_wishes[0].tg_profile_photo;
-            userPhoto.appendChild(userPhotoImg);
+            if (user_wishes[0].tg_profile_photo != null) {
+                let userPhotoImg = document.createElement("img");
+                userPhotoImg.src = "data:image/png;base64," + user_wishes[0].tg_profile_photo;
+                userPhoto.appendChild(userPhotoImg);
+            } else {
+                let userPhotoPlaceholder = document.createElement("span");
+                userPhotoPlaceholder.classList.add("material-symbols-outlined");
+                userPhotoPlaceholder.textContent = "account_circle";
+                userPhoto.appendChild(userPhotoPlaceholder);
+            }
 
             let userInfo = document.createElement("div");
             userInfo.className = "user-info";
