@@ -51,11 +51,11 @@ async def get_wishes(request: Request):
                 uw.is_deleted, 
                 uw.tg_user_id, 
                 u.tg_username, 
-                u.tg_first_name, 
+                u.tg_first_name,
+                u.tg_profile_photo, 
                 c.tg_chat_id,
                 c.tg_chat_name,
-                c.tg_chat_photo,
-                u.tg_profile_photo
+                c.tg_chat_photo
             from users_wishes uw
             join permissions p on uw.tg_user_id = p.tg_user_id
             join users u on uw.tg_user_id = u.tg_user_id
@@ -86,10 +86,10 @@ async def get_user_wishes(request: Request):
                 uw.is_deleted, 
                 uw.tg_user_id, 
                 u.tg_username, 
-                u.tg_first_name, 
+                u.tg_first_name,
+                u.tg_profile_photo, 
                 c.tg_chat_name,
-                c.tg_chat_photo,
-                u.tg_profile_photo
+                c.tg_chat_photo
             from users_wishes uw
             join permissions p on uw.tg_user_id = p.tg_user_id
             join users u on uw.tg_user_id = u.tg_user_id
