@@ -244,11 +244,11 @@ body {
 }
 
 .active {
-    background-color: #dddddd;
+    background-color: var(--tg-theme-secondary-bg-color);
 }
 
 .booked {
-    background-color: var(--tg-theme-secondary-bg-color);
+    background-color: var(--tg-theme-bg-color);
     opacity: 0.2;
 }
 
