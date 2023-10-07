@@ -243,6 +243,7 @@ async function load_user_wishes() {
         if (wish["tg_user_id"] === initData.user.id) {
             let bookMark = document.createElement("div");
             bookMark.className = "bookmark";
+            bottomBar.appendChild(bookMark);
 
             let deleteIcon = document.createElement("span");
             deleteIcon.classList.add("material-symbols-outlined");
@@ -251,7 +252,6 @@ async function load_user_wishes() {
             bookMark.parentElement.parentElement.classList.add("active");
 
             bookMark.addEventListener("click", async function () {
-                if (wish["is_deleted"] === false) {
                     await fetch(
                         "/delete",
                         {
@@ -264,10 +264,9 @@ async function load_user_wishes() {
                                 wish_id: wish["id"]
                             })
                         }
-                    )
+                    );
                     wish["is_deleted"] = true;
                     bookMark.parentElement.parentElement.remove();
-                }
             });
         } else if (wish["is_booked"] === false || (wish["is_booked"] === true && wish["booked_by"] === initData.user.id)) {
             let bookMark = document.createElement("div");
@@ -300,7 +299,7 @@ async function load_user_wishes() {
                                 tg_user_id: initData.user.id
                             })
                         }
-                    )
+                    );
                     wish["is_booked"] = true;
                     bookMark.parentElement.parentElement.classList.remove("active");
                     bookMark.parentElement.parentElement.classList.add("booked");
@@ -318,7 +317,7 @@ async function load_user_wishes() {
                                 wish_id: wish["id"]
                             })
                         }
-                    )
+                    );
                     wish["is_booked"] = false;
                     bookMark.parentElement.parentElement.classList.remove("booked");
                     bookMark.parentElement.parentElement.classList.add("active");
