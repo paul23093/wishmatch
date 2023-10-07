@@ -23,9 +23,6 @@ async function load() {
     const users = uniqueUsers(wishes);
     const chat = uniqueChats(wishes);
 
-    console.log(users);
-    console.log(chat);
-
 
     let titleText = initData.user.first_name;
     if (["group", "supergroup"].includes(chat_type)) {
@@ -132,16 +129,32 @@ async function load() {
             let div = document.getElementById("cards-container");
             div.appendChild(card);
 
-            let title = document.createElement("div");
-            title.className = "card-title";
-            title.textContent = user_wishes[0].tg_first_name;
-            card.appendChild(title);
+            let header = document.createElement("div");
+            header.className = "card-header";
+            card.appendChild(header);
 
-            let price = document.createElement("div");
-            price.className = "wish-count";
-            price.textContent = user_wishes_count + "\nwish";
-            price.textContent += user_wishes_count>1 ? "es" : "";
-            card.appendChild(price);
+            let userPhoto = document.createElement("div");
+            userPhoto.className = "user-photo";
+            header.appendChild(userPhoto);
+
+            let userPhotoImg = document.createElement("img");
+            userPhotoImg.src = "data:image/png;base64," + user_wishes[0].tg_profile_photo;
+            userPhoto.appendChild(userPhotoImg);
+
+            let userInfo = document.createElement("div");
+            userInfo.className = "user-info";
+            header.appendChild(userInfo);
+
+            let userName = document.createElement("div");
+            userName.className = "card-title";
+            userName.textContent = user_wishes[0].tg_first_name;
+            userInfo.appendChild(userName);
+
+            let wishCount = document.createElement("div");
+            wishCount.className = "wish-count";
+            wishCount.textContent = user_wishes_count + "\nwish";
+            wishCount.textContent += user_wishes_count>1 ? "es" : "";
+            userInfo.appendChild(wishCount);
         }
     }
 }
