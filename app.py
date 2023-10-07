@@ -115,7 +115,7 @@ async def add_wish(request: Request):
         cur = conn.cursor()
         cur.execute(f"""
             insert into users_wishes (tg_user_id, name, description, link, image, price, currency)
-          values ({data["tg_user_id"]}, '{data["name"]}', '{data["description"]}'}, '{data["link"]}', '{data["image_link"]}', '{data["price"]}', '{data["currency"]}')
+          values ({data["tg_user_id"]}, '{data["name"]}', '{data["description"]}', '{data["link"]}', '{data["image_link"]}', '{data["price"]}', '{data["currency"]}')
            ; 
         """)
         conn.commit()
