@@ -55,7 +55,7 @@ async def get_wishes(request: Request):
                 c.tg_chat_id,
                 c.tg_chat_name,
                 c.tg_chat_photo,
-                c.tg_profile_photo
+                u.tg_profile_photo
             from users_wishes uw
             join permissions p on uw.tg_user_id = p.tg_user_id
             join users u on uw.tg_user_id = u.tg_user_id
@@ -89,7 +89,7 @@ async def get_user_wishes(request: Request):
                 u.tg_first_name, 
                 c.tg_chat_name,
                 c.tg_chat_photo,
-                c.tg_profile_photo
+                u.tg_profile_photo
             from users_wishes uw
             join permissions p on uw.tg_user_id = p.tg_user_id
             join users u on uw.tg_user_id = u.tg_user_id
