@@ -47,7 +47,7 @@ async function load() {
     }
     document.getElementById("title").textContent = titleText;
 
-    if (user_id === chat_id) {
+    if (initData.user.id === chat_id) {
         for (let i = 0; i < wishes.length; i++) {
             let wish = wishes[i];
             let card = document.createElement("div");
