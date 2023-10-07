@@ -83,13 +83,15 @@ async function load() {
             price.textContent = priceFormat(wish["price"]) + " " + wish["currency"];
             wishInfo.appendChild(price);
 
-            let wishPhoto = document.createElement("div");
-            wishPhoto.className = "wish-image";
-            card.appendChild(wishPhoto);
+            if (wish["image"] != null) {
+                let wishPhoto = document.createElement("div");
+                wishPhoto.className = "wish-image";
+                card.appendChild(wishPhoto);
 
-            let wishPhotoImg = document.createElement("img");
-            wishPhotoImg.src = wish["images"];
-            wishPhoto.appendChild(wishPhotoImg);
+                let wishPhotoImg = document.createElement("img");
+                wishPhotoImg.src = wish["image"];
+                wishPhoto.appendChild(wishPhotoImg);
+            }
 
             let bottomBar = document.createElement("div");
             bottomBar.className = "bottom-bar";
