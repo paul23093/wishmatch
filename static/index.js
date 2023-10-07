@@ -117,6 +117,7 @@ async function load() {
                     bookMark.parentElement.parentElement.remove();
                 }
             });
+
             if (wish["link"] != null) {
                 let link = document.createElement("div");
                 link.className = "link";
@@ -240,6 +241,9 @@ async function load_user_wishes() {
         card.appendChild(bottomBar);
 
         if (wish["tg_user_id"] === initData.user.id) {
+            let bookMark = document.createElement("div");
+            bookMark.className = "bookmark";
+
             let deleteIcon = document.createElement("span");
             deleteIcon.classList.add("material-symbols-outlined");
             deleteIcon.textContent = "delete";
@@ -321,6 +325,8 @@ async function load_user_wishes() {
                     bookMark.getElementsByTagName("span")[0].textContent = "hand_gesture";
                 }
             });
+        } else if (wish["is_booked"] === true && wish["booked_by"] !== initData.user.id) {
+            bottomBar.parentElement.classList.add("booked");
         }
 
         if (wish["link"] != null) {
