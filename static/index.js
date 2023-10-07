@@ -225,15 +225,29 @@ async function load_user_wishes() {
         let div = document.getElementById("cards-container");
         div.appendChild(card);
 
-        let title = document.createElement("div");
-        title.className = "card-title";
-        title.textContent = wish["name"];
-        card.appendChild(title);
+        let wishInfo = document.createElement("div");
+            wishInfo.className = "wish-info";
+            card.appendChild(wishInfo);
 
-        let price = document.createElement("div");
-        price.className = "price";
-        price.textContent = priceFormat(wish["price"]) + " " + wish["currency"];
-        card.appendChild(price);
+            let title = document.createElement("div");
+            title.className = "card-title";
+            title.textContent = wish["name"];
+            wishInfo.appendChild(title);
+
+            let price = document.createElement("div");
+            price.className = "price";
+            price.textContent = priceFormat(wish["price"]) + " " + wish["currency"];
+            wishInfo.appendChild(price);
+
+            if (wish["image"] != null) {
+                let wishPhoto = document.createElement("div");
+                wishPhoto.className = "wish-image";
+                card.appendChild(wishPhoto);
+
+                let wishPhotoImg = document.createElement("img");
+                wishPhotoImg.src = wish["image"];
+                wishPhoto.appendChild(wishPhotoImg);
+            }
 
         let bottomBar = document.createElement("div");
         bottomBar.className = "bottom-bar";
@@ -399,7 +413,7 @@ async function add_wish() {
     let initData = Telegram.WebApp.initDataUnsafe;
     let tg_user_id = initData.user.id;
     let name = document.getElementById("wish-title").value;
-    let description = document.getElementById("wish-description").textContent;
+    let description = document.getElementById("wish-description").value;
     let link = document.getElementById("wish-link").value;
     let imageLink = document.getElementById("wish-image-link").value;
     let price = document.getElementById("wish-price").value;
