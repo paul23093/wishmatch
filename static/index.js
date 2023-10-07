@@ -36,12 +36,12 @@ async function load() {
 
         let chatPhoto = document.getElementById("chat-photo");
         let img = document.createElement("img");
-        img.src = chat[0].tg_chat_photo_url;
+        img.src = "data:image/png;base64," + chat[0].tg_chat_photo;
         chatPhoto.appendChild(img);
     } else {
         let userPhoto = document.getElementById("chat-photo");
         let img = document.createElement("img");
-        img.src = "data:image/png;base64," + chat[0].tg_profile_photo_base64;
+        img.src = "data:image/png;base64," + chat[0].tg_profile_photo;
         userPhoto.appendChild(img);
     }
     document.getElementById("title").textContent = titleText;
