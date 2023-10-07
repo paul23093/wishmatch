@@ -193,6 +193,30 @@ body {
     -webkit-animation: fadeIn 0.2s ease-in-out forwards;
 }
 
+.card-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.user-photo {
+}
+
+.user-photo img {
+    width: 40px;
+    border-radius: 100vw;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    padding: 10px;
+    margin: auto;
+}
+
 .clickable {
     cursor: pointer;
 }
@@ -212,7 +236,7 @@ body {
     align-items: flex-start;
     font-family: Open Sans, Arial, serif;
     font-weight: bold;
-    font-size: 10pt;
+    font-size: 11pt;
 }
 
 .price {
@@ -226,10 +250,7 @@ body {
 }
 
 .wish-count {
-    font-size: 15pt;
-    margin: 10px auto;
-    padding: 10px;
-    user-select: none;
+    font-size: 9pt;
 }
 
 .bottom-bar {
