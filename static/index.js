@@ -24,7 +24,7 @@ async function load() {
     const chat = uniqueChats(wishes);
     console.log(data);
     console.log(users);
-    console.log(chats);
+    console.log(chat);
 
 
     let titleText = initData.user.first_name;
