@@ -174,16 +174,16 @@ body {
 .card {
     font-family: Open Sans, Arial, serif;
     color: var(--tg-theme-text-color);
-    position: relative;
     display: flex;
     flex-direction: column;
     width: 140px;
-    height: 150px;
+    height: 180px;
     margin: 10px auto;
     padding: 10px;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: left;
     border-radius: 10px;
+    border: 1px solid rgba(52, 130, 148, 0.4);
     user-select: none;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -213,8 +213,29 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: left;
+    justify-content: left;
     padding: 10px;
     margin: auto;
+}
+
+.wish-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin: auto;
+}
+
+.wish-image {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wish-image img{
+    border-radius: 10px;
+    max-width: 150%;
+    max-height: 80px;
 }
 
 .clickable {
@@ -222,7 +243,7 @@ body {
 }
 
 .active {
-    background-color: var(--tg-theme-secondary-bg-color);
+    background-color: #dddddd;
 }
 
 .booked {
@@ -236,16 +257,13 @@ body {
     align-items: flex-start;
     font-family: Open Sans, Arial, serif;
     font-weight: bold;
-    font-size: 11pt;
+    font-size: 15pt;
 }
 
 .price {
     font-family: Open Sans, Arial, serif;
-    font-size: 18pt;
+    font-size: 11pt;
     display: block;
-    font-weight: bold;
-    margin: 10px auto;
-    padding: 10px;
     user-select: none;
 }
 
@@ -256,8 +274,6 @@ body {
 .bottom-bar {
     display: flex;
     flex-direction: row;
-    position: absolute;
-    bottom: 5%;
     width: 90%;
     height: 20%;
     justify-content: center;
@@ -265,7 +281,7 @@ body {
 }
 
 .link {
-    background-color: var(--tg-theme-button-color);
+    background-color: var(--tg-theme-secondary-bg-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -278,7 +294,7 @@ body {
 }
 
 .bookmark {
-    background-color: var(--tg-theme-button-color);
+    background-color: var(--tg-theme-secondary-bg-color);
     display: flex;
     justify-content: center;
     align-items: center;

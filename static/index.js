@@ -36,14 +36,28 @@ async function load() {
         subtitle.style.display = "flex";
 
         let chatPhoto = document.getElementById("chat-photo");
-        let img = document.createElement("img");
-        img.src = "data:image/png;base64," + chat[0].tg_chat_photo;
-        chatPhoto.appendChild(img);
+        if (chat[0].tg_chat_photo != null) {
+            let img = document.createElement("img");
+            img.src = "data:image/png;base64," + chat[0].tg_chat_photo;
+            chatPhoto.appendChild(img);
+        } else {
+            let placeholder = document.createElement("span");
+            placeholder.classList.add("material-symbols-outlined");
+            placeholder.textContent = "groups";
+            chatPhoto.appendChild(placeholder);
+        }
     } else {
         let userPhoto = document.getElementById("chat-photo");
-        let img = document.createElement("img");
-        img.src = "data:image/png;base64," + chat[0].tg_profile_photo;
-        userPhoto.appendChild(img);
+        if (chat[0].tg_profile_photo != null) {
+            let img = document.createElement("img");
+            img.src = "data:image/png;base64," + chat[0].tg_profile_photo;
+            userPhoto.appendChild(img);
+        } else {
+            let placeholder = document.createElement("span");
+            placeholder.classList.add("material-symbols-outlined");
+            placeholder.textContent = "account_circle";
+            chatPhoto.appendChild(placeholder);
+        }
     }
     document.getElementById("title").textContent = titleText;
 
@@ -55,15 +69,27 @@ async function load() {
             let div = document.getElementById("cards-container");
             div.appendChild(card);
 
+            let wishInfo = document.createElement("div");
+            wishInfo.className = "wish-info";
+            card.appendChild(wishInfo);
+
             let title = document.createElement("div");
             title.className = "card-title";
             title.textContent = wish["name"];
-            card.appendChild(title);
+            wishInfo.appendChild(title);
 
             let price = document.createElement("div");
             price.className = "price";
             price.textContent = priceFormat(wish["price"]) + " " + wish["currency"];
-            card.appendChild(price);
+            wishInfo.appendChild(price);
+
+            let wishPhoto = document.createElement("div");
+            wishPhoto.className = "wish-image";
+            card.appendChild(wishPhoto);
+
+            let wishPhotoImg = document.createElement("img");
+            wishPhotoImg.src = wish["images"];
+            wishPhoto.appendChild(wishPhotoImg);
 
             let bottomBar = document.createElement("div");
             bottomBar.className = "bottom-bar";
@@ -371,7 +397,9 @@ async function add_wish() {
     let initData = Telegram.WebApp.initDataUnsafe;
     let tg_user_id = initData.user.id;
     let name = document.getElementById("wish-title").value;
+    let description = document.getElementById("wish-description").textContent;
     let link = document.getElementById("wish-link").value;
+    let imageLink = document.getElementById("wish-image-link").value;
     let price = document.getElementById("wish-price").value;
     let currency = document.getElementById("wish-currency").value;
 
@@ -385,10 +413,12 @@ async function add_wish() {
 		    },
 		    body: JSON.stringify({
 			    tg_user_id: tg_user_id, 
-			    name: name, 
-			    link: link, 
+			    name: name,
+                description: description,
+			    link: link,
+                image_link: imageLink,
 			    price: price,
-                currency: currency
+                currency: currency,
 		    })
 	    }
     );

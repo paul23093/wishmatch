@@ -44,9 +44,11 @@ async def get_wishes(request: Request):
             select 
                 uw.id, 
                 uw.name, 
+                uw.description,
                 uw.link, 
-                uw.price, 
-                uw.currency, 
+                uw.price,
+                uw.currency,
+                uw.image,  
                 uw.is_booked, 
                 uw.is_deleted, 
                 uw.tg_user_id, 
@@ -79,9 +81,11 @@ async def get_user_wishes(request: Request):
             select 
                 uw.id, 
                 uw.name, 
+                uw.desccription,
                 uw.link, 
                 uw.price, 
-                uw.currency, 
+                uw.currency,
+                uw.image, 
                 uw.is_booked, 
                 uw.is_deleted, 
                 uw.tg_user_id, 
@@ -107,12 +111,11 @@ async def get_user_wishes(request: Request):
 @app.post("/add_wish")
 async def add_wish(request: Request):
     data = await request.json()
-    print(data)
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
-            insert into users_wishes (tg_user_id, name, link, price, currency)
-          values ({data["tg_user_id"]}, '{data["name"]}', '{data["link"]}', '{data["price"]}', '{data["currency"]}')
+            insert into users_wishes (tg_user_id, name, description, link, image, price, currency)
+          values ({data["tg_user_id"]}, '{data["name"]}', '{data["description"]}'}, '{data["link"]}', '{data["image_link"]}', '{data["price"]}', '{data["currency"]}')
            ; 
         """)
         conn.commit()

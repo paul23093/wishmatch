@@ -20,10 +20,12 @@
 </div>
 <div class="form">
     <input id="wish-title" data-index="1" type="text" class="input" placeholder="Title"/>
-    <input id="wish-link" data-index="2" type="text" inputmode="url" class="input" placeholder="Link"/>
+    <textarea id="wish-description" data-index="2" rows="3" type="text" class="input" placeholder="Description"></textarea>
+    <input id="wish-link" data-index="3" type="text" inputmode="url" class="input" placeholder="Link"/>
+    <input id="wish-image-link" data-index="4" type="text" inputmode="url" class="input" placeholder="Image link"/>
     <div class="price-block">
-        <input id="wish-price" style="flex: 2" data-index="3" type="text" class="input" placeholder="Price"/>
-        <input id="wish-currency" style="flex: 1" data-index="4" type="text" class="input" placeholder="Currency"/>
+        <input id="wish-price" style="flex: 2" data-index="5" type="text" class="input" placeholder="Price"/>
+        <input id="wish-currency" style="flex: 1" data-index="6" type="text" class="input" placeholder="Currency"/>
     </div>
     <div onclick="add_wish()" class="button">Add</div>
 </div>
