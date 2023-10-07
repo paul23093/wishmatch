@@ -259,11 +259,14 @@ body {
 
 .active {
     background-color: var(--tg-theme-secondary-bg-color);
+    opacity: 1;
+    transition: opacity 0.5s;
 }
 
 .booked {
     background-color: var(--tg-theme-bg-color);
-    opacity: 0.2;
+    opacity: 0.3;
+    transition: opacity 0.5s;
 }
 
 .card-title {
