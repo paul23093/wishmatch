@@ -376,7 +376,15 @@ async function get_user_wishes(user_id, chat_id) {
 
 
 function load_new_wish() {
-    let inputCount = Array.prototype.slice.call(document.querySelectorAll("input[data-index]")).reduce((prev, curr) => curr > prev ? curr.getAttribute("data-index") : prev.getAttribute("data-index"));
+    let inputs = Array.prototype.slice.call(document.querySelectorAll("input[data-index]"));
+    inputs.forEach(function (input) {
+        document.addEventListener("click", function (event) {
+           if (event.target !== input) {
+               input.blur();
+           }
+        });
+    });
+    let inputCount = inputs.reduce((prev, curr) => curr > prev ? curr.getAttribute("data-index") : prev.getAttribute("data-index"));
     addEventListener("keydown", (event) => {
         if (event.code === "Enter") {
             event.preventDefault();
