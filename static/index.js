@@ -20,11 +20,16 @@ async function load() {
     const res = await response.json();
     const data = await JSON.parse(res);
     const wishes = await data.data;
+    if (wishes.length === 0) {
+        let alert = document.createElement("div");
+        alert.classList.add("page-alert");
+        alert.textContent = "You are not a member of this chat\nor\nYou did not /grant access to your wishes yet";
+        document.body.appendChild(alert);
+    }
     const users = uniqueUsers(wishes);
     const chat = uniqueChats(wishes);
 
-
-    let titleText = initData.user.first_name;
+    let titleText = initData.user.first_name ? initData.user.first_name : initData.user.username;
     if (["group", "supergroup"].includes(chat_type)) {
         titleText = chat[0].tg_chat_name;
         let subtitleText = users.length + " user";
@@ -164,7 +169,7 @@ async function load() {
 
             let userName = document.createElement("div");
             userName.className = "card-title";
-            userName.textContent = user_wishes[0].tg_first_name;
+            userName.textContent = user_wishes[0].tg_first_name ? user_wishes[0].tg_first_name : user_wishes[0].tg_username;
             userInfo.appendChild(userName);
 
             let wishCount = document.createElement("div");
@@ -190,7 +195,7 @@ async function load_user_wishes() {
     const user = uniqueUsers(wishes);
     const chat = uniqueChats(wishes);
 
-    let titleText = user[0].tg_first_name;
+    let titleText = user[0].tg_first_name ? user[0].tg_first_name : user[0].tg_username;
     let subtitleText = chat[0].tg_chat_name;
 
     let title = document.getElementById("title");

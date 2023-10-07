@@ -6,6 +6,11 @@ body {
     overscroll-behavior-y: auto;
 }
 
+.page-alert {
+    display: flex;
+    margin: auto;
+}
+
 .page-title {
     margin: auto;
     display: flex;
