@@ -90,32 +90,27 @@ async function load() {
             let bookMark = document.createElement("div");
             bookMark.className = "bookmark";
             bottomBar.appendChild(bookMark);
-            if (wish["is_deleted"] === false) {
-                let deleteIcon = document.createElement("span");
-                deleteIcon.classList.add("material-symbols-outlined");
-                deleteIcon.textContent = "delete";
-                bookMark.appendChild(deleteIcon);
-                bookMark.parentElement.parentElement.classList.add("active");
-            }
+            let deleteIcon = document.createElement("span");
+            deleteIcon.classList.add("material-symbols-outlined");
+            deleteIcon.textContent = "delete";
+            bookMark.appendChild(deleteIcon);
+            bookMark.parentElement.parentElement.classList.add("active");
 
             bookMark.addEventListener("click", async function () {
-                if (wish["is_deleted"] === false) {
-                    await fetch(
-                        "/delete",
-                        {
-                            method: "POST",
-                            headers: {
-                                "Accept": "application/json",
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify({
-                                wish_id: wish["id"]
-                            })
-                        }
-                    )
-                    wish["is_deleted"] = true;
-                    bookMark.parentElement.parentElement.remove();
-                }
+                await fetch(
+                    "/delete",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Accept": "application/json",
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            wish_id: wish["id"]
+                        })
+                    }
+                )
+                bookMark.parentElement.parentElement.remove();
             });
 
             if (wish["link"] != null) {
