@@ -350,6 +350,8 @@ body {
 input[type="text"], textarea {
     background-color : var(--tg-theme-bg-color);
     color: var(--tg-theme-text-color);
+    -moz-appearance: none;
+    -webkit-appearance: none;
 }
 
 @keyframes fadeIn {
