@@ -23,6 +23,9 @@ async function load() {
     const users = uniqueUsers(wishes);
     const chat = uniqueChats(wishes);
 
+    console.log(users);
+    console.log(chat);
+
 
     let titleText = initData.user.first_name;
     if (["group", "supergroup"].includes(chat_type)) {
