@@ -51,7 +51,6 @@ async def get_wishes(request: Request):
                 uw.image,  
                 uw.is_booked, 
                 uw.booked_by,
-                uw.is_deleted, 
                 uw.tg_user_id, 
                 u.tg_username, 
                 u.tg_first_name,
@@ -66,7 +65,7 @@ async def get_wishes(request: Request):
             where p.tg_chat_id in ({res["chat_id"]})
             and not uw.is_deleted
             and not p.is_deleted
-            order by is_booked
+            order by uw.tg_user_id, uw.is_booked, uw.id desc
             ;
         """)
         data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()]
@@ -89,7 +88,6 @@ async def get_user_wishes(request: Request):
                 uw.image, 
                 uw.is_booked, 
                 uw.booked_by,
-                uw.is_deleted, 
                 uw.tg_user_id, 
                 u.tg_username, 
                 u.tg_first_name,
@@ -103,7 +101,7 @@ async def get_user_wishes(request: Request):
             where p.tg_chat_id = {res["chat_id"]}
             and p.tg_user_id = {res["user_id"]}
             and not uw.is_deleted
-            order by is_booked
+            order by uw.tg_user_id, uw.is_booked, uw.id desc
             ;
         """)
         data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()]
