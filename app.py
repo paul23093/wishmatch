@@ -50,6 +50,7 @@ async def get_wishes(request: Request):
                 uw.currency,
                 uw.image,  
                 uw.is_booked, 
+                uw.booked_by,
                 uw.is_deleted, 
                 uw.tg_user_id, 
                 u.tg_username, 
@@ -87,6 +88,7 @@ async def get_user_wishes(request: Request):
                 uw.currency,
                 uw.image, 
                 uw.is_booked, 
+                uw.booked_by,
                 uw.is_deleted, 
                 uw.tg_user_id, 
                 u.tg_username, 
@@ -130,7 +132,8 @@ async def book(request: Request):
         cur = conn.cursor()
         cur.execute(f"""
             update users_wishes
-            set is_booked = True
+            set is_booked = True,
+            booked_by = {data["tg_user_id"]}
             where id = {data["wish_id"]}
            ; 
         """)

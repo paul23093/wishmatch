@@ -239,23 +239,48 @@ async function load_user_wishes() {
         bottomBar.className = "bottom-bar";
         card.appendChild(bottomBar);
 
-        let bookMark = document.createElement("div");
-        bookMark.className = "bookmark";
-        bottomBar.appendChild(bookMark);
-        if (user_id !== initData.user.id) {
+        if (wish["tg_user_id"] === initData.user.id) {
+            let deleteIcon = document.createElement("span");
+            deleteIcon.classList.add("material-symbols-outlined");
+            deleteIcon.textContent = "delete";
+            bookMark.appendChild(deleteIcon);
+            bookMark.parentElement.parentElement.classList.add("active");
+
+            bookMark.addEventListener("click", async function () {
+                if (wish["is_deleted"] === false) {
+                    await fetch(
+                        "/delete",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Accept": "application/json",
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                wish_id: wish["id"]
+                            })
+                        }
+                    )
+                    wish["is_deleted"] = true;
+                    bookMark.parentElement.parentElement.remove();
+                }
+            });
+        } else if (wish["is_booked"] === false || (wish["is_booked"] === true && wish["booked_by"] === initData.user.id)) {
+            let bookMark = document.createElement("div");
+            bookMark.className = "bookmark";
+            bottomBar.appendChild(bookMark);
+
+            let bookIcon = document.createElement("span");
+            bookIcon.classList.add("material-symbols-outlined");
+            bookMark.appendChild(bookIcon);
             if (wish["is_booked"] === false) {
-                let bookIcon = document.createElement("span");
-                bookIcon.classList.add("material-symbols-outlined");
                 bookIcon.textContent = "hand_gesture";
-                bookMark.appendChild(bookIcon);
                 bookMark.parentElement.parentElement.classList.add("active");
             } else {
-                let bookIcon = document.createElement("span");
-                bookIcon.classList.add("material-symbols-outlined");
                 bookIcon.textContent = "do_not_touch";
-                bookMark.appendChild(bookIcon);
                 bookMark.parentElement.parentElement.classList.add("booked");
             }
+
             bookMark.addEventListener("click", async function () {
                 if (wish["is_booked"] === false) {
                     await fetch(
@@ -267,7 +292,8 @@ async function load_user_wishes() {
                                 "Content-Type": "application/json"
                             },
                             body: JSON.stringify({
-                                wish_id: wish["id"]
+                                wish_id: wish["id"],
+                                tg_user_id: initData.user.id
                             })
                         }
                     )
@@ -293,35 +319,6 @@ async function load_user_wishes() {
                     bookMark.parentElement.parentElement.classList.remove("booked");
                     bookMark.parentElement.parentElement.classList.add("active");
                     bookMark.getElementsByTagName("span")[0].textContent = "hand_gesture";
-                }
-            });
-
-        } else {
-            if (wish["is_deleted"] === false) {
-                let deleteIcon = document.createElement("span");
-                deleteIcon.classList.add("material-symbols-outlined");
-                deleteIcon.textContent = "delete";
-                bookMark.appendChild(deleteIcon);
-                bookMark.parentElement.parentElement.classList.add("active");
-            }
-
-            bookMark.addEventListener("click", async function () {
-                if (wish["is_deleted"] === false) {
-                    await fetch(
-                        "/delete",
-                        {
-                            method: "POST",
-                            headers: {
-                                "Accept": "application/json",
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify({
-                                wish_id: wish["id"]
-                            })
-                        }
-                    )
-                    wish["is_deleted"] = true;
-                    bookMark.parentElement.parentElement.remove();
                 }
             });
         }
