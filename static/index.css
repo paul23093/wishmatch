@@ -8,12 +8,15 @@ body {
 
 .page-alert {
     color: var(--tg-theme-text-color);
+    font-size: 12pt;
     height: 100vh;
     width: 100%;
     display: flex;
     margin: auto;
     justify-content: center;
     align-items: center;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .page-title {
