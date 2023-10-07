@@ -260,14 +260,21 @@ body {
 .active {
     background-color: var(--tg-theme-secondary-bg-color);
     opacity: 1;
-    transition: opacity 0.5s;
 }
 
 .booked {
-    background-color: var(--tg-theme-bg-color);
+    background-color: var(--tg-theme-secondary-bg-color);
     opacity: 0.3;
-    transition: opacity 0.5s;
 }
+
+.booked .card-title {
+    text-decoration: line-through;
+}
+
+.booked .wish-count {
+    text-decoration: line-through;
+}
+
 
 .card-title {
     display: flex;
