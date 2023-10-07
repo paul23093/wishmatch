@@ -11,7 +11,6 @@ function switchView() {
 }
 
 async function load() {
-
     Telegram.WebApp.ready();
     Telegram.WebApp.enableClosingConfirmation();
     const initData = Telegram.WebApp.initDataUnsafe;
@@ -39,6 +38,11 @@ async function load() {
         let img = document.createElement("img");
         img.src = chat[0].tg_chat_photo_url;
         chatPhoto.appendChild(img);
+    } else {
+        let userPhoto = document.getElementById("chat-photo");
+        let img = document.createElement("img");
+        img.src = "data:image/png;base64," + chat[0].tg_user_photo_base64;
+        userPhoto.appendChild(img);
     }
     document.getElementById("title").textContent = titleText;
 
