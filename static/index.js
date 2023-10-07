@@ -64,7 +64,7 @@ async function load() {
             card.appendChild(wishInfo);
 
             let title = document.createElement("div");
-            title.className = "card-title";
+            title.className = "wish-title";
             title.textContent = wish["name"];
             wishInfo.appendChild(title);
 
@@ -117,17 +117,18 @@ async function load() {
                     bookMark.parentElement.parentElement.remove();
                 }
             });
-
-            let link = document.createElement("div");
-            link.className = "link";
-            let linkIcon = document.createElement("span");
-            linkIcon.classList.add("material-symbols-outlined");
-            linkIcon.textContent = "open_in_new";
-            link.appendChild(linkIcon);
-            link.onclick = function () {
-                window.open(wish["link"]);
+            if (wish["link"] != null) {
+                let link = document.createElement("div");
+                link.className = "link";
+                let linkIcon = document.createElement("span");
+                linkIcon.classList.add("material-symbols-outlined");
+                linkIcon.textContent = "open_in_new";
+                link.appendChild(linkIcon);
+                link.onclick = function () {
+                    window.open(wish["link"]);
+                }
+                bottomBar.appendChild(link);
             }
-            bottomBar.appendChild(link);
         }
     }
     else {
@@ -215,7 +216,7 @@ async function load_user_wishes() {
             card.appendChild(wishInfo);
 
             let title = document.createElement("div");
-            title.className = "card-title";
+            title.className = "wish-title";
             title.textContent = wish["name"];
             wishInfo.appendChild(title);
 
@@ -325,16 +326,18 @@ async function load_user_wishes() {
             });
         }
 
-        let link = document.createElement("div");
-        link.className = "link";
-        let linkIcon = document.createElement("span");
-        linkIcon.classList.add("material-symbols-outlined");
-        linkIcon.textContent = "open_in_new";
-        link.appendChild(linkIcon);
-        link.onclick = function () {
-            window.open(wish["link"]);
+        if (wish["link"] != null) {
+            let link = document.createElement("div");
+            link.className = "link";
+            let linkIcon = document.createElement("span");
+            linkIcon.classList.add("material-symbols-outlined");
+            linkIcon.textContent = "open_in_new";
+            link.appendChild(linkIcon);
+            link.onclick = function () {
+                window.open(wish["link"]);
+            }
+            bottomBar.appendChild(link);
         }
-        bottomBar.appendChild(link);
     }
 }
 

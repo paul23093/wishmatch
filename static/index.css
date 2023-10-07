@@ -235,6 +235,8 @@ body {
 
 .wish-info {
     display: flex;
+    position: absolute;
+    transform: translate(5%, 5%);
     flex-direction: column;
     justify-content: left;
     margin: auto;
@@ -243,6 +245,9 @@ body {
 .wish-image {
     padding: 10px;
     display: flex;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     justify-content: center;
     align-items: center;
 }
@@ -277,6 +282,15 @@ body {
 
 
 .card-title {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    font-family: Open Sans, Arial, serif;
+    font-weight: bold;
+    font-size: 13pt;
+}
+
+.wish-title {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
