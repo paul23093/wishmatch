@@ -56,6 +56,7 @@ async function load() {
             let wish = wishes[i];
             let card = document.createElement("div");
             card.classList.add("card");
+            card.classList.add("active");
             let div = document.getElementById("cards-container");
             div.appendChild(card);
 
@@ -94,7 +95,6 @@ async function load() {
             deleteIcon.classList.add("material-symbols-outlined");
             deleteIcon.textContent = "delete";
             bookMark.appendChild(deleteIcon);
-            bookMark.parentElement.parentElement.classList.add("active");
 
             bookMark.addEventListener("click", async function () {
                 await fetch(

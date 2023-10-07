@@ -347,6 +347,10 @@ body {
     user-select: none;
 }
 
+input[type="text"], textarea {
+  background-color : var(--tg-theme-bg-color);;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
