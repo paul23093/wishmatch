@@ -81,7 +81,7 @@ async def get_user_wishes(request: Request):
             select 
                 uw.id, 
                 uw.name, 
-                uw.desccription,
+                uw.description,
                 uw.link, 
                 uw.price, 
                 uw.currency,
