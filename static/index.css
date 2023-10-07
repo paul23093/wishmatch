@@ -89,13 +89,14 @@ body {
 .price-block {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
 }
 
 .input {
     font-family: Arial, serif;
     display: flex;
     font-size: 12pt;
+    width: 100%;
     box-sizing: border-box;
     background-color: rgb(255, 255, 255);
     padding: 15px;
@@ -106,6 +107,16 @@ body {
     user-select: none;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
+}
+
+.input#wish-price {
+    -webkit-flex: 5;
+    margin-right: 5px;
+}
+
+.input#wish-currency {
+    -webkit-flex: 2;
+    margin-left: 5px;
 }
 
 .topBar {
@@ -180,8 +191,8 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 140px;
-    height: 180px;
+    width: 70%;
+    height: 220px;
     margin: 10px auto;
     padding: 10px;
     align-items: center;
