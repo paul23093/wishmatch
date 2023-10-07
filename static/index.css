@@ -174,6 +174,7 @@ body {
 .card {
     font-family: Open Sans, Arial, serif;
     color: var(--tg-theme-text-color);
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 140px;
@@ -273,7 +274,9 @@ body {
 
 .bottom-bar {
     display: flex;
+    position: absolute;
     flex-direction: row;
+    bottom: 10%;
     width: 90%;
     height: 20%;
     justify-content: center;
