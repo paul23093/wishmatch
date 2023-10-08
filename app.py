@@ -173,10 +173,33 @@ async def delete(request: Request):
 
 
 @app.get("/new")
-async def new(request: Request):
-    return templates.TemplateResponse("new_wish.html", {"request": request})
+async def new(request: Request, wish_id: Union[int, None] = None):
+    return templates.TemplateResponse("new_wish.html", {"request": request, "wish_id": wish_id})
+
+
+@app.post("/get_wish")
+async def get_wish(wish_id: int):
+    with psycopg2.connect(**con) as conn:
+        cur = conn.cursor()
+        cur.execute(f"""
+        select 
+            uw.id, 
+            uw.name, 
+            uw.description,
+            uw.link, 
+            uw.price, 
+            uw.currency,
+            uw.image
+        from users_wishes uw
+        where uw.id = {wish_id} 
+        ;
+        """)
+        data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()]
+
+        return {"status": "ok", "data": data}
+
 
 
 @app.get("/user_wishes")
-async def new(request: Request, user_id: int, chat_id: float):
+async def user_wishes(request: Request, user_id: int, chat_id: float):
     return templates.TemplateResponse("user_wishes.html", {"request": request, "user_id": user_id, "chat_id": chat_id})

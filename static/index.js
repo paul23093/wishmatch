@@ -133,6 +133,17 @@ async function load() {
                     )
                 });
 
+                let editWish = document.createElement("div");
+                editWish.className = "bookmark";
+                editWish.onclick = function () {
+                    location.href="/new?wish_id=" + wish["id"];
+                };
+                bottomBar.appendChild(editWish);
+                let editIcon = document.createElement("span");
+                editIcon.classList.add("material-symbols-outlined");
+                editIcon.textContent = "edit";
+                editWish.appendChild(deleteIcon);
+
                 if (wish["link"] != null) {
                     let link = document.createElement("div");
                     link.className = "link";
@@ -386,6 +397,22 @@ async function get_wishes(initData) {
     return response;
 }
 
+async function get_wish(wish_id) {
+    return await fetch(
+        "/get_wish",
+        {
+            method: "POST",
+            headers: {
+                "Access": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                wish_id: wish_id
+            })
+        }
+    );
+}
+
 async function get_user_wishes(user_id, chat_id) {
     return await fetch(
         "/get_user_wishes",
@@ -404,7 +431,21 @@ async function get_user_wishes(user_id, chat_id) {
 }
 
 
-function load_new_wish() {
+async function load_new_wish() {
+    if (wish_id !== null) {
+        const response = await get_wish(wish_id);
+        const res = await response.json();
+        const data = await JSON.parse(res);
+        const wish = await data.data;
+
+        document.getElementById("wish-title").value = wish["name"];
+        document.getElementById("wish-description").value = wish["description"];
+        document.getElementById("wish-link").value = wish["link"];
+        document.getElementById("wish-image-link").value = wish["image"];
+        document.getElementById("wish-price").value = wish["price"];
+        document.getElementById("wish-currency").value = wish["currency"];
+    }
+
     let inputs = Array.prototype.slice.call(document.querySelectorAll("input[data-index]"));
     inputs.forEach(function (input) {
         document.addEventListener("click", function (event) {
