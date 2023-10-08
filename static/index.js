@@ -302,6 +302,18 @@ async function load_user_wishes() {
                         }
                     });
             });
+
+            let editWish = document.createElement("div");
+            editWish.className = "bookmark";
+            editWish.onclick = function () {
+                location.href="/new?wish_id=" + wish["id"];
+            };
+            bottomBar.appendChild(editWish);
+            let editIcon = document.createElement("span");
+            editIcon.classList.add("material-symbols-outlined");
+            editIcon.textContent = "edit";
+            editWish.appendChild(editIcon);
+
         } else if (wish["is_booked"] === false || (wish["is_booked"] === true && wish["booked_by"] === initData.user.id)) {
             let bookMark = document.createElement("div");
             bookMark.className = "bookmark";
