@@ -86,7 +86,7 @@ async function load() {
                 price.textContent = priceFormat(wish["price"]) + " " + wish["currency"];
                 wishInfo.appendChild(price);
 
-                if (wish["image"] != null && imageExists(wish["image"])) {
+                if (wish["image"] != null) {
                     let wishPhoto = document.createElement("div");
                     wishPhoto.className = "wish-image";
                     card.appendChild(wishPhoto);
