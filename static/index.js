@@ -58,12 +58,13 @@ async function load() {
         }
         document.getElementById("title").textContent = titleText;
 
+        let cardsContainer = document.createElement("div");
+        cardsContainer.id = "cards-container";
+        cardsContainer.classList.add("grid-view");
+        document.body.appendChild(cardsContainer);
+
         if (initData.user.id === chat_id && initData.user.id === users[0].tg_user_id) {
             for (let i = 0; i < wishes.length; i++) {
-                let cardsContainer = document.createElement("div");
-                cardsContainer.id = "cards-container";
-                cardsContainer.classList.add("grid-view");
-                document.body.appendChild(cardsContainer);
 
                 let wish = wishes[i];
                 let card = document.createElement("div");
