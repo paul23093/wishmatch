@@ -136,7 +136,7 @@ async def edit_wish(request: Request):
                 image = '{data["image_link"]}', 
                 price = '{data["price"]}',
                 currency = '{data["currency"]}'
-        where tg_user_id = {data["id"]}
+        where id = {data["id"]}
         ; 
         """)
         conn.commit()
