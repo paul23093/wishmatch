@@ -109,6 +109,7 @@ async function load() {
                 bookMark.appendChild(deleteIcon);
 
                 bookMark.addEventListener("click", function () {
+                    Telegram.WebApp.HapticFeedback.notificationOccurred("warning");
                     Telegram.WebApp.showConfirm(
                         "Are you sure you want to delete this wish?",
                         async function (is_ok) {
@@ -302,7 +303,7 @@ async function load_user_wishes() {
 
             bookMark.addEventListener("click", async function () {
                 if (wish["is_booked"] === false) {
-                    Telegram.WebApp.HapticFeedback.impactOccurred("medium");
+                    Telegram.WebApp.HapticFeedback.notificationOccurred("success");
                     await fetch(
                         "/book",
                         {
@@ -434,7 +435,7 @@ async function add_wish() {
     let price = document.getElementById("wish-price").value;
     let currency = document.getElementById("wish-currency").value;
 
-    Telegram.WebApp.HapticFeedback.impactOccurred("light");
+    Telegram.WebApp.HapticFeedback.notificationOccurred("success");
 
     await fetch(
 	    "/add_wish",
