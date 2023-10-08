@@ -11,11 +11,23 @@ function switchView() {
 }
 
 async function load() {
-    document.body.addEventListener('scroll', function (e) {
-            if (document.body.scrollTop === 0) {
-                document.body.scrollTop = 1;
-            }
-        });
+    const popup = document.body;
+    let startY;
+
+    popup.addEventListener('touchstart', function (e) {
+        startY = e.touches[0].clientY;
+    });
+
+    popup.addEventListener('touchmove', function (e) {
+        const currentY = e.touches[0].clientY;
+        const scrollY = popup.scrollTop;
+
+        if (currentY > startY && scrollY === 0) {
+            e.preventDefault();
+        }
+    });
+
+
     Telegram.WebApp.ready();
     Telegram.WebApp.disableClosingConfirmation();
     const initData = Telegram.WebApp.initDataUnsafe;
