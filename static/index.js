@@ -112,6 +112,7 @@ async function load() {
                     Telegram.WebApp.showConfirm(
                         "Are you sure you want to delete this wish?",
                         async function (is_ok) {
+                            console.log(is_ok);
                             if (is_ok) {
                                 await fetch(
                                 "/delete",
