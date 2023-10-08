@@ -109,20 +109,25 @@ async function load() {
                 bookMark.appendChild(deleteIcon);
 
                 bookMark.addEventListener("click", async function () {
-                    await fetch(
-                        "/delete",
-                        {
-                            method: "POST",
-                            headers: {
-                                "Accept": "application/json",
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify({
-                                wish_id: wish["id"]
-                            })
+                    Telegram.WebApp.showConfirm(
+                        "Are you sure you want to delete this wish?",
+                        async function () {
+                            await fetch(
+                            "/delete",
+                            {
+                                    method: "POST",
+                                    headers: {
+                                        "Accept": "application/json",
+                                        "Content-Type": "application/json"
+                                    },
+                                    body: JSON.stringify({
+                                        wish_id: wish["id"]
+                                    })
+                                }
+                            )
+                            bookMark.parentElement.parentElement.remove();
                         }
                     )
-                    bookMark.parentElement.parentElement.remove();
                 });
 
                 if (wish["link"] != null) {
