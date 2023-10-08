@@ -553,7 +553,7 @@ async function edit_wish(id) {
 		    })
 	    }
     );
-    window.location.href="/?tgWebAppStartParam="+initData.start_param;
+    window.history.back();
 }
 
 function back() {
