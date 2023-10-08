@@ -256,11 +256,13 @@ body {
 
 .wish-info {
     display: flex;
+    width: 100%;
     position: absolute;
-    transform: translate(5%, 5%);
+    padding: 5px 10px;
     flex-direction: column;
     justify-content: left;
     margin: auto;
+    box-sizing: border-box;
 }
 
 .wish-image {
@@ -325,6 +327,7 @@ body {
     font-size: 11pt;
     display: block;
     user-select: none;
+    line-height: 30px;
 }
 
 .wish-count {
