@@ -458,6 +458,9 @@ async function load_new_wish() {
         document.getElementById("wish-currency").value = wish["currency"];
         document.getElementById("button").textContent = "Edit";
         document.getElementById("button").onclick = function () {edit_wish(wish_id);};
+    } else {
+        document.getElementById("button").textContent = "Add";
+        document.getElementById("button").onclick = function () {add_wish();};
     }
 
     let inputs = Array.prototype.slice.call(document.querySelectorAll("input[data-index]"));
@@ -521,6 +524,7 @@ async function add_wish() {
 }
 
 async function edit_wish(id) {
+    let initData = Telegram.WebApp.initDataUnsafe;
     let name = document.getElementById("wish-title").value;
     let description = document.getElementById("wish-description").value;
     let link = document.getElementById("wish-link").value;

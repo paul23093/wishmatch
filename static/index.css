@@ -338,10 +338,9 @@ body {
     display: flex;
     position: absolute;
     flex-direction: row;
-    font-size: 10pt;
     bottom: 10%;
     width: 90%;
-    height: 20%;
+    height: 15%;
     justify-content: center;
     align-items: center;
 }
