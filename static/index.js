@@ -62,6 +62,7 @@ async function load() {
                 let cardsContainer = document.createElement("div");
                 cardsContainer.id = "cards-container";
                 cardsContainer.classList.add("grid-view");
+                document.body.appendChild(cardsContainer);
 
                 let wish = wishes[i];
                 let card = document.createElement("div");
