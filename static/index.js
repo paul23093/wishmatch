@@ -108,24 +108,26 @@ async function load() {
                 deleteIcon.textContent = "delete";
                 bookMark.appendChild(deleteIcon);
 
-                bookMark.addEventListener("click", async function () {
+                bookMark.addEventListener("click", function () {
                     Telegram.WebApp.showConfirm(
                         "Are you sure you want to delete this wish?",
-                        async function () {
-                            await fetch(
-                            "/delete",
-                            {
-                                    method: "POST",
-                                    headers: {
-                                        "Accept": "application/json",
-                                        "Content-Type": "application/json"
-                                    },
-                                    body: JSON.stringify({
-                                        wish_id: wish["id"]
-                                    })
-                                }
-                            )
-                            bookMark.parentElement.parentElement.remove();
+                        async function (is_ok) {
+                            if (is_ok) {
+                                await fetch(
+                                "/delete",
+                                {
+                                        method: "POST",
+                                        headers: {
+                                            "Accept": "application/json",
+                                            "Content-Type": "application/json"
+                                        },
+                                        body: JSON.stringify({
+                                            wish_id: wish["id"]
+                                        })
+                                    }
+                                );
+                                bookMark.parentElement.parentElement.remove();
+                            }
                         }
                     )
                 });
