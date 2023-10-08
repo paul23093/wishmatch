@@ -217,7 +217,6 @@ body {
     margin: 10px auto;
     padding: 10px;
     align-items: center;
-    justify-content: left;
     border-radius: 10px;
     border: 1px solid rgba(52, 130, 148, 0.2);
     user-select: none;
@@ -277,8 +276,9 @@ body {
 
 .wish-image img{
     border-radius: 10px;
-    max-width: 150%;
-    max-height: 80px;
+    max-width: 95%;
+    max-height: 100px;
+    box-sizing: border-box;
 }
 
 .clickable {
@@ -341,12 +341,13 @@ body {
     bottom: 10%;
     width: 90%;
     height: 20%;
+    transform: translateY(50%);
     justify-content: center;
     align-items: center;
 }
 
 .bottom-bar div span {
-    font-size: 11pt;
+    font-size: 14pt;
 }
 
 .link {
