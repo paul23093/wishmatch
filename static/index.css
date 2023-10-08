@@ -213,7 +213,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 70%;
-    height: 220px;
+    height: 200px;
     margin: 10px auto;
     padding: 10px;
     align-items: center;
@@ -265,7 +265,7 @@ body {
 }
 
 .wish-image {
-    padding: 10px;
+    padding: 5px;
     display: flex;
     position: absolute;
     top: 50%;
@@ -278,7 +278,6 @@ body {
     border-radius: 10px;
     max-width: 95%;
     max-height: 100px;
-    box-sizing: border-box;
 }
 
 .clickable {

@@ -553,7 +553,7 @@ async function edit_wish(id) {
 		    })
 	    }
     );
-    window.history.back();
+    window.location.replace(document.referrer);
 }
 
 function back() {
