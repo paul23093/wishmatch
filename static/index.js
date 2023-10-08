@@ -25,160 +25,166 @@ async function load() {
         alert.classList.add("page-alert");
         alert.innerHTML = "You are not a member of this chat<br>or<br>You did not /grant access to your wishes yet";
         document.body.appendChild(alert);
-    }
-    const users = uniqueUsers(wishes);
-    const chat = uniqueChats(wishes);
-
-    let titleText = initData.user.first_name ? initData.user.first_name : initData.user.username;
-    if (["group", "supergroup"].includes(chat_type)) {
-        titleText = chat[0].tg_chat_name;
-        let subtitleText = users.length + " user";
-        if (users.length > 1) {
-            subtitleText += "s";
-        }
-        let subtitle = document.getElementById("subtitle");
-        subtitle.textContent = subtitleText;
-        subtitle.style.display = "flex";
-
-        let chatPhoto = document.getElementById("chat-photo");
-        if (chat[0].tg_chat_photo != null) {
-            let img = document.createElement("img");
-            img.src = "data:image/png;base64," + chat[0].tg_chat_photo;
-            chatPhoto.appendChild(img);
-        }
     } else {
-        let userPhoto = document.getElementById("chat-photo");
-        if (chat[0].tg_profile_photo != null) {
-            let img = document.createElement("img");
-            img.src = "data:image/png;base64," + chat[0].tg_profile_photo;
-            userPhoto.appendChild(img);
-        }
-    }
-    document.getElementById("title").textContent = titleText;
+        document.getElementById("topBar").classList.remove("hidden");
+        const users = uniqueUsers(wishes);
+        const chat = uniqueChats(wishes);
 
-    if (initData.user.id === chat_id && initData.user.id === users[0].tg_user_id) {
-        for (let i = 0; i < wishes.length; i++) {
-            let wish = wishes[i];
-            let card = document.createElement("div");
-            card.classList.add("card");
-            card.classList.add("active");
-            let div = document.getElementById("cards-container");
-            div.appendChild(card);
-
-            let wishInfo = document.createElement("div");
-            wishInfo.className = "wish-info";
-            card.appendChild(wishInfo);
-
-            let title = document.createElement("div");
-            title.className = "wish-title";
-            title.textContent = wish["name"];
-            wishInfo.appendChild(title);
-
-            let price = document.createElement("div");
-            price.className = "price";
-            price.textContent = priceFormat(wish["price"]) + " " + wish["currency"];
-            wishInfo.appendChild(price);
-
-            if (wish["image"] != null) {
-                let wishPhoto = document.createElement("div");
-                wishPhoto.className = "wish-image";
-                card.appendChild(wishPhoto);
-
-                let wishPhotoImg = document.createElement("img");
-                wishPhotoImg.src = wish["image"];
-                wishPhoto.appendChild(wishPhotoImg);
+        let titleText = initData.user.first_name ? initData.user.first_name : initData.user.username;
+        if (["group", "supergroup"].includes(chat_type)) {
+            titleText = chat[0].tg_chat_name;
+            let subtitleText = users.length + " user";
+            if (users.length > 1) {
+                subtitleText += "s";
             }
+            let subtitle = document.getElementById("subtitle");
+            subtitle.textContent = subtitleText;
+            subtitle.style.display = "flex";
 
-            let bottomBar = document.createElement("div");
-            bottomBar.className = "bottom-bar";
-            card.appendChild(bottomBar);
+            let chatPhoto = document.getElementById("chat-photo");
+            if (chat[0].tg_chat_photo != null) {
+                let img = document.createElement("img");
+                img.src = "data:image/png;base64," + chat[0].tg_chat_photo;
+                chatPhoto.appendChild(img);
+            }
+        } else {
+            let userPhoto = document.getElementById("chat-photo");
+            if (chat[0].tg_profile_photo != null) {
+                let img = document.createElement("img");
+                img.src = "data:image/png;base64," + chat[0].tg_profile_photo;
+                userPhoto.appendChild(img);
+            }
+        }
+        document.getElementById("title").textContent = titleText;
 
-            let bookMark = document.createElement("div");
-            bookMark.className = "bookmark";
-            bottomBar.appendChild(bookMark);
-            let deleteIcon = document.createElement("span");
-            deleteIcon.classList.add("material-symbols-outlined");
-            deleteIcon.textContent = "delete";
-            bookMark.appendChild(deleteIcon);
+        if (initData.user.id === chat_id && initData.user.id === users[0].tg_user_id) {
+            for (let i = 0; i < wishes.length; i++) {
+                let cardsContainer = document.createElement("div");
+                cardsContainer.id = "cards-container";
+                cardsContainer.classList.add("grid-view");
 
-            bookMark.addEventListener("click", async function () {
-                await fetch(
-                    "/delete",
-                    {
-                        method: "POST",
-                        headers: {
-                            "Accept": "application/json",
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            wish_id: wish["id"]
-                        })
-                    }
-                )
-                bookMark.parentElement.parentElement.remove();
-            });
+                let wish = wishes[i];
+                let card = document.createElement("div");
+                card.classList.add("card");
+                card.classList.add("active");
+                cardsContainer.appendChild(card);
 
-            if (wish["link"] != null) {
-                let link = document.createElement("div");
-                link.className = "link";
-                let linkIcon = document.createElement("span");
-                linkIcon.classList.add("material-symbols-outlined");
-                linkIcon.textContent = "open_in_new";
-                link.appendChild(linkIcon);
-                link.onclick = function () {
-                    window.open(wish["link"]);
+                let wishInfo = document.createElement("div");
+                wishInfo.className = "wish-info";
+                card.appendChild(wishInfo);
+
+                let title = document.createElement("div");
+                title.className = "wish-title";
+                title.textContent = wish["name"];
+                wishInfo.appendChild(title);
+
+                let price = document.createElement("div");
+                price.className = "price";
+                price.textContent = priceFormat(wish["price"]) + " " + wish["currency"];
+                wishInfo.appendChild(price);
+
+                if (wish["image"] != null) {
+                    let wishPhoto = document.createElement("div");
+                    wishPhoto.className = "wish-image";
+                    card.appendChild(wishPhoto);
+
+                    let wishPhotoImg = document.createElement("img");
+                    wishPhotoImg.src = wish["image"];
+                    wishPhoto.appendChild(wishPhotoImg);
                 }
-                bottomBar.appendChild(link);
+
+                let bottomBar = document.createElement("div");
+                bottomBar.className = "bottom-bar";
+                card.appendChild(bottomBar);
+
+                let bookMark = document.createElement("div");
+                bookMark.className = "bookmark";
+                bottomBar.appendChild(bookMark);
+                let deleteIcon = document.createElement("span");
+                deleteIcon.classList.add("material-symbols-outlined");
+                deleteIcon.textContent = "delete";
+                bookMark.appendChild(deleteIcon);
+
+                bookMark.addEventListener("click", async function () {
+                    await fetch(
+                        "/delete",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Accept": "application/json",
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                wish_id: wish["id"]
+                            })
+                        }
+                    )
+                    bookMark.parentElement.parentElement.remove();
+                });
+
+                if (wish["link"] != null) {
+                    let link = document.createElement("div");
+                    link.className = "link";
+                    let linkIcon = document.createElement("span");
+                    linkIcon.classList.add("material-symbols-outlined");
+                    linkIcon.textContent = "open_in_new";
+                    link.appendChild(linkIcon);
+                    link.onclick = function () {
+                        window.open(wish["link"]);
+                    }
+                    bottomBar.appendChild(link);
+                }
+            }
+        }
+        else {
+            for (let j=0; j<users.length; j++) {
+                const user_wishes = wishes.filter(function (wish) {
+                    return wish["tg_user_id"] === users[j].tg_user_id
+                });
+                const user_wishes_count = user_wishes.length;
+
+                let card = document.createElement("div");
+                card.classList.add("card");
+                card.classList.add("clickable");
+                card.classList.add("active");
+                card.onclick = function () {
+                    location.href = "/user_wishes?user_id=" + users[j].tg_user_id + "&chat_id=" + chat[0].tg_chat_id;
+                };
+                let div = document.getElementById("cards-container");
+                div.appendChild(card);
+
+                let header = document.createElement("div");
+                header.className = "card-header";
+                card.appendChild(header);
+
+                let userPhoto = document.createElement("div");
+                userPhoto.className = "user-photo";
+                header.appendChild(userPhoto);
+
+                if (user_wishes[0].tg_profile_photo != null) {
+                    let userPhotoImg = document.createElement("img");
+                    userPhotoImg.src = "data:image/png;base64," + user_wishes[0].tg_profile_photo;
+                    userPhoto.appendChild(userPhotoImg);
+                }
+
+                let userInfo = document.createElement("div");
+                userInfo.className = "user-info";
+                header.appendChild(userInfo);
+
+                let userName = document.createElement("div");
+                userName.className = "card-title";
+                userName.textContent = user_wishes[0].tg_first_name ? user_wishes[0].tg_first_name : user_wishes[0].tg_username;
+                userInfo.appendChild(userName);
+
+                let wishCount = document.createElement("div");
+                wishCount.className = "wish-count";
+                wishCount.textContent = user_wishes_count + "\nwish";
+                wishCount.textContent += user_wishes_count>1 ? "es" : "";
+                userInfo.appendChild(wishCount);
             }
         }
     }
-    else {
-        for (let j=0; j<users.length; j++) {
-            const user_wishes = wishes.filter(function (wish) {
-                return wish["tg_user_id"] === users[j].tg_user_id
-            });
-            const user_wishes_count = user_wishes.length;
 
-            let card = document.createElement("div");
-            card.classList.add("card");
-            card.classList.add("clickable");
-            card.classList.add("active");
-            card.onclick = function () {
-                location.href = "/user_wishes?user_id=" + users[j].tg_user_id + "&chat_id=" + chat[0].tg_chat_id;
-            };
-            let div = document.getElementById("cards-container");
-            div.appendChild(card);
-
-            let header = document.createElement("div");
-            header.className = "card-header";
-            card.appendChild(header);
-
-            let userPhoto = document.createElement("div");
-            userPhoto.className = "user-photo";
-            header.appendChild(userPhoto);
-
-            if (user_wishes[0].tg_profile_photo != null) {
-                let userPhotoImg = document.createElement("img");
-                userPhotoImg.src = "data:image/png;base64," + user_wishes[0].tg_profile_photo;
-                userPhoto.appendChild(userPhotoImg);
-            }
-
-            let userInfo = document.createElement("div");
-            userInfo.className = "user-info";
-            header.appendChild(userInfo);
-
-            let userName = document.createElement("div");
-            userName.className = "card-title";
-            userName.textContent = user_wishes[0].tg_first_name ? user_wishes[0].tg_first_name : user_wishes[0].tg_username;
-            userInfo.appendChild(userName);
-
-            let wishCount = document.createElement("div");
-            wishCount.className = "wish-count";
-            wishCount.textContent = user_wishes_count + "\nwish";
-            wishCount.textContent += user_wishes_count>1 ? "es" : "";
-            userInfo.appendChild(wishCount);
-        }
-    }
 }
 
 

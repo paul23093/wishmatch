@@ -6,6 +6,10 @@ body {
     overscroll-behavior-y: auto;
 }
 
+.hidden {
+    display: none;
+}
+
 .page-alert {
     color: var(--tg-theme-text-color);
     font-size: 12pt;
