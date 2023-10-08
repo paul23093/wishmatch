@@ -212,7 +212,7 @@ async function load() {
 
 async function load_user_wishes() {
     Telegram.WebApp.ready();
-    Telegram.WebApp.enableClosingConfirmation();
+    Telegram.WebApp.disableClosingConfirmation();
     const initData = Telegram.WebApp.initDataUnsafe;
     const chat_type = initData.chat_type;
     Telegram.WebApp.expand();
