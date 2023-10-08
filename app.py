@@ -31,7 +31,6 @@ async def index(request: Request, chat_id: Union[float, None] = None, tgWebAppSt
         result_chat_id = chat_id
     elif tgWebAppStartParam:
         result_chat_id = tgWebAppStartParam
-    print(result_chat_id)
     return templates.TemplateResponse("index.html", {"request": request, "result_chat_id": result_chat_id})
 
 

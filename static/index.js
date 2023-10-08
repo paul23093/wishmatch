@@ -444,6 +444,7 @@ async function get_user_wishes(user_id, chat_id) {
 
 
 async function load_new_wish() {
+    console.log(wish_id);
     if (wish_id !== null) {
         const response = await get_wish(wish_id);
         const res = await response.json();
