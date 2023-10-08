@@ -27,6 +27,7 @@ async function load() {
         document.body.appendChild(alert);
     } else {
         document.getElementById("topBar").classList.remove("hidden");
+        document.getElementById("topBar").classList.add("topBar");
         const users = uniqueUsers(wishes);
         const chat = uniqueChats(wishes);
 
