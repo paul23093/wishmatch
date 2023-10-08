@@ -179,7 +179,8 @@ async def new(request: Request, wish_id: Union[int, None] = None):
 
 
 @app.post("/get_wish")
-async def get_wish(wish_id: int):
+async def get_wish(request: Request):
+    data = await request.json()
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
@@ -192,7 +193,7 @@ async def get_wish(wish_id: int):
             uw.currency,
             uw.image
         from users_wishes uw
-        where uw.id = {wish_id} 
+        where uw.id = {data["wish_id"]} 
         ;
         """)
         data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()]
