@@ -13,7 +13,7 @@ function switchView() {
 async function load() {
     document.body.addEventListener('scroll', function (e) {
             if (document.body.scrollTop === 0) {
-                e.preventDefault();
+                document.body.scrollTop = 1;
             }
         });
     Telegram.WebApp.ready();
