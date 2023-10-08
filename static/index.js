@@ -86,7 +86,7 @@ async function load() {
                 price.textContent = priceFormat(wish["price"]) + " " + wish["currency"];
                 wishInfo.appendChild(price);
 
-                if (wish["image"] != null) {
+                if (wish["image"] != null && imageExists(wish["image"])) {
                     let wishPhoto = document.createElement("div");
                     wishPhoto.className = "wish-image";
                     card.appendChild(wishPhoto);
@@ -494,4 +494,11 @@ function uniqueChats(wishes) {
         }
         return false;
     });
+}
+
+function imageExists(image_url){
+    let http = new XMLHttpRequest();
+    http.open('HEAD', image_url, false);
+    http.send();
+    return http.status !== 404;
 }
