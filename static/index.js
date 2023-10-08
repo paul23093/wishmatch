@@ -456,7 +456,7 @@ async function load_new_wish() {
         document.getElementById("wish-image-link").value = wish["image"];
         document.getElementById("wish-price").value = wish["price"];
         document.getElementById("wish-currency").value = wish["currency"];
-        document.getElementById("button").textContent = "Edit";
+        document.getElementById("button").textContent = "Save";
         document.getElementById("button").onclick = function () {edit_wish(wish_id);};
     } else {
         document.getElementById("button").textContent = "Add";
