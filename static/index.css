@@ -345,6 +345,10 @@ body {
     align-items: center;
 }
 
+.bottom-bar div {
+    font-size: 10pt;
+}
+
 .link {
     background-color: var(--tg-theme-secondary-bg-color);
     display: flex;
