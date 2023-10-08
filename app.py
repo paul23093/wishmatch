@@ -198,7 +198,7 @@ async def get_wish(request: Request):
         """)
         data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()]
 
-        return {"status": "ok", "data": data}
+        return json.dumps({"status": "ok", "data": data})
 
 
 
