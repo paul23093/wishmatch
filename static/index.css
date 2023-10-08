@@ -267,6 +267,7 @@ body {
     padding: 5px;
     display: flex;
     position: absolute;
+    margin: auto;
     top: 50%;
     transform: translateY(-30%);
     justify-content: center;
@@ -277,6 +278,7 @@ body {
     border-radius: 10px;
     max-width: 95%;
     max-height: 90px;
+    margin: auto;
 }
 
 .clickable {
@@ -318,6 +320,9 @@ body {
     font-family: Open Sans, Arial, serif;
     font-weight: bold;
     font-size: 13pt;
+    line-height: 20px;
+    max-height: 40px;
+    overflow: hidden;
 }
 
 .price {
@@ -326,6 +331,8 @@ body {
     display: block;
     user-select: none;
     line-height: 30px;
+    height: 30px;
+    overflow: hidden;
 }
 
 .wish-count {
