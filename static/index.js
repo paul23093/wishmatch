@@ -302,7 +302,7 @@ async function load_user_wishes() {
 
             bookMark.addEventListener("click", async function () {
                 if (wish["is_booked"] === false) {
-                    Telegram.WebApp.HapticFeedback().impactOccurred("medium");
+                    Telegram.WebApp.HapticFeedback.impactOccurred("medium");
                     await fetch(
                         "/book",
                         {
@@ -434,7 +434,7 @@ async function add_wish() {
     let price = document.getElementById("wish-price").value;
     let currency = document.getElementById("wish-currency").value;
 
-    Telegram.WebApp.HapticFeedback().impactOccurred("light");
+    Telegram.WebApp.HapticFeedback.impactOccurred("light");
 
     await fetch(
 	    "/add_wish",
