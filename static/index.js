@@ -11,7 +11,6 @@ function switchView() {
 }
 
 async function load() {
-    document.addEventListener('contextmenu', event => event.preventDefault());
     Telegram.WebApp.ready();
     Telegram.WebApp.disableClosingConfirmation();
     const initData = Telegram.WebApp.initDataUnsafe;
@@ -212,7 +211,6 @@ async function load() {
 
 
 async function load_user_wishes() {
-    document.addEventListener('contextmenu', event => event.preventDefault());
     Telegram.WebApp.ready();
     Telegram.WebApp.disableClosingConfirmation();
     const initData = Telegram.WebApp.initDataUnsafe;
@@ -446,7 +444,6 @@ async function get_user_wishes(user_id, chat_id) {
 
 
 async function load_new_wish() {
-    document.addEventListener('contextmenu', event => event.preventDefault());
     if (wish_id !== -1) {
         const response = await get_wish(wish_id);
         const res = await response.json();
