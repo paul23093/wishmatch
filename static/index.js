@@ -456,6 +456,8 @@ async function load_new_wish() {
         document.getElementById("wish-image-link").value = wish["image"];
         document.getElementById("wish-price").value = wish["price"];
         document.getElementById("wish-currency").value = wish["currency"];
+        document.getElementById("button").textContent = "Edit";
+        document.getElementById("button").onclick = edit_wish(wish_id);
     }
 
     let inputs = Array.prototype.slice.call(document.querySelectorAll("input[data-index]"));
@@ -506,6 +508,40 @@ async function add_wish() {
 		    },
 		    body: JSON.stringify({
 			    tg_user_id: tg_user_id, 
+			    name: name,
+                description: description,
+			    link: link,
+                image_link: imageLink,
+			    price: price,
+                currency: currency,
+		    })
+	    }
+    );
+    window.location.href="/?tgWebAppStartParam="+initData.start_param;
+}
+
+async function edit_wish() {
+    let initData = Telegram.WebApp.initDataUnsafe;
+    let tg_user_id = initData.user.id;
+    let name = document.getElementById("wish-title").value;
+    let description = document.getElementById("wish-description").value;
+    let link = document.getElementById("wish-link").value;
+    let imageLink = document.getElementById("wish-image-link").value;
+    let price = document.getElementById("wish-price").value;
+    let currency = document.getElementById("wish-currency").value;
+
+    Telegram.WebApp.HapticFeedback.notificationOccurred("success");
+
+    await fetch(
+	    "/edit_wish",
+	    {
+		    method: "POST",
+		    headers: {
+			    "Accept": "application/json",
+			    "Content-Type": "application/json"
+		    },
+		    body: JSON.stringify({
+			    tg_user_id: tg_user_id,
 			    name: name,
                 description: description,
 			    link: link,

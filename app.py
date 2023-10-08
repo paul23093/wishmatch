@@ -123,6 +123,27 @@ async def add_wish(request: Request):
     return response
 
 
+@app.post("/edit_wish")
+async def edit_wish(request: Request):
+    data = await request.json()
+    with psycopg2.connect(**con) as conn:
+        cur = conn.cursor()
+        cur.execute(f"""
+        update users_wishes 
+            set name = '{data["name"]}', 
+                description = '{data["description"]}', 
+                link = '{data["link"]}', 
+                image = '{data["image_link"]}', 
+                price = '{data["price"]}',
+                currency = '{data["currency"]}'
+        where tg_user_id = {data["id"]}
+        ; 
+        """)
+        conn.commit()
+    response = {"status": "ok"}
+    return response
+
+
 @app.post("/book")
 async def book(request: Request):
     data = await request.json()
