@@ -193,8 +193,7 @@ async def delete(request: Request):
 
 
 @app.get("/new")
-async def new(request: Request, wish_id: Union[int, None] = None):
-    print(wish_id)
+async def new(request: Request, wish_id: int = -1):
     return templates.TemplateResponse("new_wish.html", {"request": request, "wish_id": wish_id})
 
 

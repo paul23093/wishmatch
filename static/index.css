@@ -255,7 +255,7 @@ body {
 
 .wish-info {
     display: flex;
-    width: 90%;
+    width: 85%;
     position: absolute;
     padding: 5px 10px;
     flex-direction: column;
