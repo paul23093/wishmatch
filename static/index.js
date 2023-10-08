@@ -11,6 +11,11 @@ function switchView() {
 }
 
 async function load() {
+    document.body.addEventListener('scroll', function (e) {
+            if (document.body.scrollTop === 0) {
+                e.preventDefault();
+            }
+        });
     Telegram.WebApp.ready();
     Telegram.WebApp.disableClosingConfirmation();
     const initData = Telegram.WebApp.initDataUnsafe;
