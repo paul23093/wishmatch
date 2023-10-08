@@ -268,7 +268,7 @@ body {
     display: flex;
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-30%);
     justify-content: center;
     align-items: center;
 }
