@@ -21,9 +21,9 @@ async function load() {
     const data = await JSON.parse(res);
     const wishes = await data.data;
     if (wishes.length === 0) {
-        let alert = document.createElement("div");
+        let alert = document.createElement("span");
         alert.classList.add("page-alert");
-        alert.textContent = "You are not a member of this chat\nor\nYou did not /grant access to your wishes yet";
+        alert.innerHTML = "You are not a member of this chat<br>or<br>You did not /grant access to your wishes yet";
         document.body.appendChild(alert);
     }
     const users = uniqueUsers(wishes);
