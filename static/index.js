@@ -457,7 +457,7 @@ async function load_new_wish() {
         document.getElementById("wish-price").value = wish["price"];
         document.getElementById("wish-currency").value = wish["currency"];
         document.getElementById("button").textContent = "Edit";
-        document.getElementById("button").onclick = edit_wish(wish_id);
+        document.getElementById("button").onclick = function () {edit_wish(wish_id);};
     }
 
     let inputs = Array.prototype.slice.call(document.querySelectorAll("input[data-index]"));
@@ -520,9 +520,7 @@ async function add_wish() {
     window.location.href="/?tgWebAppStartParam="+initData.start_param;
 }
 
-async function edit_wish() {
-    let initData = Telegram.WebApp.initDataUnsafe;
-    let tg_user_id = initData.user.id;
+async function edit_wish(id) {
     let name = document.getElementById("wish-title").value;
     let description = document.getElementById("wish-description").value;
     let link = document.getElementById("wish-link").value;
@@ -541,7 +539,7 @@ async function edit_wish() {
 			    "Content-Type": "application/json"
 		    },
 		    body: JSON.stringify({
-			    tg_user_id: tg_user_id,
+                id: id,
 			    name: name,
                 description: description,
 			    link: link,
