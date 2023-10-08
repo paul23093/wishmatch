@@ -142,7 +142,7 @@ async function load() {
                 let editIcon = document.createElement("span");
                 editIcon.classList.add("material-symbols-outlined");
                 editIcon.textContent = "edit";
-                editWish.appendChild(deleteIcon);
+                editWish.appendChild(editIcon);
 
                 if (wish["link"] != null) {
                     let link = document.createElement("div");
