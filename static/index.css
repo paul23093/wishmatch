@@ -338,12 +338,15 @@ body {
     display: flex;
     position: absolute;
     flex-direction: row;
-    font-size: 12px;
     bottom: 10%;
     width: 90%;
     height: 20%;
     justify-content: center;
     align-items: center;
+}
+
+.bottom-bar div span {
+    font-size: 9pt;
 }
 
 .link {
