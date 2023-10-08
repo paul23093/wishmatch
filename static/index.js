@@ -269,21 +269,27 @@ async function load_user_wishes() {
             bookMark.parentElement.parentElement.classList.add("active");
 
             bookMark.addEventListener("click", async function () {
-                    await fetch(
-                        "/delete",
-                        {
-                            method: "POST",
-                            headers: {
-                                "Accept": "application/json",
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify({
-                                wish_id: wish["id"]
-                            })
+                Telegram.WebApp.HapticFeedback.notificationOccurred("warning");
+                Telegram.WebApp.showConfirm(
+                    "Are you sure you want to delete this wish?",
+                    async function (is_ok) {
+                        if (is_ok) {
+                            await fetch(
+                                "/delete",
+                                {
+                                    method: "POST",
+                                    headers: {
+                                        "Accept": "application/json",
+                                        "Content-Type": "application/json"
+                                    },
+                                    body: JSON.stringify({
+                                        wish_id: wish["id"]
+                                    })
+                                }
+                            );
+                            bookMark.parentElement.parentElement.remove();
                         }
-                    );
-                    wish["is_deleted"] = true;
-                    bookMark.parentElement.parentElement.remove();
+                    });
             });
         } else if (wish["is_booked"] === false || (wish["is_booked"] === true && wish["booked_by"] === initData.user.id)) {
             let bookMark = document.createElement("div");
