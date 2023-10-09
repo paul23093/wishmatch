@@ -446,11 +446,11 @@ async function get_user_wishes(user_id, chat_id) {
 async function load_new_wish() {
     document.getElementById("wish-price").addEventListener('focusin', function(e) {
         e.preventDefault();
-        e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
     document.getElementById("wish-currency").addEventListener('focusin', function(e) {
         e.preventDefault();
-        e.target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        // e.target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     });
     if (wish_id !== -1) {
         const response = await get_wish(wish_id);
