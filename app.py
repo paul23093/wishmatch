@@ -140,6 +140,7 @@ async def add_wish(request: Request):
 @app.post("/edit_wish")
 async def edit_wish(request: Request):
     data = await request.json()
+    print(data)
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
