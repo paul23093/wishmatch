@@ -119,7 +119,8 @@ body {
     font-size: 12pt;
     width: 100%;
     box-sizing: border-box;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
     padding: 15px;
     margin: 10px 0;
     border: 2px solid rgba(52, 130, 148, 0.1);
