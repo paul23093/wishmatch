@@ -38,7 +38,7 @@ location / {
 ```
 
 On your hosting you have to:
-1. Deploy database like postgresql
+1. Deploy database like postgresql and create the following tables from [here](https://github.com/paul23093/wishmatch-bot/tree/main/tables).
 2. Git clone [wishmatch bot](https://github.com/paul23093/wishmatch-bot)
 3. Git clone [wishmatch webapp](https://github.com/paul23093/wishmatch-webapp)
 4. Create `.env` file where you will store your credentials of postgresql (`PG_HOST`, `PG_PORT`, `PG_USER`, `PG_PASSWORD`, `PG_DB`) and your Telegram bot token (`TOKEN`).
@@ -50,6 +50,12 @@ On your hosting you have to:
 ## Developer
 
 [Pavel Semenov](https://github.com/paul23093)
+
+## Stack
+
+- Python, FastApi
+- Native HTML+CSS+Javascript
+- PostgreSQL
 
 ## License
 
