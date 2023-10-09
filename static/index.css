@@ -289,21 +289,39 @@ body {
 
 .active {
     background-color: var(--tg-theme-secondary-bg-color);
-    opacity: 1;
+}
+
+.active .wish-title {
     transition: opacity 0.3s ease-in-out;
+    opacity: 1;
+}
+
+.active .price {
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1;
+}
+
+.active .wish-image {
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1;
 }
 
 .booked {
     background-color: var(--tg-theme-secondary-bg-color);
-    opacity: 0.3;
 }
 
 .booked .wish-title {
     text-decoration: line-through;
+    opacity: 0.3;
 }
 
 .booked .price {
     text-decoration: line-through;
+    opacity: 0.3;
+}
+
+.booked .wish-image {
+    opacity: 0.3;
 }
 
 
