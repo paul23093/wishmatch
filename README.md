@@ -23,7 +23,7 @@ Then you will see your wish as a card on main webapp screen. You can always edit
 
 But the main purpose of this webapp is to share wishes between group members like in separate wishlist sites. So once each member who granted the access, add their wishes, you will see cards of them and you can click on member card to deep into their wishes. For each fiend wish you cann book it by clicking `waving hand` button. By doing this, you are notifying other friends (except the wish owner) that you are going to buy it for the wish owner and the other guys will not be able to book it since this moment.
 
-## How to build and up this.
+## How to deploy bot and webapp
 
 You need to have your own hosting and https domain.
 On your hosting you have to:
