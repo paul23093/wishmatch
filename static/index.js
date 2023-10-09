@@ -444,7 +444,10 @@ async function get_user_wishes(user_id, chat_id) {
 
 
 async function load_new_wish() {
-    document.addEventListener('focusin', function(e) {
+    document.getElementById("wish-price").addEventListener('focusin', function(e) {
+        e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+    document.getElementById("wish-currency").addEventListener('focusin', function(e) {
         e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
     if (wish_id !== -1) {
