@@ -124,12 +124,12 @@ async def add_wish(request: Request):
             )
             values (
                 {data["tg_user_id"]}, 
-                {f"'{data.name}'" if data.name else "NULL"},
-                {f"'{data.description}'" if data.description else "NULL"}, 
-                {f"'{data.link}'" if data.link else "NULL"}, 
-                {f"'{data.image_link}'" if data.image_link else "NULL"}, 
-                {f"'{data.price}'" if data.price else "NULL"}, 
-                {f"'{data.currency}'" if data.currency else "NULL"}
+                {f"'{data['name']}'" if data["name"] else "NULL"},
+                {f"'{data['description']}'" if data["description"] else "NULL"}, 
+                {f"'{data['link']}'" if data["link"] else "NULL"}, 
+                {f"'{data['image_link']}'" if data["image_link"] else "NULL"}, 
+                {f"'{data['price']}'" if data["price"] else "NULL"}, 
+                {f"'{data['currency']}'" if data["currency"] else "NULL"}
             ); 
         """)
         conn.commit()
@@ -140,17 +140,16 @@ async def add_wish(request: Request):
 @app.post("/edit_wish")
 async def edit_wish(request: Request):
     data = await request.json()
-    print(data)
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
         update users_wishes 
-            set name = {f"'{data.name}'" if data.name else "NULL"}, 
-                description = {f"'{data.description}'" if data.description else "NULL"}, 
-                link = {f"'{data.link}'" if data.link else "NULL"}, 
-                image = {f"'{data.image_link}'" if data.image_link else "NULL"}, 
-                price = {f"'{data.price}'" if data.price else "NULL"},
-                currency = {f"'{data.currency}'" if data.currency else "NULL"}
+            set name = {f"'{data['name']}'" if data["name"] else "NULL"}, 
+                description = {f"'{data['description']}'" if data["description"] else "NULL"}, 
+                link = {f"'{data['link']}'" if data["link"] else "NULL"}, 
+                image = {f"'{data['image_link']}'" if data["image_link"] else "NULL"}, 
+                price = {f"'{data['price']}'" if data["price"] else "NULL"},
+                currency = {f"'{data['currency']}'" if data["currency"] else "NULL"}
         where id = {data["id"]}
         ; 
         """)
