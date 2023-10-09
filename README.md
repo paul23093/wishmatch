@@ -3,6 +3,10 @@
 [wishmatch webapp](https://github.com/paul23093/wishmatch-webapp) is a tool for creating, storing, managing and sharing your wishlist with friends.
 It works based on [wishmatch bot](https://github.com/paul23093/wishmatch-bot) where you can grant access to your wishes in certain groups.
 
+
+https://github.com/paul23093/wishmatch-webapp/assets/29181090/779e9161-811e-414f-b2f8-283d6cafca0e
+
+
 ## How it works in personal chat
 
 First of all, you need to /start conversation with [@wishmatch_bot](https://t.me/wishmatch_bot).
