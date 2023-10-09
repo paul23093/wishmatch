@@ -444,6 +444,11 @@ async function get_user_wishes(user_id, chat_id) {
 
 
 async function load_new_wish() {
+    let backButton = Telegram.WebApp.BackButton();
+    backButton.onclick(function () {
+        back();
+    });
+    backButton.show();
     if (wish_id !== -1) {
         const response = await get_wish(wish_id);
         const res = await response.json();
@@ -557,8 +562,7 @@ async function edit_wish(id) {
 }
 
 function back() {
-    let initData = Telegram.WebApp.initDataUnsafe;
-    window.location.href="/?tgWebAppStartParam="+initData.start_param;
+    window.location.replace(document.referrer);
 }
 
 function priceFormat(x) {
