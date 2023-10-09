@@ -6,10 +6,6 @@ body {
     overscroll-behavior-y: auto;
 }
 
-body.keyboard {
-    height: calc(150%);
-}
-
 .hidden {
     display: none;
 }
@@ -182,9 +178,6 @@ body.keyboard {
 
 .form {
     background-color: var(--tg-theme-secondary-bg-color);
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-    flex: auto;
     min-height: 85vh;
     max-height: 150vh;
     width: 90%;
