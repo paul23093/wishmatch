@@ -327,7 +327,8 @@ async function load_user_wishes() {
                 bookMark.parentElement.parentElement.classList.add("active");
             } else {
                 bookIcon.textContent = "do_not_touch";
-                bookMark.parentElement.parentElement.classList.add("booked");
+                card.classList.add("booked");
+                card.style.opacity = 0.3;
             }
 
             bookMark.addEventListener("click", async function () {
@@ -348,8 +349,9 @@ async function load_user_wishes() {
                         }
                     );
                     wish["is_booked"] = true;
-                    bookMark.parentElement.parentElement.classList.remove("active");
-                    bookMark.parentElement.parentElement.classList.add("booked");
+                    card.classList.remove("active");
+                    card.classList.add("booked");
+                    card.style.opacity = 1
                     bookMark.getElementsByTagName("span")[0].textContent = "do_not_touch";
                 } else {
                     await fetch(

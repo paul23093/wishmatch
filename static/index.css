@@ -290,11 +290,7 @@ body {
 .active {
     background-color: var(--tg-theme-secondary-bg-color);
     opacity: 1;
-}
-
-.booked {
-    background-color: var(--tg-theme-secondary-bg-color);
-    opacity: 0.3;
+    transition: opacity 0.3s ease-in-out;
 }
 
 .booked .wish-title {
