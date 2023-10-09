@@ -28,12 +28,14 @@ But the main purpose of this webapp is to share wishes between group members lik
 **You need to have your own hosting and https domain with nginx.**
 
 NGINX sites-enabled:
-```location / {
+```
+location / {
     proxy_pass http://localhost:{PORT};
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-}```
+}
+```
 
 On your hosting you have to:
 1. Deploy database like postgresql
