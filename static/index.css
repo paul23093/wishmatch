@@ -6,6 +6,10 @@ body {
     overscroll-behavior-y: auto;
 }
 
+body.keyboard {
+    height: calc(150%);
+}
+
 .hidden {
     display: none;
 }
