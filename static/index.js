@@ -102,11 +102,11 @@ async function load() {
 
                 let bookMark = document.createElement("div");
                 bookMark.className = "bookmark";
-                bottomBar.appendChild(bookMark);
                 let deleteIcon = document.createElement("span");
                 deleteIcon.classList.add("material-symbols-outlined");
                 deleteIcon.textContent = "delete";
                 bookMark.appendChild(deleteIcon);
+                bottomBar.appendChild(bookMark);
 
                 bookMark.addEventListener("click", function () {
                     Telegram.WebApp.HapticFeedback.notificationOccurred("warning");
@@ -138,11 +138,11 @@ async function load() {
                 editWish.onclick = function () {
                     location.href="/new?wish_id=" + wish["id"];
                 };
-                bottomBar.appendChild(editWish);
                 let editIcon = document.createElement("span");
                 editIcon.classList.add("material-symbols-outlined");
                 editIcon.textContent = "edit";
                 editWish.appendChild(editIcon);
+                bottomBar.appendChild(editWish);
 
                 if (wish["link"] != null) {
                     let link = document.createElement("div");
@@ -271,12 +271,12 @@ async function load_user_wishes() {
         if (wish["tg_user_id"] === initData.user.id) {
             let bookMark = document.createElement("div");
             bookMark.className = "bookmark";
-            bottomBar.appendChild(bookMark);
 
             let deleteIcon = document.createElement("span");
             deleteIcon.classList.add("material-symbols-outlined");
             deleteIcon.textContent = "delete";
             bookMark.appendChild(deleteIcon);
+            bottomBar.appendChild(bookMark);
             bookMark.parentElement.parentElement.classList.add("active");
 
             bookMark.addEventListener("click", async function () {
@@ -308,20 +308,20 @@ async function load_user_wishes() {
             editWish.onclick = function () {
                 location.href="/new?wish_id=" + wish["id"];
             };
-            bottomBar.appendChild(editWish);
             let editIcon = document.createElement("span");
             editIcon.classList.add("material-symbols-outlined");
             editIcon.textContent = "edit";
             editWish.appendChild(editIcon);
+            bottomBar.appendChild(editWish);
 
         } else if (wish["is_booked"] === false || (wish["is_booked"] === true && wish["booked_by"] === initData.user.id)) {
             let bookMark = document.createElement("div");
             bookMark.className = "bookmark";
-            bottomBar.appendChild(bookMark);
 
             let bookIcon = document.createElement("span");
             bookIcon.classList.add("material-symbols-outlined");
             bookMark.appendChild(bookIcon);
+            bottomBar.appendChild(bookMark);
             if (wish["is_booked"] === false) {
                 bookIcon.textContent = "hand_gesture";
                 bookMark.parentElement.parentElement.classList.add("active");
