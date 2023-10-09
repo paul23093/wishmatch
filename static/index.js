@@ -215,11 +215,7 @@ async function load_user_wishes() {
     Telegram.WebApp.ready();
     Telegram.WebApp.disableClosingConfirmation();
     let backButton = Telegram.WebApp.BackButton;
-    backButton.onClick(function () {
-        back();
-        backButton.hide();
-    });
-    backButton.show();
+    backButton.onClick(back);
     const initData = Telegram.WebApp.initDataUnsafe;
     const chat_type = initData.chat_type;
     Telegram.WebApp.expand();
@@ -452,10 +448,7 @@ async function get_user_wishes(user_id, chat_id) {
 
 async function load_new_wish() {
     let backButton = Telegram.WebApp.BackButton;
-    backButton.onClick(function () {
-        back();
-        backButton.hide();
-    });
+    backButton.onClick(back);
     backButton.show();
     if (wish_id !== -1) {
         const response = await get_wish(wish_id);
@@ -504,7 +497,6 @@ async function load_new_wish() {
 
 async function add_wish() {
     let initData = Telegram.WebApp.initDataUnsafe;
-    Telegram.WebApp.BackButton.onClick(back);
     let tg_user_id = initData.user.id;
     let name = document.getElementById("wish-title").value;
     let description = document.getElementById("wish-description").value;
@@ -539,7 +531,6 @@ async function add_wish() {
 
 async function edit_wish(id) {
     let initData = Telegram.WebApp.initDataUnsafe;
-    Telegram.WebApp.BackButton.onClick(back);
     let name = document.getElementById("wish-title").value;
     let description = document.getElementById("wish-description").value;
     let link = document.getElementById("wish-link").value;
