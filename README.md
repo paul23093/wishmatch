@@ -1,7 +1,7 @@
 # wishmatch
 
 [wishmatch webapp](https://github.com/paul23093/wishmatch-webapp) is a tool for creating, storing, managing and sharing your wishlist with friends.
-It works based on [wishmath bot](https://github.com/paul23093/wishmatch-bot) where you can grant access to your wishes in certain groups.
+It works based on [wishmatch bot](https://github.com/paul23093/wishmatch-bot) where you can grant access to your wishes in certain groups.
 
 ## How it works in personal chat
 
@@ -28,10 +28,12 @@ But the main purpose of this webapp is to share wishes between group members lik
 You need to have your own hosting and https domain.
 On your hosting you have to:
 1. Deploy database like postgresql
-2. Git clone [wishmath bot](https://github.com/paul23093/wishmatch-bot)
+2. Git clone [wishmatch bot](https://github.com/paul23093/wishmatch-bot)
 3. Git clone [wishmatch webapp](https://github.com/paul23093/wishmatch-webapp)
-4. Create `.env` file where you will store your credentials of postgresql (`PG_HOST`, `PG_PORT`, `PG_USER`, `PG_PASSWORD`, `PG_DB`) and Telegram bot token (`TOKEN`).
+4. Create `.env` file where you will store your credentials of postgresql (`PG_HOST`, `PG_PORT`, `PG_USER`, `PG_PASSWORD`, `PG_DB`) and your Telegram bot token (`TOKEN`).
 5. Replace the path to `.env` file in `docker-compose.yml` file [here](https://github.com/paul23093/wishmatch-webapp/blob/9d23e150c5ab5beb266c7d83e83e5a4843fd86ef/docker-compose.yml#L10C10-L10C10) and [here](https://github.com/paul23093/wishmatch-bot/blob/1d6ef703cf7f489a77cb219a6efef58e35a7bdd3/docker-compose.yml#L10).
+6. cd wishmatch_bot && docker-compose build && docker-compose up -d
+7. cd wishmatch_webapp && docker-compose build && docker-compose up -d
 
 ## Developer
 
