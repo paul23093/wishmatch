@@ -444,7 +444,7 @@ async function get_user_wishes(user_id, chat_id) {
 
 
 async function load_new_wish() {
-    let backButton = Telegram.WebApp.BackButton();
+    let backButton = Telegram.WebApp.BackButton;
     backButton.onclick(function () {
         back();
     });
