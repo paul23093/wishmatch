@@ -25,7 +25,16 @@ But the main purpose of this webapp is to share wishes between group members lik
 
 ## How to deploy bot and webapp
 
-You need to have your own hosting and https domain.
+**You need to have your own hosting and https domain with nginx.**
+
+NGINX sites-enabled:
+```location / {
+    proxy_pass http://localhost:{PORT};
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+}```
+
 On your hosting you have to:
 1. Deploy database like postgresql
 2. Git clone [wishmatch bot](https://github.com/paul23093/wishmatch-bot)
@@ -34,6 +43,7 @@ On your hosting you have to:
 5. Replace the path to `.env` file in `docker-compose.yml` file [here](https://github.com/paul23093/wishmatch-webapp/blob/9d23e150c5ab5beb266c7d83e83e5a4843fd86ef/docker-compose.yml#L10C10-L10C10) and [here](https://github.com/paul23093/wishmatch-bot/blob/1d6ef703cf7f489a77cb219a6efef58e35a7bdd3/docker-compose.yml#L10).
 6. `cd wishmatch_bot && docker-compose build && docker-compose up -d`
 7. `cd wishmatch_webapp && docker-compose build && docker-compose up -d`
+8. Open Telegram, navigate to your bot and click Start.
 
 ## Developer
 
