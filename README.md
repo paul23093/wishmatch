@@ -38,18 +38,25 @@ location / {
 ```
 
 On your hosting you have to:
-1. Deploy database like postgresql
+1. Deploy database like postgresql and create the following tables from [here](https://github.com/paul23093/wishmatch-bot/tree/main/tables).
 2. Git clone [wishmatch bot](https://github.com/paul23093/wishmatch-bot)
 3. Git clone [wishmatch webapp](https://github.com/paul23093/wishmatch-webapp)
 4. Create `.env` file where you will store your credentials of postgresql (`PG_HOST`, `PG_PORT`, `PG_USER`, `PG_PASSWORD`, `PG_DB`) and your Telegram bot token (`TOKEN`).
-5. Replace the path to `.env` file in `docker-compose.yml` file [here](https://github.com/paul23093/wishmatch-webapp/blob/9d23e150c5ab5beb266c7d83e83e5a4843fd86ef/docker-compose.yml#L10C10-L10C10) and [here](https://github.com/paul23093/wishmatch-bot/blob/1d6ef703cf7f489a77cb219a6efef58e35a7bdd3/docker-compose.yml#L10).
+5. Replace the path to `.env` file in `docker-compose.yml` files [here](https://github.com/paul23093/wishmatch-webapp/blob/9d23e150c5ab5beb266c7d83e83e5a4843fd86ef/docker-compose.yml#L10C10-L10C10) and [here](https://github.com/paul23093/wishmatch-bot/blob/1d6ef703cf7f489a77cb219a6efef58e35a7bdd3/docker-compose.yml#L10).
 6. `cd wishmatch_bot && docker-compose build && docker-compose up -d`
 7. `cd wishmatch_webapp && docker-compose build && docker-compose up -d`
-8. Open Telegram, navigate to your bot and click Start.
+
+Then open Telegram, navigate to your bot and click Start.
 
 ## Developer
 
 [Pavel Semenov](https://github.com/paul23093)
+
+## Stack
+
+- Python, FastApi
+- Native HTML+CSS+Javascript
+- PostgreSQL
 
 ## License
 
