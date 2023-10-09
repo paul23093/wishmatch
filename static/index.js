@@ -511,12 +511,12 @@ async function add_wish() {
 		    },
 		    body: JSON.stringify({
 			    tg_user_id: tg_user_id, 
-			    name: (name != null && name !== "") ? name : null,
-                description: (description != null && description !== "") ? description : null,
-			    link: (link != null && link !== "") ? link : null,
-                image_link: (imageLink != null && imageLink !== "") ? imageLink : null,
-			    price: (price != null && price !== "") ? price : null,
-                currency: (currency != null && currency !== "") ? currency : null,
+			    name: (name !== null && name !== "") ? name : null,
+                description: (description !== null && description !== "") ? description : null,
+			    link: (link !== null && link !== "") ? link : null,
+                image_link: (imageLink !== null && imageLink !== "") ? imageLink : null,
+			    price: (price !== null && price !== "") ? price : null,
+                currency: (currency !== null && currency !== "") ? currency : null,
 		    })
 	    }
     );
@@ -544,12 +544,12 @@ async function edit_wish(id) {
 		    },
 		    body: JSON.stringify({
 			    id: id,
-			    name: (name != null && name !== "") ? name : null,
-                description: (description != null && description !== "") ? description : null,
-			    link: (link != null && link !== "") ? link : null,
-                image_link: (imageLink != null && imageLink !== "") ? imageLink : null,
-			    price: (price != null && price !== "") ? price : null,
-                currency: (currency != null && currency !== "") ? currency : null,
+			    name: (name !== null && name !== "") ? name : null,
+                description: (description !== null && description !== "") ? description : null,
+			    link: (link !== null && link !== "") ? link : null,
+                image_link: (imageLink !== null && imageLink !== "") ? imageLink : null,
+			    price: (price !== null && price !== "") ? price : null,
+                currency: (currency !== null && currency !== "") ? currency : null,
 		    })
 	    }
     );
