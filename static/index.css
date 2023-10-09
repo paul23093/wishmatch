@@ -180,7 +180,7 @@ body {
     background-color: var(--tg-theme-secondary-bg-color);
     max-height: 150vh;
     overflow-y: auto;
-    height: 85vh;
+    height: 150vh;
     width: 90%;
     font-family: Arial, serif;
     display: flex;
