@@ -351,7 +351,7 @@ async function load_user_wishes() {
                     wish["is_booked"] = true;
                     card.classList.remove("active");
                     card.classList.add("booked");
-                    card.style.opacity = 1
+                    card.style.opacity = 1;
                     bookMark.getElementsByTagName("span")[0].textContent = "do_not_touch";
                 } else {
                     await fetch(
