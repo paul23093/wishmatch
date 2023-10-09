@@ -23,6 +23,16 @@ Then you will see your wish as a card on main webapp screen. You can always edit
 
 But the main purpose of this webapp is to share wishes between group members like in separate wishlist sites. So once each member who granted the access, add their wishes, you will see cards of them and you can click on member card to deep into their wishes. For each fiend wish you cann book it by clicking `waving hand` button. By doing this, you are notifying other friends (except the wish owner) that you are going to buy it for the wish owner and the other guys will not be able to book it since this moment.
 
+## How to build and up this.
+
+You need to have your own hosting and https domain.
+On your hosting you have to:
+1. Deploy database like postgresql
+2. Git clone [wishmath bot](https://github.com/paul23093/wishmatch-bot)
+3. Git clone [wishmatch webapp](https://github.com/paul23093/wishmatch-webapp)
+4. Create `.env` file where you will store your credentials of postgresql (`PG_HOST`, `PG_PORT`, `PG_USER`, `PG_PASSWORD`, `PG_DB`) and Telegram bot token (`TOKEN`).
+5. Replace the path to `.env` file in `docker-compose.yml` file [here](https://github.com/paul23093/wishmatch-webapp/blob/9d23e150c5ab5beb266c7d83e83e5a4843fd86ef/docker-compose.yml#L10C10-L10C10) and [here](https://github.com/paul23093/wishmatch-bot/blob/1d6ef703cf7f489a77cb219a6efef58e35a7bdd3/docker-compose.yml#L10).
+
 ## Developer
 
 [Pavel Semenov](https://github.com/paul23093)
