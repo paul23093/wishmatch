@@ -293,6 +293,10 @@ body {
     transition: opacity 0.3s ease-in-out;
 }
 
+.booked {
+    background-color: var(--tg-theme-secondary-bg-color);
+}
+
 .booked .wish-title {
     text-decoration: line-through;
 }
