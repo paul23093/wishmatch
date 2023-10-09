@@ -122,7 +122,7 @@ body {
     background-color: rgb(255, 255, 255);
     padding: 15px;
     margin: 10px 0;
-    border: 2px solid rgba(52, 130, 148, 0.2);
+    border: 2px solid rgba(52, 130, 148, 0.1);
     border-radius: 5px;
     outline: none;
     user-select: none;
@@ -381,11 +381,6 @@ body {
     border-radius: 10px;
     cursor: pointer;
     user-select: none;
-}
-
-.input {
-    background-color : var(--tg-theme-bg-color);
-    color: var(--tg-theme-text-color);
 }
 
 @keyframes fadeIn {
