@@ -306,21 +306,20 @@ body {
     opacity: 1;
 }
 
-.booked {
-    background-color: var(--tg-theme-secondary-bg-color);
-}
-
 .booked .wish-title {
+    transition: opacity 0.3s ease-in-out;
     text-decoration: line-through;
     opacity: 0.3;
 }
 
 .booked .price {
+    transition: opacity 0.3s ease-in-out;
     text-decoration: line-through;
     opacity: 0.3;
 }
 
 .booked .wish-image {
+    transition: opacity 0.3s ease-in-out;
     opacity: 0.3;
 }
 
