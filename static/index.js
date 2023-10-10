@@ -574,11 +574,6 @@ async function edit_wish(id) {
     window.location.replace(document.referrer);
 }
 
-function back() {
-    let initData = Telegram.WebApp.initDataUnsafe;
-    window.location.href="/?tgWebAppStartParam="+initData.start_param;
-}
-
 function priceFormat(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
