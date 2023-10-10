@@ -477,9 +477,14 @@ async function load_new_wish() {
                 }
             }
         });
+        document.addEventListener("click", function (event) {
+                if (event.target !== el) {
+                    el.blur();
+                }
+            });
         el.addEventListener("focusin", function (e) {
             const inputFieldRect = e.target.parentElement.getBoundingClientRect();
-            const keyboardHeight = 200;
+            const keyboardHeight = 230;
             document.body.style.height = (window.innerHeight + keyboardHeight).toString() + "px";
             window.scrollTo({
                 top: inputFieldRect.bottom - window.innerHeight + keyboardHeight,
@@ -492,6 +497,13 @@ async function load_new_wish() {
             document.body.style.height = window.innerHeight.toString() + "px";
         });
     });
+
+    document.querySelector('[data-index="' + inputCount + '"]').addEventListener('keydown', (event) => {
+        if (event.code === 'Enter') {
+            event.target.blur();
+        }
+    });
+
     if (wish_id !== -1) {
         const response = await get_wish(wish_id);
         const res = await response.json();
@@ -510,14 +522,6 @@ async function load_new_wish() {
         document.getElementById("button").textContent = "Add";
         document.getElementById("button").onclick = function () {add_wish();};
     }
-
-    inputs.forEach(function (input) {
-        document.addEventListener("click", function (event) {
-           if (event.target !== input) {
-               input.blur();
-           }
-        });
-    });
 }
 
 async function add_wish() {
