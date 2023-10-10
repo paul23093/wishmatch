@@ -444,6 +444,7 @@ async function get_user_wishes(user_id, chat_id) {
 
 
 async function load_new_wish() {
+    window.addEventListener("resize", adjustScroll);
     if (wish_id !== -1) {
         const response = await get_wish(wish_id);
         const res = await response.json();
@@ -592,4 +593,18 @@ function imageExists(image_url){
     http.open('HEAD', image_url, false);
     http.send();
     return http.status !== 404;
+}
+
+function adjustScroll() {
+    const form = document.getElementById("form");
+    const keyboardHeight = window.innerHeight - document.documentElement.clientHeight;
+    if (keyboardHeight > 0) {
+        const inputField = document.activeElement;
+        const inputFieldRect = inputField.getBoundingClientRect();
+        const scrollTop = inputFieldRect.bottom - window.innerHeight + keyboardHeight;
+
+        form.scrollTop = scrollTop;
+    } else {
+        form.scrollTop = 0;
+    }
 }
