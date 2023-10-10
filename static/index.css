@@ -134,6 +134,7 @@ body {
 
 .input::-webkit-search-cancel-button {
     margin-left: 10px;
+    opacity: 0.5;
     -webkit-transition: opacity 0.2s;
     -webkit-appearance: searchfield-cancel-button;
 }

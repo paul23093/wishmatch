@@ -596,15 +596,15 @@ function imageExists(image_url){
 }
 
 function adjustScroll() {
-    const form = document.getElementById("form");
+    const body = document.body;
     const keyboardHeight = window.innerHeight - document.documentElement.clientHeight;
     if (keyboardHeight > 0) {
         const inputField = document.activeElement;
         const inputFieldRect = inputField.getBoundingClientRect();
         const scrollTop = inputFieldRect.bottom - window.innerHeight + keyboardHeight;
 
-        form.scrollTop = scrollTop;
+        body.scrollTop = scrollTop;
     } else {
-        form.scrollTop = 0;
+        body.scrollTop = 0;
     }
 }
