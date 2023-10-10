@@ -484,6 +484,10 @@ async function load_new_wish() {
             }
         });
         el.addEventListener("focusin", function (e) {
+            checkInput(e);
+        });
+
+        el.addEventListener("touchend", function (e) {
             const currentHeight = window.innerHeight;
             let keyboardHeight = Math.abs(currentHeight - initialHeight);
             document.getElementById("title").textContent = document.documentElement.clientHeight.toString();
@@ -493,7 +497,6 @@ async function load_new_wish() {
                 top: inputFieldRect.bottom - initialHeight + keyboardHeight,
                 behavior: 'smooth'
             });
-            checkInput(e);
         });
 
 
