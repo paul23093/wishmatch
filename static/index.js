@@ -13,6 +13,7 @@ function switchView() {
 async function load() {
     Telegram.WebApp.ready();
     Telegram.WebApp.disableClosingConfirmation();
+    Telegram.WebApp.BackButton.hide();
     const initData = Telegram.WebApp.initDataUnsafe;
     const chat_type = initData.chat_type;
     Telegram.WebApp.expand();
@@ -214,6 +215,14 @@ async function load_user_wishes() {
     Telegram.WebApp.ready();
     Telegram.WebApp.disableClosingConfirmation();
     const initData = Telegram.WebApp.initDataUnsafe;
+    Telegram.WebApp.BackButton.onClick(function () {
+        if (initData.start_param !== initData.user.id) {
+            window.location.href="/?tgWebAppStartParam="+initData.start_param;
+        } else {
+            window.location.href="/?tgWebAppStartParam="+initData.start_param;
+        }
+    });
+    Telegram.WebApp.BackButton.show();
     const chat_type = initData.chat_type;
     Telegram.WebApp.expand();
     const response = await get_user_wishes(user_id, chat_id);
@@ -491,6 +500,10 @@ async function load_new_wish() {
 async function add_wish() {
     let initData = Telegram.WebApp.initDataUnsafe;
     let tg_user_id = initData.user.id;
+    Telegram.WebApp.BackButton.onClick(function () {
+        window.location.replace(document.referrer);
+    });
+    Telegram.WebApp.BackButton.show();
     let name = document.getElementById("wish-title").value;
     let description = document.getElementById("wish-description").value;
     let link = document.getElementById("wish-link").value;
@@ -519,11 +532,15 @@ async function add_wish() {
 		    })
 	    }
     );
-    window.location.href="/?tgWebAppStartParam="+initData.start_param;
+    window.location.replace(document.referrer);
 }
 
 async function edit_wish(id) {
     let initData = Telegram.WebApp.initDataUnsafe;
+    Telegram.WebApp.BackButton.onClick(function () {
+        window.location.replace(document.referrer);
+    });
+    Telegram.WebApp.BackButton.show();
     let name = document.getElementById("wish-title").value;
     let description = document.getElementById("wish-description").value;
     let link = document.getElementById("wish-link").value;
