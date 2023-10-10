@@ -479,10 +479,14 @@ async function load_new_wish() {
             }
         });
         document.addEventListener("click", function (event) {
-                if (event.target !== el) {
-                    el.blur();
-                }
+            if (event.target !== el) {
+                el.blur();
+            }
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
+        });
         el.addEventListener("focusin", function (e) {
             const currentHeight = document.visualViewport.height;
             let keyboardHeight = 240; //Math.abs(currentHeight - initialHeight);
