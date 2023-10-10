@@ -464,6 +464,7 @@ async function load_new_wish() {
         window.location.replace(document.referrer);
     });
     Telegram.WebApp.BackButton.show();
+    let initialHeight = window.innerHeight;
     let inputs = Array.prototype.slice.call(document.querySelectorAll("input[data-index]"));
     let inputCount = inputs.reduce((prev, curr) => curr > prev ? curr.getAttribute("data-index") : prev.getAttribute("data-index"));
     document.querySelectorAll("div[class='input'].input").forEach(function (el) {
@@ -483,15 +484,17 @@ async function load_new_wish() {
                 }
             });
         el.addEventListener("focusin", function (e) {
-            const inputFieldRect = e.target.parentElement.getBoundingClientRect();
-            const keyboardHeight = 230;
-            document.body.style.height = (window.innerHeight + keyboardHeight).toString() + "px";
+            const currentHeight = window.innerHeight;
+            let keyboardHeight = Math.abs(currentHeight - initialHeight);
+            const inputFieldRect = el.parentElement.getBoundingClientRect();
+            document.body.style.height = (initialHeight + keyboardHeight).toString() + "px";
             window.scrollTo({
-                top: inputFieldRect.bottom - window.innerHeight + keyboardHeight,
+                top: inputFieldRect.bottom - initialHeight + keyboardHeight,
                 behavior: 'smooth'
             });
             checkInput(e);
         });
+
 
         el.addEventListener("focusout", function (e) {
             document.body.style.height = window.innerHeight.toString() + "px";
