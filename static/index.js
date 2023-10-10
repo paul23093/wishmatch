@@ -453,9 +453,12 @@ async function get_user_wishes(user_id, chat_id) {
 
 
 async function load_new_wish() {
+    Telegram.WebApp.BackButton.onClick(function () {
+        window.location.replace(document.referrer);
+    });
+    Telegram.WebApp.BackButton.show();
     let inputs = Array.prototype.slice.call(document.querySelectorAll("input[data-index]"));
     let inputCount = inputs.reduce((prev, curr) => curr > prev ? curr.getAttribute("data-index") : prev.getAttribute("data-index"));
-
     document.querySelectorAll("div[class='input'].input").forEach(function (el) {
         el.addEventListener("keyup", function (e) {checkInput(e);});
         el.addEventListener("keydown", (e) => {
@@ -500,10 +503,6 @@ async function load_new_wish() {
 async function add_wish() {
     let initData = Telegram.WebApp.initDataUnsafe;
     let tg_user_id = initData.user.id;
-    Telegram.WebApp.BackButton.onClick(function () {
-        window.location.replace(document.referrer);
-    });
-    Telegram.WebApp.BackButton.show();
     let name = document.getElementById("wish-title").value;
     let description = document.getElementById("wish-description").value;
     let link = document.getElementById("wish-link").value;
@@ -537,10 +536,6 @@ async function add_wish() {
 
 async function edit_wish(id) {
     let initData = Telegram.WebApp.initDataUnsafe;
-    Telegram.WebApp.BackButton.onClick(function () {
-        window.location.replace(document.referrer);
-    });
-    Telegram.WebApp.BackButton.show();
     let name = document.getElementById("wish-title").value;
     let description = document.getElementById("wish-description").value;
     let link = document.getElementById("wish-link").value;
