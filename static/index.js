@@ -486,7 +486,7 @@ async function load_new_wish() {
         el.addEventListener("focusin", function (e) {
             const currentHeight = window.innerHeight;
             let keyboardHeight = Math.abs(currentHeight - initialHeight);
-            document.getElementById("title").textContent = window.innerHeight.toString();
+            document.getElementById("title").textContent = document.visualViewport.height.toString();
             const inputFieldRect = el.getBoundingClientRect();
             document.body.style.height = (initialHeight + keyboardHeight).toString() + "px";
             window.scrollTo({
