@@ -444,7 +444,22 @@ async function get_user_wishes(user_id, chat_id) {
 
 
 async function load_new_wish() {
-    window.addEventListener("resize", adjustScroll);
+    let inputs = Array.prototype.slice.call(document.querySelectorAll("input[data-index]"));
+    let inputCount = inputs.reduce((prev, curr) => curr > prev ? curr.getAttribute("data-index") : prev.getAttribute("data-index"));
+
+    document.querySelectorAll("div[class='input'].input").forEach(function (el) {
+        el.addEventListener("keyup", function (e) {checkInput(e);});
+        el.addEventListener("keydown", (e) => {
+            if (e.code === "Enter") {
+                e.preventDefault();
+                const index = parseInt(e.target.getAttribute("data-index"));
+                if (index < inputCount) {
+                    document.querySelector('[data-index="' + (index+1) + '"]').focus();
+                }
+            }
+        });
+        el.addEventListener("focusin", function (e) {checkInput(e);});
+    });
     if (wish_id !== -1) {
         const response = await get_wish(wish_id);
         const res = await response.json();
@@ -464,29 +479,12 @@ async function load_new_wish() {
         document.getElementById("button").onclick = function () {add_wish();};
     }
 
-    let inputs = Array.prototype.slice.call(document.querySelectorAll("input[data-index]"));
     inputs.forEach(function (input) {
         document.addEventListener("click", function (event) {
            if (event.target !== input) {
                input.blur();
            }
         });
-    });
-    let inputCount = inputs.reduce((prev, curr) => curr > prev ? curr.getAttribute("data-index") : prev.getAttribute("data-index"));
-    addEventListener("keydown", (event) => {
-        if (event.code === "Enter") {
-            event.preventDefault();
-            const index = parseInt(event.target.getAttribute("data-index"));
-            if (index < inputCount) {
-                document.querySelector('[data-index="' + (index+1) + '"]').focus();
-            }
-        }
-    });
-
-    document.querySelector('[data-index="' + inputCount + '"]').addEventListener('keydown', (event) => {
-        if (event.code === 'Enter') {
-            event.target.blur();
-        }
     });
 }
 
@@ -607,4 +605,23 @@ function adjustScroll() {
     } else {
         body.scrollTop = 0;
     }
+}
+
+function clearField(el) {
+    let input = el.previousElementSibling;
+    input.value = "";
+    input.focus();
+}
+
+function checkInput(e) {
+    let el = e.target;
+    if (el.value !== null && el.value !== "") {
+        el.nextElementSibling.style.display = "flex";
+    } else {
+        el.nextElementSibling.style.display = "none";
+    }
+}
+
+function checkBlur(e) {
+    e.target.nextElementSibling.style.display = "none";
 }
