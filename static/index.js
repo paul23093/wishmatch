@@ -495,6 +495,7 @@ async function load_new_wish() {
 
 
         el.addEventListener("focusout", function (e) {
+            el.nextElementSibling.style.display = "none";
             document.body.style.height = window.innerHeight.toString() + "px";
             window.scrollTo({
                 top: 0,
