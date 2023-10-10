@@ -486,17 +486,12 @@ async function load_new_wish() {
         el.addEventListener("focusin", function (e) {
             const currentHeight = window.innerHeight;
             let keyboardHeight = Math.abs(currentHeight - initialHeight);
-            if (keyboardHeight > 0) {
-                const inputFieldRect = el.parentElement.getBoundingClientRect();
-                document.body.style.height = (initialHeight + keyboardHeight).toString() + "px";
-                window.scrollTo({
-                    top: inputFieldRect.bottom - initialHeight + keyboardHeight,
-                    behavior: 'smooth'
-                });
-            } else {
-                document.body.style.height = (initialHeight + keyboardHeight).toString() + "px";
-                window.scrollTo(0, 0);
-            }
+            const inputFieldRect = el.parentElement.getBoundingClientRect();
+            document.body.style.height = (initialHeight + keyboardHeight).toString() + "px";
+            window.scrollTo({
+                top: inputFieldRect.bottom - initialHeight + keyboardHeight,
+                behavior: 'smooth'
+            });
             checkInput(e);
         });
 
