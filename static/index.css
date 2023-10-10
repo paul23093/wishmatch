@@ -132,6 +132,12 @@ body {
     -webkit-user-select: none;
 }
 
+.input::-webkit-search-cancel-button {
+    margin-left: 10px;
+    -webkit-transition: opacity 0.2s;
+    -webkit-appearance: searchfield-cancel-button;
+}
+
 .input#wish-price {
     -webkit-flex: 5;
     margin-right: 5px;
