@@ -146,8 +146,8 @@ body {
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    color: #fff;
-    background-color: #ccc;
+    color: var(--tg-theme-text-color);
+    background-color: var(--tg-theme-secondary-bg-color);
     font: 13px monospace;
     cursor: pointer;
 }
