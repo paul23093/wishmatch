@@ -477,7 +477,20 @@ async function load_new_wish() {
                 }
             }
         });
-        el.addEventListener("focusin", function (e) {checkInput(e);});
+        el.addEventListener("focusin", function (e) {
+            const inputFieldRect = e.target.parentElement.getBoundingClientRect();
+            const keyboardHeight = window.innerHeight - document.documentElement.clientHeight;
+            document.body.style.height = (window.innerHeight + keyboardHeight).toString() + "px";
+            window.scrollTo({
+                top: inputFieldRect.bottom - window.innerHeight + keyboardHeight,
+                behavior: 'smooth'
+            });
+            checkInput(e);
+        });
+
+        el.addEventListener("focusout", function (e) {
+            document.body.style.height = window.innerHeight.toString() + "px";
+        });
     });
     if (wish_id !== -1) {
         const response = await get_wish(wish_id);

@@ -200,8 +200,7 @@ body {
 
 .form {
     background-color: var(--tg-theme-secondary-bg-color);
-    min-height: 85vh;
-    max-height: 150vh;
+    height: 85vh;
     width: 90%;
     font-family: Arial, serif;
     display: flex;
