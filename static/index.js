@@ -498,6 +498,10 @@ async function load_new_wish() {
 
         el.addEventListener("focusout", function (e) {
             document.body.style.height = initialHeight.toString() + "px";
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
     });
 
