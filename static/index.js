@@ -484,7 +484,6 @@ async function load_new_wish() {
             }
         });
         el.addEventListener("focusin", function (e) {
-            document.getElementById("title").textContent = document.documentElement.clientHeight.toString();
             const inputFieldRect = el.getBoundingClientRect();
             document.body.style.height = (window.innerHeight + keyboardHeight).toString() + "px";
             window.scrollTo({
@@ -495,13 +494,13 @@ async function load_new_wish() {
         });
 
 
-        // el.addEventListener("focusout", function (e) {
-        //     document.body.style.height = initialHeight.toString() + "px";
-        //     window.scrollTo({
-        //         top: 0,
-        //         behavior: 'smooth'
-        //     });
-        // });
+        el.addEventListener("focusout", function (e) {
+            document.body.style.height = window.innerHeight.toString() + "px";
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
     });
 
     document.querySelector('[data-index="' + inputCount + '"]').addEventListener('keydown', (event) => {
