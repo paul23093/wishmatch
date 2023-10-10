@@ -487,12 +487,13 @@ async function load_new_wish() {
         });
 
         el.addEventListener("focusin", function (e) {
-            console.log(Telegram.WebApp.platform);
-            document.body.style.height = (window.innerHeight + keyboardHeight).toString() + "px";
-            window.scrollTo({
-                top: inputFieldRect.bottom - window.innerHeight + keyboardHeight,
-                behavior: 'smooth'
-            });
+            if(["android", "ios"].includes(Telegram.WebApp.platform)) {
+                document.body.style.height = (window.innerHeight + keyboardHeight).toString() + "px";
+                window.scrollTo({
+                    top: inputFieldRect.bottom - window.innerHeight + keyboardHeight,
+                    behavior: 'smooth'
+                });
+            }
             checkInput(e);
         });
 
