@@ -142,12 +142,13 @@ body {
     position: absolute;
     display: none;
     justify-content: center;
+    align-items: center;
     right: 10px;
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    color: var(--tg-theme-text-color);
-    background-color: var(--tg-theme-secondary-bg-color);
+    color: #000;
+    background-color: #eee;
     font: 13px monospace;
     cursor: pointer;
 }
