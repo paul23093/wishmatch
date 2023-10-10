@@ -479,7 +479,7 @@ async function load_new_wish() {
         });
         el.addEventListener("focusin", function (e) {
             const inputFieldRect = e.target.parentElement.getBoundingClientRect();
-            const keyboardHeight = window.innerHeight - document.documentElement.clientHeight;
+            const keyboardHeight = 200;
             document.body.style.height = (window.innerHeight + keyboardHeight).toString() + "px";
             window.scrollTo({
                 top: inputFieldRect.bottom - window.innerHeight + keyboardHeight,
