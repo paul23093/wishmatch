@@ -484,7 +484,7 @@ async function load_new_wish() {
                 }
             });
         el.addEventListener("focusin", function (e) {
-            const currentHeight = window.innerHeight;
+            const currentHeight = document.documentElement.clientHeight;
             let keyboardHeight = Math.abs(currentHeight - initialHeight);
             const inputFieldRect = el.parentElement.getBoundingClientRect();
             document.body.style.height = (initialHeight + keyboardHeight).toString() + "px";
