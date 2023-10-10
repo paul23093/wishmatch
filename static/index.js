@@ -242,6 +242,13 @@ async function load_user_wishes() {
     subtitle.textContent = subtitleText;
     subtitle.style.display = "flex";
 
+    let userPhoto = document.getElementById("chat-photo");
+    if (chat[0].tg_profile_photo != null) {
+        let img = document.createElement("img");
+        img.src = "data:image/png;base64," + chat[0].tg_profile_photo;
+        userPhoto.appendChild(img);
+    }
+
     for (let i = 0; i < wishes.length; i++) {
         let wish = wishes[i];
         let card = document.createElement("div");
