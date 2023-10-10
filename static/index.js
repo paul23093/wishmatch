@@ -486,18 +486,23 @@ async function load_new_wish() {
         el.addEventListener("focusin", function (e) {
             const currentHeight = window.innerHeight;
             let keyboardHeight = Math.abs(currentHeight - initialHeight);
-            const inputFieldRect = el.parentElement.getBoundingClientRect();
-            document.body.style.height = (initialHeight + keyboardHeight).toString() + "px";
-            window.scrollTo({
-                top: inputFieldRect.bottom - initialHeight + keyboardHeight,
-                behavior: 'smooth'
-            });
+            if (keyboardHeight > 0) {
+                const inputFieldRect = el.parentElement.getBoundingClientRect();
+                document.body.style.height = (initialHeight + keyboardHeight).toString() + "px";
+                window.scrollTo({
+                    top: inputFieldRect.bottom - initialHeight + keyboardHeight,
+                    behavior: 'smooth'
+                });
+            } else {
+                document.body.style.height = (initialHeight + keyboardHeight).toString() + "px";
+                window.scrollTo(0, 0);
+            }
             checkInput(e);
         });
 
 
         el.addEventListener("focusout", function (e) {
-            document.body.style.height = window.innerHeight.toString() + "px";
+            document.body.style.height = initialHeight.toString() + "px";
         });
     });
 
