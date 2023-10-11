@@ -500,14 +500,15 @@ async function load_new_wish() {
 
         el.addEventListener("focusout", (e) => {
             setTimeout(() => {
+                el.nextElementSibling.className = "hidden";
                 if (buttonClick) {}
             }, 0);
-            el.nextElementSibling.className = "hidden";
             document.body.style.height = window.innerHeight.toString() + "px";
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
+            // buttonClick = false;
         });
 
         div.querySelector("span").addEventListener("click", (e) => {
