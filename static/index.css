@@ -140,7 +140,6 @@ body {
 
 .input span {
     position: absolute;
-    display: none;
     justify-content: center;
     align-items: center;
     right: 10px;
@@ -151,6 +150,14 @@ body {
     background-color: #eee;
     font: 13px monospace;
     cursor: pointer;
+}
+
+.input span.visible {
+    display: flex;
+}
+
+.input span.hidden {
+    display: none;
 }
 
 

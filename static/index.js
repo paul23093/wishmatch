@@ -465,28 +465,38 @@ async function load_new_wish() {
     });
     Telegram.WebApp.BackButton.show();
     let keyboardHeight = 150;
+    let buttonClick = false;
     let inputs = Array.prototype.slice.call(document.querySelectorAll("input[data-index]"));
     let inputCount = inputs.reduce((prev, curr) => curr > prev ? curr.getAttribute("data-index") : prev.getAttribute("data-index"));
-    document.querySelectorAll("div[class='input'].input").forEach(function (el) {
+    document.querySelectorAll("div[class='input'].input").forEach((div) => {
+        let el = div.firstElementChild;
         const inputFieldRect = el.getBoundingClientRect();
-        el.addEventListener("keyup", function (e) {checkInput(e);});
+        el.addEventListener("keyup", (e) => {
+            checkInput(e);
+        });
         el.addEventListener("keydown", (e) => {
             if (e.code === "Enter") {
                 e.preventDefault();
                 const index = parseInt(e.target.getAttribute("data-index"));
+                e.target.blur();
                 if (index < inputCount) {
                     document.querySelector('[data-index="' + (index+1) + '"]').focus();
                 }
-            }
-        });
-        document.addEventListener("click", function (event) {
-            if (event.target !== el) {
-                el.blur();
-                el.querySelector("span").style.display = "none";
+                el.querySelector("span").className = "hidden";
             }
         });
 
-        el.addEventListener("focusin", function (e) {
+        // el.addEventListener("click", (e) => {
+        //     if (e.target !== el) {
+        //         el.blur();
+        //         el.querySelector("span").className = "hidden";
+        //     } else {
+        //         checkInput(e);
+        //     }
+        // });
+
+        el.addEventListener("focusin",  (e) => {
+            checkInput(e);
             if(["android", "ios"].includes(Telegram.WebApp.platform)) {
                 document.body.style.height = (window.innerHeight + keyboardHeight).toString() + "px";
                 window.scrollTo({
@@ -494,24 +504,36 @@ async function load_new_wish() {
                     behavior: 'smooth'
                 });
             }
-            checkInput(e);
         });
 
 
-        // el.addEventListener("focusout", function (e) {
-        //     el.querySelector("span").style.display = "none";
-        //     document.body.style.height = window.innerHeight.toString() + "px";
-        //     window.scrollTo({
-        //         top: 0,
-        //         behavior: 'smooth'
-        //     });
-        // });
-    });
+        el.addEventListener("focusout", (e) => {
+            setTimeout(() => {
+                el.nextElementSibling.className = "hidden";
+                if (buttonClick) {
+                    document.body.style.height = window.innerHeight.toString() + "px";
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    buttonClick = false;
+                }
+            }, 0);
+        });
 
-    document.querySelector('[data-index="' + inputCount + '"]').addEventListener('keydown', (event) => {
-        if (event.code === 'Enter') {
-            event.target.blur();
-        }
+        div.querySelector("span").addEventListener("click", (e) => {
+            buttonClick = true;
+            let input = e.target.previousElementSibling;
+            input.blur();
+            input.value = "";
+            input.focus();
+            e.target.className = "hidden";
+
+            setTimeout(() => {
+                buttonClick = false;
+            }, 0);
+        });
+
     });
 
     if (wish_id !== -1) {
@@ -664,21 +686,15 @@ function adjustScroll() {
     }
 }
 
-function clearField(el) {
-    let input = el.previousElementSibling;
-    input.value = "";
-    input.focus();
-}
-
 function checkInput(e) {
     let el = e.target;
     if (el.value !== null && el.value !== "") {
-        el.nextElementSibling.style.display = "flex";
+        el.nextElementSibling.className = "visible";
         if (el.id === "wish-title") {
             Telegram.WebApp.MainButton.enable();
         }
     } else {
-        el.nextElementSibling.style.display = "none";
+        el.nextElementSibling.className = "hidden";
         if (el.id === "wish-title") {
             Telegram.WebApp.MainButton.disable();
         }
@@ -686,5 +702,5 @@ function checkInput(e) {
 }
 
 function checkBlur(e) {
-    e.target.nextElementSibling.style.display = "none";
+    e.target.nextElementSibling.className = "hidden";
 }
