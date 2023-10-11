@@ -536,6 +536,9 @@ async function load_new_wish() {
         // document.getElementById("button").textContent = "Add";
         // document.getElementById("button").onclick = function () {add_wish();};
     }
+    if (document.getElementById("wish-title").value === null || document.getElementById("wish-title").value === "") {
+        Telegram.WebApp.MainButton.disable();
+    }
     Telegram.WebApp.MainButton.show();
 }
 
