@@ -539,7 +539,8 @@ async function load_new_wish() {
     Telegram.WebApp.MainButton.show();
 }
 
-async function add_wish() {
+function add_wish() {
+    Telegram.WebApp.MainButton.showProgress();
     let initData = Telegram.WebApp.initDataUnsafe;
     let tg_user_id = initData.user.id;
     let name = document.getElementById("wish-title").value;
@@ -551,7 +552,7 @@ async function add_wish() {
 
     Telegram.WebApp.HapticFeedback.notificationOccurred("success");
 
-    await fetch(
+    fetch(
 	    "/add_wish",
 	    {
 		    method: "POST",
@@ -569,11 +570,14 @@ async function add_wish() {
                 currency: (currency !== null && currency !== "") ? currency : null,
 		    })
 	    }
-    );
+    ).then(function() {
+        Telegram.WebApp.MainButton.hideProgress();
+    });
     window.location.replace(document.referrer);
 }
 
-async function edit_wish(id) {
+function edit_wish(id) {
+    Telegram.WebApp.MainButton.showProgress();
     let initData = Telegram.WebApp.initDataUnsafe;
     let name = document.getElementById("wish-title").value;
     let description = document.getElementById("wish-description").value;
@@ -584,7 +588,7 @@ async function edit_wish(id) {
 
     Telegram.WebApp.HapticFeedback.notificationOccurred("success");
 
-    await fetch(
+    fetch(
 	    "/edit_wish",
 	    {
 		    method: "POST",
@@ -602,7 +606,9 @@ async function edit_wish(id) {
                 currency: (currency !== null && currency !== "") ? currency : null,
 		    })
 	    }
-    );
+    ).then(function() {
+        Telegram.WebApp.MainButton.hideProgress();
+    });;
     window.location.replace(document.referrer);
 }
 
