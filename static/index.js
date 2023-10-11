@@ -608,7 +608,7 @@ function edit_wish(id) {
 	    }
     ).then(function() {
         Telegram.WebApp.MainButton.hideProgress();
-    });;
+    });
     window.location.replace(document.referrer);
 }
 
