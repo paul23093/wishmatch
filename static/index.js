@@ -464,7 +464,7 @@ async function load_new_wish() {
         window.location.replace(document.referrer);
     });
     Telegram.WebApp.BackButton.show();
-    let keyboardHeight = 250;
+    let keyboardHeight = 150;
     let inputs = Array.prototype.slice.call(document.querySelectorAll("input[data-index]"));
     let inputCount = inputs.reduce((prev, curr) => curr > prev ? curr.getAttribute("data-index") : prev.getAttribute("data-index"));
     document.querySelectorAll("div[class='input'].input").forEach(function (el) {
