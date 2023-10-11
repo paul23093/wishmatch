@@ -528,11 +528,11 @@ async function load_new_wish() {
         document.getElementById("wish-currency").value = wish["currency"];
         // document.getElementById("button").textContent = "Save";
         // document.getElementById("button").onclick = function () {edit_wish(wish_id);};
-        Telegram.WebApp.text = "Save";
-        Telegram.WebApp.onClick(function () {edit_wish(wish_id);});
+        Telegram.WebApp.MainButton.text = "Save";
+        Telegram.WebApp.MainButton.onClick(function () {edit_wish(wish_id);});
     } else {
-        Telegram.WebApp.text = "Add";
-        Telegram.WebApp.onClick(function () {add_wish();});
+        Telegram.WebApp.MainButton.text = "Add";
+        Telegram.WebApp.MainButton.onClick(function () {add_wish();});
         // document.getElementById("button").textContent = "Add";
         // document.getElementById("button").onclick = function () {add_wish();};
     }
