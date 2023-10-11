@@ -517,10 +517,7 @@ async function load_new_wish() {
             input.value = "";
             input.focus();
             e.target.className = "hidden";
-
-            setTimeout(() => {
-                buttonClick = false;
-            }, 0);
+            buttonClick = false;
         });
 
     });
