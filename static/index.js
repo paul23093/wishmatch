@@ -482,7 +482,7 @@ async function load_new_wish() {
                 if (index < inputCount) {
                     document.querySelector('[data-index="' + (index+1) + '"]').focus();
                 }
-                el.querySelector("span").className = "hidden";
+                el.nextElementSibling.className = "hidden";
             }
         });
 
@@ -500,22 +500,19 @@ async function load_new_wish() {
 
         el.addEventListener("focusout", (e) => {
             setTimeout(() => {
-                el.nextElementSibling.className = "hidden";
-                if (buttonClick) {
-                    document.body.style.height = window.innerHeight.toString() + "px";
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                    buttonClick = false;
-                }
+                if (buttonClick) {}
             }, 0);
+            el.nextElementSibling.className = "hidden";
+            document.body.style.height = window.innerHeight.toString() + "px";
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
 
         div.querySelector("span").addEventListener("click", (e) => {
             buttonClick = true;
             let input = e.target.previousElementSibling;
-            input.blur();
             input.value = "";
             input.focus();
             e.target.className = "hidden";
