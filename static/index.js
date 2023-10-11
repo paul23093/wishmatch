@@ -534,15 +534,11 @@ async function load_new_wish() {
         document.getElementById("wish-image-link").value = wish["image"];
         document.getElementById("wish-price").value = wish["price"];
         document.getElementById("wish-currency").value = wish["currency"];
-        // document.getElementById("button").textContent = "Save";
-        // document.getElementById("button").onclick = function () {edit_wish(wish_id);};
         Telegram.WebApp.MainButton.text = "Save";
         Telegram.WebApp.MainButton.onClick(function () {edit_wish(wish_id);});
     } else {
         Telegram.WebApp.MainButton.text = "Add";
         Telegram.WebApp.MainButton.onClick(function () {add_wish();});
-        // document.getElementById("button").textContent = "Add";
-        // document.getElementById("button").onclick = function () {add_wish();};
     }
     if (document.getElementById("wish-title").value === null || document.getElementById("wish-title").value === "") {
         Telegram.WebApp.MainButton.disable();

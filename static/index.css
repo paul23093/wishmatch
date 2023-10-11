@@ -128,7 +128,7 @@ body {
     box-sizing: border-box;
     background-color: var(--tg-theme-bg-color);
     color: var(--tg-theme-text-color);
-    padding: 12px;
+    padding: 12px 30px 12px 12px;
     margin: 12px 0;
     border: 2px solid rgba(52, 130, 148, 0.1);
     border-radius: 8px;
