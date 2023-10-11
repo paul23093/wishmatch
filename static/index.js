@@ -502,7 +502,7 @@ async function load_new_wish() {
             setTimeout(() => {
                 el.nextElementSibling.className = "hidden";
                 if (buttonClick) {}
-            }, 0);
+            }, 5);
             document.body.style.height = window.innerHeight.toString() + "px";
             window.scrollTo({
                 top: 0,
