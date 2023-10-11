@@ -671,8 +671,14 @@ function checkInput(e) {
     let el = e.target;
     if (el.value !== null && el.value !== "") {
         el.nextElementSibling.style.display = "flex";
+        if (el.id === "wish-title") {
+            Telegram.WebApp.MainButton.enable();
+        }
     } else {
         el.nextElementSibling.style.display = "none";
+        if (el.id === "wish-title") {
+            Telegram.WebApp.MainButton.disable();
+        }
     }
 }
 
