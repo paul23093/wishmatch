@@ -540,6 +540,7 @@ async function load_new_wish() {
 }
 
 function add_wish() {
+    Telegram.WebApp.MainButton.disable();
     Telegram.WebApp.MainButton.showProgress();
     let initData = Telegram.WebApp.initDataUnsafe;
     let tg_user_id = initData.user.id;
@@ -577,6 +578,7 @@ function add_wish() {
 }
 
 function edit_wish(id) {
+    Telegram.WebApp.MainButton.disable();
     Telegram.WebApp.MainButton.showProgress();
     let initData = Telegram.WebApp.initDataUnsafe;
     let name = document.getElementById("wish-title").value;
