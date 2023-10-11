@@ -486,15 +486,6 @@ async function load_new_wish() {
             }
         });
 
-        // el.addEventListener("click", (e) => {
-        //     if (e.target !== el) {
-        //         el.blur();
-        //         el.querySelector("span").className = "hidden";
-        //     } else {
-        //         checkInput(e);
-        //     }
-        // });
-
         el.addEventListener("focusin",  (e) => {
             checkInput(e);
             if(["android", "ios"].includes(Telegram.WebApp.platform)) {
