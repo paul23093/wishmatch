@@ -40,25 +40,25 @@ async def index(request: Request, chat_id: Union[float, None] = None, tgWebAppSt
 @app.post("/verify_data")
 async def verify_data(request: Request):
     res = request.content
-    res_hash = re.compile("hash=(\w+)", res)[0]
-    secret_key = hmac.new(
-        bytes(os.environ.get("TOKEN"), 'latin-1'),
-        msg=bytes("WebAppData", 'latin-1'),
-        digestmod=hashlib.sha256
-    ).hexdigest().upper()
-
-    data_check_string = hmac.new(
-        bytes(res, 'latin-1'),
-        msg=bytes(secret_key, 'latin-1'),
-        digestmod=hashlib.sha256
-    ).hexdigest().upper()
-
-    if hex(data_check_string) == res_hash:
-        result = "VERIFIED"
-    else:
-        result = "NOT VERIFIED"
-    print(result)
-    return json.dumps({"request": request, "result": result})
+    # res_hash = re.compile("hash=(\w+)", res)[0]
+    # secret_key = hmac.new(
+    #     bytes(os.environ.get("TOKEN"), 'latin-1'),
+    #     msg=bytes("WebAppData", 'latin-1'),
+    #     digestmod=hashlib.sha256
+    # ).hexdigest().upper()
+    #
+    # data_check_string = hmac.new(
+    #     bytes(res, 'latin-1'),
+    #     msg=bytes(secret_key, 'latin-1'),
+    #     digestmod=hashlib.sha256
+    # ).hexdigest().upper()
+    #
+    # if hex(data_check_string) == res_hash:
+    #     result = "VERIFIED"
+    # else:
+    #     result = "NOT VERIFIED"
+    # print(result)
+    return json.dumps({"request": request, "result": res})
 
 
 @app.post("/get_wishes")

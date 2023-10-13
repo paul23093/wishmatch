@@ -15,7 +15,8 @@ async function load() {
     Telegram.WebApp.disableClosingConfirmation();
     Telegram.WebApp.BackButton.hide();
     const initData = Telegram.WebApp.initDataUnsafe;
-    await verify_data(Telegram.WebApp.initData);
+    const status = await verify_data(Telegram.WebApp.initData);
+    console.log(status);
     const chat_type = initData.chat_type;
     Telegram.WebApp.expand();
     const response = await get_wishes(initData);
