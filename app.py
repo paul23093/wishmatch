@@ -40,9 +40,8 @@ async def index(request: Request, chat_id: Union[float, None] = None, tgWebAppSt
 @app.post("/verify_data")
 async def verify_data(request: Request):
     res = await request.json()
-    initData = res["initData"]
-    print(initData)
-    res_hash = re.compile("hash=(\w+)", initData)[0]
+    init_data = res["initData"]
+    res_hash = re.finall("hash=(\w+)", init_data)[0]
     secret_key = hmac.new(
         bytes(os.environ.get("TOKEN"), 'latin-1'),
         msg=bytes("WebAppData", 'latin-1'),
@@ -50,7 +49,7 @@ async def verify_data(request: Request):
     ).hexdigest().upper()
 
     data_check_string = hmac.new(
-        bytes(initData, 'latin-1'),
+        bytes(init_data, 'latin-1'),
         msg=bytes(secret_key, 'latin-1'),
         digestmod=hashlib.sha256
     ).hexdigest().upper()
