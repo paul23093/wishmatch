@@ -15,6 +15,7 @@ async function load() {
     Telegram.WebApp.disableClosingConfirmation();
     Telegram.WebApp.BackButton.hide();
     const initData = Telegram.WebApp.initDataUnsafe;
+    await verify_data(Telegram.WebApp.initData);
     const chat_type = initData.chat_type;
     Telegram.WebApp.expand();
     const response = await get_wishes(initData);
@@ -456,6 +457,22 @@ async function get_user_wishes(user_id, chat_id) {
             })
         }
     );
+}
+
+
+async function verify_data(initData) {
+    let res = await fetch(
+        "/verify_data",
+        {
+            method: "POST",
+            // headers: {
+            //     "Accept": "application/json",
+            //     "Content-Type": "application/json"
+            // },
+            body: initData
+        }
+    )
+    console.log(res.json())
 }
 
 

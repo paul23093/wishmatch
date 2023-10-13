@@ -1,5 +1,6 @@
 import os
 import json
+import re
 from typing import Union
 from fastapi import FastAPI, Depends
 from fastapi.templating import Jinja2Templates
@@ -7,6 +8,8 @@ from starlette.requests import Request
 from fastapi.staticfiles import StaticFiles
 import psycopg2
 from dotenv import load_dotenv
+import hmac
+import hashlib
 
 load_dotenv()
 
@@ -32,6 +35,30 @@ async def index(request: Request, chat_id: Union[float, None] = None, tgWebAppSt
     elif tgWebAppStartParam:
         result_chat_id = tgWebAppStartParam
     return templates.TemplateResponse("index.html", {"request": request, "result_chat_id": result_chat_id})
+
+
+@app.get("/verify_data")
+async def verify_data(request: Request):
+    res = request.text
+    res_hash = re.compile("hash=(\w+)", res)[0]
+    secret_key = hmac.new(
+        bytes(os.environ.get("TOKEN"), 'latin-1'),
+        msg=bytes("WebAppData", 'latin-1'),
+        digestmod=hashlib.sha256
+    ).hexdigest().upper()
+
+    data_check_string = hmac.new(
+        bytes(res, 'latin-1'),
+        msg=bytes(secret_key, 'latin-1'),
+        digestmod=hashlib.sha256
+    ).hexdigest().upper()
+
+    if hex(data_check_string) == res_hash:
+        result = "VERIFIED"
+    else:
+        result = "NOT VERIFIED"
+    print(result)
+    return json.dumps({"request": request, "result": result})
 
 
 @app.post("/get_wishes")
@@ -233,7 +260,6 @@ async def get_wish(request: Request):
         data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()][0]
 
         return json.dumps({"status": "ok", "data": data})
-
 
 
 @app.get("/user_wishes")
