@@ -470,7 +470,7 @@ async function verify_data(initData) {
             //     "Accept": "application/json",
             //     "Content-Type": "application/json"
             // },
-            body: initData
+            body: JSON.stringify({"initData": initData})
         }
     )
     console.log(res.json())
