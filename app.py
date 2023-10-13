@@ -39,7 +39,7 @@ async def index(request: Request, chat_id: Union[float, None] = None, tgWebAppSt
 
 @app.post("/verify_data")
 async def verify_data(request: Request):
-    res = request.json()
+    res = await request.json()
     initData = res["initData"]
     res_hash = re.compile("hash=(\w+)", initData)[0]
     secret_key = hmac.new(
