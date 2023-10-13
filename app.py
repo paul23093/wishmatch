@@ -37,7 +37,7 @@ async def index(request: Request, chat_id: Union[float, None] = None, tgWebAppSt
     return templates.TemplateResponse("index.html", {"request": request, "result_chat_id": result_chat_id})
 
 
-@app.get("/verify_data")
+@app.post("/verify_data")
 async def verify_data(request: Request):
     res = request.text
     res_hash = re.compile("hash=(\w+)", res)[0]
