@@ -426,6 +426,17 @@ async function load_user_wishes() {
 
 
 async function get_wishes(initData) {
+
+    const initDataRaw = Telegram.WebApp.initData;
+    const is_data_verified = await verify_data(initDataRaw);
+    if (is_data_verified === false) {
+        let alert = document.createElement("span");
+        alert.classList.add("page-alert");
+        alert.innerHTML = "You do not have permissions to see this view.";
+        document.body.appendChild(alert);
+        return;
+    }
+
     const response = await fetch(
         "/get_wishes",
         {
@@ -444,6 +455,17 @@ async function get_wishes(initData) {
 }
 
 async function get_wish(wish_id) {
+
+    const initDataRaw = Telegram.WebApp.initData;
+    const is_data_verified = await verify_data(initDataRaw);
+    if (is_data_verified === false) {
+        let alert = document.createElement("span");
+        alert.classList.add("page-alert");
+        alert.innerHTML = "You do not have permissions to see this view.";
+        document.body.appendChild(alert);
+        return;
+    }
+
     return await fetch(
         "/get_wish",
         {
@@ -460,6 +482,17 @@ async function get_wish(wish_id) {
 }
 
 async function get_user_wishes(user_id, chat_id) {
+
+    const initDataRaw = Telegram.WebApp.initData;
+    const is_data_verified = await verify_data(initDataRaw);
+    if (is_data_verified === false) {
+        let alert = document.createElement("span");
+        alert.classList.add("page-alert");
+        alert.innerHTML = "You do not have permissions to see this view.";
+        document.body.appendChild(alert);
+        return;
+    }
+
     return await fetch(
         "/get_user_wishes",
         {
