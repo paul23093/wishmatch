@@ -57,10 +57,10 @@ async def verify_data(request: Request):
         digestmod=hashlib.sha256
     ).hexdigest()
 
-    if data_check_string == res_hash:
-        is_data_verified = True
-    else:
+    if data_check_string != res_hash or init_data == '':
         is_data_verified = False
+    else:
+        is_data_verified = True
     return json.dumps({"verification": is_data_verified})
 
 

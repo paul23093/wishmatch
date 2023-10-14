@@ -24,8 +24,6 @@ async function load() {
         return;
     }
     const initData = Telegram.WebApp.initDataUnsafe;
-    const status = await verify_data(Telegram.WebApp.initData);
-    console.log(status);
     const chat_type = initData.chat_type;
     Telegram.WebApp.expand();
     const response = await get_wishes(initData);
@@ -491,6 +489,17 @@ async function verify_data(initData) {
 
 
 async function load_new_wish() {
+
+    const initDataRaw = Telegram.WebApp.initData;
+    const is_data_verified = await verify_data(initDataRaw);
+    if (is_data_verified === false) {
+        let alert = document.createElement("span");
+        alert.classList.add("page-alert");
+        alert.innerHTML = "You do not have permissions to see this view.";
+        document.body.appendChild(alert);
+        return;
+    }
+
     Telegram.WebApp.BackButton.onClick(function () {
         window.location.replace(document.referrer);
     });
@@ -577,9 +586,18 @@ async function load_new_wish() {
     Telegram.WebApp.MainButton.show();
 }
 
-function add_wish() {
+async function add_wish() {
     Telegram.WebApp.MainButton.disable();
     Telegram.WebApp.MainButton.showProgress();
+    const initDataRaw = Telegram.WebApp.initData;
+    const is_data_verified = await verify_data(initDataRaw);
+    if (is_data_verified === false) {
+        let alert = document.createElement("span");
+        alert.classList.add("page-alert");
+        alert.innerHTML = "You do not have permissions to see this view.";
+        document.body.appendChild(alert);
+        return;
+    }
     let initData = Telegram.WebApp.initDataUnsafe;
     let tg_user_id = initData.user.id;
     let name = document.getElementById("wish-title").value;
@@ -615,10 +633,18 @@ function add_wish() {
     window.location.replace(document.referrer);
 }
 
-function edit_wish(id) {
+async function edit_wish(id) {
     Telegram.WebApp.MainButton.disable();
     Telegram.WebApp.MainButton.showProgress();
-    let initData = Telegram.WebApp.initDataUnsafe;
+    const initDataRaw = Telegram.WebApp.initData;
+    const is_data_verified = await verify_data(initDataRaw);
+    if (is_data_verified === false) {
+        let alert = document.createElement("span");
+        alert.classList.add("page-alert");
+        alert.innerHTML = "You do not have permissions to see this view.";
+        document.body.appendChild(alert);
+        return;
+    }
     let name = document.getElementById("wish-title").value;
     let description = document.getElementById("wish-description").value;
     let link = document.getElementById("wish-link").value;
