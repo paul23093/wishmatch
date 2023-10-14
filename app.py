@@ -10,6 +10,7 @@ import psycopg2
 from dotenv import load_dotenv
 import hmac
 import hashlib
+from urllib.parse import unquote
 
 load_dotenv()
 
@@ -41,18 +42,20 @@ async def index(request: Request, chat_id: Union[float, None] = None, tgWebAppSt
 async def verify_data(request: Request):
     res = await request.json()
     init_data = res["initData"]
+    init_data_sorted = '\n'.join(sorted(unquote(init_data).split('&')[:-1]))
     res_hash = re.findall("hash=(\w+)", init_data)[0]
+
     secret_key = hmac.new(
-        bytes(os.environ.get("TOKEN"), 'latin-1'),
-        msg=bytes("WebAppData", 'latin-1'),
+        "WebAppData".encode(),
+        msg=os.environ.get("TOKEN").encode(),
         digestmod=hashlib.sha256
-    ).hexdigest().upper()
+    ).digest()
 
     data_check_string = hmac.new(
-        bytes(init_data, 'latin-1'),
-        msg=bytes(secret_key, 'latin-1'),
+        secret_key,
+        msg=init_data_sorted.encode(),
         digestmod=hashlib.sha256
-    ).hexdigest().upper()
+    ).hexdigest()
 
     if hex(data_check_string) == res_hash:
         result = "VERIFIED"
