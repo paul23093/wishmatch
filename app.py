@@ -62,7 +62,7 @@ async def verify_data(request: Request):
     else:
         result = "NOT VERIFIED"
     print(result)
-    return json.dumps({"request": request, "result": result})
+    return json.dumps({"result": result})
 
 
 @app.post("/get_wishes")
