@@ -58,11 +58,10 @@ async def verify_data(request: Request):
     ).hexdigest()
 
     if data_check_string == res_hash:
-        result = "VERIFIED"
+        is_data_verified = True
     else:
-        result = "NOT VERIFIED"
-    print(result)
-    return json.dumps({"result": result})
+        is_data_verified = False
+    return json.dumps({"verification": is_data_verified})
 
 
 @app.post("/get_wishes")

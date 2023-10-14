@@ -14,6 +14,15 @@ async function load() {
     Telegram.WebApp.ready();
     Telegram.WebApp.disableClosingConfirmation();
     Telegram.WebApp.BackButton.hide();
+    const initDataRaw = Telegram.WebApp.initData;
+    const is_data_verified = await verify_data(initDataRaw);
+    if (is_data_verified === false) {
+        let alert = document.createElement("span");
+        alert.classList.add("page-alert");
+        alert.innerHTML = "You do not have permissions to see this view.";
+        document.body.appendChild(alert);
+        return;
+    }
     const initData = Telegram.WebApp.initDataUnsafe;
     const status = await verify_data(Telegram.WebApp.initData);
     console.log(status);
@@ -216,6 +225,15 @@ async function load() {
 async function load_user_wishes() {
     Telegram.WebApp.ready();
     Telegram.WebApp.disableClosingConfirmation();
+    const initDataRaw = Telegram.WebApp.initData;
+    const is_data_verified = await verify_data(initDataRaw);
+    if (is_data_verified === false) {
+        let alert = document.createElement("span");
+        alert.classList.add("page-alert");
+        alert.innerHTML = "You do not have permissions to see this view.";
+        document.body.appendChild(alert);
+        return;
+    }
     const initData = Telegram.WebApp.initDataUnsafe;
     Telegram.WebApp.BackButton.onClick(function () {
         if (initData.start_param !== initData.user.id) {
@@ -466,14 +484,9 @@ async function verify_data(initData) {
         "/verify_data",
         {
             method: "POST",
-            // headers: {
-            //     "Accept": "application/json",
-            //     "Content-Type": "application/json"
-            // },
             body: JSON.stringify({"initData": initData})
         }
     )
-    console.log(res.json())
 }
 
 
