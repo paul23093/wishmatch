@@ -18,7 +18,6 @@ async function load() {
     const is_data_verified_res = await verify_data(initDataRaw);
     const is_data_verified = await JSON.parse((await is_data_verified_res.json()));
     console.log(initDataRaw);
-    console.log(await is_data_verified_res.json());
     console.log(is_data_verified_res);
     console.log(is_data_verified);
     if (is_data_verified["status"] === "failed") {
