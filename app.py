@@ -290,7 +290,7 @@ async def user_wishes(request: Request, user_id: int, chat_id: float):
 @app.post("/verify_data")
 async def verify_data(request: Request):
     res = await request.json()
-    init_data = res["initData"]
+    init_data = res["init_data"]
     if init_data == '' or init_data is None:
         return False
     init_data_sorted = '\n'.join(sorted(unquote(init_data).split('&')[:-1]))
