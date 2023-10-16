@@ -38,10 +38,10 @@ async def index(request: Request, chat_id: Union[float, None] = None, tgWebAppSt
     return templates.TemplateResponse("index.html", {"request": request, "result_chat_id": result_chat_id})
 
 
-@app.post("/verify_data")
-async def verify_data(request: Request):
-    res = await request.json()
-    init_data = res["initData"]
+def is_data_verified(init_data: str = None):
+    if init_data == '' or init_data is None:
+        return False
+
     init_data_sorted = '\n'.join(sorted(unquote(init_data).split('&')[:-1]))
     res_hash = re.findall("hash=(\w+)", init_data)[0]
 
@@ -57,16 +57,18 @@ async def verify_data(request: Request):
         digestmod=hashlib.sha256
     ).hexdigest()
 
-    if data_check_string != res_hash or init_data == '':
-        is_data_verified = False
+    if data_check_string != res_hash:
+        return False
     else:
-        is_data_verified = True
-    return json.dumps({"verification": is_data_verified})
+        return True
 
 
 @app.post("/get_wishes")
 async def get_wishes(request: Request):
     res = await request.json()
+    init_data = res["init_data"]
+    if not is_data_verified(init_data):
+        return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
@@ -104,6 +106,9 @@ async def get_wishes(request: Request):
 @app.post("/get_user_wishes")
 async def get_user_wishes(request: Request):
     res = await request.json()
+    init_data = res["init_data"]
+    if not is_data_verified(init_data):
+        return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
@@ -134,12 +139,15 @@ async def get_user_wishes(request: Request):
             ;
         """)
         data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()]
-        return json.dumps({"status": "ok", "data": data})
+        return json.dumps({"status": "success", "data": data})
 
 
 @app.post("/add_wish")
 async def add_wish(request: Request):
-    data = await request.json()
+    res = await request.json()
+    init_data = res["init_data"]
+    if not is_data_verified(init_data):
+        return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
@@ -153,88 +161,95 @@ async def add_wish(request: Request):
                 currency
             )
             values (
-                {data["tg_user_id"]}, 
-                {f"'{data['name']}'" if data["name"] else "NULL"},
-                {f"'{data['description']}'" if data["description"] else "NULL"}, 
-                {f"'{data['link']}'" if data["link"] else "NULL"}, 
-                {f"'{data['image_link']}'" if data["image_link"] else "NULL"}, 
-                {f"'{data['price']}'" if data["price"] else "NULL"}, 
-                {f"'{data['currency']}'" if data["currency"] else "NULL"}
+                {res["tg_user_id"]}, 
+                {f"'{res['name']}'" if res["name"] else "NULL"},
+                {f"'{res['description']}'" if res["description"] else "NULL"}, 
+                {f"'{res['link']}'" if res["link"] else "NULL"}, 
+                {f"'{res['image_link']}'" if res["image_link"] else "NULL"}, 
+                {f"'{res['price']}'" if res["price"] else "NULL"}, 
+                {f"'{res['currency']}'" if res["currency"] else "NULL"}
             ); 
         """)
         conn.commit()
-    response = {"status": "ok"}
-    return response
+    return json.dumps({"status": "success"})
 
 
 @app.post("/edit_wish")
 async def edit_wish(request: Request):
-    data = await request.json()
+    res = await request.json()
+    init_data = res["init_data"]
+    if not is_data_verified(init_data):
+        return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
         update users_wishes 
-            set name = {f"'{data['name']}'" if data["name"] else "NULL"}, 
-                description = {f"'{data['description']}'" if data["description"] else "NULL"}, 
-                link = {f"'{data['link']}'" if data["link"] else "NULL"}, 
-                image = {f"'{data['image_link']}'" if data["image_link"] else "NULL"}, 
-                price = {f"'{data['price']}'" if data["price"] else "NULL"},
-                currency = {f"'{data['currency']}'" if data["currency"] else "NULL"}
-        where id = {data["id"]}
+            set name = {f"'{res['name']}'" if res["name"] else "NULL"}, 
+                description = {f"'{res['description']}'" if res["description"] else "NULL"}, 
+                link = {f"'{res['link']}'" if res["link"] else "NULL"}, 
+                image = {f"'{res['image_link']}'" if res["image_link"] else "NULL"}, 
+                price = {f"'{res['price']}'" if res["price"] else "NULL"},
+                currency = {f"'{res['currency']}'" if res["currency"] else "NULL"}
+        where id = {res["id"]}
         ; 
         """)
         conn.commit()
-    response = {"status": "ok"}
-    return response
+    return json.dumps({"status": "success"})
 
 
 @app.post("/book")
 async def book(request: Request):
-    data = await request.json()
+    res = await request.json()
+    init_data = res["init_data"]
+    if not is_data_verified(init_data):
+        return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
             update users_wishes
             set is_booked = True,
-            booked_by = {data["tg_user_id"]}
-            where id = {data["wish_id"]}
+            booked_by = {res["tg_user_id"]}
+            where id = {res["wish_id"]}
            ; 
         """)
         conn.commit()
-    response = {"status": "ok"}
-    return response
+    return json.dumps({"status": "success"})
 
 
 @app.post("/unbook")
 async def unbook(request: Request):
-    data = await request.json()
+    res = await request.json()
+    init_data = res["init_data"]
+    if not is_data_verified(init_data):
+        return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
             update users_wishes
             set is_booked = False
-            where id = {data["wish_id"]}
+            where id = {res["wish_id"]}
            ; 
         """)
         conn.commit()
-    response = {"status": "ok"}
-    return response
+    return json.dumps({"status": "success"})
 
 
 @app.post("/delete")
 async def delete(request: Request):
-    data = await request.json()
+    res = await request.json()
+    init_data = res["init_data"]
+    if not is_data_verified(init_data):
+        return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
             update users_wishes
             set is_deleted = True
-            where id = {data["wish_id"]}
+            where id = {res["wish_id"]}
            ; 
         """)
         conn.commit()
-    response = {"status": "ok"}
-    return response
+    return json.dumps({"status": "success"})
 
 
 @app.get("/new")
@@ -244,7 +259,10 @@ async def new(request: Request, wish_id: int = -1):
 
 @app.post("/get_wish")
 async def get_wish(request: Request):
-    data = await request.json()
+    res = await request.json()
+    init_data = res["init_data"]
+    if not is_data_verified(init_data):
+        return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
@@ -257,12 +275,11 @@ async def get_wish(request: Request):
             uw.currency,
             uw.image
         from users_wishes uw
-        where uw.id = {data["wish_id"]} 
+        where uw.id = {res["wish_id"]} 
         ;
         """)
         data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()][0]
-
-        return json.dumps({"status": "ok", "data": data})
+        return json.dumps({"status": "success", "data": data})
 
 
 @app.get("/user_wishes")
