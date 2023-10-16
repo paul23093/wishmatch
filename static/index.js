@@ -18,6 +18,7 @@ async function load() {
     const is_data_verified_res = await verify_data(initDataRaw);
     const is_data_verified = await JSON.parse((await is_data_verified_res.json()));
     if (is_data_verified["status"] === "failed") {
+        console.log("sgsgsgsdg");
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
         alert.innerText = "You do not have permissions to see this view.";
