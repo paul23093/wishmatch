@@ -16,7 +16,7 @@ async function load() {
     Telegram.WebApp.BackButton.hide();
     const initDataRaw = Telegram.WebApp.initData;
     const is_data_verified_res = await verify_data(initDataRaw);
-    const is_data_verified = is_data_verified_res.json()
+    const is_data_verified = await JSON.parse((await is_data_verified_res.json()));
     if (is_data_verified["status"] === "failed") {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
@@ -762,6 +762,7 @@ function checkBlur(e) {
 }
 
 async function verify_data(initDataRaw) {
+    return await fetch(
     return await fetch(
         "/verify_data",
         {
