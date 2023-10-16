@@ -15,23 +15,13 @@ async function load() {
     Telegram.WebApp.disableClosingConfirmation();
     Telegram.WebApp.BackButton.hide();
     const initDataRaw = Telegram.WebApp.initData;
-    const is_data_verified_res = await verify_data(initDataRaw);
-    const is_data_verified = await JSON.parse((await is_data_verified_res.json()));
-    if (is_data_verified["status"] === "failed") {
-        console.log("sgsgsgsdg");
-        let alert = document.createElement("span");
-        alert.classList.add("page-alert");
-        alert.innerText = "You do not have permissions to see this view.";
-        document.body.appendChild(alert);
-        return;
-    }
     const initData = Telegram.WebApp.initDataUnsafe;
     const chatType = initData.chat_type;
     Telegram.WebApp.expand();
     const response = await get_wishes(initData);
     const res = await response.json();
     const data = await JSON.parse(res);
-    if (data["status"] !== "success") {
+    if (data["status"] === "failed") {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
         alert.innerHTML = data["data"]["message"];
@@ -448,7 +438,7 @@ async function load_user_wishes() {
 
 async function get_wishes(initData) {
     const initDataRaw = Telegram.WebApp.initData;
-    const response = await fetch(
+    return await fetch(
         "/get_wishes",
         {
             method: "POST",
@@ -462,8 +452,7 @@ async function get_wishes(initData) {
                 chat_id: chat_id
             })
         }
-    )
-    return response;
+    );
 }
 
 async function get_wish(wish_id) {
