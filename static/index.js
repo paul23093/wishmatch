@@ -17,18 +17,15 @@ async function load() {
     const initDataRaw = Telegram.WebApp.initData;
     const is_data_verified_res = await verify_data(initDataRaw);
     const is_data_verified = await JSON.parse((await is_data_verified_res.json()));
-    console.log(initDataRaw);
-    console.log(is_data_verified_res);
-    console.log(is_data_verified);
     if (is_data_verified["status"] === "failed") {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
-        alert.innerHTML = "You do not have permissions to see this view.";
+        alert.innerText = "You do not have permissions to see this view.";
         document.body.appendChild(alert);
         return;
     }
     const initData = Telegram.WebApp.initDataUnsafe;
-    const chat_type = initData.chat_type;
+    const chatType = initData.chat_type;
     Telegram.WebApp.expand();
     const response = await get_wishes(initData);
     const res = await response.json();
@@ -53,7 +50,7 @@ async function load() {
         const chat = uniqueChats(wishes);
 
         let titleText = initData.user.first_name ? initData.user.first_name : initData.user.username;
-        if (["group", "supergroup"].includes(chat_type)) {
+        if (["group", "supergroup"].includes(chatType)) {
             titleText = chat[0].tg_chat_name;
             let subtitleText = users.length + " user";
             if (users.length > 1) {
