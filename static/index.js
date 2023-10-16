@@ -16,6 +16,7 @@ async function load() {
     Telegram.WebApp.BackButton.hide();
     const initDataRaw = Telegram.WebApp.initData;
     const is_data_verified = await verify_data(initDataRaw);
+    console.log(is_data_verified);
     if (is_data_verified === false) {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
