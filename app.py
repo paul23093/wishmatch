@@ -292,7 +292,7 @@ async def verify_data(request: Request):
     res = await request.json()
     init_data = res["init_data"]
     if init_data == '' or init_data is None:
-        return False
+        return json.dumps({"status": "failed", "data": False})
     init_data_sorted = '\n'.join(sorted(unquote(init_data).split('&')[:-1]))
     res_hash = re.findall("hash=(\w+)", init_data)[0]
 
@@ -309,6 +309,6 @@ async def verify_data(request: Request):
     ).hexdigest()
 
     if data_check_string != res_hash:
-        return False
+        return json.dumps({"status": "failed", "data": False})
     else:
-        return True
+        return json.dumps({"status": "success", "data": True})

@@ -15,9 +15,9 @@ async function load() {
     Telegram.WebApp.disableClosingConfirmation();
     Telegram.WebApp.BackButton.hide();
     const initDataRaw = Telegram.WebApp.initData;
-    const is_data_verified = await verify_data(initDataRaw);
-    console.log(is_data_verified);
-    if (is_data_verified === false) {
+    const is_data_verified_res = await verify_data(initDataRaw);
+    const is_data_verified = is_data_verified_res.json()
+    if (is_data_verified["status"] === "failed") {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
         alert.innerHTML = "You do not have permissions to see this view.";
@@ -233,8 +233,9 @@ async function load_user_wishes() {
     Telegram.WebApp.ready();
     Telegram.WebApp.disableClosingConfirmation();
     const initDataRaw = Telegram.WebApp.initData;
-    const is_data_verified = await verify_data(initDataRaw);
-    if (is_data_verified === false) {
+    const is_data_verified_res = await verify_data(initDataRaw);
+    const is_data_verified = is_data_verified_res.json()
+    if (is_data_verified["status"] === "failed") {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
         alert.innerHTML = data["data"]["message"];
@@ -504,8 +505,9 @@ async function get_user_wishes(user_id, chat_id) {
 
 async function load_new_wish() {
     const initDataRaw = Telegram.WebApp.initData;
-    const is_data_verified = await verify_data(initDataRaw);
-    if (is_data_verified === false) {
+    const is_data_verified_res = await verify_data(initDataRaw);
+    const is_data_verified = is_data_verified_res.json()
+    if (is_data_verified["status"] === "failed") {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
         alert.innerHTML = "You do not have permissions to see this view.";
@@ -603,8 +605,9 @@ async function add_wish() {
     Telegram.WebApp.MainButton.disable();
     Telegram.WebApp.MainButton.showProgress();
     const initDataRaw = Telegram.WebApp.initData;
-    const is_data_verified = await verify_data(initDataRaw);
-    if (is_data_verified === false) {
+    const is_data_verified_res = await verify_data(initDataRaw);
+    const is_data_verified = is_data_verified_res.json()
+    if (is_data_verified["status"] === "failed") {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
         alert.innerHTML = "You do not have permissions to see this view.";
@@ -650,8 +653,9 @@ async function edit_wish(id) {
     Telegram.WebApp.MainButton.disable();
     Telegram.WebApp.MainButton.showProgress();
     const initDataRaw = Telegram.WebApp.initData;
-    const is_data_verified = await verify_data(initDataRaw);
-    if (is_data_verified === false) {
+    const is_data_verified_res = await verify_data(initDataRaw);
+    const is_data_verified = is_data_verified_res.json()
+    if (is_data_verified["status"] === "failed") {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
         alert.innerHTML = "You do not have permissions to see this view.";
