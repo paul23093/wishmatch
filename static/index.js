@@ -15,6 +15,14 @@ async function load() {
     Telegram.WebApp.disableClosingConfirmation();
     Telegram.WebApp.BackButton.hide();
     const initDataRaw = Telegram.WebApp.initData;
+    const is_data_verified = await verify_data(initDataRaw);
+    if (is_data_verified === false) {
+        let alert = document.createElement("span");
+        alert.classList.add("page-alert");
+        alert.innerHTML = data["data"]["message"];
+        document.body.appendChild(alert);
+        return;
+    }
     const initData = Telegram.WebApp.initDataUnsafe;
     const chat_type = initData.chat_type;
     Telegram.WebApp.expand();
@@ -224,6 +232,14 @@ async function load_user_wishes() {
     Telegram.WebApp.ready();
     Telegram.WebApp.disableClosingConfirmation();
     const initDataRaw = Telegram.WebApp.initData;
+    const is_data_verified = await verify_data(initDataRaw);
+    if (is_data_verified === false) {
+        let alert = document.createElement("span");
+        alert.classList.add("page-alert");
+        alert.innerHTML = data["data"]["message"];
+        document.body.appendChild(alert);
+        return;
+    }
     const initData = Telegram.WebApp.initDataUnsafe;
     Telegram.WebApp.BackButton.onClick(function () {
         if (initData.start_param !== initData.user.id) {
@@ -485,19 +501,7 @@ async function get_user_wishes(user_id, chat_id) {
 }
 
 
-async function verify_data(initData) {
-    let res = await fetch(
-        "/verify_data",
-        {
-            method: "POST",
-            body: JSON.stringify({"initData": initData})
-        }
-    )
-}
-
-
 async function load_new_wish() {
-
     const initDataRaw = Telegram.WebApp.initData;
     const is_data_verified = await verify_data(initDataRaw);
     if (is_data_verified === false) {
@@ -750,4 +754,16 @@ function checkInput(e) {
 
 function checkBlur(e) {
     e.target.nextElementSibling.className = "hidden";
+}
+
+async function verify_data(initDataRaw) {
+    return await fetch(
+        "/verify_data",
+        {
+            method: "POST",
+            body: JSON.stringify({
+                "init_data": initDataRaw
+            })
+        }
+    )
 }

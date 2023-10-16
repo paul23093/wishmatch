@@ -285,3 +285,30 @@ async def get_wish(request: Request):
 @app.get("/user_wishes")
 async def user_wishes(request: Request, user_id: int, chat_id: float):
     return templates.TemplateResponse("user_wishes.html", {"request": request, "user_id": user_id, "chat_id": chat_id})
+
+
+@app.post("/verify_data")
+async def verify_data(request: Request):
+    res = await request.json()
+    init_data = res["initData"]
+    if init_data == '' or init_data is None:
+        return False
+    init_data_sorted = '\n'.join(sorted(unquote(init_data).split('&')[:-1]))
+    res_hash = re.findall("hash=(\w+)", init_data)[0]
+
+    secret_key = hmac.new(
+        "WebAppData".encode(),
+        msg=os.environ.get("TOKEN").encode(),
+        digestmod=hashlib.sha256
+    ).digest()
+
+    data_check_string = hmac.new(
+        secret_key,
+        msg=init_data_sorted.encode(),
+        digestmod=hashlib.sha256
+    ).hexdigest()
+
+    if data_check_string != res_hash:
+        return False
+    else:
+        return True
