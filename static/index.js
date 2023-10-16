@@ -763,7 +763,6 @@ function checkBlur(e) {
 
 async function verify_data(initDataRaw) {
     return await fetch(
-    return await fetch(
         "/verify_data",
         {
             method: "POST",
