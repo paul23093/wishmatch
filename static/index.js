@@ -624,6 +624,7 @@ async function add_wish() {
 			    "Content-Type": "application/json"
 		    },
 		    body: JSON.stringify({
+                init_data: initDataRaw,
 			    tg_user_id: tg_user_id, 
 			    name: (name !== null && name !== "") ? name : null,
                 description: (description !== null && description !== "") ? description : null,
@@ -670,6 +671,7 @@ async function edit_wish(id) {
 			    "Content-Type": "application/json"
 		    },
 		    body: JSON.stringify({
+                init_data: initDataRaw,
 			    id: id,
 			    name: (name !== null && name !== "") ? name : null,
                 description: (description !== null && description !== "") ? description : null,
