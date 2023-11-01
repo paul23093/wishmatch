@@ -24,7 +24,7 @@ async function load() {
     if (data_verification["data"]["is_access_granted"] === false) {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
-        alert.innerHTML = data["data"]["message"];
+        alert.innerHTML = data_verification["data"]["status"];
         document.body.appendChild(alert);
         return;
     }
@@ -32,191 +32,184 @@ async function load() {
     const res = await response.json();
     const data = await JSON.parse(res);
     const wishes = await data.data;
-    if (wishes.length === 0) {
-        let alert = document.createElement("span");
-        alert.classList.add("page-alert");
-        alert.innerHTML = "You are not a member of this chat<br>or<br>You did not /grant access to your wishes yet";
-        document.body.appendChild(alert);
+    document.getElementById("topBar").classList.remove("hidden");
+    document.getElementById("topBar").classList.add("topBar");
+    const users = uniqueUsers(wishes);
+    const chat = uniqueChats(wishes);
+
+    let titleText = initData.user.first_name ? initData.user.first_name : initData.user.username;
+    if (["group", "supergroup"].includes(chatType)) {
+        titleText = chat[0].tg_chat_name;
+        let subtitleText = users.length + " user";
+        if (users.length > 1) {
+            subtitleText += "s";
+        }
+        let subtitle = document.getElementById("subtitle");
+        subtitle.textContent = subtitleText;
+        subtitle.style.display = "flex";
+
+        let chatPhoto = document.getElementById("chat-photo");
+        if (chat[0].tg_chat_photo != null) {
+            let img = document.createElement("img");
+            img.src = "data:image/png;base64," + chat[0].tg_chat_photo;
+            chatPhoto.appendChild(img);
+        }
     } else {
-        document.getElementById("topBar").classList.remove("hidden");
-        document.getElementById("topBar").classList.add("topBar");
-        const users = uniqueUsers(wishes);
-        const chat = uniqueChats(wishes);
-
-        let titleText = initData.user.first_name ? initData.user.first_name : initData.user.username;
-        if (["group", "supergroup"].includes(chatType)) {
-            titleText = chat[0].tg_chat_name;
-            let subtitleText = users.length + " user";
-            if (users.length > 1) {
-                subtitleText += "s";
-            }
-            let subtitle = document.getElementById("subtitle");
-            subtitle.textContent = subtitleText;
-            subtitle.style.display = "flex";
-
-            let chatPhoto = document.getElementById("chat-photo");
-            if (chat[0].tg_chat_photo != null) {
-                let img = document.createElement("img");
-                img.src = "data:image/png;base64," + chat[0].tg_chat_photo;
-                chatPhoto.appendChild(img);
-            }
-        } else {
-            let userPhoto = document.getElementById("chat-photo");
-            if (chat[0].tg_profile_photo != null) {
-                let img = document.createElement("img");
-                img.src = "data:image/png;base64," + chat[0].tg_profile_photo;
-                userPhoto.appendChild(img);
-            }
+        let userPhoto = document.getElementById("chat-photo");
+        if (chat[0].tg_profile_photo != null) {
+            let img = document.createElement("img");
+            img.src = "data:image/png;base64," + chat[0].tg_profile_photo;
+            userPhoto.appendChild(img);
         }
-        document.getElementById("title").textContent = titleText;
+    }
+    document.getElementById("title").textContent = titleText;
 
-        let cardsContainer = document.createElement("div");
-        cardsContainer.id = "cards-container";
-        cardsContainer.classList.add("grid-view");
-        document.body.appendChild(cardsContainer);
+    let cardsContainer = document.createElement("div");
+    cardsContainer.id = "cards-container";
+    cardsContainer.classList.add("grid-view");
+    document.body.appendChild(cardsContainer);
 
-        if (initData.user.id === chat_id && initData.user.id === users[0].tg_user_id) {
-            for (let i = 0; i < wishes.length; i++) {
+    if (initData.user.id === chat_id && initData.user.id === users[0].tg_user_id) {
+        for (let i = 0; i < wishes.length; i++) {
 
-                let wish = wishes[i];
-                let card = document.createElement("div");
-                card.classList.add("card");
-                card.classList.add("active");
-                cardsContainer.appendChild(card);
+            let wish = wishes[i];
+            let card = document.createElement("div");
+            card.classList.add("card");
+            card.classList.add("active");
+            cardsContainer.appendChild(card);
 
-                let wishInfo = document.createElement("div");
-                wishInfo.className = "wish-info";
-                card.appendChild(wishInfo);
+            let wishInfo = document.createElement("div");
+            wishInfo.className = "wish-info";
+            card.appendChild(wishInfo);
 
-                let title = document.createElement("div");
-                title.className = "wish-title";
-                title.textContent = wish["name"];
-                wishInfo.appendChild(title);
+            let title = document.createElement("div");
+            title.className = "wish-title";
+            title.textContent = wish["name"];
+            wishInfo.appendChild(title);
 
-                let price = document.createElement("div");
-                price.className = "price";
-                price.textContent = priceFormat(wish["price"]) + " " + wish["currency"];
-                wishInfo.appendChild(price);
+            let price = document.createElement("div");
+            price.className = "price";
+            price.textContent = priceFormat(wish["price"]) + " " + wish["currency"];
+            wishInfo.appendChild(price);
 
-                if (wish["image"] != null) {
-                    let wishPhoto = document.createElement("div");
-                    wishPhoto.className = "wish-image";
-                    card.appendChild(wishPhoto);
+            if (wish["image"] != null) {
+                let wishPhoto = document.createElement("div");
+                wishPhoto.className = "wish-image";
+                card.appendChild(wishPhoto);
 
-                    let wishPhotoImg = document.createElement("img");
-                    wishPhotoImg.src = wish["image"];
-                    wishPhoto.appendChild(wishPhotoImg);
-                }
+                let wishPhotoImg = document.createElement("img");
+                wishPhotoImg.src = wish["image"];
+                wishPhoto.appendChild(wishPhotoImg);
+            }
 
-                let bottomBar = document.createElement("div");
-                bottomBar.className = "bottom-bar";
-                card.appendChild(bottomBar);
+            let bottomBar = document.createElement("div");
+            bottomBar.className = "bottom-bar";
+            card.appendChild(bottomBar);
 
-                let bookMark = document.createElement("div");
-                bookMark.className = "bookmark";
-                bottomBar.appendChild(bookMark);
-                let deleteIcon = document.createElement("span");
-                deleteIcon.classList.add("material-symbols-outlined");
-                deleteIcon.textContent = "delete";
-                bookMark.appendChild(deleteIcon);
+            let bookMark = document.createElement("div");
+            bookMark.className = "bookmark";
+            bottomBar.appendChild(bookMark);
+            let deleteIcon = document.createElement("span");
+            deleteIcon.classList.add("material-symbols-outlined");
+            deleteIcon.textContent = "delete";
+            bookMark.appendChild(deleteIcon);
 
-                bookMark.addEventListener("click", function () {
-                    Telegram.WebApp.HapticFeedback.notificationOccurred("warning");
-                    Telegram.WebApp.showConfirm(
-                        "Are you sure you want to delete this wish?",
-                        async function (is_ok) {
-                            if (is_ok) {
-                                await fetch(
-                                "/delete",
-                                {
-                                        method: "POST",
-                                        headers: {
-                                            "Accept": "application/json",
-                                            "Content-Type": "application/json"
-                                        },
-                                        body: JSON.stringify({
-                                            init_data: initDataRaw,
-                                            wish_id: wish["id"]
-                                        })
-                                    }
-                                );
-                                bookMark.parentElement.parentElement.remove();
-                            }
+            bookMark.addEventListener("click", function () {
+                Telegram.WebApp.HapticFeedback.notificationOccurred("warning");
+                Telegram.WebApp.showConfirm(
+                    "Are you sure you want to delete this wish?",
+                    async function (is_ok) {
+                        if (is_ok) {
+                            await fetch(
+                            "/delete",
+                            {
+                                    method: "POST",
+                                    headers: {
+                                        "Accept": "application/json",
+                                        "Content-Type": "application/json"
+                                    },
+                                    body: JSON.stringify({
+                                        init_data: initDataRaw,
+                                        wish_id: wish["id"]
+                                    })
+                                }
+                            );
+                            bookMark.parentElement.parentElement.remove();
                         }
-                    )
-                });
-
-                let editWish = document.createElement("div");
-                editWish.className = "bookmark";
-                editWish.onclick = function () {
-                    location.href="/new?wish_id=" + wish["id"];
-                };
-                bottomBar.appendChild(editWish);
-                let editIcon = document.createElement("span");
-                editIcon.classList.add("material-symbols-outlined");
-                editIcon.textContent = "edit";
-                editWish.appendChild(editIcon);
-
-                if (wish["link"] != null) {
-                    let link = document.createElement("div");
-                    link.className = "link";
-                    let linkIcon = document.createElement("span");
-                    linkIcon.classList.add("material-symbols-outlined");
-                    linkIcon.textContent = "open_in_new";
-                    link.appendChild(linkIcon);
-                    link.onclick = function () {
-                        window.open(wish["link"]);
                     }
-                    bottomBar.appendChild(link);
+                )
+            });
+
+            let editWish = document.createElement("div");
+            editWish.className = "bookmark";
+            editWish.onclick = function () {
+                location.href="/new?wish_id=" + wish["id"];
+            };
+            bottomBar.appendChild(editWish);
+            let editIcon = document.createElement("span");
+            editIcon.classList.add("material-symbols-outlined");
+            editIcon.textContent = "edit";
+            editWish.appendChild(editIcon);
+
+            if (wish["link"] != null) {
+                let link = document.createElement("div");
+                link.className = "link";
+                let linkIcon = document.createElement("span");
+                linkIcon.classList.add("material-symbols-outlined");
+                linkIcon.textContent = "open_in_new";
+                link.appendChild(linkIcon);
+                link.onclick = function () {
+                    window.open(wish["link"]);
                 }
+                bottomBar.appendChild(link);
             }
         }
-        else {
-            for (let j=0; j<users.length; j++) {
-                const user_wishes = wishes.filter(function (wish) {
-                    return wish["tg_user_id"] === users[j].tg_user_id
-                });
-                const user_wishes_count = user_wishes.length;
+    }
+    else {
+        for (let j=0; j<users.length; j++) {
+            const user_wishes = wishes.filter(function (wish) {
+                return wish["tg_user_id"] === users[j].tg_user_id
+            });
+            const user_wishes_count = user_wishes.length;
 
-                let card = document.createElement("div");
-                card.classList.add("card");
-                card.classList.add("clickable");
-                card.classList.add("active");
-                card.onclick = function () {
-                    location.href = "/user_wishes?user_id=" + users[j].tg_user_id + "&chat_id=" + chat[0].tg_chat_id;
-                };
-                let div = document.getElementById("cards-container");
-                div.appendChild(card);
+            let card = document.createElement("div");
+            card.classList.add("card");
+            card.classList.add("clickable");
+            card.classList.add("active");
+            card.onclick = function () {
+                location.href = "/user_wishes?user_id=" + users[j].tg_user_id + "&chat_id=" + chat[0].tg_chat_id;
+            };
+            let div = document.getElementById("cards-container");
+            div.appendChild(card);
 
-                let header = document.createElement("div");
-                header.className = "card-header";
-                card.appendChild(header);
+            let header = document.createElement("div");
+            header.className = "card-header";
+            card.appendChild(header);
 
-                let userPhoto = document.createElement("div");
-                userPhoto.className = "user-photo";
-                header.appendChild(userPhoto);
+            let userPhoto = document.createElement("div");
+            userPhoto.className = "user-photo";
+            header.appendChild(userPhoto);
 
-                if (user_wishes[0].tg_profile_photo != null) {
-                    let userPhotoImg = document.createElement("img");
-                    userPhotoImg.src = "data:image/png;base64," + user_wishes[0].tg_profile_photo;
-                    userPhoto.appendChild(userPhotoImg);
-                }
-
-                let userInfo = document.createElement("div");
-                userInfo.className = "user-info";
-                header.appendChild(userInfo);
-
-                let userName = document.createElement("div");
-                userName.className = "card-title";
-                userName.textContent = user_wishes[0].tg_first_name ? user_wishes[0].tg_first_name : user_wishes[0].tg_username;
-                userInfo.appendChild(userName);
-
-                let wishCount = document.createElement("div");
-                wishCount.className = "wish-count";
-                wishCount.textContent = user_wishes_count + "\nwish";
-                wishCount.textContent += user_wishes_count>1 ? "es" : "";
-                userInfo.appendChild(wishCount);
+            if (user_wishes[0].tg_profile_photo != null) {
+                let userPhotoImg = document.createElement("img");
+                userPhotoImg.src = "data:image/png;base64," + user_wishes[0].tg_profile_photo;
+                userPhoto.appendChild(userPhotoImg);
             }
+
+            let userInfo = document.createElement("div");
+            userInfo.className = "user-info";
+            header.appendChild(userInfo);
+
+            let userName = document.createElement("div");
+            userName.className = "card-title";
+            userName.textContent = user_wishes[0].tg_first_name ? user_wishes[0].tg_first_name : user_wishes[0].tg_username;
+            userInfo.appendChild(userName);
+
+            let wishCount = document.createElement("div");
+            wishCount.className = "wish-count";
+            wishCount.textContent = user_wishes_count + "\nwish";
+            wishCount.textContent += user_wishes_count>1 ? "es" : "";
+            userInfo.appendChild(wishCount);
         }
     }
 
@@ -253,7 +246,7 @@ async function load_user_wishes() {
     if (data_verification["data"]["is_access_granted"] === false) {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
-        alert.innerHTML = data["data"]["message"];
+        alert.innerHTML = data_verification["data"]["status"];
         document.body.appendChild(alert);
         return;
     }
