@@ -63,11 +63,30 @@ def is_data_verified(init_data: str = None):
         return True
 
 
+@app.post("/access_verification")
+async def access_verification(request: Request):
+    res = await request.json()
+    init_data = res["init_data"]
+    if not is_data_verified(init_data):
+        return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
+    with psycopg2.connect(**con) as conn:
+        cur = conn.cursor()
+        cur.execute(f"""
+            select count(*) > 0 is_access_granted
+            from permissions p
+            where p.tg_chat_id in ({res["chat_id"]})
+            and p.tg_user_id = {res["user_id"]}
+            and not p.is_deleted
+            ;
+        """)
+        data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()][0]
+        return json.dumps({"status": "ok", "data": data})
+
+
 @app.post("/get_wishes")
 async def get_wishes(request: Request):
     res = await request.json()
     init_data = res["init_data"]
-    print(is_data_verified(init_data))
     if not is_data_verified(init_data):
         return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
     with psycopg2.connect(**con) as conn:

@@ -18,16 +18,19 @@ async function load() {
     const initData = Telegram.WebApp.initDataUnsafe;
     const chatType = initData.chat_type;
     Telegram.WebApp.expand();
-    const response = await get_wishes(initData);
-    const res = await response.json();
-    const data = await JSON.parse(res);
-    if (data["status"] === "failed") {
+    const access_verification = await verify_access(chat_id);
+    const res_verification = await access_verification.json();
+    const data_verification = await JSON.parse(res_verification);
+    if (data_verification["data"]["is_access_granted"] === false) {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
         alert.innerHTML = data["data"]["message"];
         document.body.appendChild(alert);
         return;
     }
+    const response = await get_wishes(initData);
+    const res = await response.json();
+    const data = await JSON.parse(res);
     const wishes = await data.data;
     if (wishes.length === 0) {
         let alert = document.createElement("span");
@@ -244,16 +247,19 @@ async function load_user_wishes() {
     Telegram.WebApp.BackButton.show();
     const chat_type = initData.chat_type;
     Telegram.WebApp.expand();
-    const response = await get_user_wishes(user_id, chat_id);
-    const res = await response.json();
-    const data = await JSON.parse(res);
-    if (data["status"] !== "success") {
+    const access_verification = await verify_access(chat_id);
+    const res_verification = await access_verification.json();
+    const data_verification = await JSON.parse(res_verification);
+    if (data_verification["data"]["is_access_granted"] === false) {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
         alert.innerHTML = data["data"]["message"];
         document.body.appendChild(alert);
         return;
     }
+    const response = await get_user_wishes(user_id, chat_id);
+    const res = await response.json();
+    const data = await JSON.parse(res);
     const wishes = await data.data;
     const user = uniqueUsers(wishes);
     const chat = uniqueChats(wishes);
@@ -433,6 +439,27 @@ async function load_user_wishes() {
             bottomBar.appendChild(link);
         }
     }
+}
+
+
+async function verify_access(chat_id) {
+    const initDataRaw = Telegram.WebApp.initData;
+    const initData = Telegram.WebApp.initDataUnsafe;
+    return await fetch(
+        "/access_verification",
+        {
+            method: "POST",
+            headers: {
+                "Access": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                init_data: initDataRaw,
+                user_id: initData.user.id,
+                chat_id: chat_id
+            })
+        }
+    );
 }
 
 
