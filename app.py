@@ -67,6 +67,7 @@ def is_data_verified(init_data: str = None):
 async def get_wishes(request: Request):
     res = await request.json()
     init_data = res["init_data"]
+    print(is_data_verified(init_data))
     if not is_data_verified(init_data):
         return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
     with psycopg2.connect(**con) as conn:
