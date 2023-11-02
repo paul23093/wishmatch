@@ -83,6 +83,24 @@ async def access_verification(request: Request):
         return json.dumps({"status": "ok", "data": data})
 
 
+@app.post("/get_chat_info")
+async def get_chat_info(request: Request):
+    res = await request.json()
+    init_data = res["init_data"]
+    if not is_data_verified(init_data):
+        return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
+    with psycopg2.connect(**con) as conn:
+        cur = conn.cursor()
+        cur.execute(f"""
+            select *
+            from users
+            where tg_user_id = {res["chat_id"]}
+            ;
+        """)
+        data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()][0]
+        return json.dumps({"status": "ok", "data": data})
+
+
 @app.post("/get_wishes")
 async def get_wishes(request: Request):
     res = await request.json()

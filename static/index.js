@@ -55,11 +55,16 @@ async function load() {
             chatPhoto.appendChild(img);
         }
     } else {
-        let userPhoto = document.getElementById("chat-photo");
-        if (chat[0].tg_profile_photo != null) {
-            let img = document.createElement("img");
-            img.src = "data:image/png;base64," + chat[0].tg_profile_photo;
-            userPhoto.appendChild(img);
+        const response_user_info = await get_chat_info(chat_id);
+        const data_user_info = await response_user_info.json();
+        const json_user_info = await JSON.parse(data_user_info);
+        if (json_user_info["data"] != null) {
+            let userPhoto = document.getElementById("chat-photo");
+            if (json_user_info["data"]["tg_profile_photo"] != null) {
+                let img = document.createElement("img");
+                img.src = "data:image/png;base64," + json_user_info["data"]["tg_profile_photo"];
+                userPhoto.appendChild(img);
+            }
         }
     }
     document.getElementById("title").textContent = titleText;
@@ -456,6 +461,24 @@ async function verify_access(chat_id) {
             body: JSON.stringify({
                 init_data: initDataRaw,
                 user_id: initData.user.id,
+                chat_id: chat_id
+            })
+        }
+    );
+}
+
+async function get_chat_info(chat_id) {
+    const initDataRaw = Telegram.WebApp.initData;
+    return await fetch(
+        "/get_chat_info",
+        {
+            method: "POST",
+            headers: {
+                "Access": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                init_data: initDataRaw,
                 chat_id: chat_id
             })
         }
