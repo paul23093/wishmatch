@@ -55,7 +55,7 @@ async function load() {
             chatPhoto.appendChild(img);
         }
     } else {
-        const response_user_info = await get_chat_info(chat_id);
+        const response_user_info = await get_chat_info();
         const data_user_info = await response_user_info.json();
         const json_user_info = await JSON.parse(data_user_info);
         if (json_user_info["data"] != null) {
@@ -467,7 +467,7 @@ async function verify_access(chat_id) {
     );
 }
 
-async function get_chat_info(chat_id) {
+async function get_chat_info() {
     const initDataRaw = Telegram.WebApp.initData;
     return await fetch(
         "/get_chat_info",
