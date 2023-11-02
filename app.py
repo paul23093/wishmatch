@@ -92,7 +92,11 @@ async def get_chat_info(request: Request):
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
-            select *
+            select 
+                tg_username,
+                tg_first_name,
+                tg_last_name,
+                tg_profile_photo 
             from users
             where tg_user_id = {res["chat_id"]}
             ;
