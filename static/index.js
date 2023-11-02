@@ -72,7 +72,7 @@ async function load() {
     if (wishes.length === 0) {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
-        alert.innerHTML = "Your wishlist is empty. Add new wish by + button.";
+        alert.innerHTML = "Your wishlist is empty.<br>Add new wish by + button.";
         document.body.appendChild(alert);
     }
 
