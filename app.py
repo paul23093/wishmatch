@@ -237,7 +237,7 @@ async def edit_wish(request: Request):
         ; 
         """)
         conn.commit()
-    return json.dumps({"status": "success"})
+    return JSONResponse(content={"status": "success"})
 
 
 @app.post("/book")
@@ -256,7 +256,7 @@ async def book(request: Request):
            ; 
         """)
         conn.commit()
-    return json.dumps({"status": "success"})
+    return JSONResponse(content={"status": "success"})
 
 
 @app.post("/unbook")
@@ -274,7 +274,7 @@ async def unbook(request: Request):
            ; 
         """)
         conn.commit()
-    return json.dumps({"status": "success"})
+    return JSONResponse(content={"status": "success"})
 
 
 @app.post("/delete")
