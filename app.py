@@ -269,7 +269,8 @@ async def unbook(request: Request):
         cur = conn.cursor()
         cur.execute(f"""
             update users_wishes
-            set is_booked = False
+            set is_booked = False,
+                booked_by = null
             where id = {res["wish_id"]}
            ; 
         """)
