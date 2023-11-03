@@ -29,9 +29,7 @@ async function load() {
         return;
     }
     const response = await get_wishes(initData);
-    const res = await response.json();
-    const data = await JSON.parse(res);
-    const wishes = await data.data;
+    const wishes = await response.json();
     document.getElementById("topBar").classList.remove("hidden");
     document.getElementById("topBar").classList.add("topBar");
     const users = uniqueUsers(wishes);
@@ -487,7 +485,7 @@ async function get_chat_info() {
 
 async function get_wishes(initData) {
     const initDataRaw = Telegram.WebApp.initData;
-    return await fetch(
+    const response = await fetch(
         "/get_wishes",
         {
             method: "POST",
@@ -502,6 +500,7 @@ async function get_wishes(initData) {
             })
         }
     );
+    return response.json();
 }
 
 async function get_wish(wish_id) {
