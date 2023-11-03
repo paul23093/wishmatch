@@ -4,6 +4,7 @@ import re
 from typing import Union
 from fastapi import FastAPI, Depends
 from fastapi.templating import Jinja2Templates
+from fastapi.responses import JSONResponse
 from starlette.requests import Request
 from fastapi.staticfiles import StaticFiles
 import psycopg2
@@ -102,7 +103,7 @@ async def get_chat_info(request: Request):
             ;
         """)
         data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()][0]
-        return json.dumps({"status": "ok", "data": json.dumps(data)})
+        return JSONResponse(content={"status": "ok", "data": data})
 
 
 @app.post("/get_wishes")
