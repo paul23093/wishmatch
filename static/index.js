@@ -57,11 +57,11 @@ async function load() {
     } else {
         const response_user_info = await get_chat_info();
         const data_user_info = await response_user_info.json();
-        if (data_user_info["data"] != null) {
+        if (data_user_info.data != null) {
             let userPhoto = document.getElementById("chat-photo");
-            if (data_user_info["data"]["tg_profile_photo"] != null) {
+            if (data_user_info.data.tg_profile_photo != null) {
                 let img = document.createElement("img");
-                img.src = "data:image/png;base64," + data_user_info["data"]["tg_profile_photo"];
+                img.src = "data:image/png;base64," + data_user_info.data.tg_profile_photo;
                 userPhoto.appendChild(img);
             }
         }
