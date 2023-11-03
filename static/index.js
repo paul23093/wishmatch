@@ -504,7 +504,7 @@ async function get_wishes() {
 
 async function get_wish(wish_id) {
     const initDataRaw = Telegram.WebApp.initData;
-    return await fetch(
+    const response = await fetch(
         "/get_wish",
         {
             method: "POST",
@@ -518,6 +518,7 @@ async function get_wish(wish_id) {
             })
         }
     );
+    return await response.json();
 }
 
 async function get_user_wishes(user_id, chat_id) {
@@ -615,10 +616,7 @@ async function load_new_wish() {
     });
 
     if (wish_id !== -1) {
-        const response = await get_wish(wish_id);
-        const res = await response.json();
-        const data = await JSON.parse(res);
-        const wish = await data.data;
+        const wish = await get_wish(wish_id);
 
         document.getElementById("wish-title").value = wish["name"];
         document.getElementById("wish-description").value = wish["description"];

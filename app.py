@@ -322,7 +322,7 @@ async def get_wish(request: Request):
         ;
         """)
         data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()][0]
-        return json.dumps({"status": "success", "data": data})
+        return JSONResponse(content=data)
 
 
 @app.get("/user_wishes")
