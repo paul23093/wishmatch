@@ -94,6 +94,7 @@ async function load() {
             title.textContent = wish["name"];
             wishInfo.appendChild(title);
 
+            console.log(wish["price"]);
             if (wish["price"] !== null) {
                 let price = document.createElement("div");
                 price.className = "price";
