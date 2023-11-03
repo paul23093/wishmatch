@@ -28,8 +28,7 @@ async function load() {
         document.body.appendChild(alert);
         return;
     }
-    const response = await get_wishes(initData);
-    const wishes = await response.json();
+    const wishes = await get_wishes(initData);
     document.getElementById("topBar").classList.remove("hidden");
     document.getElementById("topBar").classList.add("topBar");
     const users = uniqueUsers(wishes);
