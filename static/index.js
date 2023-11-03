@@ -56,12 +56,11 @@ async function load() {
         }
     } else {
         const chat_info = await get_chat_info();
-        console.log(chat_info.data);
-        if (chat_info.data != null) {
+        if (chat_info != null) {
             let userPhoto = document.getElementById("chat-photo");
-            if (chat_info.data.tg_profile_photo != null) {
+            if (chat_info.tg_profile_photo != null) {
                 let img = document.createElement("img");
-                img.src = "data:image/png;base64," + chat_info.data.tg_profile_photo;
+                img.src = "data:image/png;base64," + chat_info.tg_profile_photo;
                 userPhoto.appendChild(img);
             }
         }
