@@ -57,8 +57,6 @@ async function load() {
     } else {
         const chat_info = await get_chat_info();
         console.log(chat_info.data);
-        console.log(chat_info.data.tg_username);
-        console.log(chat_info.data.tg_profile_photo);
         if (chat_info.data != null) {
             let userPhoto = document.getElementById("chat-photo");
             if (chat_info.data.tg_profile_photo != null) {
