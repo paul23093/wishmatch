@@ -302,10 +302,15 @@ async function load_user_wishes() {
             title.textContent = wish["name"];
             wishInfo.appendChild(title);
 
-            let price = document.createElement("div");
-            price.className = "price";
-            price.textContent = priceFormat(wish["price"]) + " " + wish["currency"];
-            wishInfo.appendChild(price);
+            if (wish["price"] !== null) {
+                let price = document.createElement("div");
+                price.className = "price";
+                price.textContent = priceFormat(wish["price"]);
+                if (wish["currency"] !== null) {
+                    price.textContent += " " + wish["currency"];
+                }
+                wishInfo.appendChild(price);
+            }
 
             if (wish["image"] != null) {
                 let wishPhoto = document.createElement("div");
