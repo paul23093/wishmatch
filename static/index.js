@@ -804,6 +804,11 @@ function checkInput(e) {
     }
 }
 
+
+function showSymbolsLeftCount(el) {
+    el.
+}
+
 function checkBlur(e) {
     e.target.nextElementSibling.className = "hidden";
 }
