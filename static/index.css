@@ -162,14 +162,12 @@ body {
 
 
 .input#input-wish-price {
-    flex: 2;
-    -webkit-flex: 2;
+    -webkit-flex: 5;
     margin-right: 5px;
 }
 
 .input#input-wish-currency {
-    flex: 1;
-    -webkit-flex: 1;
+    -webkit-flex: 4;
     margin-left: 5px;
 }
 
