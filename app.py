@@ -252,7 +252,8 @@ async def book(request: Request):
         cur.execute(f"""
             update users_wishes
             set is_booked = True,
-            booked_by = {res["tg_user_id"]}
+                booked_by = {res["tg_user_id"]},
+                updated_at = current_timestamp
             where id = {res["wish_id"]}
            ; 
         """)
@@ -271,7 +272,8 @@ async def unbook(request: Request):
         cur.execute(f"""
             update users_wishes
             set is_booked = False,
-                booked_by = null
+                booked_by = null,
+                updated_at = current_timestamp
             where id = {res["wish_id"]}
            ; 
         """)
@@ -289,7 +291,8 @@ async def delete(request: Request):
         cur = conn.cursor()
         cur.execute(f"""
             update users_wishes
-            set is_deleted = True
+            set is_deleted = True,
+                updated_at = current_timestamp
             where id = {res["wish_id"]}
            ; 
         """)
