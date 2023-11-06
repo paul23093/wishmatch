@@ -11,7 +11,8 @@ function switchView() {
 }
 
 class Wish {
-    constructor(name, description, link, image, price, currency) {
+    constructor(id=null, name, description, link, image, price, currency) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.link = link;
@@ -22,6 +23,7 @@ class Wish {
 
     toJson() {
         return {
+            "id": this.id,
             "name": this.name,
             "description": this.description,
             "link": this.link,
