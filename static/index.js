@@ -554,7 +554,8 @@ async function get_wish(wish_id) {
         }
     );
     const json= response.json();
-    return Wish.from(json);
+    console.log(json);
+    return new Wish.from(json);
 }
 
 async function get_user_wishes(user_id, chat_id) {
