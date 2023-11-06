@@ -22,7 +22,6 @@ class Wish {
 
     toJson() {
         return {
-            "id": this.id,
             "name": this.name,
             "description": this.description,
             "link": this.link,
@@ -33,7 +32,14 @@ class Wish {
     }
 
     static from(json){
-        return Object.assign(new Wish(), json);
+        return new Wish(
+            json["name"],
+            json["description"],
+            json["link"],
+            json["image"],
+            json["price"],
+            json["currency"]
+        );
     }
 }
 

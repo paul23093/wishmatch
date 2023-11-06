@@ -232,7 +232,8 @@ async def edit_wish(request: Request):
                 link = {f"'{res['link']}'" if res["link"] else "NULL"}, 
                 image = {f"'{res['image']}'" if res["image"] else "NULL"}, 
                 price = {f"'{res['price']}'" if res["price"] else "NULL"},
-                currency = {f"'{res['currency']}'" if res["currency"] else "NULL"}
+                currency = {f"'{res['currency']}'" if res["currency"] else "NULL"},
+                updated_at = current_timestamp
         where id = {res["id"]}
         ; 
         """)
