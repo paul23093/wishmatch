@@ -11,11 +11,11 @@ function switchView() {
 }
 
 class Wish {
-    constructor(name, description, link, imageLink, price, currency) {
+    constructor(name, description, link, image, price, currency) {
         this.name = name;
         this.description = description;
         this.link = link;
-        this.imageLink = imageLink;
+        this.image = image;
         this.price = price;
         this.currency = currency;
     }
@@ -25,7 +25,7 @@ class Wish {
             "name": this.name,
             "description": this.description,
             "link": this.link,
-            "imageLink": this.imageLink,
+            "image": this.image,
             "price": this.price,
             "currency": this.currency
         }
@@ -652,12 +652,12 @@ async function load_new_wish() {
     if (wish_id !== -1) {
         const wish = await get_wish(wish_id);
 
-        document.getElementById("wish-title").value = wish["name"];
-        document.getElementById("wish-description").value = wish["description"];
-        document.getElementById("wish-link").value = wish["link"];
-        document.getElementById("wish-image-link").value = wish["image"];
-        document.getElementById("wish-price").value = wish["price"];
-        document.getElementById("wish-currency").value = wish["currency"];
+        document.getElementById("wish-title").value = wish.name;
+        document.getElementById("wish-description").value = wish.description;
+        document.getElementById("wish-link").value = wish.link;
+        document.getElementById("wish-image-link").value = wish.image;
+        document.getElementById("wish-price").value = wish.price;
+        document.getElementById("wish-currency").value = wish.currency;
         Telegram.WebApp.MainButton.text = "Save";
         Telegram.WebApp.MainButton.onClick(function () {edit_wish(wish_id);});
     } else {
