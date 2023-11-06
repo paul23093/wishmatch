@@ -551,8 +551,10 @@ async function get_wish(wish_id) {
             })
         }
     );
-    const json = response.json();
-    return Wish.from(json);
+    const json= response.json();
+    const wish = Wish.from(json);
+    console.log(wish);
+    return wish;
 }
 
 async function get_user_wishes(user_id, chat_id) {
