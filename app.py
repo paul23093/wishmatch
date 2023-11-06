@@ -230,7 +230,7 @@ async def edit_wish(request: Request):
             set name = {f"'{res['name']}'" if res["name"] else "NULL"}, 
                 description = {f"'{res['description']}'" if res["description"] else "NULL"}, 
                 link = {f"'{res['link']}'" if res["link"] else "NULL"}, 
-                image = {f"'{res['image_link']}'" if res["image_link"] else "NULL"}, 
+                image = {f"'{res['image']}'" if res["image"] else "NULL"}, 
                 price = {f"'{res['price']}'" if res["price"] else "NULL"},
                 currency = {f"'{res['currency']}'" if res["currency"] else "NULL"}
         where id = {res["id"]}

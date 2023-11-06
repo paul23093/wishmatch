@@ -761,7 +761,7 @@ async function edit_wish(id) {
 			    name: (wish.name !== null && wish.name !== "") ? wish.name : null,
                 description: (wish.description !== null && wish.description !== "") ? wish.description : null,
 			    link: (wish.link !== null && wish.link !== "") ? wish.link : null,
-                image_link: (wish.image !== null && wish.image !== "") ? wish.image : null,
+                image: (wish.image !== null && wish.image !== "") ? wish.image : null,
 			    price: (wish.price !== null && wish.price !== "") ? wish.price : null,
                 currency: (wish.currency !== null && wish.currency !== "") ? wish.currency : null,
 		    })
