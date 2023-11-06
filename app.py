@@ -220,7 +220,6 @@ async def add_wish(request: Request):
 @app.post("/edit_wish")
 async def edit_wish(request: Request):
     res = await request.json()
-    print(res)
     init_data = res["init_data"]
     if not is_data_verified(init_data):
         return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
