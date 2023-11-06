@@ -553,7 +553,7 @@ async function get_wish(wish_id) {
             })
         }
     );
-    const json= await response.json();
+    const json = await response.json();
     return Wish.from(json);
 }
 
@@ -761,7 +761,7 @@ async function edit_wish(id) {
 			    name: (wish.name !== null && wish.name !== "") ? wish.name : null,
                 description: (wish.description !== null && wish.description !== "") ? wish.description : null,
 			    link: (wish.link !== null && wish.link !== "") ? wish.link : null,
-                image_link: (wish.imageLink !== null && wish.imageLink !== "") ? wish.imageLink : null,
+                image_link: (wish.image !== null && wish.image !== "") ? wish.image : null,
 			    price: (wish.price !== null && wish.price !== "") ? wish.price : null,
                 currency: (wish.currency !== null && wish.currency !== "") ? wish.currency : null,
 		    })
