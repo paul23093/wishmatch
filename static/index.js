@@ -18,13 +18,11 @@ async function load() {
     const initData = Telegram.WebApp.initDataUnsafe;
     const chatType = initData.chat_type;
     Telegram.WebApp.expand();
-    const access_verification = await verify_access(chat_id);
-    const res_verification = await access_verification.json();
-    const data_verification = await JSON.parse(res_verification);
-    if (data_verification["data"]["is_access_granted"] === false) {
+    const verification = await verify_access(chat_id);
+    if (verification["is_access_granted"] === false) {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
-        alert.innerHTML = data_verification["data"]["status"];
+        alert.innerHTML = verification["status"];
         document.body.appendChild(alert);
         return;
     }
@@ -252,13 +250,11 @@ async function load_user_wishes() {
     Telegram.WebApp.BackButton.show();
     const chat_type = initData.chat_type;
     Telegram.WebApp.expand();
-    const access_verification = await verify_access(chat_id);
-    const res_verification = await access_verification.json();
-    const data_verification = await JSON.parse(res_verification);
-    if (data_verification["data"]["is_access_granted"] === false) {
+    const verification = await verify_access(chat_id);
+    if (verification["is_access_granted"] === false) {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
-        alert.innerHTML = data_verification["data"]["status"];
+        alert.innerHTML = verification["status"];
         document.body.appendChild(alert);
         return;
     }
@@ -455,7 +451,7 @@ async function load_user_wishes() {
 async function verify_access(chat_id) {
     const initDataRaw = Telegram.WebApp.initData;
     const initData = Telegram.WebApp.initDataUnsafe;
-    return await fetch(
+    const response = await fetch(
         "/access_verification",
         {
             method: "POST",
@@ -470,6 +466,7 @@ async function verify_access(chat_id) {
             })
         }
     );
+    return await response.json();
 }
 
 async function get_chat_info() {
