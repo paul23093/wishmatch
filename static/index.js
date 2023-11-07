@@ -88,7 +88,7 @@ class Wish {
             "name": (this.name !== null && this.name !== "") ? this.name : null,
             "description": (this.description !== null && this.description !== "") ? this.description : null,
             "link": (this.link !== null && this.link !== "") ? this.link : null,
-            "image": (this.image !== null && this.image !== "") ? this.image : null,
+            "image_link": (this.image !== null && this.image !== "") ? this.image : null,
             "price": (this.price !== null && this.price !== "") ? this.price : null,
             "currency": (this.currency !== null && this.currency !== "") ? this.currency : null
         };
