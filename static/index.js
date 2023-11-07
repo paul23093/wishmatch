@@ -12,12 +12,12 @@ function switchView() {
 
 class User {
     constructor(id, tgId, username, firstName, lastName, photoBytes) {
-        this.id = id,
-        this.tgId = tgId,
-        this.username = username,
-        this.firstName = firstName,
-        this.lastName = lastName,
-        this.photoBytes = photoBytes
+        this.id = id;
+        this.tgId = tgId;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.photoBytes = photoBytes;
     }
 
     toJson() {
@@ -72,7 +72,8 @@ class ChatUser extends User {
 }
 
 class Wish {
-    constructor(name, description, link, image, price, currency) {
+    constructor({id=null, name, description, link, image, price, currency}) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.link = link;
@@ -83,6 +84,7 @@ class Wish {
 
     toJson() {
         return {
+            "id": (this.id !== null && this.id !== "") ? this.id : null,
             "name": (this.name !== null && this.name !== "") ? this.name : null,
             "description": (this.description !== null && this.description !== "") ? this.description : null,
             "link": (this.link !== null && this.link !== "") ? this.link : null,
@@ -93,14 +95,15 @@ class Wish {
     }
 
     static from(json){
-        return new Wish(
-            json["name"],
-            json["description"],
-            json["link"],
-            json["image"],
-            json["price"],
-            json["currency"]
-        );
+        return new Wish({
+            id: json["id"],
+            name: json["name"],
+            description: json["description"],
+            link: json["link"],
+            image: json["image"],
+            price: json["price"],
+            currency: json["currency"]
+        });
     }
 }
 
