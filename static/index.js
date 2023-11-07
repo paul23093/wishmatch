@@ -753,14 +753,14 @@ async function add_wish() {
     }
     let initData = Telegram.WebApp.initDataUnsafe;
     let tg_user_id = initData.user.id;
-    let wish = new Wish(
-        document.getElementById("wish-title").value,
-        document.getElementById("wish-description").value,
-        document.getElementById("wish-link").value,
-        document.getElementById("wish-image-link").value,
-        document.getElementById("wish-price").value,
-        document.getElementById("wish-currency").value
-    )
+    let wish = new Wish({
+        name: document.getElementById("wish-title").value,
+        description: document.getElementById("wish-description").value,
+        link: document.getElementById("wish-link").value,
+        image: document.getElementById("wish-image-link").value,
+        price: document.getElementById("wish-price").value,
+        currency: document.getElementById("wish-currency").value
+    })
 
     Telegram.WebApp.HapticFeedback.notificationOccurred("success");
 
@@ -797,14 +797,14 @@ async function edit_wish(id) {
         return;
     }
 
-    let wish = new Wish(
-        document.getElementById("wish-title").value,
-        document.getElementById("wish-description").value,
-        document.getElementById("wish-link").value,
-        document.getElementById("wish-image-link").value,
-        document.getElementById("wish-price").value,
-        document.getElementById("wish-currency").value
-    )
+    let wish = new Wish({
+        name: document.getElementById("wish-title").value,
+        description: document.getElementById("wish-description").value,
+        link: document.getElementById("wish-link").value,
+        image: document.getElementById("wish-image-link").value,
+        price: document.getElementById("wish-price").value,
+        currency: document.getElementById("wish-currency").value
+    })
 
     Telegram.WebApp.HapticFeedback.notificationOccurred("success");
 
