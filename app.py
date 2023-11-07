@@ -210,12 +210,7 @@ async def get_user_wishes(request: Request):
             ;
         """)
         data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()]
-        return JSONResponse(
-            content={
-                "status": "success",
-                "data": data
-            }
-        )
+        return JSONResponse(content=data)
 
 
 @app.post("/add_wish")
