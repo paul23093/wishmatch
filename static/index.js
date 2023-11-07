@@ -784,7 +784,7 @@ async function edit_wish(id) {
     )
 
     Telegram.WebApp.HapticFeedback.notificationOccurred("success");
-
+    console.log(wish.toJson());
     fetch(
 	    "/edit_wish",
 	    {
