@@ -10,6 +10,39 @@ function switchView() {
     }
 }
 
+class User {
+    constructor(id, tgId, username, firstName, lastName, photoBytes) {
+        this.id = id,
+        this.tgId = tgId,
+        this.username = username,
+        this.firstName = firstName,
+        this.lastName = lastName,
+        this.photoBytes = photoBytes
+    }
+
+    toJson() {
+        return {
+            "id": this.id,
+            "tg_user_id": this.tgId,
+            "tg_username": this.username,
+            "tg_first_name": this.firstName,
+            "tg_last_name": this.lastName,
+            "image": this.photoBytes
+        }
+    }
+
+    static from(json){
+        return new User(
+            json["id"],
+            json["tg_user_id"],
+            json["tg_username"],
+            json["tg_first_name"],
+            json["tg_last_name"],
+            json["image"]
+        );
+    }
+}
+
 class Wish {
     constructor(name, description, link, image, price, currency) {
         this.name = name;
@@ -22,12 +55,12 @@ class Wish {
 
     toJson() {
         return {
-            "name": this.name,
-            "description": this.description,
-            "link": this.link,
-            "image": this.image,
-            "price": this.price,
-            "currency": this.currency
+            "name": (this.name !== null && this.name !== "") ? this.name : null,
+            "description": (this.description !== null && this.description !== "") ? this.description : null,
+            "link": (this.link !== null && this.link !== "") ? this.link : null,
+            "image": (this.image !== null && this.image !== "") ? this.image : null,
+            "price": (this.price !== null && this.price !== "") ? this.price : null,
+            "currency": (this.currency !== null && this.currency !== "") ? this.currency : null
         }
     }
 
@@ -763,12 +796,7 @@ async function edit_wish(id) {
 		    body: JSON.stringify({
                 init_data: initDataRaw,
 			    id: id,
-			    name: (wish.name !== null && wish.name !== "") ? wish.name : null,
-                description: (wish.description !== null && wish.description !== "") ? wish.description : null,
-			    link: (wish.link !== null && wish.link !== "") ? wish.link : null,
-                image: (wish.image !== null && wish.image !== "") ? wish.image : null,
-			    price: (wish.price !== null && wish.price !== "") ? wish.price : null,
-                currency: (wish.currency !== null && wish.currency !== "") ? wish.currency : null,
+			    wish: wish.toJson()
 		    })
 	    }
     ).then(function() {

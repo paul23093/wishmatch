@@ -227,12 +227,12 @@ async def edit_wish(request: Request):
         cur = conn.cursor()
         cur.execute(f"""
         update users_wishes 
-            set name = {f"'{res['name']}'" if res["name"] else "NULL"}, 
-                description = {f"'{res['description']}'" if res["description"] else "NULL"}, 
-                link = {f"'{res['link']}'" if res["link"] else "NULL"}, 
-                image = {f"'{res['image']}'" if res["image"] else "NULL"}, 
-                price = {f"'{res['price']}'" if res["price"] else "NULL"},
-                currency = {f"'{res['currency']}'" if res["currency"] else "NULL"},
+            set name = {f"'{res['wish']['name']}'" if res['wish']["name"] else "NULL"}, 
+                description = {f"'{res['wish']['description']}'" if res['wish']["description"] else "NULL"}, 
+                link = {f"'{res['wish']['link']}'" if res['wish']["link"] else "NULL"}, 
+                image = {f"'{res['wish']['image']}'" if res['wish']["image"] else "NULL"}, 
+                price = {f"'{res['wish']['price']}'" if res['wish']["price"] else "NULL"},
+                currency = {f"'{res['wish']['currency']}'" if res['wish']["currency"] else "NULL"},
                 updated_at = current_timestamp
         where id = {res["id"]}
         ; 
