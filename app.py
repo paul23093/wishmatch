@@ -205,12 +205,12 @@ async def add_wish(request: Request):
             )
             values (
                 {res["tg_user_id"]}, 
-                {f"'{res['name']}'" if res["name"] else "NULL"},
-                {f"'{res['description']}'" if res["description"] else "NULL"}, 
-                {f"'{res['link']}'" if res["link"] else "NULL"}, 
-                {f"'{res['image_link']}'" if res["image_link"] else "NULL"}, 
-                {f"'{res['price']}'" if res["price"] else "NULL"}, 
-                {f"'{res['currency']}'" if res["currency"] else "NULL"}
+                {f"'{res['wish']['name']}'" if res["wish"]["name"] else "NULL"},
+                {f"'{res['wish']['description']}'" if res["wish"]["description"] else "NULL"}, 
+                {f"'{res['wish']['link']}'" if res["wish"]["link"] else "NULL"}, 
+                {f"'{res['wish']['image_link']}'" if res["wish"]["image_link"] else "NULL"}, 
+                {f"'{res['wish']['price']}'" if res["wish"]["price"] else "NULL"}, 
+                {f"'{res['wish']['currency']}'" if res["wish"]["currency"] else "NULL"}
             ); 
         """)
         conn.commit()
@@ -227,12 +227,12 @@ async def edit_wish(request: Request):
         cur = conn.cursor()
         cur.execute(f"""
         update users_wishes 
-            set name = {f"'{res['wish']['name']}'" if res['wish']["name"] else "NULL"}, 
-                description = {f"'{res['wish']['description']}'" if res['wish']["description"] else "NULL"}, 
-                link = {f"'{res['wish']['link']}'" if res['wish']["link"] else "NULL"}, 
-                image = {f"'{res['wish']['image']}'" if res['wish']["image"] else "NULL"}, 
-                price = {f"'{res['wish']['price']}'" if res['wish']["price"] else "NULL"},
-                currency = {f"'{res['wish']['currency']}'" if res['wish']["currency"] else "NULL"},
+            set name = {f"'{res['wish']['name']}'" if res["wish"]["name"] else "NULL"}, 
+                description = {f"'{res['wish']['description']}'" if res["wish"]["description"] else "NULL"}, 
+                link = {f"'{res['wish']['link']}'" if res["wish"]["link"] else "NULL"}, 
+                image = {f"'{res['wish']['image']}'" if res["wish"]["image"] else "NULL"}, 
+                price = {f"'{res['wish']['price']}'" if res["wish"]["price"] else "NULL"},
+                currency = {f"'{res['wish']['currency']}'" if res["wish"]["currency"] else "NULL"},
                 updated_at = current_timestamp
         where id = {res["id"]}
         ; 
@@ -340,7 +340,7 @@ async def verify_data(request: Request):
     res = await request.json()
     init_data = res["init_data"]
     if init_data == '' or init_data is None:
-        return json.dumps({"status": "failed", "data": False})
+        return JSONResponse(content={"status": "failed", "data": False})
     init_data_sorted = '\n'.join(sorted(unquote(init_data).split('&')[:-1]))
     res_hash = re.findall("hash=(\w+)", init_data)[0]
 
@@ -357,6 +357,6 @@ async def verify_data(request: Request):
     ).hexdigest()
 
     if data_check_string != res_hash:
-        return json.dumps({"status": "failed", "data": False})
+        return JSONResponse(content={"status": "failed", "data": False})
     else:
-        return json.dumps({"status": "success", "data": True})
+        return JSONResponse(content={"status": "success", "data": True})
