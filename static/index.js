@@ -774,6 +774,7 @@ async function edit_wish(id) {
         document.body.appendChild(alert);
         return;
     }
+
     let wish = new Wish(
         document.getElementById("wish-title").value,
         document.getElementById("wish-description").value,
@@ -784,7 +785,7 @@ async function edit_wish(id) {
     )
 
     Telegram.WebApp.HapticFeedback.notificationOccurred("success");
-    console.log(wish.toJson());
+
     fetch(
 	    "/edit_wish",
 	    {
