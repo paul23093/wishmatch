@@ -232,8 +232,7 @@ async def edit_wish(request: Request):
                 link = {f"'{res['wish']['link']}'" if res["wish"]["link"] else "NULL"}, 
                 image = {f"'{res['wish']['image']}'" if res["wish"]["image"] else "NULL"}, 
                 price = {f"'{res['wish']['price']}'" if res["wish"]["price"] else "NULL"},
-                currency = {f"'{res['wish']['currency']}'" if res["wish"]["currency"] else "NULL"},
-                updated_at = current_timestamp
+                currency = {f"'{res['wish']['currency']}'" if res["wish"]["currency"] else "NULL"}
         where id = {res["wish"]["id"]}
         ; 
         """)
@@ -252,8 +251,7 @@ async def book(request: Request):
         cur.execute(f"""
             update users_wishes
             set is_booked = True,
-                booked_by = {res["tg_user_id"]},
-                updated_at = current_timestamp
+                booked_by = {res["tg_user_id"]}
             where id = {res["wish_id"]}
            ; 
         """)
@@ -272,8 +270,7 @@ async def unbook(request: Request):
         cur.execute(f"""
             update users_wishes
             set is_booked = False,
-                booked_by = null,
-                updated_at = current_timestamp
+                booked_by = null
             where id = {res["wish_id"]}
            ; 
         """)
@@ -291,8 +288,7 @@ async def delete(request: Request):
         cur = conn.cursor()
         cur.execute(f"""
             update users_wishes
-            set is_deleted = True,
-                updated_at = current_timestamp
+            set is_deleted = True
             where id = {res["wish_id"]}
            ; 
         """)
