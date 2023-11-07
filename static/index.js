@@ -115,7 +115,7 @@ async function load() {
     const initData = Telegram.WebApp.initDataUnsafe;
     const chatType = initData.chat_type;
     Telegram.WebApp.expand();
-    const verification = await verify_access(chat_id);
+    const verification = await verifyAccess(chat_id);
     if (verification["is_access_granted"] === false) {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
@@ -123,7 +123,7 @@ async function load() {
         document.body.appendChild(alert);
         return;
     }
-    const wishes = await get_wishes();
+    const wishes = await getWishes();
     document.getElementById("topBar").classList.remove("hidden");
     document.getElementById("topBar").classList.add("topBar");
     const users = uniqueUsers(wishes);
@@ -147,7 +147,7 @@ async function load() {
             chatPhoto.appendChild(img);
         }
     } else {
-        const chat_info = await get_chat_info();
+        const chat_info = await getChatInfo();
         if (chat_info != null) {
             let userPhoto = document.getElementById("chat-photo");
             if (chat_info.tg_profile_photo != null) {
@@ -323,11 +323,11 @@ async function load() {
 }
 
 
-async function load_user_wishes() {
+async function loadUserWishes() {
     Telegram.WebApp.ready();
     Telegram.WebApp.disableClosingConfirmation();
     const initDataRaw = Telegram.WebApp.initData;
-    const is_data_verified = await verify_data(initDataRaw);
+    const is_data_verified = await verifyData(initDataRaw);
     if (is_data_verified["status"] === "failed") {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
@@ -346,7 +346,7 @@ async function load_user_wishes() {
     Telegram.WebApp.BackButton.show();
     const chat_type = initData.chat_type;
     Telegram.WebApp.expand();
-    const verification = await verify_access(chat_id);
+    const verification = await verifyAccess(chat_id);
     if (verification["is_access_granted"] === false) {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
@@ -354,7 +354,7 @@ async function load_user_wishes() {
         document.body.appendChild(alert);
         return;
     }
-    const wishes = await get_user_wishes(user_id, chat_id);
+    const wishes = await getUserWishes(user_id, chat_id);
     const user = uniqueUsers(wishes);
     const chat = uniqueChats(wishes);
 
@@ -541,7 +541,7 @@ async function load_user_wishes() {
 }
 
 
-async function verify_access(chat_id) {
+async function verifyAccess(chat_id) {
     const initDataRaw = Telegram.WebApp.initData;
     const initData = Telegram.WebApp.initDataUnsafe;
     const response = await fetch(
@@ -562,7 +562,7 @@ async function verify_access(chat_id) {
     return await response.json();
 }
 
-async function get_chat_info() {
+async function getChatInfo() {
     const initDataRaw = Telegram.WebApp.initData;
     const response = await fetch(
         "/get_chat_info",
@@ -582,7 +582,7 @@ async function get_chat_info() {
 }
 
 
-async function get_wishes() {
+async function getWishes() {
     const initDataRaw = Telegram.WebApp.initData;
     const response = await fetch(
         "/get_wishes",
@@ -602,7 +602,7 @@ async function get_wishes() {
     return await response.json();
 }
 
-async function get_wish(wish_id) {
+async function getWish(wish_id) {
     const initDataRaw = Telegram.WebApp.initData;
     const response = await fetch(
         "/get_wish",
@@ -622,7 +622,7 @@ async function get_wish(wish_id) {
     return Wish.from(json);
 }
 
-async function get_user_wishes(user_id, chat_id) {
+async function getUserWishes(user_id, chat_id) {
     const initDataRaw = Telegram.WebApp.initData;
     const response = await fetch(
         "/get_user_wishes",
@@ -643,9 +643,9 @@ async function get_user_wishes(user_id, chat_id) {
 }
 
 
-async function load_new_wish() {
+async function loadNewWish() {
     const initDataRaw = Telegram.WebApp.initData;
-    const is_data_verified = await verify_data(initDataRaw);
+    const is_data_verified = await verifyData(initDataRaw);
     if (is_data_verified["status"] === "failed") {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
@@ -717,7 +717,7 @@ async function load_new_wish() {
     });
 
     if (wish_id !== -1) {
-        const wish = await get_wish(wish_id);
+        const wish = await getWish(wish_id);
 
         document.getElementById("wish-title").value = wish.name;
         document.getElementById("wish-description").value = wish.description;
@@ -741,7 +741,7 @@ async function add_wish() {
     Telegram.WebApp.MainButton.disable();
     Telegram.WebApp.MainButton.showProgress();
     const initDataRaw = Telegram.WebApp.initData;
-    const is_data_verified = await verify_data(initDataRaw);
+    const is_data_verified = await verifyData(initDataRaw);
     if (is_data_verified["status"] === "failed") {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
@@ -786,7 +786,7 @@ async function edit_wish(id) {
     Telegram.WebApp.MainButton.disable();
     Telegram.WebApp.MainButton.showProgress();
     const initDataRaw = Telegram.WebApp.initData;
-    const is_data_verified = await verify_data(initDataRaw);
+    const is_data_verified = await verifyData(initDataRaw);
     if (is_data_verified["status"] === "failed") {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
@@ -892,7 +892,7 @@ function checkBlur(e) {
     e.target.nextElementSibling.className = "hidden";
 }
 
-async function verify_data(initDataRaw) {
+async function verifyData(initDataRaw) {
     const response = await fetch(
         "/verify_data",
         {
