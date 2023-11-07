@@ -798,6 +798,7 @@ async function edit_wish(id) {
     }
 
     let wish = new Wish({
+        id: id,
         name: document.getElementById("wish-title").value,
         description: document.getElementById("wish-description").value,
         link: document.getElementById("wish-link").value,
@@ -818,7 +819,6 @@ async function edit_wish(id) {
 		    },
 		    body: JSON.stringify({
                 init_data: initDataRaw,
-			    id: id,
 			    wish: wish.toJson()
 		    })
 	    }
