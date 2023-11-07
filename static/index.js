@@ -28,11 +28,39 @@ class User {
             "tg_first_name": this.firstName,
             "tg_last_name": this.lastName,
             "image": this.photoBytes
-        }
+        };
     }
 
     static from(json){
         return new User(
+            json["id"],
+            json["tg_user_id"],
+            json["tg_username"],
+            json["tg_first_name"],
+            json["tg_last_name"],
+            json["image"]
+        );
+    }
+}
+
+class ChatUser extends User {
+    constructor(chatId, chatName, ...args) {
+        super(...args);
+        this.chatId = chatId;
+        this.chatName = chatName;
+    }
+
+    toJson() {
+        let jsonObj = super.toJson();
+        jsonObj["chat_id"] = this.chatId;
+        jsonObj["chat_name"] = this.chatName;
+        return jsonObj;
+    }
+
+    static from(json){
+        return new ChatUser(
+            json["chat_id"],
+            json["chat_name"],
             json["id"],
             json["tg_user_id"],
             json["tg_username"],
