@@ -243,7 +243,7 @@ async def add_wish(request: Request):
                 {f"'{res['wish']['name']}'" if res["wish"]["name"] else "NULL"},
                 {f"'{res['wish']['description']}'" if res["wish"]["description"] else "NULL"}, 
                 {f"'{res['wish']['link']}'" if res["wish"]["link"] else "NULL"}, 
-                {f"'{res['wish']['image_link']}'" if res["wish"]["image_link"] else "NULL"}, 
+                {f"'{res['wish']['image']}'" if res["wish"]["image"] else "NULL"}, 
                 {f"'{res['wish']['price']}'" if res["wish"]["price"] else "NULL"}, 
                 {f"'{res['wish']['currency']}'" if res["wish"]["currency"] else "NULL"}
             ); 
