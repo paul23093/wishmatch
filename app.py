@@ -69,7 +69,14 @@ async def access_verification(request: Request):
     res = await request.json()
     init_data = res["init_data"]
     if not is_data_verified(init_data):
-        return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
+        return JSONResponse(
+            content={
+                "status": "failed",
+                "data": {
+                    "message": "You do not have permissions to see this view."
+                }
+            }
+        )
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
@@ -89,7 +96,14 @@ async def get_chat_info(request: Request):
     res = await request.json()
     init_data = res["init_data"]
     if not is_data_verified(init_data):
-        return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
+        return JSONResponse(
+            content={
+                "status": "failed",
+                "data": {
+                    "message": "You do not have permissions to see this view."
+                }
+            }
+        )
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
@@ -111,7 +125,14 @@ async def get_wishes(request: Request):
     res = await request.json()
     init_data = res["init_data"]
     if not is_data_verified(init_data):
-        return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
+        return JSONResponse(
+            content={
+                "status": "failed",
+                "data": {
+                    "message": "You do not have permissions to see this view."
+                }
+            }
+        )
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
@@ -151,7 +172,14 @@ async def get_user_wishes(request: Request):
     res = await request.json()
     init_data = res["init_data"]
     if not is_data_verified(init_data):
-        return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
+        return JSONResponse(
+            content={
+                "status": "failed",
+                "data": {
+                    "message": "You do not have permissions to see this view."
+                }
+            }
+        )
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
@@ -182,7 +210,12 @@ async def get_user_wishes(request: Request):
             ;
         """)
         data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()]
-        return json.dumps({"status": "success", "data": data})
+        return JSONResponse(
+            content={
+                "status": "success",
+                "data": data
+            }
+        )
 
 
 @app.post("/add_wish")
@@ -190,7 +223,14 @@ async def add_wish(request: Request):
     res = await request.json()
     init_data = res["init_data"]
     if not is_data_verified(init_data):
-        return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
+        return JSONResponse(
+            content={
+                "status": "failed",
+                "data": {
+                    "message": "You do not have permissions to see this view."
+                }
+            }
+        )
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
@@ -214,7 +254,11 @@ async def add_wish(request: Request):
             ); 
         """)
         conn.commit()
-    return json.dumps({"status": "success"})
+    return JSONResponse(
+        content={
+            "status": "success"
+        }
+    )
 
 
 @app.post("/edit_wish")
@@ -222,7 +266,14 @@ async def edit_wish(request: Request):
     res = await request.json()
     init_data = res["init_data"]
     if not is_data_verified(init_data):
-        return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
+        return JSONResponse(
+            content={
+                "status": "failed",
+                "data": {
+                    "message": "You do not have permissions to see this view."
+                }
+            }
+        )
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
@@ -237,7 +288,11 @@ async def edit_wish(request: Request):
         ; 
         """)
         conn.commit()
-    return JSONResponse(content={"status": "success"})
+    return JSONResponse(
+        content={
+            "status": "success"
+        }
+    )
 
 
 @app.post("/book")
@@ -245,7 +300,14 @@ async def book(request: Request):
     res = await request.json()
     init_data = res["init_data"]
     if not is_data_verified(init_data):
-        return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
+        return JSONResponse(
+            content={
+                "status": "failed",
+                "data": {
+                    "message": "You do not have permissions to see this view."
+                }
+            }
+        )
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
@@ -256,7 +318,11 @@ async def book(request: Request):
            ; 
         """)
         conn.commit()
-    return JSONResponse(content={"status": "success"})
+    return JSONResponse(
+        content={
+            "status": "success"
+        }
+    )
 
 
 @app.post("/unbook")
@@ -264,7 +330,14 @@ async def unbook(request: Request):
     res = await request.json()
     init_data = res["init_data"]
     if not is_data_verified(init_data):
-        return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
+        return JSONResponse(
+            content={
+                "status": "failed",
+                "data": {
+                    "message": "You do not have permissions to see this view."
+                }
+            }
+        )
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
@@ -275,7 +348,11 @@ async def unbook(request: Request):
            ; 
         """)
         conn.commit()
-    return JSONResponse(content={"status": "success"})
+    return JSONResponse(
+        content={
+            "status": "success"
+        }
+    )
 
 
 @app.post("/delete")
@@ -283,7 +360,14 @@ async def delete(request: Request):
     res = await request.json()
     init_data = res["init_data"]
     if not is_data_verified(init_data):
-        return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
+        return JSONResponse(
+            content={
+                "status": "failed",
+                "data": {
+                    "message": "You do not have permissions to see this view."
+                }
+            }
+        )
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
@@ -293,7 +377,11 @@ async def delete(request: Request):
            ; 
         """)
         conn.commit()
-    return json.dumps({"status": "success"})
+    return JSONResponse(
+        content={
+            "status": "success"
+        }
+    )
 
 
 @app.get("/new")
@@ -306,7 +394,14 @@ async def get_wish(request: Request):
     res = await request.json()
     init_data = res["init_data"]
     if not is_data_verified(init_data):
-        return json.dumps({"status": "failed", "data": {"message": "You do not have permissions to see this view."}})
+        return JSONResponse(
+            content={
+                "status": "failed",
+                "data": {
+                    "message": "You do not have permissions to see this view."
+                }
+            }
+        )
     with psycopg2.connect(**con) as conn:
         cur = conn.cursor()
         cur.execute(f"""
@@ -323,7 +418,9 @@ async def get_wish(request: Request):
         ;
         """)
         data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()][0]
-        return JSONResponse(content=data)
+        return JSONResponse(
+            content=data
+        )
 
 
 @app.get("/user_wishes")
@@ -336,7 +433,12 @@ async def verify_data(request: Request):
     res = await request.json()
     init_data = res["init_data"]
     if init_data == '' or init_data is None:
-        return JSONResponse(content={"status": "failed", "data": False})
+        return JSONResponse(
+            content={
+                "status": "failed",
+                "data": False
+            }
+        )
     init_data_sorted = '\n'.join(sorted(unquote(init_data).split('&')[:-1]))
     res_hash = re.findall("hash=(\w+)", init_data)[0]
 
@@ -353,6 +455,16 @@ async def verify_data(request: Request):
     ).hexdigest()
 
     if data_check_string != res_hash:
-        return JSONResponse(content={"status": "failed", "data": False})
+        return JSONResponse(
+            content={
+                "status": "failed",
+                "data": False
+            }
+        )
     else:
-        return JSONResponse(content={"status": "success", "data": True})
+        return JSONResponse(
+            content={
+                "status": "success",
+                "data": True
+            }
+        )
