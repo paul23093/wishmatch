@@ -91,8 +91,8 @@ async def access_verification(request: Request):
         return JSONResponse(content=data)
 
 
-@app.post("/get_chat_info")
-async def get_chat_info(request: Request):
+@app.post("/get_user_info")
+async def get_user_info(request: Request):
     res = await request.json()
     init_data = res["init_data"]
     if not is_data_verified(init_data):
@@ -114,6 +114,33 @@ async def get_chat_info(request: Request):
                 tg_profile_photo 
             from users
             where tg_user_id = {res["chat_id"]}
+            ;
+        """)
+        data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()][0]
+        return JSONResponse(content=data)
+
+
+@app.post("/get_chat_info")
+async def get_chat_info(request: Request):
+    res = await request.json()
+    init_data = res["init_data"]
+    if not is_data_verified(init_data):
+        return JSONResponse(
+            content={
+                "status": "failed",
+                "data": {
+                    "message": "You do not have permissions to see this view."
+                }
+            }
+        )
+    with psycopg2.connect(**con) as conn:
+        cur = conn.cursor()
+        cur.execute(f"""
+            select 
+                tg_chat_name,
+                tg_chat_photo 
+            from chats
+            where tg_chat_id = {res["chat_id"]}
             ;
         """)
         data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()][0]
