@@ -119,7 +119,7 @@ async function load() {
     if (verification["is_access_granted"] === false) {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
-        alert.innerHTML = "You need to /grant access first";
+        alert.innerHTML = "You need to /grant access in this chat first";
         document.body.appendChild(alert);
         return;
     }
@@ -350,7 +350,7 @@ async function loadUserWishes() {
     if (verification["is_access_granted"] === false) {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
-        alert.innerHTML = "You need to /grant access first";
+        alert.innerHTML = "You need to /grant access in this chat first";
         document.body.appendChild(alert);
         return;
     }
