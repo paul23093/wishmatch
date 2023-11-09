@@ -119,12 +119,11 @@ async function load() {
     if (verification["is_access_granted"] === false) {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
-        alert.innerHTML = verification["status"];
+        alert.innerHTML = "You need to /grant access first";
         document.body.appendChild(alert);
         return;
     }
     const wishes = await getWishes();
-    console.log(wishes);
     document.getElementById("topBar").classList.remove("hidden");
     document.getElementById("topBar").classList.add("topBar");
     const users = uniqueUsers(wishes);
@@ -351,7 +350,7 @@ async function loadUserWishes() {
     if (verification["is_access_granted"] === false) {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
-        alert.innerHTML = verification["status"];
+        alert.innerHTML = "You need to /grant access first";
         document.body.appendChild(alert);
         return;
     }
