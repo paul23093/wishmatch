@@ -855,6 +855,7 @@ function openWish(userWish) {
     card.style.position = "absolute";
     card.style.width = "95vw";
     card.style.height = "95vh";
+    card.style.backgroundColor = "rgb(130, 130, 130)";
     document.body.appendChild(card);
     let header = document.createElement("div");
     header.style.display = "flex";
