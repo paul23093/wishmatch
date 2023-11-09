@@ -181,6 +181,8 @@ async function load() {
             card.classList.add("active");
             cardsContainer.appendChild(card);
 
+            card.onclick = function() {openWish(Wish.from(wish));};
+
             let wishInfo = document.createElement("div");
             wishInfo.className = "wish-info";
             card.appendChild(wishInfo);
@@ -848,7 +850,7 @@ async function edit_wish(id) {
     window.location.replace(document.referrer);
 }
 
-function open_wish(userWish) {
+function openWish(userWish) {
     let card = document.createElement("div");
     card.style.position = "absolute";
     card.style.width = "95vw";
@@ -857,6 +859,7 @@ function open_wish(userWish) {
     let header = document.createElement("div");
     header.style.display = "flex";
     header.style.flexDirection = "row";
+    header.innerHTML = userWish.name;
     card.appendChild(header);
     Telegram.WebApp.BackButton.onClick(function () {
         card.remove();
