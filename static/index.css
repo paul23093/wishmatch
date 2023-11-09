@@ -207,6 +207,16 @@ body {
     user-select: none;
 }
 
+.wish-details {
+    position: absolute;
+    top: 1vh;
+    left: 1vw;
+    width: 98vw;
+    height: 98vh;
+    border-radius: 10px;
+    background-color: rgb(220, 220, 220);
+}
+
 .form {
     background-color: var(--tg-theme-secondary-bg-color);
     height: 85vh;

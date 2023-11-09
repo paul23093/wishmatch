@@ -852,21 +852,16 @@ async function edit_wish(id) {
 
 function openWish(userWish) {
     let card = document.createElement("div");
-    card.style.position = "absolute";
-    card.style.width = "95vw";
-    card.style.top = "2vh";
-    card.style.left = "2vw";
-    card.style.height = "95vh";
-    card.style.borderRadius = "10px";
-    card.style.backgroundColor = "rgb(130, 130, 130)";
+    card.className = "wish-details";
     document.body.appendChild(card);
     let header = document.createElement("div");
     header.style.display = "flex";
     header.style.flexDirection = "row";
-    header.innerHTML = userWish.name;
+    header.innerText = userWish.name;
     card.appendChild(header);
     Telegram.WebApp.BackButton.onClick(function () {
         card.remove();
+        Telegram.WebApp.BackButton.hide();
     });
     Telegram.WebApp.BackButton.show();
 }
