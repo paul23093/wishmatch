@@ -181,7 +181,7 @@ async function load() {
             card.classList.add("active");
             cardsContainer.appendChild(card);
 
-            card.onclick = function() {openWish(Wish.from(wish));};
+            // card.onclick = function() {openWish(Wish.from(wish));};
 
             let wishInfo = document.createElement("div");
             wishInfo.className = "wish-info";
