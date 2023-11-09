@@ -124,6 +124,7 @@ async function load() {
         return;
     }
     const wishes = await getWishes();
+    console.log(wishes);
     document.getElementById("topBar").classList.remove("hidden");
     document.getElementById("topBar").classList.add("topBar");
     const users = uniqueUsers(wishes);
