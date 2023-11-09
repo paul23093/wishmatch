@@ -107,6 +107,7 @@ class Wish {
     }
 }
 
+
 async function load() {
     Telegram.WebApp.ready();
     Telegram.WebApp.disableClosingConfirmation();
@@ -127,11 +128,11 @@ async function load() {
     document.getElementById("topBar").classList.remove("hidden");
     document.getElementById("topBar").classList.add("topBar");
     const users = uniqueUsers(wishes);
-    const chat = uniqueChats(wishes);
+    const chat = await getChatInfo();
 
     let titleText = initData.user.first_name ? initData.user.first_name : initData.user.username;
     if (["group", "supergroup"].includes(chatType)) {
-        titleText = chat[0].tg_chat_name;
+        titleText = chat.tg_chat_name;
         let subtitleText = users.length + " user";
         if (users.length > 1) {
             subtitleText += "s";
@@ -141,9 +142,9 @@ async function load() {
         subtitle.style.display = "flex";
 
         let chatPhoto = document.getElementById("chat-photo");
-        if (chat[0].tg_chat_photo != null) {
+        if (chat.tg_chat_photo != null) {
             let img = document.createElement("img");
-            img.src = "data:image/png;base64," + chat[0].tg_chat_photo;
+            img.src = "data:image/png;base64," + chat.tg_chat_photo;
             chatPhoto.appendChild(img);
         }
     } else {
@@ -845,6 +846,22 @@ async function edit_wish(id) {
         Telegram.WebApp.MainButton.hideProgress();
     });
     window.location.replace(document.referrer);
+}
+
+function open_wish(userWish) {
+    let card = document.createElement("div");
+    card.style.position = "absolute";
+    card.style.width = "95vw";
+    card.style.height = "95vh";
+    document.body.appendChild(card);
+    let header = document.createElement("div");
+    header.style.display = "flex";
+    header.style.flexDirection = "row";
+    card.appendChild(header);
+    Telegram.WebApp.BackButton.onClick(function () {
+        card.remove();
+    });
+    Telegram.WebApp.BackButton.show();
 }
 
 function priceFormat(x) {
