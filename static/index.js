@@ -182,7 +182,7 @@ async function load() {
             cardsContainer.appendChild(card);
 
             card.addEventListener("click", function(event) {
-                if (!event.target.classList.contains("wish-title")) {
+                if (!event.target.parentElement.classList.contains("bottom-bar")) {
                     openWish(Wish.from(wish));
                 }
             });
