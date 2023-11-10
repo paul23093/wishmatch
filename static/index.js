@@ -182,7 +182,7 @@ async function load() {
             cardsContainer.appendChild(card);
 
             card.addEventListener("click", function(event) {
-                if (!event.target.classList.contains("bottom-bar")) {
+                if (!event.target.classList.contains("button")) {
                     openWish(Wish.from(wish));
                 }
             });
@@ -221,7 +221,8 @@ async function load() {
             card.appendChild(bottomBar);
 
             let bookMark = document.createElement("div");
-            bookMark.className = "bookmark";
+            bookMark.classList.add("bookmark");
+            bookMark.classList.add("button");
             bottomBar.appendChild(bookMark);
             let deleteIcon = document.createElement("span");
             deleteIcon.classList.add("material-symbols-outlined");
@@ -255,7 +256,8 @@ async function load() {
             });
 
             let editWish = document.createElement("div");
-            editWish.className = "bookmark";
+            editWish.classList.add("bookmark");
+            editWish.classList.add("button");
             editWish.onclick = function () {
                 location.href="/new?wish_id=" + wish["id"];
             };
@@ -267,7 +269,8 @@ async function load() {
 
             if (wish["link"] != null) {
                 let link = document.createElement("div");
-                link.className = "link";
+                link.classList.add("link");
+                link.classList.add("button");
                 let linkIcon = document.createElement("span");
                 linkIcon.classList.add("material-symbols-outlined");
                 linkIcon.textContent = "open_in_new";
