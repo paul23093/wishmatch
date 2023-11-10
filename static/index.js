@@ -875,7 +875,7 @@ function openWish(userWish) {
     wishInfo.appendChild(wishTitle);
 
     let wishPrice = document.createElement("div");
-    wishPrice.innerText = userWish.price;
+    wishPrice.innerText = priceFormat(userWish.price) + " " + userWish.currency;
     wishInfo.appendChild(wishPrice);
 
     let wishDesc = document.createElement("div");
