@@ -863,6 +863,7 @@ function openWish(userWish) {
     card.appendChild(header);
 
     let wishImage = document.createElement("img");
+    wishImage.className = "wish-details-image";
     wishImage.src = userWish.image;
     header.appendChild(wishImage);
 
