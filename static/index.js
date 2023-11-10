@@ -883,7 +883,7 @@ function openWish(userWish) {
     card.appendChild(wishDesc);
 
     let wishDescLabel = document.createElement("div");
-    wishDesc.className = "wish-details-desc-label";
+    wishDescLabel.className = "wish-details-desc-label";
     wishDescLabel.innerText = "Description";
     wishDesc.appendChild(wishDescLabel);
 
