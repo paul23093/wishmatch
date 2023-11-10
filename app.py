@@ -408,8 +408,8 @@ async def delete(request: Request):
 
 
 @app.get("/new")
-async def new(request: Request, wish: dict):
-    return templates.TemplateResponse("new_wish.html", {"request": request, "wish": wish})
+async def new(request: Request, wish_id: int):
+    return templates.TemplateResponse("new_wish.html", {"request": request, "wish_id": wish_id})
 
 
 @app.post("/get_wish")
