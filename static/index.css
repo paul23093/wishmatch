@@ -184,12 +184,14 @@ body {
 
 .wish-details {
     position: absolute;
+    color: var(--tg-theme-text-color);
     top: 1vh;
     left: 1vw;
     width: 98vw;
     height: 98vh;
     padding: 0 20px;
     border-radius: 10px;
+    box-sizing: border-box;
     background-color: var(--tg-theme-secondary-bg-color);
 }
 
@@ -207,8 +209,13 @@ body {
 }
 
 .wish-details-info {
+    margin-left: 10px;
     display: flex;
     flex-direction: column;
+}
+
+.wish-details-desc-label {
+    background-color: rgba(220, 220, 220, 0.6);
 }
 
 .form {

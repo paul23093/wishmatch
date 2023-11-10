@@ -879,8 +879,17 @@ function openWish(userWish) {
     wishInfo.appendChild(wishPrice);
 
     let wishDesc = document.createElement("div");
-    wishDesc.innerText = userWish.description;
+    wishDesc.className = "wish-details-desc";
     card.appendChild(wishDesc);
+
+    let wishDescLabel = document.createElement("div");
+    wishDesc.className = "wish-details-desc-label";
+    wishDescLabel.innerText = "Description";
+    wishDesc.appendChild(wishDescLabel);
+
+    let wishDescContent = document.createElement("div");
+    wishDescContent.innerText = userWish.description;
+    wishDesc.appendChild(wishDescContent);
 
     Telegram.WebApp.BackButton.onClick(function () {
         card.remove();
