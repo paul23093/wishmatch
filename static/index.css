@@ -189,7 +189,18 @@ body {
     width: 98vw;
     height: 98vh;
     border-radius: 10px;
-    background-color: rgb(220, 220, 220);
+    background-color: var(--tg-theme-secondary-bg-color);
+}
+
+.wish-details-header {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.wish-details-info {
+    display: flex;
+    flex-direction: column;
 }
 
 .form {

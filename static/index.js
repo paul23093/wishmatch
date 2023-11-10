@@ -181,11 +181,11 @@ async function load() {
             card.classList.add("active");
             cardsContainer.appendChild(card);
 
-            // card.addEventListener("click", function(event) {
-            //     if (!event.target.parentNode.classList.contains("bottom-bar")) {
-            //         openWish(Wish.from(wish));
-            //     }
-            // });
+            card.addEventListener("click", function(event) {
+                if (!event.target.parentNode.classList.contains("bottom-bar")) {
+                    openWish(Wish.from(wish));
+                }
+            });
 
             let wishInfo = document.createElement("div");
             wishInfo.className = "wish-info";
@@ -859,10 +859,29 @@ function openWish(userWish) {
     card.className = "wish-details";
     document.body.appendChild(card);
     let header = document.createElement("div");
-    header.style.display = "flex";
-    header.style.flexDirection = "row";
-    header.innerText = userWish.name;
+    header.className = "wish-details-header";
     card.appendChild(header);
+
+    let wishInfo = document.createElement("div");
+    wishInfo.className = "wish-details-info";
+    header.appendChild(wishInfo);
+
+    let wishImage = document.createElement("img");
+    wishImage.src = userWish.image;
+    header.appendChild(wishImage);
+
+    let wishTitle = document.createElement("div");
+    wishTitle.innerText = userWish.name;
+    wishInfo.appendChild(wishTitle);
+
+    let wishPrice = document.createElement("div");
+    wishPrice.innerText = userWish.price;
+    wishInfo.appendChild(wishPrice);
+
+    let wishDesc = document.createElement("div");
+    wishDesc.innerText = userWish.description;
+    card.appendChild(wishDesc);
+
     Telegram.WebApp.BackButton.onClick(function () {
         card.remove();
         Telegram.WebApp.BackButton.hide();
