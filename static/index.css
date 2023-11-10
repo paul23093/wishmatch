@@ -193,9 +193,12 @@ body {
 }
 
 .wish-details-header {
-    margin: 0 auto;
+    margin: auto 0;
+    padding: 10px 20px;
     display: flex;
     flex-direction: row;
+    justify-content: left;
+    align-items: start;
 }
 
 .wish-details-header img {
