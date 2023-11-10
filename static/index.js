@@ -871,10 +871,12 @@ function openWish(userWish) {
     header.appendChild(wishInfo);
 
     let wishTitle = document.createElement("div");
+    wishTitle.className = "wish-details-info-title";
     wishTitle.innerText = userWish.name;
     wishInfo.appendChild(wishTitle);
 
     let wishPrice = document.createElement("div");
+    wishPrice.className = "wish-details-info-price";
     wishPrice.innerText = priceFormat(userWish.price) + " " + userWish.currency;
     wishInfo.appendChild(wishPrice);
 

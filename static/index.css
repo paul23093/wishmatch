@@ -214,6 +214,15 @@ body {
     flex-direction: column;
 }
 
+.wish-details-info-title {
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.wish-details-info-price {
+    font-size: 12pt;
+}
+
 .wish-details-desc-label {
     margin-bottom: 10px;
     font-size: 10pt;
