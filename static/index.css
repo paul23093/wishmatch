@@ -215,8 +215,9 @@ body {
 }
 
 .wish-details-desc-label {
+    margin-bottom: 10px;
     font-size: 10pt;
-    color: rgba(200, 200, 200, 0.8);
+    color: rgba(150, 150, 150, 0.9);
 }
 
 .form {
