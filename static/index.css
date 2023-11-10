@@ -1,6 +1,6 @@
 body {
     font-family: Open Sans, Arial, serif;
-    background-color: var(--tg-theme-secondary-bg-color);
+    background-color: var(--tg-theme-bg-color);
     margin: auto;
     overscroll-behavior-x: none;
     overscroll-behavior-y: auto;
@@ -126,7 +126,7 @@ body {
     font-size: 12pt;
     width: 100%;
     box-sizing: border-box;
-    background-color: var(--tg-theme-secondary-bg-color);
+    background-color: var(--tg-theme-bg-color);
     color: var(--tg-theme-text-color);
     padding: 12px 30px 12px 12px;
     margin: 12px 0;
@@ -174,7 +174,7 @@ body {
 }
 
 .topBar {
-    background-color: var(--tg-theme-bg-color);
+    background-color: var(--tg-theme-secondary-bg-color);
     color: var(--tg-theme-text-color);
     position: relative;
     height: 35px;
@@ -218,7 +218,7 @@ body {
 }
 
 .form {
-    background-color: var(--tg-theme-bg-color);
+    background-color: var(--tg-theme-secondary-bg-color);
     height: 85vh;
     width: 90%;
     font-family: Arial, serif;
@@ -331,7 +331,7 @@ body {
 }
 
 .active {
-    background-color: var(--tg-theme-bg-color);
+    background-color: var(--tg-theme-secondary-bg-color);
 }
 
 .active .wish-title {
@@ -350,7 +350,7 @@ body {
 }
 
 .booked {
-    background-color: var(--tg-theme-bg-color);
+    background-color: var(--tg-theme-secondary-bg-color);
 }
 
 .booked .wish-title {
@@ -423,7 +423,7 @@ body {
 }
 
 .link {
-    background-color: var(--tg-theme-bg-color);
+    background-color: var(--tg-theme-secondary-bg-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -436,7 +436,7 @@ body {
 }
 
 .bookmark {
-    background-color: var(--tg-theme-bg-color);
+    background-color: var(--tg-theme-secondary-bg-color);
     display: flex;
     justify-content: center;
     align-items: center;
