@@ -181,7 +181,11 @@ async function load() {
             card.classList.add("active");
             cardsContainer.appendChild(card);
 
-            // card.onclick = function() {openWish(Wish.from(wish));};
+            card.addEventListener("click", function(event) {
+                if (!event.target.classList.contains("bottom-bar")) {
+                    openWish(Wish.from(wish));
+                }
+            });
 
             let wishInfo = document.createElement("div");
             wishInfo.className = "wish-info";
