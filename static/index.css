@@ -198,6 +198,10 @@ body {
     flex-direction: row;
 }
 
+.wish-details-header img {
+    max-width: 10vw;
+}
+
 .wish-details-info {
     display: flex;
     flex-direction: column;
