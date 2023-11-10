@@ -181,11 +181,11 @@ async function load() {
             card.classList.add("active");
             cardsContainer.appendChild(card);
 
-            card.addEventListener("click", function(event) {
-                if (!event.target.parentNode.classList.contains("bottom-bar")) {
-                    openWish(Wish.from(wish));
-                }
-            });
+            // card.addEventListener("click", function(event) {
+            //     if (!event.target.parentNode.classList.contains("bottom-bar")) {
+            //         openWish(Wish.from(wish));
+            //     }
+            // });
 
             let wishInfo = document.createElement("div");
             wishInfo.className = "wish-info";
@@ -291,7 +291,7 @@ async function load() {
             card.classList.add("clickable");
             card.classList.add("active");
             card.onclick = function () {
-                location.href = "/user_wishes?user_id=" + users[j].tg_user_id + "&chat_id=" + chat[0].tg_chat_id;
+                location.href = "/user_wishes?user_id=" + users[j].tg_user_id + "&chat_id=" + chat.tg_chat_id;
             };
             let div = document.getElementById("cards-container");
             div.appendChild(card);

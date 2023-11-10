@@ -137,6 +137,7 @@ async def get_chat_info(request: Request):
         cur = conn.cursor()
         cur.execute(f"""
             select 
+                tg_chat_id,
                 tg_chat_name,
                 tg_chat_photo 
             from chats
