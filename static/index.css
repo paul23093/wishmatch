@@ -186,8 +186,8 @@ body {
     position: absolute;
     color: var(--tg-theme-text-color);
     top: 1vh;
-    left: 1vw;
-    width: 98vw;
+    left: 2vw;
+    width: 96vw;
     height: 98vh;
     padding: 0 20px;
     border-radius: 10px;
