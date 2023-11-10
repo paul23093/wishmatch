@@ -862,13 +862,13 @@ function openWish(userWish) {
     header.className = "wish-details-header";
     card.appendChild(header);
 
-    let wishInfo = document.createElement("div");
-    wishInfo.className = "wish-details-info";
-    header.appendChild(wishInfo);
-
     let wishImage = document.createElement("img");
     wishImage.src = userWish.image;
     header.appendChild(wishImage);
+
+    let wishInfo = document.createElement("div");
+    wishInfo.className = "wish-details-info";
+    header.appendChild(wishInfo);
 
     let wishTitle = document.createElement("div");
     wishTitle.innerText = userWish.name;
