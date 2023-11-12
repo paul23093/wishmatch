@@ -815,7 +815,7 @@ function openWish(userWish) {
     card.appendChild(header);
 
     let cardsContainer = document.getElementById("cards-container");
-    cardsContainer.visibility = "hidden";
+    cardsContainer.hidden = true;
 
     let wishImage = document.createElement("img");
     wishImage.className = "wish-details-image";
@@ -853,7 +853,7 @@ function openWish(userWish) {
     card.appendChild(bottomBar);
 
     Telegram.WebApp.BackButton.onClick(function () {
-        cardsContainer.visibility = "visible";
+        cardsContainer.hidden = false;
         card.remove();
         Telegram.WebApp.BackButton.hide();
     });
