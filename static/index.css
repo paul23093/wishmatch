@@ -289,7 +289,7 @@ body {
     -webkit-animation: fadeIn 0.2s ease-in-out forwards;
 }
 
-card:focus {
+card:active {
     background-color: rgb(120, 120, 120);
 }
 
