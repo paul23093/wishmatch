@@ -853,7 +853,7 @@ function openWish(userWish) {
     card.appendChild(bottomBar);
 
     Telegram.WebApp.BackButton.onClick(function () {
-        cardsContainer.style.display = "block";
+        cardsContainer.classList = "grid";
         card.remove();
         Telegram.WebApp.BackButton.hide();
     });
