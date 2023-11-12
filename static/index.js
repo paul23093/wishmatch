@@ -218,7 +218,7 @@ async function load() {
                 wishPhoto.appendChild(wishPhotoImg);
             }
 
-            let bottomBar = buildBottomBar(wish);
+            let bottomBar = buildBottomBar(Wish.from(wish));
             card.appendChild(bottomBar);
 
         }
@@ -846,6 +846,9 @@ function openWish(userWish) {
     wishDescContent.innerText = userWish.description;
     wishDesc.appendChild(wishDescContent);
 
+    let bottomBar = buildBottomBar(userWish);
+    card.appendChild(bottomBar);
+
     Telegram.WebApp.BackButton.onClick(function () {
         card.remove();
         Telegram.WebApp.BackButton.hide();
@@ -882,7 +885,7 @@ function buildBottomBar(wish) {
                             },
                             body: JSON.stringify({
                                 init_data: initDataRaw,
-                                wish_id: wish["id"]
+                                wish_id: wish.id
                             })
                         }
                     );
@@ -895,7 +898,7 @@ function buildBottomBar(wish) {
     let editWish = document.createElement("div");
     editWish.className = "bookmark";
     editWish.onclick = function () {
-        location.href="/new?wish_id=" + wish["id"];
+        location.href="/new?wish_id=" + wish.id;
     };
     bottomBar.appendChild(editWish);
     let editIcon = document.createElement("span");
@@ -903,7 +906,7 @@ function buildBottomBar(wish) {
     editIcon.textContent = "edit";
     editWish.appendChild(editIcon);
 
-    if (wish["link"] != null) {
+    if (wish.link != null) {
         let link = document.createElement("div");
         link.className = "link";
         let linkIcon = document.createElement("span");
@@ -911,7 +914,7 @@ function buildBottomBar(wish) {
         linkIcon.textContent = "open_in_new";
         link.appendChild(linkIcon);
         link.onclick = function () {
-            window.open(wish["link"]);
+            window.open(wish.link);
         }
         bottomBar.appendChild(link);
     }
