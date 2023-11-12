@@ -193,6 +193,7 @@ body {
     border-radius: 10px;
     box-sizing: border-box;
     background-color: var(--tg-theme-secondary-bg-color);
+    user-select: none;
 }
 
 .wish-details-header {
@@ -287,6 +288,7 @@ body {
     transition: opacity 0.2s ease-in-out;
     animation: fadeIn 0.2s ease-in-out forwards;
     -webkit-animation: fadeIn 0.2s ease-in-out forwards;
+    cursor: pointer;
 }
 
 .card:active {

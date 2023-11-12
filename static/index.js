@@ -218,67 +218,9 @@ async function load() {
                 wishPhoto.appendChild(wishPhotoImg);
             }
 
-            let bottomBar = document.createElement("div");
-            bottomBar.className = "bottom-bar";
+            let bottomBar = buildBottomBar(wish);
             card.appendChild(bottomBar);
 
-            let bookMark = document.createElement("div");
-            bookMark.className = "bookmark";
-            bottomBar.appendChild(bookMark);
-            let deleteIcon = document.createElement("span");
-            deleteIcon.classList.add("material-symbols-outlined");
-            deleteIcon.textContent = "delete";
-            bookMark.appendChild(deleteIcon);
-
-            bookMark.addEventListener("click", function () {
-                Telegram.WebApp.HapticFeedback.notificationOccurred("warning");
-                Telegram.WebApp.showConfirm(
-                    "Are you sure you want to delete this wish?",
-                    async function (is_ok) {
-                        if (is_ok) {
-                            await fetch(
-                            "/delete",
-                            {
-                                    method: "POST",
-                                    headers: {
-                                        "Accept": "application/json",
-                                        "Content-Type": "application/json"
-                                    },
-                                    body: JSON.stringify({
-                                        init_data: initDataRaw,
-                                        wish_id: wish["id"]
-                                    })
-                                }
-                            );
-                            bookMark.parentElement.parentElement.remove();
-                        }
-                    }
-                )
-            });
-
-            let editWish = document.createElement("div");
-            editWish.className = "bookmark";
-            editWish.onclick = function () {
-                location.href="/new?wish_id=" + wish["id"];
-            };
-            bottomBar.appendChild(editWish);
-            let editIcon = document.createElement("span");
-            editIcon.classList.add("material-symbols-outlined");
-            editIcon.textContent = "edit";
-            editWish.appendChild(editIcon);
-
-            if (wish["link"] != null) {
-                let link = document.createElement("div");
-                link.className = "link";
-                let linkIcon = document.createElement("span");
-                linkIcon.classList.add("material-symbols-outlined");
-                linkIcon.textContent = "open_in_new";
-                link.appendChild(linkIcon);
-                link.onclick = function () {
-                    window.open(wish["link"]);
-                }
-                bottomBar.appendChild(link);
-            }
         }
     }
     else {
@@ -909,6 +851,72 @@ function openWish(userWish) {
         Telegram.WebApp.BackButton.hide();
     });
     Telegram.WebApp.BackButton.show();
+}
+
+function buildBottomBar(wish) {
+    let initDataRaw = Telegram.WebApp.initData;
+    let bottomBar = document.createElement("div");
+    bottomBar.className = "bottom-bar";
+
+    let bookMark = document.createElement("div");
+    bookMark.className = "bookmark";
+    bottomBar.appendChild(bookMark);
+    let deleteIcon = document.createElement("span");
+    deleteIcon.classList.add("material-symbols-outlined");
+    deleteIcon.textContent = "delete";
+    bookMark.appendChild(deleteIcon);
+
+    bookMark.addEventListener("click", function () {
+        Telegram.WebApp.HapticFeedback.notificationOccurred("warning");
+        Telegram.WebApp.showConfirm(
+            "Are you sure you want to delete this wish?",
+            async function (is_ok) {
+                if (is_ok) {
+                    await fetch(
+                    "/delete",
+                    {
+                            method: "POST",
+                            headers: {
+                                "Accept": "application/json",
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                init_data: initDataRaw,
+                                wish_id: wish["id"]
+                            })
+                        }
+                    );
+                    bookMark.parentElement.parentElement.remove();
+                }
+            }
+        )
+    });
+
+    let editWish = document.createElement("div");
+    editWish.className = "bookmark";
+    editWish.onclick = function () {
+        location.href="/new?wish_id=" + wish["id"];
+    };
+    bottomBar.appendChild(editWish);
+    let editIcon = document.createElement("span");
+    editIcon.classList.add("material-symbols-outlined");
+    editIcon.textContent = "edit";
+    editWish.appendChild(editIcon);
+
+    if (wish["link"] != null) {
+        let link = document.createElement("div");
+        link.className = "link";
+        let linkIcon = document.createElement("span");
+        linkIcon.classList.add("material-symbols-outlined");
+        linkIcon.textContent = "open_in_new";
+        link.appendChild(linkIcon);
+        link.onclick = function () {
+            window.open(wish["link"]);
+        }
+        bottomBar.appendChild(link);
+    }
+
+    return bottomBar;
 }
 
 function priceFormat(x) {
