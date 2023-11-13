@@ -872,7 +872,11 @@ function buildBottomBar(wish, showLabels=false) {
     deleteIcon.classList.add("material-symbols-outlined");
     deleteIcon.textContent = "delete";
     bookMark.appendChild(deleteIcon);
-    if (showLabels) {bookMark.innerHTML = "<span>Delete</span>";}
+    if (showLabels) {
+        let deleteLabel = document.createElement("span");
+        deleteLabel.className = "button-label";
+        bookMark.appendChild(deleteLabel);
+    }
 
     bookMark.addEventListener("click", function () {
         Telegram.WebApp.HapticFeedback.notificationOccurred("warning");
@@ -910,7 +914,11 @@ function buildBottomBar(wish, showLabels=false) {
     editIcon.classList.add("material-symbols-outlined");
     editIcon.textContent = "edit";
     editWish.appendChild(editIcon);
-    if (showLabels) {editWish.innerHTML = "<span>Edit</span>";}
+    if (showLabels) {
+        let editLabel = document.createElement("span");
+        editLabel.className = "button-label";
+        editWish.appendChild(editLabel);
+    }
 
     if (wish.link != null) {
         let link = document.createElement("div");
@@ -919,7 +927,11 @@ function buildBottomBar(wish, showLabels=false) {
         linkIcon.classList.add("material-symbols-outlined");
         linkIcon.textContent = "open_in_new";
         link.appendChild(linkIcon);
-        if (showLabels) {link.innerHTML = "<span>Link</span>";}
+        if (showLabels) {
+            let linkLabel = document.createElement("span");
+            linkLabel.className = "button-label";
+            link.appendChild(linkLabel);
+        }
         link.onclick = function () {
             window.open(wish.link);
         }

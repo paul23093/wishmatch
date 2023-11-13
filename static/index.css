@@ -291,6 +291,11 @@ body {
     cursor: pointer;
 }
 
+.button-label {
+    font-size: 10pt;
+    font-weight: bold;
+}
+
 .card:active {
     background-color: rgb(120, 120, 120);
 }
