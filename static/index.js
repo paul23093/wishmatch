@@ -938,7 +938,7 @@ function buildBottomBar(wish, showLabels=false) {
         link.onclick = function () {
             window.open(wish.link);
         }
-        Bar.appendChild(link);
+        bottomBar.appendChild(link);
     }
 
     return bottomBar;
