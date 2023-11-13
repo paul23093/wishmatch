@@ -875,6 +875,7 @@ function buildBottomBar(wish, showLabels=false) {
     if (showLabels) {
         let deleteLabel = document.createElement("span");
         deleteLabel.className = "button-label";
+        deleteLabel.textContent = "Delete";
         bookMark.appendChild(deleteLabel);
     }
 
@@ -917,6 +918,7 @@ function buildBottomBar(wish, showLabels=false) {
     if (showLabels) {
         let editLabel = document.createElement("span");
         editLabel.className = "button-label";
+        editLabel.textContent = "Edit";
         editWish.appendChild(editLabel);
     }
 
@@ -930,6 +932,7 @@ function buildBottomBar(wish, showLabels=false) {
         if (showLabels) {
             let linkLabel = document.createElement("span");
             linkLabel.className = "button-label";
+            linkLabel.textContent = "Link";
             link.appendChild(linkLabel);
         }
         link.onclick = function () {
