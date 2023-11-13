@@ -441,7 +441,7 @@ body {
     align-items: center;
 }
 
-.bottom-bar div span.icon {
+.bottom-bar div span.material-symbols-outlined {
     font-size: 9pt;
 }
 
