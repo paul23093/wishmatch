@@ -292,7 +292,7 @@ body {
 }
 
 .button-label {
-    font-size: 10pt;
+    font-size: 8pt;
     font-weight: bold;
 }
 
@@ -466,6 +466,7 @@ body {
 .bookmark {
     background-color: var(--tg-theme-secondary-bg-color);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: auto;
