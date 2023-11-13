@@ -849,7 +849,7 @@ function openWish(userWish) {
     wishDescContent.innerText = userWish.description;
     wishDesc.appendChild(wishDescContent);
 
-    let bottomBar = buildBottomBar(userWish);
+    let bottomBar = buildBottomBar(userWish, true);
     card.appendChild(bottomBar);
 
     Telegram.WebApp.BackButton.onClick(function () {
@@ -860,7 +860,7 @@ function openWish(userWish) {
     Telegram.WebApp.BackButton.show();
 }
 
-function buildBottomBar(wish) {
+function buildBottomBar(wish, showLabels=false) {
     let initDataRaw = Telegram.WebApp.initData;
     let bottomBar = document.createElement("div");
     bottomBar.className = "bottom-bar";
@@ -872,6 +872,7 @@ function buildBottomBar(wish) {
     deleteIcon.classList.add("material-symbols-outlined");
     deleteIcon.textContent = "delete";
     bookMark.appendChild(deleteIcon);
+    if (showLabels) {bookMark.innerHTML = "<span>Delete</span>";}
 
     bookMark.addEventListener("click", function () {
         Telegram.WebApp.HapticFeedback.notificationOccurred("warning");
@@ -909,6 +910,7 @@ function buildBottomBar(wish) {
     editIcon.classList.add("material-symbols-outlined");
     editIcon.textContent = "edit";
     editWish.appendChild(editIcon);
+    if (showLabels) {editWish.innerHTML = "<span>Edit</span>";}
 
     if (wish.link != null) {
         let link = document.createElement("div");
@@ -917,6 +919,7 @@ function buildBottomBar(wish) {
         linkIcon.classList.add("material-symbols-outlined");
         linkIcon.textContent = "open_in_new";
         link.appendChild(linkIcon);
+        if (showLabels) {link.innerHTML = "<span>Link</span>";}
         link.onclick = function () {
             window.open(wish.link);
         }
