@@ -924,7 +924,7 @@ function buildBottomBar(wish, showLabels=false) {
 
     if (wish.link != null) {
         let link = document.createElement("div");
-        link.className = "link";
+        link.className = "bookmark";
         let linkIcon = document.createElement("span");
         linkIcon.classList.add("material-symbols-outlined");
         linkIcon.textContent = "open_in_new";
