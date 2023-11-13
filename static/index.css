@@ -291,11 +291,6 @@ body {
     cursor: pointer;
 }
 
-.button-label {
-    font-size: 9px;
-    font-weight: bold;
-}
-
 .card:active {
     background-color: rgb(120, 120, 120);
 }
@@ -446,8 +441,13 @@ body {
     align-items: center;
 }
 
-.bottom-bar div span {
+.bottom-bar div span.icon {
     font-size: 14pt;
+}
+
+.bottom-bar div span.button-label {
+    font-size: 9pt;
+    font-weight: bold;
 }
 
 .link {
