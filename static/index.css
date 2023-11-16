@@ -19,7 +19,7 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    padding: 3px 5px;
+    padding: 5px 10px;
     transition: 0.3s;
     border-radius: 5px;
 }
