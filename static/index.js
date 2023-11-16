@@ -107,12 +107,12 @@ class Wish {
     }
 }
 
-function openTab(event, tabName) {
+function openTab(tabName) {
     let tabs = document.getElementsByClassName("tab");
     for (let i = 0; i < tabs.length; i++) {
         tabs[i].classList.remove("active");
     }
-    event.currentTarget.classList.add("active");
+    this.event.currentTarget.classList.add("active");
 }
 
 
