@@ -157,6 +157,7 @@ async function load() {
         }
     } else {
         document.getElementById("tabs").hidden = false;
+        document.getElementById("page-title").hidden = true;
         const userInfo = await getUserInfo();
         if (userInfo != null) {
             let userPhoto = document.getElementById("chat-photo");
