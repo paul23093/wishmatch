@@ -238,9 +238,9 @@ async function load() {
             userPhoto.className = "user-photo";
             header.appendChild(userPhoto);
 
-            if (userChat["tg_chat_name"] != null) {
+            if (userChat["tg_chat_photo"] != null) {
                 let userPhotoImg = document.createElement("img");
-                userPhotoImg.src = "data:image/png;base64," + userChat["tg_chat_name"];
+                userPhotoImg.src = "data:image/png;base64," + userChat["tg_chat_photo"];
                 userPhoto.appendChild(userPhotoImg);
             }
 
