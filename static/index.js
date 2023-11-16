@@ -164,7 +164,6 @@ async function load() {
             chatPhoto.appendChild(img);
         }
     } else {
-        openTab("wishes");
         document.getElementById("tabs").hidden = false;
         document.getElementById("page-title").hidden = true;
         const userInfo = await getUserInfo();
@@ -189,8 +188,9 @@ async function load() {
     let cardsContainer = document.createElement("div");
     cardsContainer.id = "wishes";
     cardsContainer.classList.add("grid-view");
-    chatsContainer.classList.add("tab-content");
+    cardsContainer.classList.add("tab-content");
     document.getElementById("content").appendChild(cardsContainer);
+    openTab("wishes");
 
     if (initData.user.id === chat_id && initData.user.id === users[0].tg_user_id) {
         for (let i = 0; i < wishes.length; i++) {
