@@ -226,9 +226,32 @@ async function load() {
         const userChats = await getUserChats(initData.user.id);
         userChats.forEach((userChat) => {
             let chatCard = document.createElement("div");
-            chatCard.className = "card";
-            chatCard.textContent = userChat["tg_chat_name"];
+            chatCard.classList.add("card");
+            chatCard.classList.add("active");
             cardsContainer.appendChild(chatCard);
+
+            let header = document.createElement("div");
+            header.className = "card-header";
+            chatCard.appendChild(header);
+
+            let userPhoto = document.createElement("div");
+            userPhoto.className = "user-photo";
+            header.appendChild(userPhoto);
+
+            if (userChat["tg_chat_name"] != null) {
+                let userPhotoImg = document.createElement("img");
+                userPhotoImg.src = "data:image/png;base64," + userChat["tg_chat_name"];
+                userPhoto.appendChild(userPhotoImg);
+            }
+
+            let userInfo = document.createElement("div");
+            userInfo.className = "user-info";
+            header.appendChild(userInfo);
+
+            let userName = document.createElement("div");
+            userName.className = "card-title";
+            userName.textContent = userChat["tg_chat_name"];
+            userInfo.appendChild(userName);
         });
     }
     else {
