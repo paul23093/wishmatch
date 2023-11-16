@@ -107,6 +107,14 @@ class Wish {
     }
 }
 
+function openTab(event, tabName) {
+    let tabs = document.getElementsByClassName("tab");
+    for (let i = 0; i < tabs.length; i++) {
+        tabs[i].classList.remove("active");
+    }
+    event.currentTarget.classList.add("active");
+}
+
 
 async function load() {
     Telegram.WebApp.ready();
@@ -121,7 +129,7 @@ async function load() {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
         alert.innerHTML = "You need to /grant access in this chat first";
-        document.body.appendChild(alert);
+        document.getElementById("content").appendChild(alert);
         return;
     }
     const wishes = await getWishes();
@@ -164,13 +172,13 @@ async function load() {
         let alert = document.createElement("span");
         alert.classList.add("page-alert");
         alert.innerHTML = "Your wishlist is empty.<br>Add new wish by + button.";
-        document.body.appendChild(alert);
+        document.getElementById("content").appendChild(alert);
     }
 
     let cardsContainer = document.createElement("div");
     cardsContainer.id = "cards-container";
     cardsContainer.classList.add("grid-view");
-    document.body.appendChild(cardsContainer);
+    document.getElementById("content").appendChild(cardsContainer);
 
     if (initData.user.id === chat_id && initData.user.id === users[0].tg_user_id) {
         for (let i = 0; i < wishes.length; i++) {

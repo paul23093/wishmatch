@@ -14,6 +14,10 @@
     <div class="icons-tray left">
         <div class="chat-photo" id="chat-photo"></div>
     </div>
+    <div class="tabs">
+        <button class="tab" onclick="openTab('wishes')">My Wishes</button>
+        <button class="tab" onclick="openTab('chats')">Chats</button>
+    </div>
     <div class="page-title">
         <div id="title"></div>
         <div id="subtitle"></div>
@@ -23,6 +27,7 @@
 <!--        <span id="view-button" onclick="switchView()" class="icon material-symbols-outlined">grid_view</span>-->
     </div>
 </div>
+<div id="content"></div>
 <script>
     let chat_id = {{ result_chat_id }};
 </script>
