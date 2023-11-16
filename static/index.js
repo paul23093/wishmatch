@@ -246,6 +246,7 @@ async function load() {
         chatsContainer.id = "chats";
         chatsContainer.classList.add("grid-view");
         chatsContainer.classList.add("tab-content");
+        chatsContainer.style.display = "none";
         document.getElementById("content").appendChild(chatsContainer);
 
         const userChats = await getUserChats(initData.user.id);
