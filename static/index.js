@@ -107,7 +107,7 @@ class Wish {
     }
 }
 
-function openTab(tabName) {
+function openTab(el, tabName) {
 
     let tabContent = document.getElementsByClassName("tab-content");
     for (let i = 0; i < tabContent.length; i++) {
@@ -120,7 +120,7 @@ function openTab(tabName) {
     }
 
     document.getElementById(tabName).style.display = "block";
-    this.classList.add("active");
+    el.classList.add("active");
 }
 
 
