@@ -18,11 +18,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    float: left;
-    border: none;
-    outline: none;
     cursor: pointer;
-    padding: 14px 16px;
+    padding: 3px 5px;
     transition: 0.3s;
     border-radius: 5px;
 }
