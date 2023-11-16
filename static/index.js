@@ -120,7 +120,7 @@ function openTab(tabName) {
     }
 
     document.getElementById(tabName).style.display = "block";
-    this.event.currentTarget.classList.add("active");
+    this.classList.add("active");
 }
 
 
