@@ -253,7 +253,7 @@ async function load() {
             let chatCard = document.createElement("div");
             chatCard.classList.add("card");
             chatCard.classList.add("active");
-            cardsContainer.appendChild(chatCard);
+            chatsContainer.appendChild(chatCard);
 
             let header = document.createElement("div");
             header.className = "card-header";
