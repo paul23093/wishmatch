@@ -11,6 +11,9 @@ body {
 }
 
 .tabs .tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     float: left;
     border: none;
     outline: none;
