@@ -119,7 +119,7 @@ function openTab(el, tabName) {
         tabs[i].classList.remove("active");
     }
 
-    document.getElementById(tabName).style.display = "block";
+    document.getElementById(tabName).style.display = "grid";
     el.classList.add("active");
 }
 
