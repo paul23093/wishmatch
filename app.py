@@ -265,6 +265,7 @@ async def get_user_chats(request: Request):
             from chats c
             join permissions p on c.tg_chat_id = p.tg_chat_id
             where p.tg_user_id = {res["user_id"]}
+            and p.tg_chat_id != {res["user_id"]}
             and not p.is_deleted
             ;
         """)
