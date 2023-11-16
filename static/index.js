@@ -148,7 +148,6 @@ async function load() {
 
     let titleText = initData.user.first_name ? initData.user.first_name : initData.user.username;
     if (["group", "supergroup"].includes(chatType)) {
-        document.getElementById("pageTitle").hidden = false;
         titleText = chat.tg_chat_name;
         let subtitleText = users.length + " user";
         if (users.length > 1) {
@@ -166,6 +165,7 @@ async function load() {
         }
     } else {
         document.getElementById("tabs").hidden = false;
+        document.getElementById("pageTitle").style.display = "none";
         const userInfo = await getUserInfo();
         if (userInfo != null) {
             let userPhoto = document.getElementById("chat-photo");
