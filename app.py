@@ -241,6 +241,37 @@ async def get_user_wishes(request: Request):
         return JSONResponse(content=data)
 
 
+@app.post("/get_user_chats")
+async def get_user_chats(request: Request):
+    res = await request.json()
+    init_data = res["init_data"]
+    if not is_data_verified(init_data):
+        return JSONResponse(
+            content={
+                "status": "failed",
+                "data": {
+                    "message": "You do not have permissions to see this view."
+                }
+            }
+        )
+    with psycopg2.connect(**con) as conn:
+        cur = conn.cursor()
+        cur.execute(f"""
+            select 
+                c.id,
+                c.tg_chat_id,
+                c.tg_chat_name,
+                c.tg_chat_photo
+            from chats c
+            join permissions p on c.tg_chat_id = p.tg_chat_id
+            where p.tg_chat_id = {res["chat_id"]}
+            and not p.is_deleted
+            ;
+        """)
+        data = [dict((cur.description[i][0], value) for i, value in enumerate(row)) for row in cur.fetchall()]
+        return JSONResponse(content=data)
+
+
 @app.post("/add_wish")
 async def add_wish(request: Request):
     res = await request.json()
@@ -397,7 +428,7 @@ async def delete(request: Request):
             update users_wishes
             set is_deleted = True
             where id = {res["wish_id"]}
-           ; 
+           ;
         """)
         conn.commit()
     return JSONResponse(

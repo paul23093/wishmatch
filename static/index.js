@@ -222,6 +222,14 @@ async function load() {
             card.appendChild(bottomBar);
 
         }
+
+        const userChats = await getUserChats(initData.user.id);
+        userChats.forEach((userChat) => {
+            let chatCard = document.createElement("div");
+            chatCard.className = "card";
+            chatCard.textContent = userChat["tg_chat_name"];
+            cardsContainer.appendChild(chatCard);
+        });
     }
     else {
         for (let j=0; j<users.length; j++) {
@@ -616,6 +624,26 @@ async function getUserWishes(user_id, chat_id) {
                 init_data: initDataRaw,
                 user_id: user_id,
                 chat_id: chat_id
+            })
+        }
+    );
+    return await response.json();
+}
+
+
+async function getUserChats(user_id) {
+    const initDataRaw = Telegram.WebApp.initData;
+    const response = await fetch(
+        "/get_user_chats",
+        {
+            method: "POST",
+            headers: {
+                "Access": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                init_data: initDataRaw,
+                user_id: user_id
             })
         }
     );
