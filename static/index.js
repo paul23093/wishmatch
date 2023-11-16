@@ -108,10 +108,18 @@ class Wish {
 }
 
 function openTab(tabName) {
+
+    let tabContent = document.getElementsByClassName("tab-content");
+    for (let i = 0; i < tabContent.length; i++) {
+        tabContent[i].style.display = "none";
+    }
+
     let tabs = document.getElementsByClassName("tab");
     for (let i = 0; i < tabs.length; i++) {
         tabs[i].classList.remove("active");
     }
+
+    document.getElementById(tabName).style.display = "block";
     this.event.currentTarget.classList.add("active");
 }
 
@@ -156,6 +164,7 @@ async function load() {
             chatPhoto.appendChild(img);
         }
     } else {
+        openTab("wishes");
         document.getElementById("tabs").hidden = false;
         document.getElementById("page-title").hidden = true;
         const userInfo = await getUserInfo();
@@ -178,8 +187,9 @@ async function load() {
     }
 
     let cardsContainer = document.createElement("div");
-    cardsContainer.id = "cards-container";
+    cardsContainer.id = "wishes";
     cardsContainer.classList.add("grid-view");
+    chatsContainer.classList.add("tab-content");
     document.getElementById("content").appendChild(cardsContainer);
 
     if (initData.user.id === chat_id && initData.user.id === users[0].tg_user_id) {
@@ -232,6 +242,12 @@ async function load() {
             card.appendChild(bottomBar);
 
         }
+
+        let chatsContainer = document.createElement("div");
+        chatsContainer.id = "chats";
+        chatsContainer.classList.add("grid-view");
+        chatsContainer.classList.add("tab-content");
+        document.getElementById("content").appendChild(chatsContainer);
 
         const userChats = await getUserChats(initData.user.id);
         userChats.forEach((userChat) => {
