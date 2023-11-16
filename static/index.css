@@ -7,7 +7,11 @@ body {
 }
 
 .tabs {
+    margin: auto;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .tabs .tab {
