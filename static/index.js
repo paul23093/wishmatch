@@ -156,6 +156,7 @@ async function load() {
             chatPhoto.appendChild(img);
         }
     } else {
+        document.getElementById("tabs").hidden = false;
         const userInfo = await getUserInfo();
         if (userInfo != null) {
             let userPhoto = document.getElementById("chat-photo");
