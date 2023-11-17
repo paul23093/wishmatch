@@ -1235,7 +1235,10 @@ async function openChatUsers(chat_id) {
         tabs.style.display = "flex";
         openTab("chats", document.getElementById("tabChats"));
     });
-    Telegram.WebApp.BackButton.show();
+    const chats = document.getElementById("chats");
+    if (chats) {
+        Telegram.WebApp.BackButton.show();
+    }
 
     for (let j=0; j<users.length; j++) {
         const user_wishes = wishes.filter(function (wish) {
