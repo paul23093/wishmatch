@@ -1113,6 +1113,8 @@ function buildWishForm(wish=null) {
     Telegram.WebApp.BackButton.onClick(function () {
         content.style.display = "block";
         form.remove();
+        Telegram.WebApp.BackButton.hide();
+        Telegram.WebApp.MainButton.hide();
     });
     Telegram.WebApp.BackButton.show();
 
