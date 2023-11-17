@@ -1234,6 +1234,7 @@ function buildWishForm(wish=null) {
         Telegram.WebApp.MainButton.onClick(function () {add_wish();});
     }
     if (wishTitleInput.value === null || wishTitleInput.value === "") {
+        Telegram.WebApp.MainButton.color = "rgb(160, 160, 160)";
         Telegram.WebApp.MainButton.disable();
     }
     Telegram.WebApp.MainButton.show();
