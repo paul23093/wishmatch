@@ -142,7 +142,7 @@ async function load() {
         document.getElementById("content").appendChild(alert);
         return;
     }
-    const wishes = await getWishes();
+    const wishes = await getChatWishes(chat_id);
     document.getElementById("topBar").classList.remove("hidden");
     document.getElementById("topBar").classList.add("topBar");
     const users = uniqueUsers(wishes);
@@ -583,7 +583,7 @@ async function getChatInfo(chat_id) {
 }
 
 
-async function getWishes() {
+async function getChatWishes(chat_id) {
     const initDataRaw = Telegram.WebApp.initData;
     const response = await fetch(
         "/get_wishes",
@@ -1194,7 +1194,7 @@ function buildWishForm(wish=null) {
 
 
 async function openChatUsers(chat_id) {
-    const wishes = await getWishes();
+    const wishes = await getChatWishes(chat_id);
     const users = uniqueUsers(wishes);
     const chat = await getChatInfo(chat_id);
     let content = document.getElementById("content");
