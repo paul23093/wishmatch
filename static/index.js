@@ -1250,6 +1250,64 @@ function buildWishForm(wish=null) {
         Telegram.WebApp.MainButton.enable();
     }
     Telegram.WebApp.MainButton.show();
+
+    let keyboardHeight = 150;
+    let buttonClick = false;
+    let inputs = Array.prototype.slice.call(document.querySelectorAll("input[data-index]"));
+    let inputCount = inputs.reduce((prev, curr) => curr > prev ? curr.getAttribute("data-index") : prev.getAttribute("data-index"));
+    document.querySelectorAll("div[class='input'].input").forEach((div) => {
+        let el = div.firstElementChild;
+        const inputFieldRect = el.getBoundingClientRect();
+        el.addEventListener("keyup", (e) => {
+            checkInput(e);
+        });
+        el.addEventListener("keydown", (e) => {
+            if (e.code === "Enter") {
+                e.preventDefault();
+                const index = parseInt(e.target.getAttribute("data-index"));
+                e.target.blur();
+                if (index < inputCount) {
+                    document.querySelector('[data-index="' + (index+1) + '"]').focus();
+                }
+                el.nextElementSibling.className = "hidden";
+            }
+        });
+
+        el.addEventListener("focusin",  (e) => {
+            checkInput(e);
+            if(["android", "ios"].includes(Telegram.WebApp.platform)) {
+                document.body.style.height = (window.innerHeight + keyboardHeight).toString() + "px";
+                window.scrollTo({
+                    top: inputFieldRect.bottom - window.innerHeight + keyboardHeight,
+                    behavior: 'smooth'
+                });
+            }
+        });
+
+
+        el.addEventListener("focusout", (e) => {
+            setTimeout(() => {
+                el.nextElementSibling.className = "hidden";
+                if (buttonClick) {}
+            }, 5);
+            document.body.style.height = window.innerHeight.toString() + "px";
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            // buttonClick = false;
+        });
+
+        div.querySelector("span").addEventListener("click", (e) => {
+            buttonClick = true;
+            let input = e.target.previousElementSibling;
+            input.value = "";
+            input.focus();
+            e.target.className = "hidden";
+            buttonClick = false;
+        });
+
+    });
 }
 
 
