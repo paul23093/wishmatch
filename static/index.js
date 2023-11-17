@@ -1115,14 +1115,7 @@ function buildWishForm(wish=null) {
     wishTitleInput.dataIndex = "1";
     wishTitleInput.type = "text";
     wishTitleInput.placeholder = "Title";
-    if (wishTitleInput.value === null || wishTitleInput.value === "") {
-        Telegram.WebApp.MainButton.color = "rgb(160, 160, 160)";
-        Telegram.WebApp.MainButton.disable();
-    } else {
-        Telegram.WebApp.MainButton.color = Telegram.WebApp.themeParams.button_color;
-        Telegram.WebApp.MainButton.enable();
-    }
-    wishTitleInput.addEventListener("keydown", () => {
+    wishTitleInput.addEventListener("keypress", () => {
         if (wishTitleInput.value === null || wishTitleInput.value === "") {
             Telegram.WebApp.MainButton.color = "rgb(160, 160, 160)";
             Telegram.WebApp.MainButton.disable();
@@ -1248,6 +1241,13 @@ function buildWishForm(wish=null) {
     } else {
         Telegram.WebApp.MainButton.text = "Add";
         Telegram.WebApp.MainButton.onClick(function () {add_wish();});
+    }
+    if (wishTitleInput.value === null || wishTitleInput.value === "") {
+        Telegram.WebApp.MainButton.color = "rgb(160, 160, 160)";
+        Telegram.WebApp.MainButton.disable();
+    } else {
+        Telegram.WebApp.MainButton.color = Telegram.WebApp.themeParams.button_color;
+        Telegram.WebApp.MainButton.enable();
     }
     Telegram.WebApp.MainButton.show();
 }
