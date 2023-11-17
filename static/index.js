@@ -783,7 +783,7 @@ async function loadNewWish() {
         document.getElementById("wish-price").value = wish.price;
         document.getElementById("wish-currency").value = wish.currency;
         Telegram.WebApp.MainButton.text = "Save";
-        Telegram.WebApp.MainButton.onClick(function () {edit_wish(wish_id);});
+        Telegram.WebApp.MainButton.onClick(function () {edit_wish(wish.id);});
     } else {
         Telegram.WebApp.MainButton.text = "Add";
         Telegram.WebApp.MainButton.onClick(function () {add_wish();});
@@ -1228,14 +1228,10 @@ function buildWishForm(wish=null) {
         wishPriceInput.value = wish.price;
         wishCurrencyInput.value = wish.currency;
         Telegram.WebApp.MainButton.text = "Save";
-        Telegram.WebApp.MainButton.onClick(async function () {
-            await edit_wish(wish.id);
-        });
+        Telegram.WebApp.MainButton.onClick(function () {edit_wish(wish.id);});
     } else {
         Telegram.WebApp.MainButton.text = "Add";
-        Telegram.WebApp.MainButton.onClick(async function () {
-            await add_wish();
-        });
+        Telegram.WebApp.MainButton.onClick(function () {add_wish();});
     }
     if (document.getElementById("wish-title").value === null || document.getElementById("wish-title").value === "") {
         Telegram.WebApp.MainButton.disable();
