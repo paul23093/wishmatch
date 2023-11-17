@@ -1266,6 +1266,7 @@ async function openChatUsers(chat_id) {
             userPhoto.appendChild(userPhotoImg);
         }
 
+
         let userInfo = document.createElement("div");
         userInfo.className = "user-info";
         header.appendChild(userInfo);
