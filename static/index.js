@@ -1099,3 +1099,124 @@ async function verifyData(initDataRaw) {
     );
     return await response.json();
 }
+
+
+function buildWishForm() {
+    let form = document.createElement("div");
+    form.className = "form";
+    form.id = "form";
+    document.body.appendChild(form);
+
+    let wishTitleDiv = document.createElement("div");
+    wishTitleDiv.className = "input";
+
+    let wishTitleInput = document.createElement("input");
+    wishTitleInput.id = "wish-title";
+    wishTitleInput.dataIndex = "1";
+    wishTitleInput.type = "text";
+    wishTitleInput.placeholder = "Title";
+    wishTitleDiv.appendChild(wishTitleInput);
+
+    let wishTitleSpan = document.createElement("span");
+    wishTitleSpan.className = "hidden";
+    wishTitleDiv.appendChild(wishTitleSpan);
+
+    form.appendChild(wishTitleDiv);
+
+    let wishDescDiv = document.createElement("div");
+    wishDescDiv.className = "input";
+
+    let wishDescInput = document.createElement("textarea");
+    wishDescInput.id = "wish-description";
+    wishDescInput.dataIndex = "2";
+    wishDescInput.type = "text";
+    wishDescInput.placeholder = "Description";
+    wishDescDiv.appendChild(wishDescInput);
+
+    let wishDescSpan = document.createElement("span");
+    wishDescSpan.className = "hidden";
+    wishDescDiv.appendChild(wishDescSpan);
+
+    form.appendChild(wishDescDiv);
+
+    let wishLinkDiv = document.createElement("div");
+    wishLinkDiv.className = "input";
+
+    let wishLinkInput = document.createElement("input");
+    wishLinkInput.id = "wish-link";
+    wishLinkInput.dataIndex = "3";
+    wishLinkInput.type = "text";
+    wishLinkInput.placeholder = "Link";
+    wishLinkDiv.appendChild(wishDescInput);
+
+    let wishLinkSpan = document.createElement("span");
+    wishLinkSpan.className = "hidden";
+    wishLinkDiv.appendChild(wishLinkSpan);
+
+    form.appendChild(wishLinkDiv);
+
+    let wishImageLinkDiv = document.createElement("div");
+    wishImageLinkDiv.className = "input";
+
+    let wishImageLinkInput = document.createElement("input");
+    wishImageLinkInput.id = "wish-image-link";
+    wishImageLinkInput.dataIndex = "4";
+    wishImageLinkInput.type = "text";
+    wishImageLinkInput.placeholder = "Image link";
+    wishImageLinkDiv.appendChild(wishImageLinkInput);
+
+    let wishImageLinkSpan = document.createElement("span");
+    wishImageLinkSpan.className = "hidden";
+    wishImageLinkDiv.appendChild(wishImageLinkSpan);
+
+    form.appendChild(wishImageLinkDiv);
+
+    let wishPriceBlockDiv = document.createElement("div");
+    wishPriceBlockDiv.className = "price-block";
+
+    let wishPriceDiv = document.createElement("div");
+    wishPriceDiv.className = "input";
+
+    let wishPriceInput = document.createElement("input");
+    wishPriceInput.id = "wish-price";
+    wishPriceInput.dataIndex = "5";
+    wishPriceInput.type = "text";
+    wishPriceInput.placeholder = "Price";
+    wishPriceDiv.appendChild(wishPriceInput);
+
+    let wishPriceSpan = document.createElement("span");
+    wishPriceSpan.className = "hidden";
+    wishPriceDiv.appendChild(wishPriceSpan);
+
+    wishPriceBlockDiv.appendChild(wishPriceDiv);
+
+    let wishCurrencyDiv = document.createElement("div");
+    wishCurrencyDiv.className = "input";
+
+    let wishCurrencyInput = document.createElement("input");
+    wishCurrencyInput.id = "wish-currency";
+    wishCurrencyInput.setAttribute("list", "currency");
+    wishCurrencyInput.dataIndex = "6";
+    wishCurrencyInput.type = "text";
+    wishCurrencyInput.placeholder = "Currency";
+    wishCurrencyDiv.appendChild(wishCurrencyInput);
+
+    let wishCurrencySpan = document.createElement("span");
+    wishCurrencySpan.className = "hidden";
+    wishCurrencyDiv.appendChild(wishCurrencySpan);
+
+    let wishCurrencyList = document.createElement("datalist");
+    wishCurrencyList.id = "currency";
+    ["RUB", "EUR", "USD"].forEach((currency) => {
+        let currencyOption = document.createElement("option");
+        currencyOption.value = currency;
+        currencyOption.textContent = currency;
+        wishCurrencyList.appendChild(currencyOption);
+    });
+
+    wishCurrencyDiv.appendChild(wishCurrencyList);
+
+    wishPriceBlockDiv.appendChild(wishCurrencyDiv);
+
+    form.appendChild(wishPriceBlockDiv);
+}
