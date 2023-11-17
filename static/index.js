@@ -144,7 +144,7 @@ async function load() {
     document.getElementById("topBar").classList.remove("hidden");
     document.getElementById("topBar").classList.add("topBar");
     const users = uniqueUsers(wishes);
-    const chat = await getChatInfo();
+    const chat = await getChatInfo(chat_id);
 
     let titleText = initData.user.first_name ? initData.user.first_name : initData.user.username;
     if (["group", "supergroup"].includes(chatType)) {
@@ -254,6 +254,11 @@ async function load() {
             let chatCard = document.createElement("div");
             chatCard.classList.add("card");
             chatCard.classList.add("active");
+
+            chatCard.addEventListener("click", async () => {
+                await openChatUsers(userChat["tg_chat_id"]);
+            });
+
             chatsContainer.appendChild(chatCard);
 
             let header = document.createElement("div");
@@ -282,57 +287,7 @@ async function load() {
     }
     else {
         document.getElementById("tabs").style.display = "none";
-        let content = document.getElementById("content");
-        let cardsContainer = document.createElement("div");
-        cardsContainer.id = "users";
-        cardsContainer.classList.add("grid-view");
-        cardsContainer.classList.add("tab-content");
-        content.appendChild(cardsContainer);
-
-        for (let j=0; j<users.length; j++) {
-            const user_wishes = wishes.filter(function (wish) {
-                return wish["tg_user_id"] === users[j].tg_user_id
-            });
-            const user_wishes_count = user_wishes.length;
-
-            let card = document.createElement("div");
-            card.classList.add("card");
-            card.classList.add("clickable");
-            card.classList.add("active");
-            card.onclick = function () {
-                location.href = "/user_wishes?user_id=" + users[j].tg_user_id + "&chat_id=" + chat.tg_chat_id;
-            };
-            cardsContainer.appendChild(card);
-
-            let header = document.createElement("div");
-            header.className = "card-header";
-            card.appendChild(header);
-
-            let userPhoto = document.createElement("div");
-            userPhoto.className = "user-photo";
-            header.appendChild(userPhoto);
-
-            if (user_wishes[0].tg_profile_photo != null) {
-                let userPhotoImg = document.createElement("img");
-                userPhotoImg.src = "data:image/png;base64," + user_wishes[0].tg_profile_photo;
-                userPhoto.appendChild(userPhotoImg);
-            }
-
-            let userInfo = document.createElement("div");
-            userInfo.className = "user-info";
-            header.appendChild(userInfo);
-
-            let userName = document.createElement("div");
-            userName.className = "card-title";
-            userName.textContent = user_wishes[0].tg_first_name ? user_wishes[0].tg_first_name : user_wishes[0].tg_username;
-            userInfo.appendChild(userName);
-
-            let wishCount = document.createElement("div");
-            wishCount.className = "wish-count";
-            wishCount.textContent = user_wishes_count + "\nwish";
-            wishCount.textContent += user_wishes_count>1 ? "es" : "";
-            userInfo.appendChild(wishCount);
-        }
+        await openChatUsers(chat_id);
     }
 
 }
@@ -606,7 +561,7 @@ async function getUserInfo() {
 }
 
 
-async function getChatInfo() {
+async function getChatInfo(chat_id) {
     const initDataRaw = Telegram.WebApp.initData;
     const response = await fetch(
         "/get_chat_info",
@@ -1236,6 +1191,64 @@ function buildWishForm(wish=null) {
 }
 
 
-function saveWishForm() {
-    document.getElementById("form").style.display = "none";
+async function openChatUsers(chat_id) {
+    const wishes = await getWishes();
+    const users = uniqueUsers(wishes);
+    const chat = await getChatInfo(chat_id);
+    let content = document.getElementById("content");
+    let cardsContainer = document.createElement("div");
+    cardsContainer.id = "users";
+    cardsContainer.classList.add("grid-view");
+    cardsContainer.classList.add("tab-content");
+    Telegram.WebApp.BackButton.onClick(() => {
+        Telegram.WebApp.BackButton.hide();
+        cardsContainer.remove();
+    });
+    Telegram.WebApp.BackButton.show();
+    content.appendChild(cardsContainer);
+
+    for (let j=0; j<users.length; j++) {
+        const user_wishes = wishes.filter(function (wish) {
+            return wish["tg_user_id"] === users[j].tg_user_id
+        });
+        const user_wishes_count = user_wishes.length;
+
+        let card = document.createElement("div");
+        card.classList.add("card");
+        card.classList.add("clickable");
+        card.classList.add("active");
+        card.onclick = function () {
+            location.href = "/user_wishes?user_id=" + users[j].tg_user_id + "&chat_id=" + chat.tg_chat_id;
+        };
+        cardsContainer.appendChild(card);
+
+        let header = document.createElement("div");
+        header.className = "card-header";
+        card.appendChild(header);
+
+        let userPhoto = document.createElement("div");
+        userPhoto.className = "user-photo";
+        header.appendChild(userPhoto);
+
+        if (user_wishes[0].tg_profile_photo != null) {
+            let userPhotoImg = document.createElement("img");
+            userPhotoImg.src = "data:image/png;base64," + user_wishes[0].tg_profile_photo;
+            userPhoto.appendChild(userPhotoImg);
+        }
+
+        let userInfo = document.createElement("div");
+        userInfo.className = "user-info";
+        header.appendChild(userInfo);
+
+        let userName = document.createElement("div");
+        userName.className = "card-title";
+        userName.textContent = user_wishes[0].tg_first_name ? user_wishes[0].tg_first_name : user_wishes[0].tg_username;
+        userInfo.appendChild(userName);
+
+        let wishCount = document.createElement("div");
+        wishCount.className = "wish-count";
+        wishCount.textContent = user_wishes_count + "\nwish";
+        wishCount.textContent += user_wishes_count>1 ? "es" : "";
+        userInfo.appendChild(wishCount);
+    }
 }
