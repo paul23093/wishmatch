@@ -282,6 +282,13 @@ async function load() {
     }
     else {
         document.getElementById("tabs").style.display = "none";
+        let content = document.getElementById("content");
+        let cardsContainer = document.createElement("div");
+        cardsContainer.id = "users";
+        cardsContainer.classList.add("grid-view");
+        cardsContainer.classList.add("tab-content");
+        content.appendChild(cardsContainer);
+
         for (let j=0; j<users.length; j++) {
             const user_wishes = wishes.filter(function (wish) {
                 return wish["tg_user_id"] === users[j].tg_user_id
@@ -295,12 +302,6 @@ async function load() {
             card.onclick = function () {
                 location.href = "/user_wishes?user_id=" + users[j].tg_user_id + "&chat_id=" + chat.tg_chat_id;
             };
-            let content = document.getElementById("content");
-            let cardsContainer = document.createElement("div");
-            cardsContainer.id = "users";
-            cardsContainer.classList.add("grid-view");
-            cardsContainer.classList.add("tab-content");
-            content.appendChild(cardsContainer);
             cardsContainer.appendChild(card);
 
             let header = document.createElement("div");
