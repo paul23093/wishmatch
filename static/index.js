@@ -1102,10 +1102,19 @@ async function verifyData(initDataRaw) {
 
 
 function buildWishForm(wish=null) {
+    let content = document.getElementById("content");
+    content.style.display = "none";
+
     let form = document.createElement("div");
     form.className = "form";
     form.id = "form";
     document.body.appendChild(form);
+
+    Telegram.WebApp.BackButton.onClick(function () {
+        content.style.display = "block";
+        form.remove();
+    });
+    Telegram.WebApp.BackButton.show();
 
     let wishTitleDiv = document.createElement("div");
     wishTitleDiv.className = "input";
@@ -1250,7 +1259,6 @@ function buildWishForm(wish=null) {
         Telegram.WebApp.MainButton.color = Telegram.WebApp.themeParams.button_color;
         Telegram.WebApp.MainButton.enable();
     }
-    Telegram.WebApp.BackButton.show();
     Telegram.WebApp.MainButton.show();
 
     let keyboardHeight = 150;
