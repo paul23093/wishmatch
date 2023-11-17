@@ -1207,12 +1207,12 @@ async function openChatUsers(chat_id) {
     subtitle.textContent = subtitleText;
     subtitle.style.display = "flex";
 
-    let chatPhoto = document.getElementById("chat-photo");
-    if (chat.tg_chat_photo != null) {
-        let img = document.createElement("img");
-        img.src = "data:image/png;base64," + chat.tg_chat_photo;
-        chatPhoto.appendChild(img);
-    }
+    // let chatPhoto = document.getElementById("chat-photo");
+    // if (chat.tg_chat_photo != null) {
+    //     let img = document.createElement("img");
+    //     img.src = "data:image/png;base64," + chat.tg_chat_photo;
+    //     chatPhoto.appendChild(img);
+    // }
 
     let tabs = document.getElementById("tabs");
     tabs.style.display = "none";
@@ -1232,9 +1232,6 @@ async function openChatUsers(chat_id) {
         cardsContainer.remove();
         pageTitle.style.display = "none";
         tabs.style.display = "flex";
-        if (chat.tg_chat_photo != null) {
-            img.remove();
-        }
         openTab("chats", document.getElementById("tabChats"));
     });
     Telegram.WebApp.BackButton.show();
