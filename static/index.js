@@ -1233,7 +1233,7 @@ function buildWishForm(wish=null) {
         Telegram.WebApp.MainButton.text = "Add";
         Telegram.WebApp.MainButton.onClick(function () {add_wish();});
     }
-    if (document.getElementById("wish-title").value === null || document.getElementById("wish-title").value === "") {
+    if (wishTitleInput.value === null || wishTitleInput.value === "") {
         Telegram.WebApp.MainButton.disable();
     }
     Telegram.WebApp.MainButton.show();
