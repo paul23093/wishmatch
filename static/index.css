@@ -260,16 +260,20 @@ body {
 
 .form {
     background-color: var(--tg-theme-secondary-bg-color);
-    height: 85vh;
-    width: 90%;
+    top: 1vh;
+    left: 2vw;
+    width: 96vw;
+    height: 98vh;
+    padding: 0 20px;
+    border-radius: 10px;
+    box-sizing: border-box;
     font-family: Arial, serif;
+    position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: left;
     align-items: stretch;
     margin: 5px auto;
-    padding: 10px;
-    border-radius: 10px;
     user-select: none;
 }
 

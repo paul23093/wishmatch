@@ -985,7 +985,7 @@ function buildBottomBar(wish, showLabels=false) {
     let editWish = document.createElement("div");
     editWish.className = "bookmark";
     editWish.onclick = function () {
-        location.href="/new?wish_id=" + wish.id;
+        buildWishForm(wish);
     };
     bottomBar.appendChild(editWish);
     let editIcon = document.createElement("span");
@@ -1101,7 +1101,7 @@ async function verifyData(initDataRaw) {
 }
 
 
-function buildWishForm() {
+function buildWishForm(wish=null) {
     let form = document.createElement("div");
     form.className = "form";
     form.id = "form";
@@ -1219,4 +1219,9 @@ function buildWishForm() {
     wishPriceBlockDiv.appendChild(wishCurrencyDiv);
 
     form.appendChild(wishPriceBlockDiv);
+}
+
+
+function saveWishForm() {
+    document.getElementById("form").style.display = "none";
 }
