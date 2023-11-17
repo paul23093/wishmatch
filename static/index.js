@@ -1232,6 +1232,9 @@ async function openChatUsers(chat_id) {
         cardsContainer.remove();
         pageTitle.style.display = "none";
         tabs.style.display = "flex";
+        if (chat.tg_chat_photo != null) {
+            img.remove();
+        }
         openTab("chats", document.getElementById("tabChats"));
     });
     Telegram.WebApp.BackButton.show();
