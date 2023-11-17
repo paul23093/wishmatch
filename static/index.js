@@ -294,8 +294,11 @@ async function load() {
             card.onclick = function () {
                 location.href = "/user_wishes?user_id=" + users[j].tg_user_id + "&chat_id=" + chat.tg_chat_id;
             };
-            let div = document.getElementById("cards-container");
-            div.appendChild(card);
+            let content = document.getElementById("content");
+            let cardsContainer = document.createElement("div");
+            cardsContainer.id = "cards-container";
+            content.appendChild(cardsContainer);
+            cardsContainer.appendChild(card);
 
             let header = document.createElement("div");
             header.className = "card-header";
@@ -700,7 +703,7 @@ async function getUserChats(user_id) {
 }
 
 
-async function add_wish() {
+async function addWish() {
     Telegram.WebApp.MainButton.disable();
     Telegram.WebApp.MainButton.showProgress();
     const initDataRaw = Telegram.WebApp.initData;
@@ -745,7 +748,7 @@ async function add_wish() {
     window.location.replace(document.referrer);
 }
 
-async function edit_wish(id) {
+async function editWish(id) {
     Telegram.WebApp.MainButton.disable();
     Telegram.WebApp.MainButton.showProgress();
     const initDataRaw = Telegram.WebApp.initData;
@@ -1154,10 +1157,10 @@ function buildWishForm(wish=null) {
         wishPriceInput.value = wish.price;
         wishCurrencyInput.value = wish.currency;
         Telegram.WebApp.MainButton.text = "Save";
-        Telegram.WebApp.MainButton.onClick(function () {edit_wish(wish.id);});
+        Telegram.WebApp.MainButton.onClick(function () {editWish(wish.id);});
     } else {
         Telegram.WebApp.MainButton.text = "Add";
-        Telegram.WebApp.MainButton.onClick(function () {add_wish();});
+        Telegram.WebApp.MainButton.onClick(function () {addWish();});
     }
 
     if (wishTitleInput.value === null || wishTitleInput.value === "") {
