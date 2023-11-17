@@ -1219,6 +1219,28 @@ function buildWishForm(wish=null) {
     wishPriceBlockDiv.appendChild(wishCurrencyDiv);
 
     form.appendChild(wishPriceBlockDiv);
+
+    if (wish !== null) {
+        wishTitleInput.value = wish.name;
+        wishDescInput.value = wish.description;
+        wishLinkInput.value = wish.link;
+        wishImageLinkInput.value = wish.image;
+        wishPriceInput.value = wish.price;
+        wishCurrencyInput.value = wish.currency;
+        Telegram.WebApp.MainButton.text = "Save";
+        Telegram.WebApp.MainButton.onClick(async function () {
+            await edit_wish(wish.id);
+        });
+    } else {
+        Telegram.WebApp.MainButton.text = "Add";
+        Telegram.WebApp.MainButton.onClick(async function () {
+            await add_wish();
+        });
+    }
+    if (document.getElementById("wish-title").value === null || document.getElementById("wish-title").value === "") {
+        Telegram.WebApp.MainButton.disable();
+    }
+    Telegram.WebApp.MainButton.show();
 }
 
 
