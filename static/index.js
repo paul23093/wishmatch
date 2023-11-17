@@ -1147,7 +1147,7 @@ function buildWishForm(wish=null) {
     wishLinkInput.dataIndex = "3";
     wishLinkInput.type = "text";
     wishLinkInput.placeholder = "Link";
-    wishLinkDiv.appendChild(wishDescInput);
+    wishLinkDiv.appendChild(wishLinkInput);
 
     let wishLinkSpan = document.createElement("span");
     wishLinkSpan.className = "hidden";
