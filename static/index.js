@@ -1115,7 +1115,7 @@ function buildWishForm(wish=null) {
     wishTitleInput.dataIndex = "1";
     wishTitleInput.type = "text";
     wishTitleInput.placeholder = "Title";
-    wishTitleInput.addEventListener("keypress", () => {
+    wishTitleInput.addEventListener("keyup", () => {
         if (wishTitleInput.value === null || wishTitleInput.value === "") {
             Telegram.WebApp.MainButton.color = "rgb(160, 160, 160)";
             Telegram.WebApp.MainButton.disable();
