@@ -1197,6 +1197,26 @@ async function openChatUsers(chat_id) {
     const wishes = await getChatWishes(chat_id);
     const users = uniqueUsers(wishes);
     const chat = await getChatInfo(chat_id);
+
+    titleText = chat.tg_chat_name;
+    let subtitleText = users.length + " user";
+    if (users.length > 1) {
+        subtitleText += "s";
+    }
+    let subtitle = document.getElementById("subtitle");
+    subtitle.textContent = subtitleText;
+    subtitle.style.display = "flex";
+
+    let chatPhoto = document.getElementById("chat-photo");
+    if (chat.tg_chat_photo != null) {
+        let img = document.createElement("img");
+        img.src = "data:image/png;base64," + chat.tg_chat_photo;
+        chatPhoto.appendChild(img);
+    }
+
+    let pageTitle = document.getElementById("pageTitle");
+    pageTitle.style.display = "flex";
+
     let content = document.getElementById("content");
     let cardsContainer = document.createElement("div");
     cardsContainer.id = "users";
@@ -1207,6 +1227,8 @@ async function openChatUsers(chat_id) {
     Telegram.WebApp.BackButton.onClick(() => {
         Telegram.WebApp.BackButton.hide();
         cardsContainer.remove();
+        pageTitle.style.display = "none";
+        openTab("chats", document.getElementById("tabChats"));
     });
     Telegram.WebApp.BackButton.show();
 
