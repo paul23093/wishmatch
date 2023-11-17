@@ -107,7 +107,7 @@ class Wish {
     }
 }
 
-function openTab(el, tabName) {
+function openTab(tabName, el=null) {
 
     let tabContent = document.getElementsByClassName("tab-content");
     for (let i = 0; i < tabContent.length; i++) {
@@ -120,7 +120,9 @@ function openTab(el, tabName) {
     }
 
     document.getElementById(tabName).style.display = "grid";
-    el.classList.add("active");
+    if (el !== null) {
+        el.classList.add("active");
+    }
 }
 
 
@@ -1200,6 +1202,7 @@ async function openChatUsers(chat_id) {
     cardsContainer.id = "users";
     cardsContainer.classList.add("grid-view");
     cardsContainer.classList.add("tab-content");
+    openTab("users");
     Telegram.WebApp.BackButton.onClick(() => {
         Telegram.WebApp.BackButton.hide();
         cardsContainer.remove();
