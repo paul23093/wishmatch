@@ -281,6 +281,7 @@ async function load() {
         });
     }
     else {
+        document.getElementById("tabs").style.display = "none";
         for (let j=0; j<users.length; j++) {
             const user_wishes = wishes.filter(function (wish) {
                 return wish["tg_user_id"] === users[j].tg_user_id
@@ -296,7 +297,9 @@ async function load() {
             };
             let content = document.getElementById("content");
             let cardsContainer = document.createElement("div");
-            cardsContainer.id = "cards-container";
+            cardsContainer.id = "users";
+            cardsContainer.classList.add("grid-view");
+            cardsContainer.classList.add("tab-content");
             content.appendChild(cardsContainer);
             cardsContainer.appendChild(card);
 
