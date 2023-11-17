@@ -1214,6 +1214,9 @@ async function openChatUsers(chat_id) {
         chatPhoto.appendChild(img);
     }
 
+    let tabs = document.getElementById("tabs");
+    tabs.style.display = "none";
+
     let pageTitle = document.getElementById("pageTitle");
     pageTitle.style.display = "flex";
 
@@ -1228,6 +1231,7 @@ async function openChatUsers(chat_id) {
         Telegram.WebApp.BackButton.hide();
         cardsContainer.remove();
         pageTitle.style.display = "none";
+        tabs.style.display = "flex";
         openTab("chats", document.getElementById("tabChats"));
     });
     Telegram.WebApp.BackButton.show();
