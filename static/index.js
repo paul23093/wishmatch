@@ -1202,13 +1202,13 @@ async function openChatUsers(chat_id) {
     cardsContainer.id = "users";
     cardsContainer.classList.add("grid-view");
     cardsContainer.classList.add("tab-content");
+    content.appendChild(cardsContainer);
     openTab("users");
     Telegram.WebApp.BackButton.onClick(() => {
         Telegram.WebApp.BackButton.hide();
         cardsContainer.remove();
     });
     Telegram.WebApp.BackButton.show();
-    content.appendChild(cardsContainer);
 
     for (let j=0; j<users.length; j++) {
         const user_wishes = wishes.filter(function (wish) {
