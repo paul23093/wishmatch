@@ -187,62 +187,9 @@ async function load() {
         document.getElementById("content").appendChild(alert);
     }
 
-    let cardsContainer = document.createElement("div");
-    cardsContainer.id = "wishes";
-    cardsContainer.classList.add("grid-view");
-    cardsContainer.classList.add("tab-content");
-    document.getElementById("content").appendChild(cardsContainer);
-
     if (initData.user.id === chat_id && initData.user.id === users[0].tg_user_id) {
-        for (let i = 0; i < wishes.length; i++) {
 
-            let wish = wishes[i];
-            let card = document.createElement("div");
-            card.classList.add("card");
-            card.classList.add("active");
-            cardsContainer.appendChild(card);
-
-            card.addEventListener("click", function(event) {
-                if (!event.target.parentNode.parentNode.classList.contains("bottom-bar") &&
-                    !event.target.parentNode.classList.contains("bottom-bar") &&
-                    !event.target.classList.contains("bottom-bar")) {
-                    openWish(Wish.from(wish));
-                }
-            });
-
-            let wishInfo = document.createElement("div");
-            wishInfo.className = "wish-info";
-            card.appendChild(wishInfo);
-
-            let title = document.createElement("div");
-            title.className = "wish-title";
-            title.textContent = wish["name"];
-            wishInfo.appendChild(title);
-
-            if (wish["price"] !== null) {
-                let price = document.createElement("div");
-                price.className = "price";
-                price.textContent = priceFormat(wish["price"]);
-                if (wish["currency"] !== null) {
-                    price.textContent += " " + wish["currency"];
-                }
-                wishInfo.appendChild(price);
-            }
-
-            if (wish["image"] != null) {
-                let wishPhoto = document.createElement("div");
-                wishPhoto.className = "wish-image";
-                card.appendChild(wishPhoto);
-
-                let wishPhotoImg = document.createElement("img");
-                wishPhotoImg.src = wish["image"];
-                wishPhoto.appendChild(wishPhotoImg);
-            }
-
-            let bottomBar = buildBottomBar(Wish.from(wish));
-            card.appendChild(bottomBar);
-
-        }
+        await openUserWishes(wishes, "myWishes");
 
         let chatsContainer = document.createElement("div");
         chatsContainer.id = "chats";
@@ -1269,7 +1216,6 @@ async function openChatUsers(chat_id) {
             userPhoto.appendChild(userPhotoImg);
         }
 
-
         let userInfo = document.createElement("div");
         userInfo.className = "user-info";
         header.appendChild(userInfo);
@@ -1285,4 +1231,61 @@ async function openChatUsers(chat_id) {
         wishCount.textContent += user_wishes_count>1 ? "es" : "";
         userInfo.appendChild(wishCount);
     }
+}
+
+
+async function openUserWishes(wishes, containerId) {
+    let cardsContainer = document.createElement("div");
+    cardsContainer.id = containerId;
+    cardsContainer.classList.add("grid-view");
+    cardsContainer.classList.add("tab-content");
+    document.getElementById("content").appendChild(cardsContainer);
+
+    wishes.forEach(wish => {
+
+        let card = document.createElement("div");
+        card.classList.add("card");
+        card.classList.add("active");
+        cardsContainer.appendChild(card);
+
+        card.addEventListener("click", function(event) {
+            if (!event.target.parentNode.parentNode.classList.contains("bottom-bar") &&
+                !event.target.parentNode.classList.contains("bottom-bar") &&
+                !event.target.classList.contains("bottom-bar")) {
+                openWish(Wish.from(wish));
+            }
+        });
+
+        let wishInfo = document.createElement("div");
+        wishInfo.className = "wish-info";
+        card.appendChild(wishInfo);
+
+        let title = document.createElement("div");
+        title.className = "wish-title";
+        title.textContent = wish["name"];
+        wishInfo.appendChild(title);
+
+        if (wish["price"] !== null) {
+            let price = document.createElement("div");
+            price.className = "price";
+            price.textContent = priceFormat(wish["price"]);
+            if (wish["currency"] !== null) {
+                price.textContent += " " + wish["currency"];
+            }
+            wishInfo.appendChild(price);
+        }
+
+        if (wish["image"] != null) {
+            let wishPhoto = document.createElement("div");
+            wishPhoto.className = "wish-image";
+            card.appendChild(wishPhoto);
+
+            let wishPhotoImg = document.createElement("img");
+            wishPhotoImg.src = wish["image"];
+            wishPhoto.appendChild(wishPhotoImg);
+        }
+
+        let bottomBar = buildBottomBar(Wish.from(wish));
+        card.appendChild(bottomBar);
+    });
 }
