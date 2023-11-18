@@ -1199,7 +1199,6 @@ async function openChatUsers(chat_id) {
         card.classList.add("active");
         card.onclick = async function () {
             await openUserWishes(userWishes, "userWishes");
-            // location.href = "/user_wishes?user_id=" + users[j].tg_user_id + "&chat_id=" + chat.tg_chat_id;
         };
         cardsContainer.appendChild(card);
 
@@ -1241,6 +1240,10 @@ async function openUserWishes(wishes, containerId) {
     cardsContainer.classList.add("grid-view");
     cardsContainer.classList.add("tab-content");
     document.getElementById("content").appendChild(cardsContainer);
+
+    if (containerId === "userWishes") {
+        document.getElementById("users").style.display = "none";
+    }
 
     wishes.forEach(wish => {
 
