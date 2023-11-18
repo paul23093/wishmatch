@@ -1188,10 +1188,10 @@ async function openChatUsers(chat_id) {
     }
 
     for (let j=0; j<users.length; j++) {
-        const user_wishes = wishes.filter(function (wish) {
+        const userWishes = wishes.filter(function (wish) {
             return wish["tg_user_id"] === users[j].tg_user_id
         });
-        const user_wishes_count = user_wishes.length;
+        const userWishesCount = userWishes.length;
 
         let card = document.createElement("div");
         card.classList.add("card");
@@ -1210,9 +1210,9 @@ async function openChatUsers(chat_id) {
         userPhoto.className = "user-photo";
         header.appendChild(userPhoto);
 
-        if (user_wishes[0].tg_profile_photo != null) {
+        if (userWishes[0].tg_profile_photo != null) {
             let userPhotoImg = document.createElement("img");
-            userPhotoImg.src = "data:image/png;base64," + user_wishes[0].tg_profile_photo;
+            userPhotoImg.src = "data:image/png;base64," + userWishes[0].tg_profile_photo;
             userPhoto.appendChild(userPhotoImg);
         }
 
@@ -1222,13 +1222,13 @@ async function openChatUsers(chat_id) {
 
         let userName = document.createElement("div");
         userName.className = "card-title";
-        userName.textContent = user_wishes[0].tg_first_name ? user_wishes[0].tg_first_name : user_wishes[0].tg_username;
+        userName.textContent = userWishes[0].tg_first_name ? userWishes[0].tg_first_name : userWishes[0].tg_username;
         userInfo.appendChild(userName);
 
         let wishCount = document.createElement("div");
         wishCount.className = "wish-count";
-        wishCount.textContent = user_wishes_count + "\nwish";
-        wishCount.textContent += user_wishes_count>1 ? "es" : "";
+        wishCount.textContent = userWishesCount + "\nwish";
+        wishCount.textContent += userWishesCount>1 ? "es" : "";
         userInfo.appendChild(wishCount);
     }
 }
