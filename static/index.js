@@ -1197,8 +1197,9 @@ async function openChatUsers(chat_id) {
         card.classList.add("card");
         card.classList.add("clickable");
         card.classList.add("active");
-        card.onclick = function () {
-            location.href = "/user_wishes?user_id=" + users[j].tg_user_id + "&chat_id=" + chat.tg_chat_id;
+        card.onclick = async function () {
+            await openUserWishes(userWishes, "userWishes");
+            // location.href = "/user_wishes?user_id=" + users[j].tg_user_id + "&chat_id=" + chat.tg_chat_id;
         };
         cardsContainer.appendChild(card);
 
