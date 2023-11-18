@@ -929,6 +929,7 @@ function buildWishForm(wish=null) {
 
     Telegram.WebApp.BackButton.onClick(function () {
         content.style.display = "block";
+        openTab("myWishes", document.getElementById("tabWishes"));
         form.remove();
         Telegram.WebApp.BackButton.hide();
         Telegram.WebApp.MainButton.hide();
