@@ -941,7 +941,7 @@ function buildWishForm(wish=null) {
 
     let wishTitleInput = document.createElement("input");
     wishTitleInput.id = "wish-title";
-    wishTitleInput.dataIndex = "1";
+    wishTitleInput.setAttribute("data-index", "1");
     wishTitleInput.type = "text";
     wishTitleInput.placeholder = "Title";
     wishTitleInput.addEventListener("keyup", () => {
@@ -966,7 +966,7 @@ function buildWishForm(wish=null) {
 
     let wishDescInput = document.createElement("textarea");
     wishDescInput.id = "wish-description";
-    wishDescInput.dataIndex = "2";
+    wishTitleInput.setAttribute("data-index", "2");
     wishDescInput.type = "text";
     wishDescInput.placeholder = "Description";
     wishDescDiv.appendChild(wishDescInput);
@@ -982,7 +982,7 @@ function buildWishForm(wish=null) {
 
     let wishLinkInput = document.createElement("input");
     wishLinkInput.id = "wish-link";
-    wishLinkInput.dataIndex = "3";
+    wishTitleInput.setAttribute("data-index", "3");
     wishLinkInput.type = "text";
     wishLinkInput.placeholder = "Link";
     wishLinkDiv.appendChild(wishLinkInput);
@@ -998,7 +998,7 @@ function buildWishForm(wish=null) {
 
     let wishImageLinkInput = document.createElement("input");
     wishImageLinkInput.id = "wish-image-link";
-    wishImageLinkInput.dataIndex = "4";
+    wishTitleInput.setAttribute("data-index", "4");
     wishImageLinkInput.type = "text";
     wishImageLinkInput.placeholder = "Image link";
     wishImageLinkDiv.appendChild(wishImageLinkInput);
@@ -1017,7 +1017,7 @@ function buildWishForm(wish=null) {
 
     let wishPriceInput = document.createElement("input");
     wishPriceInput.id = "wish-price";
-    wishPriceInput.dataIndex = "5";
+    wishTitleInput.setAttribute("data-index", "5");
     wishPriceInput.type = "text";
     wishPriceInput.placeholder = "Price";
     wishPriceDiv.appendChild(wishPriceInput);
@@ -1034,7 +1034,7 @@ function buildWishForm(wish=null) {
     let wishCurrencyInput = document.createElement("input");
     wishCurrencyInput.id = "wish-currency";
     wishCurrencyInput.setAttribute("list", "currency");
-    wishCurrencyInput.dataIndex = "6";
+    wishTitleInput.setAttribute("data-index", "6");
     wishCurrencyInput.type = "text";
     wishCurrencyInput.placeholder = "Currency";
     wishCurrencyDiv.appendChild(wishCurrencyInput);

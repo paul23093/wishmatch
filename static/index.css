@@ -159,13 +159,13 @@ body {
 }
 
 
-.input#input-wish-price {
+.input#wish-price {
     flex: 5;
     -webkit-flex: 5;
     margin-right: 5px;
 }
 
-.input#input-wish-currency {
+.input#wish-currency {
     flex: 4;
     -webkit-flex: 4;
     margin-left: 5px;
