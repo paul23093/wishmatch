@@ -666,6 +666,7 @@ async function addWish() {
         Telegram.WebApp.MainButton.offClick(function () {addWish();});
         Telegram.WebApp.MainButton.hideProgress();
     });
+    window.location.replace(document.referrer);
 }
 
 async function editWish(id) {
@@ -710,6 +711,7 @@ async function editWish(id) {
         Telegram.WebApp.MainButton.offClick(function () {editWish(id);});
         Telegram.WebApp.MainButton.hideProgress();
     });
+    window.location.replace(document.referrer);
 }
 
 function openWish(userWish) {
