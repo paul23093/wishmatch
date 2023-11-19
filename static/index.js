@@ -1330,14 +1330,18 @@ async function openUserWishes(wishes, containerId) {
 
     if (containerId === "userWishes") {
         document.getElementById("users").style.display = "none";
-        Telegram.WebApp.BackButton.onClick(() => {
+
+        function openUsers() {
             let chats = document.getElementById("chats");
             if (!chats) {
                 Telegram.WebApp.BackButton.hide();
             }
             cardsContainer.remove();
             openTab("users");
-        });
+            Telegram.WebApp.BackButton.offClick(openUsers);
+        }
+
+        Telegram.WebApp.BackButton.onClick(openUsers);
         Telegram.WebApp.BackButton.show();
     }
 
