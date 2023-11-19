@@ -559,21 +559,20 @@ function buildBottomBar(wish, card, showLabels=false) {
     card.appendChild(bottomBar);
 
     if (wish.tgUserId === initData.user.id) {
-        let bookMark = document.createElement("div");
-        bookMark.className = "bookmark";
-        bottomBar.appendChild(bookMark);
-        let deleteIcon = document.createElement("span");
-        deleteIcon.classList.add("material-symbols-outlined");
-        deleteIcon.textContent = "delete";
-        bookMark.appendChild(deleteIcon);
+        let divDelete = document.createElement("div");
+        bottomBar.appendChild(divDelete);
+        let iconDelete = document.createElement("span");
+        iconDelete.classList.add("material-symbols-outlined");
+        iconDelete.textContent = "delete";
+        divDelete.appendChild(iconDelete);
         if (showLabels) {
-            let deleteLabel = document.createElement("span");
-            deleteLabel.className = "button-label";
-            deleteLabel.textContent = "Delete";
-            bookMark.appendChild(deleteLabel);
+            let labelDelete = document.createElement("span");
+            labelDelete.className = "button-label";
+            labelDelete.textContent = "Delete";
+            divDelete.appendChild(labelDelete);
         }
 
-        bookMark.addEventListener("click", function () {
+        divDelete.addEventListener("click", function () {
             Telegram.WebApp.HapticFeedback.notificationOccurred("warning");
             Telegram.WebApp.showConfirm(
                 "Are you sure you want to delete this wish?",
@@ -593,57 +592,55 @@ function buildBottomBar(wish, card, showLabels=false) {
                                 })
                             }
                         );
-                        bookMark.parentElement.parentElement.remove();
+                        divDelete.parentElement.parentElement.remove();
                     }
                 }
             )
         });
 
-        let editWish = document.createElement("div");
-        editWish.className = "bookmark";
-        editWish.onclick = function () {
+        let divEdit = document.createElement("div");
+        divEdit.onclick = function () {
             buildWishForm(wish);
         };
-        bottomBar.appendChild(editWish);
-        let editIcon = document.createElement("span");
-        editIcon.classList.add("material-symbols-outlined");
-        editIcon.textContent = "edit";
-        editWish.appendChild(editIcon);
+        bottomBar.appendChild(divEdit);
+        let iconEdit = document.createElement("span");
+        iconEdit.classList.add("material-symbols-outlined");
+        iconEdit.textContent = "edit";
+        divEdit.appendChild(iconEdit);
         if (showLabels) {
-            let editLabel = document.createElement("span");
-            editLabel.className = "button-label";
-            editLabel.textContent = "Edit";
-            editWish.appendChild(editLabel);
+            let labelEdit = document.createElement("span");
+            labelEdit.className = "button-label";
+            labelEdit.textContent = "Edit";
+            divEdit.appendChild(labelEdit);
         }
     } else if (wish.isBooked === false || (wish.isBooked === true && wish.bookedBy === initData.user.id)) {
-        let bookMark = document.createElement("div");
-        bookMark.className = "bookmark";
-        bottomBar.appendChild(bookMark);
+        let divBook = document.createElement("div");
+        bottomBar.appendChild(divBook);
 
-        let bookIcon = document.createElement("span");
-        bookIcon.classList.add("material-symbols-outlined");
-        bookMark.appendChild(bookIcon);
+        let iconBook = document.createElement("span");
+        iconBook.classList.add("material-symbols-outlined");
+        divBook.appendChild(iconBook);
         if (wish.isBooked === false) {
-            bookIcon.textContent = "hand_gesture";
-            bookMark.parentElement.parentElement.classList.add("active");
+            iconBook.textContent = "hand_gesture";
+            divBook.parentElement.parentElement.classList.add("active");
             if (showLabels) {
-                let deleteLabel = document.createElement("span");
-                deleteLabel.className = "button-label";
-                deleteLabel.textContent = "Book";
-                bookMark.appendChild(deleteLabel);
+                let labelBook = document.createElement("span");
+                labelBook.className = "button-label";
+                labelBook.textContent = "Book";
+                divBook.appendChild(labelBook);
             }
         } else {
-            bookIcon.textContent = "do_not_touch";
-            bookMark.parentElement.parentElement.classList.add("booked");
+            iconBook.textContent = "do_not_touch";
+            divBook.parentElement.parentElement.classList.add("booked");
             if (showLabels) {
-                let deleteLabel = document.createElement("span");
-                deleteLabel.className = "button-label";
-                deleteLabel.textContent = "Unbook";
-                bookMark.appendChild(deleteLabel);
+                let labelBook = document.createElement("span");
+                labelBook.className = "button-label";
+                labelBook.textContent = "Unbook";
+                divBook.appendChild(labelBook);
             }
         }
 
-        bookMark.addEventListener("click", async function () {
+        divBook.addEventListener("click", async function () {
             if (wish.isBooked === false) {
                 Telegram.WebApp.HapticFeedback.notificationOccurred("success");
                 await fetch(
@@ -664,8 +661,8 @@ function buildBottomBar(wish, card, showLabels=false) {
                 wish.isBooked = true;
                 card.classList.remove("active");
                 card.classList.add("booked");
-                bookMark.querySelector("span[class='material-symbols-outlined']").textContent = "do_not_touch";
-                bookMark.querySelector("span[class='button-label']").textContent = "Unbook";
+                divBook.querySelector("span[class='material-symbols-outlined']").textContent = "do_not_touch";
+                divBook.querySelector("span[class='button-label']").textContent = "Unbook";
             } else {
                 await fetch(
                     "/unbook",
@@ -684,8 +681,8 @@ function buildBottomBar(wish, card, showLabels=false) {
                 wish.isBooked = false;
                 card.classList.remove("booked");
                 card.classList.add("active");
-                bookMark.querySelector("span[class='material-symbols-outlined']").textContent = "hand_gesture";
-                bookMark.querySelector("span[class='button-label']").textContent = "Book";
+                divBook.querySelector("span[class='material-symbols-outlined']").textContent = "hand_gesture";
+                divBook.querySelector("span[class='button-label']").textContent = "Book";
             }
         });
     } else if (wish.isBooked === true && wish.bookedBy !== initData.user.id) {
@@ -693,22 +690,21 @@ function buildBottomBar(wish, card, showLabels=false) {
     }
 
     if (wish.link != null) {
-        let link = document.createElement("div");
-        link.className = "bookmark";
-        let linkIcon = document.createElement("span");
-        linkIcon.classList.add("material-symbols-outlined");
-        linkIcon.textContent = "open_in_new";
-        link.appendChild(linkIcon);
+        let divLink = document.createElement("div");
+        let iconLink = document.createElement("span");
+        iconLink.classList.add("material-symbols-outlined");
+        iconLink.textContent = "open_in_new";
+        divLink.appendChild(iconLink);
         if (showLabels) {
-            let linkLabel = document.createElement("span");
-            linkLabel.className = "button-label";
-            linkLabel.textContent = "Link";
-            link.appendChild(linkLabel);
+            let labelLink = document.createElement("span");
+            labelLink.className = "button-label";
+            labelLink.textContent = "Link";
+            divLink.appendChild(labelLink);
         }
-        link.onclick = function () {
+        divLink.addEventListener("click", () => {
             window.open(wish.link);
-        }
-        bottomBar.appendChild(link);
+        });
+        bottomBar.appendChild(divLink);
     }
 }
 

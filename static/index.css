@@ -505,7 +505,7 @@ body {
     user-select: none;
 }
 
-.bookmark {
+.bottom-bar div {
     background-color: var(--tg-theme-secondary-bg-color);
     display: flex;
     flex-direction: column;
