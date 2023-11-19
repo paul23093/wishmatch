@@ -837,9 +837,21 @@ function buildBottomBar(wish, card, showLabels=false) {
         if (wish.isBooked === false) {
             bookIcon.textContent = "hand_gesture";
             bookMark.parentElement.parentElement.classList.add("active");
+            if (showLabels) {
+                let deleteLabel = document.createElement("span");
+                deleteLabel.className = "button-label";
+                deleteLabel.textContent = "Book";
+                bookMark.appendChild(deleteLabel);
+            }
         } else {
             bookIcon.textContent = "do_not_touch";
             bookMark.parentElement.parentElement.classList.add("booked");
+            if (showLabels) {
+                let deleteLabel = document.createElement("span");
+                deleteLabel.className = "button-label";
+                deleteLabel.textContent = "Unbook";
+                bookMark.appendChild(deleteLabel);
+            }
         }
 
         bookMark.addEventListener("click", async function () {
@@ -863,7 +875,8 @@ function buildBottomBar(wish, card, showLabels=false) {
                 wish.isBooked = true;
                 card.classList.remove("active");
                 card.classList.add("booked");
-                bookMark.getElementsByTagName("span")[0].textContent = "do_not_touch";
+                bookMark.querySelector("span[class='material-symbols-outlined']").textContent = "do_not_touch";
+                bookMark.querySelector("span[class='button-label']").textContent = "Unbook";
             } else {
                 await fetch(
                     "/unbook",
@@ -882,7 +895,8 @@ function buildBottomBar(wish, card, showLabels=false) {
                 wish.isBooked = false;
                 card.classList.remove("booked");
                 card.classList.add("active");
-                bookMark.getElementsByTagName("span")[0].textContent = "hand_gesture";
+                bookMark.querySelector("span[class='material-symbols-outlined']").textContent = "hand_gesture";
+                bookMark.querySelector("span[class='button-label']").textContent = "Book";
             }
         });
     } else if (wish.isBooked === true && wish.bookedBy !== initData.user.id) {
