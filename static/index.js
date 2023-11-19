@@ -191,7 +191,10 @@ async function load() {
             }
         }
     }
-    document.getElementById("title").textContent = titleText;
+    let title = document.getElementById("title");
+    title.textContent = titleText;
+    title.style.transform = "translate(0)";
+    title.style.opacity = "1";
 
     if (wishes.length === 0) {
         let alert = document.createElement("span");

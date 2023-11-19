@@ -61,11 +61,17 @@ body {
 .page-title #title {
     font-size: 13pt;
     font-weight: bold;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.5s, transform 0.5s;
 }
 
 .page-title #subtitle {
     display: none;
     font-size: 10pt;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.5s, transform 0.5s;
 }
 
 .icons-tray {
