@@ -1332,6 +1332,14 @@ async function openUserWishes(wishes, containerId) {
         document.getElementById("users").style.display = "none";
     }
 
+    Telegram.WebApp.BackButton.onClick(() => {
+        document.getElementById("users").style.display = "flex";
+        if (containerId === "myWishes") {
+            Telegram.WebApp.BackButton.hide();
+        }
+    });
+    Telegram.WebApp.BackButton.show();
+
     wishes.forEach(wish => {
 
         let card = document.createElement("div");
