@@ -1348,7 +1348,7 @@ async function openUserWishes(wishes, containerId) {
             }
             cardsContainer.remove();
             document.getElementById("title").textContent = wishes[0]["tg_chat_name"];
-            document.getElementById("subtitle").textContent = uniqueUsers(wishes).length + " users";
+            // document.getElementById("subtitle").textContent = uniqueUsers(wishes).length + " users";
             openTab("users");
             Telegram.WebApp.BackButton.offClick(backToUsersCallback);
         }
