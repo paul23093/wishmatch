@@ -180,8 +180,7 @@ async function load() {
             chatPhoto.appendChild(img);
         }
     } else {
-        document.getElementById("tabs").hidden = false;
-        document.getElementById("pageTitle").style.display = "none";
+        document.getElementById("tabs").style.display = "none";
         const userInfo = await getUserInfo();
         if (userInfo != null) {
             let userPhoto = document.getElementById("chat-photo");
@@ -249,7 +248,6 @@ async function load() {
         });
     }
     else {
-        document.getElementById("tabs").style.display = "none";
         await openChatUsers(chat_id);
     }
 
@@ -1019,8 +1017,12 @@ function buildWishForm(wish=null) {
 
     Telegram.WebApp.BackButton.onClick(function () {
         content.style.display = "block";
-        openTab(content.children.item(0).id, document.getElementById("tabWishes"));
         form.remove();
+        if (wish !== null) {
+            openTab(content.children.item(0).id, document.getElementById("tabWishes"));
+        } else {
+            openTab(content.children.item(0).id);
+        }
         Telegram.WebApp.BackButton.hide();
         Telegram.WebApp.MainButton.hide();
     });
@@ -1233,6 +1235,7 @@ function buildWishForm(wish=null) {
 
 
 async function openChatUsers(chat_id) {
+    document.getElementById("pageTitle").style.display = "flex";
     const wishes = await getChatWishes(chat_id);
     const users = uniqueUsers(wishes);
     const chat = await getChatInfo(chat_id);
