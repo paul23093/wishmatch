@@ -72,37 +72,46 @@ class ChatUser extends User {
 }
 
 class Wish {
-    constructor({id=null, name, description, link, image, price, currency}) {
+    constructor({id=null, tgUserId, name, description, link, image, price, currency, isBooked, bookedBy}) {
         this.id = id;
+        this.tgUserId = tgUserId;
         this.name = name;
         this.description = description;
         this.link = link;
         this.image = image;
         this.price = price;
         this.currency = currency;
+        this.isBooked = isBooked;
+        this.bookedBy = bookedBy;
     }
 
     toJson() {
         return {
             "id": (this.id !== null && this.id !== "") ? this.id : null,
+            "tg_user_id": (this.tgUserId !== null && this.tgUserId !== "") ? this.tgUserId : null,
             "name": (this.name !== null && this.name !== "") ? this.name : null,
             "description": (this.description !== null && this.description !== "") ? this.description : null,
             "link": (this.link !== null && this.link !== "") ? this.link : null,
             "image": (this.image !== null && this.image !== "") ? this.image : null,
             "price": (this.price !== null && this.price !== "") ? this.price : null,
-            "currency": (this.currency !== null && this.currency !== "") ? this.currency : null
+            "currency": (this.currency !== null && this.currency !== "") ? this.currency : null,
+            "is_booked": (this.isBooked !== null && this.isBooked !== "") ? this.isBooked : null,
+            "booked_by": (this.bookedBy !== null && this.bookedBy !== "") ? this.bookedBy : null
         };
     }
 
     static from(json){
         return new Wish({
             id: json["id"],
+            tgUserId: json["tg_user_id"],
             name: json["name"],
             description: json["description"],
             link: json["link"],
             image: json["image"],
             price: json["price"],
-            currency: json["currency"]
+            currency: json["currency"],
+            isBooked: json["is_booked"],
+            bookedBy: json["booked_by"]
         });
     }
 }
@@ -743,7 +752,7 @@ function openWish(userWish) {
     wishDescContent.innerText = userWish.description;
     wishDesc.appendChild(wishDescContent);
 
-    let bottomBar = buildBottomBar(userWish, true);
+    let bottomBar = buildBottomBar(userWish, card, true);
     card.appendChild(bottomBar);
 
     Telegram.WebApp.BackButton.onClick(function () {
@@ -754,66 +763,130 @@ function openWish(userWish) {
     Telegram.WebApp.BackButton.show();
 }
 
-function buildBottomBar(wish, showLabels=false) {
+function buildBottomBar(wish, card, showLabels=false) {
+    let initData = Telegram.WebApp.initDataUnsafe;
     let initDataRaw = Telegram.WebApp.initData;
     let bottomBar = document.createElement("div");
     bottomBar.className = "bottom-bar";
 
-    let bookMark = document.createElement("div");
-    bookMark.className = "bookmark";
-    bottomBar.appendChild(bookMark);
-    let deleteIcon = document.createElement("span");
-    deleteIcon.classList.add("material-symbols-outlined");
-    deleteIcon.textContent = "delete";
-    bookMark.appendChild(deleteIcon);
-    if (showLabels) {
-        let deleteLabel = document.createElement("span");
-        deleteLabel.className = "button-label";
-        deleteLabel.textContent = "Delete";
-        bookMark.appendChild(deleteLabel);
-    }
+    if (wish.tgUserId === initData.user.id) {
+        let bookMark = document.createElement("div");
+        bookMark.className = "bookmark";
+        bottomBar.appendChild(bookMark);
+        let deleteIcon = document.createElement("span");
+        deleteIcon.classList.add("material-symbols-outlined");
+        deleteIcon.textContent = "delete";
+        bookMark.appendChild(deleteIcon);
+        if (showLabels) {
+            let deleteLabel = document.createElement("span");
+            deleteLabel.className = "button-label";
+            deleteLabel.textContent = "Delete";
+            bookMark.appendChild(deleteLabel);
+        }
 
-    bookMark.addEventListener("click", function () {
-        Telegram.WebApp.HapticFeedback.notificationOccurred("warning");
-        Telegram.WebApp.showConfirm(
-            "Are you sure you want to delete this wish?",
-            async function (is_ok) {
-                if (is_ok) {
-                    await fetch(
-                    "/delete",
-                    {
-                            method: "POST",
-                            headers: {
-                                "Accept": "application/json",
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify({
-                                init_data: initDataRaw,
-                                wish_id: wish.id
-                            })
-                        }
-                    );
-                    bookMark.parentElement.parentElement.remove();
+        bookMark.addEventListener("click", function () {
+            Telegram.WebApp.HapticFeedback.notificationOccurred("warning");
+            Telegram.WebApp.showConfirm(
+                "Are you sure you want to delete this wish?",
+                async function (is_ok) {
+                    if (is_ok) {
+                        await fetch(
+                        "/delete",
+                        {
+                                method: "POST",
+                                headers: {
+                                    "Accept": "application/json",
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify({
+                                    init_data: initDataRaw,
+                                    wish_id: wish.id
+                                })
+                            }
+                        );
+                        bookMark.parentElement.parentElement.remove();
+                    }
                 }
-            }
-        )
-    });
+            )
+        });
 
-    let editWish = document.createElement("div");
-    editWish.className = "bookmark";
-    editWish.onclick = function () {
-        buildWishForm(wish);
-    };
-    bottomBar.appendChild(editWish);
-    let editIcon = document.createElement("span");
-    editIcon.classList.add("material-symbols-outlined");
-    editIcon.textContent = "edit";
-    editWish.appendChild(editIcon);
-    if (showLabels) {
-        let editLabel = document.createElement("span");
-        editLabel.className = "button-label";
-        editLabel.textContent = "Edit";
-        editWish.appendChild(editLabel);
+        let editWish = document.createElement("div");
+        editWish.className = "bookmark";
+        editWish.onclick = function () {
+            buildWishForm(wish);
+        };
+        bottomBar.appendChild(editWish);
+        let editIcon = document.createElement("span");
+        editIcon.classList.add("material-symbols-outlined");
+        editIcon.textContent = "edit";
+        editWish.appendChild(editIcon);
+        if (showLabels) {
+            let editLabel = document.createElement("span");
+            editLabel.className = "button-label";
+            editLabel.textContent = "Edit";
+            editWish.appendChild(editLabel);
+        }
+    } else if (wish.isBooked === false || (wish.isBooked === true && wish.bookedBy === initData.user.id)) {
+        let bookMark = document.createElement("div");
+        bookMark.className = "bookmark";
+        bottomBar.appendChild(bookMark);
+
+        let bookIcon = document.createElement("span");
+        bookIcon.classList.add("material-symbols-outlined");
+        bookMark.appendChild(bookIcon);
+        if (wish["is_booked"] === false) {
+            bookIcon.textContent = "hand_gesture";
+            bookMark.parentElement.parentElement.classList.add("active");
+        } else {
+            bookIcon.textContent = "do_not_touch";
+            bookMark.parentElement.parentElement.classList.add("booked");
+        }
+
+        bookMark.addEventListener("click", async function () {
+            if (wish["is_booked"] === false) {
+                Telegram.WebApp.HapticFeedback.notificationOccurred("success");
+                await fetch(
+                    "/book",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Accept": "application/json",
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            init_data: initDataRaw,
+                            wish_id: wish["id"],
+                            tg_user_id: initData.user.id
+                        })
+                    }
+                );
+                wish.isBooked = true;
+                card.classList.remove("active");
+                card.classList.add("booked");
+                bookMark.getElementsByTagName("span")[0].textContent = "do_not_touch";
+            } else {
+                await fetch(
+                    "/unbook",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Accept": "application/json",
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            init_data: initDataRaw,
+                            wish_id: wish.id
+                        })
+                    }
+                );
+                wish["is_booked"] = false;
+                card.classList.remove("booked");
+                card.classList.add("active");
+                bookMark.getElementsByTagName("span")[0].textContent = "hand_gesture";
+            }
+        });
+    } else if (wish["is_booked"] === true && wish["booked_by"] !== initData.user.id) {
+        bottomBar.parentElement.classList.add("booked");
     }
 
     if (wish.link != null) {
@@ -1058,7 +1131,7 @@ function buildWishForm(wish=null) {
 
     form.appendChild(wishPriceBlockDiv);
 
-    if (wish !== null) {
+    if (wish.id !== null) {
         wishTitleInput.value = wish.name;
         wishDescInput.value = wish.description;
         wishLinkInput.value = wish.link;
@@ -1290,7 +1363,7 @@ async function openUserWishes(wishes, containerId) {
             wishPhoto.appendChild(wishPhotoImg);
         }
 
-        let bottomBar = buildBottomBar(Wish.from(wish));
+        let bottomBar = buildBottomBar(Wish.from(wish), card);
         card.appendChild(bottomBar);
     });
 }
