@@ -1186,8 +1186,8 @@ function hideWishDetailsCallback() {
     document.getElementById("content").style.display = "block";;
     document.getElementById("wishDetails").remove();
     Telegram.WebApp.BackButton.offClick(hideWishDetailsCallback);
-    let chats = document.getElementById("chats");
-    if (chats) {
+    let users = document.getElementById("users");
+    if (users) {
         Telegram.WebApp.BackButton.onClick(backToUsersCallback);
     } else {
         Telegram.WebApp.BackButton.hide();
