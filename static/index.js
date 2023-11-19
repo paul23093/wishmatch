@@ -1018,7 +1018,8 @@ function buildWishForm(wish=null) {
     Telegram.WebApp.BackButton.onClick(function () {
         content.style.display = "block";
         form.remove();
-        if (wish !== null) {
+        let myWishes = document.getElementById("myWishes");
+        if (myWishes) {
             openTab(content.children.item(0).id, document.getElementById("tabWishes"));
         } else {
             openTab(content.children.item(0).id);
