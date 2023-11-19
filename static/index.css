@@ -12,6 +12,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s;
 }
 
 .tabs .tab {
@@ -98,7 +100,7 @@ body {
     justify-content: center;
     align-items: center;
     opacity: 0;
-    transform: translateX(50%);
+    transform: translateX(20%);
     transition: opacity 0.5s, transform 0.5s;
 }
 

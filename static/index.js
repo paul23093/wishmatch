@@ -182,7 +182,9 @@ async function load() {
             chatPhoto.style.opacity = "1";
         }
     } else {
-        document.getElementById("tabs").style.display = "flex";
+        let tabs = document.getElementById("tabs")
+        tabs.style.display = "flex";
+        tabs.style.opacity = "1";
         const userInfo = await getUserInfo();
         if (userInfo != null) {
             let userPhoto = document.getElementById("chat-photo");
