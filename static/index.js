@@ -1152,7 +1152,7 @@ function buildWishForm(wish=null) {
 
     form.appendChild(wishPriceBlockDiv);
 
-    if (wish.id !== null) {
+    if (wish !== null) {
         wishTitleInput.value = wish.name;
         wishDescInput.value = wish.description;
         wishLinkInput.value = wish.link;
