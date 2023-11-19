@@ -895,10 +895,7 @@ function buildWishForm(wish=null) {
     wishPriceInput.placeholder = "Price";
     wishPriceDiv.appendChild(wishPriceInput);
 
-    let wishPriceSpan = document.createElement("span");
-    wishPriceSpan.textContent = "✖";
-    wishPriceSpan.className = "hidden";
-    wishPriceDiv.appendChild(wishPriceSpan);
+    wishPriceBlockDiv.appendChild(wishPriceDiv);
 
     let wishCurrencyDiv = document.createElement("div");
     wishCurrencyDiv.className = "input";
