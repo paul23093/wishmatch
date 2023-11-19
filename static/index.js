@@ -808,11 +808,14 @@ function buildWishForm(wish=null) {
     let wishTitleDiv = document.createElement("div");
     wishTitleDiv.className = "input";
 
+    let clearSign = document.createElement("span");
+    clearSign.textContent = "✖";
+    clearSign.className = "hidden";
+
     let wishTitleInput = document.createElement("input");
     wishTitleInput.id = "wish-title";
     wishTitleInput.setAttribute("data-index", "1");
     wishTitleInput.type = "text";
-    wishTitleInput.placeholder = "Title";
     wishTitleInput.placeholder = "Title";
     wishTitleInput.addEventListener("keyup", () => {
         if (wishTitleInput.value === null || wishTitleInput.value === "") {
@@ -824,10 +827,7 @@ function buildWishForm(wish=null) {
         }
     });
     wishTitleDiv.appendChild(wishTitleInput);
-
-    let wishTitleSpan = document.createElement("span");
-    wishTitleSpan.className = "hidden";
-    wishTitleDiv.appendChild(wishTitleSpan);
+    wishTitleDiv.appendChild(clearSign);
 
     form.appendChild(wishTitleDiv);
 
@@ -840,10 +840,7 @@ function buildWishForm(wish=null) {
     wishDescInput.type = "text";
     wishDescInput.placeholder = "Description";
     wishDescDiv.appendChild(wishDescInput);
-
-    let wishDescSpan = document.createElement("span");
-    wishDescSpan.className = "hidden";
-    wishDescDiv.appendChild(wishDescSpan);
+    wishDescDiv.appendChild(clearSign);
 
     form.appendChild(wishDescDiv);
 
@@ -856,10 +853,7 @@ function buildWishForm(wish=null) {
     wishLinkInput.type = "text";
     wishLinkInput.placeholder = "Link";
     wishLinkDiv.appendChild(wishLinkInput);
-
-    let wishLinkSpan = document.createElement("span");
-    wishLinkSpan.className = "hidden";
-    wishLinkDiv.appendChild(wishLinkSpan);
+    wishLinkDiv.appendChild(clearSign);
 
     form.appendChild(wishLinkDiv);
 
@@ -872,10 +866,7 @@ function buildWishForm(wish=null) {
     wishImageLinkInput.type = "text";
     wishImageLinkInput.placeholder = "Image link";
     wishImageLinkDiv.appendChild(wishImageLinkInput);
-
-    let wishImageLinkSpan = document.createElement("span");
-    wishImageLinkSpan.className = "hidden";
-    wishImageLinkDiv.appendChild(wishImageLinkSpan);
+    wishImageLinkDiv.appendChild(clearSign);
 
     form.appendChild(wishImageLinkDiv);
 
@@ -892,10 +883,6 @@ function buildWishForm(wish=null) {
     wishPriceInput.placeholder = "Price";
     wishPriceDiv.appendChild(wishPriceInput);
 
-    let wishPriceSpan = document.createElement("span");
-    wishPriceSpan.className = "hidden";
-    wishPriceDiv.appendChild(wishPriceSpan);
-
     wishPriceBlockDiv.appendChild(wishPriceDiv);
 
     let wishCurrencyDiv = document.createElement("div");
@@ -908,10 +895,6 @@ function buildWishForm(wish=null) {
     wishCurrencyInput.type = "text";
     wishCurrencyInput.placeholder = "Currency";
     wishCurrencyDiv.appendChild(wishCurrencyInput);
-
-    let wishCurrencySpan = document.createElement("span");
-    wishCurrencySpan.className = "hidden";
-    wishCurrencyDiv.appendChild(wishCurrencySpan);
 
     let wishCurrencyList = document.createElement("datalist");
     wishCurrencyList.id = "currency";
