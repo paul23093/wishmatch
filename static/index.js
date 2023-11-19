@@ -1020,7 +1020,11 @@ async function openChatUsers(chat_id) {
     const chat = await getChatInfo(chat_id);
 
     let titleText = chat.tg_chat_name;
-    document.getElementById("title").textContent = titleText;
+    let title = document.getElementById("title");
+    title.textContent = titleText;
+    title.style.transform = "translateY(0)";
+    title.style.opacity = "1";
+
     let subtitleText = users.length + " user";
     if (users.length > 1) {
         subtitleText += "s";
