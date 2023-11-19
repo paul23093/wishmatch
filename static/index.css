@@ -180,8 +180,8 @@ body {
 }
 
 .input #wish-currency {
-    flex: 4;
-    -webkit-flex: 4;
+    flex: 3;
+    -webkit-flex: 3;
     margin-left: 5px;
 }
 
