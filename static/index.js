@@ -975,7 +975,7 @@ function buildWishForm(wish=null) {
         el.addEventListener("focusin",  (e) => {
             checkInput(e);
             if(["android", "ios"].includes(Telegram.WebApp.platform)) {
-                document.body.style.height = (window.innerHeight + keyboardHeight).toString() + "px";
+                // document.body.style.height = (window.innerHeight + keyboardHeight).toString() + "px";
                 window.scrollTo({
                     top: inputFieldRect.bottom - window.innerHeight + keyboardHeight,
                     behavior: 'smooth'
