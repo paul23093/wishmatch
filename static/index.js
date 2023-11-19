@@ -1283,7 +1283,6 @@ async function openChatUsers(chat_id) {
         card.classList.add("clickable");
         card.classList.add("active");
         card.onclick = async function () {
-            Telegram.WebApp.BackButton.offClick(backToChatsCallback);
             await openUserWishes(userWishes, "userWishes");
         };
         cardsContainer.appendChild(card);
@@ -1333,6 +1332,7 @@ async function openUserWishes(wishes, containerId) {
         document.getElementById("title").textContent = wishes[0]["tg_username"];
         document.getElementById("subtitle").textContent = wishes[0]["tg_chat_name"];
 
+        Telegram.WebApp.BackButton.offClick(backToChatsCallback);
         Telegram.WebApp.BackButton.onClick(backToUsersCallback);
         Telegram.WebApp.BackButton.show();
     }
