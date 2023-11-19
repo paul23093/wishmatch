@@ -130,7 +130,10 @@ function openTab(tabName, el=null) {
 
     document.getElementById(tabName).style.display = "grid";
     if (el !== null) {
+        el.parentNode.style.display = "flex";
         el.classList.add("active");
+    } else {
+        el.parentNode.style.display = "none";
     }
 }
 
@@ -1334,6 +1337,7 @@ async function openUserWishes(wishes, containerId) {
 
     Telegram.WebApp.BackButton.onClick(() => {
         document.getElementById("users").style.display = "flex";
+        openTab("users");
         if (containerId === "myWishes") {
             Telegram.WebApp.BackButton.hide();
         }
