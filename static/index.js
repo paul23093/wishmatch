@@ -131,9 +131,11 @@ function openTab(tabName, el=null) {
     document.getElementById(tabName).style.display = "grid";
     if (el !== null) {
         document.getElementById("tabs").style.display = "flex";
+        document.getElementById("pageTitle").style.display = "none";
         el.classList.add("active");
     } else {
         document.getElementById("tabs").style.display = "none";
+        document.getElementById("pageTitle").style.display = "flex";
     }
 }
 
