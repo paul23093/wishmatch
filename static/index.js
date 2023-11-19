@@ -1235,8 +1235,6 @@ function buildWishForm(wish=null) {
 
 
 async function openChatUsers(chat_id) {
-    document.getElementById("tabs").style.display = "none";
-    document.getElementById("pageTitle").style.display = "flex";
     const wishes = await getChatWishes(chat_id);
     const users = uniqueUsers(wishes);
     const chat = await getChatInfo(chat_id);
