@@ -503,6 +503,7 @@ async function editWish(id) {
 
 function openWish(userWish) {
     let card = document.createElement("div");
+    card.id = "wishDetails";
     card.className = "wish-details";
     document.body.appendChild(card);
     let header = document.createElement("div");
@@ -546,11 +547,7 @@ function openWish(userWish) {
 
     buildBottomBar(userWish, card, true);
 
-    Telegram.WebApp.BackButton.onClick(function () {
-        content.style.display = "block";
-        card.remove();
-        Telegram.WebApp.BackButton.hide();
-    });
+    Telegram.WebApp.BackButton.onClick(hideWishDetailsCallback);
     Telegram.WebApp.BackButton.show();
 }
 
@@ -804,18 +801,7 @@ function buildWishForm(wish=null) {
     form.id = "form";
     document.body.appendChild(form);
 
-    Telegram.WebApp.BackButton.onClick(function () {
-        content.style.display = "block";
-        form.remove();
-        let myWishes = document.getElementById("myWishes");
-        if (myWishes) {
-            openTab(content.children.item(0).id, document.getElementById("tabWishes"));
-        } else {
-            openTab(content.children.item(0).id);
-        }
-        Telegram.WebApp.BackButton.hide();
-        Telegram.WebApp.MainButton.hide();
-    });
+    Telegram.WebApp.BackButton.onClick(hideWishFormCallback);
     Telegram.WebApp.BackButton.show();
 
     let wishTitleDiv = document.createElement("div");
@@ -1196,4 +1182,28 @@ function backToUsersCallback() {
     openTab("users");
     Telegram.WebApp.BackButton.offClick(backToUsersCallback);
     Telegram.WebApp.BackButton.onClick(backToChatsCallback);
+}
+
+
+function hideWishDetailsCallback() {
+    document.getElementById("content").style.display = "block";;
+    document.getElementById("wishDetails").remove();
+    Telegram.WebApp.BackButton.hide();
+    Telegram.WebApp.BackButton.offClick(hideWishDetailsCallback);
+}
+
+
+function hideWishFormCallback() {
+    let content = document.getElementById("content");
+    content.style.display = "block";
+    document.getElementById("form").remove();
+    let myWishes = document.getElementById("myWishes");
+    if (myWishes) {
+        openTab(content.children.item(0).id, document.getElementById("tabWishes"));
+    } else {
+        openTab(content.children.item(0).id);
+    }
+    Telegram.WebApp.BackButton.hide();
+    Telegram.WebApp.MainButton.hide();
+    Telegram.WebApp.BackButton.offClick(hideWishFormCallback);
 }
