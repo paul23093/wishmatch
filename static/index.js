@@ -1268,14 +1268,6 @@ async function openChatUsers(chat_id) {
     openTab("users");
     const chats = document.getElementById("chats");
     if (chats) {
-
-        function backToChatsCallback() {
-            Telegram.WebApp.BackButton.hide();
-            cardsContainer.remove();
-            openTab("chats", document.getElementById("tabChats"));
-            Telegram.WebApp.BackButton.offClick(backToChatsCallback);
-        }
-
         Telegram.WebApp.BackButton.onClick(backToChatsCallback);
         Telegram.WebApp.BackButton.show();
     }
@@ -1341,18 +1333,6 @@ async function openUserWishes(wishes, containerId) {
         document.getElementById("title").textContent = wishes[0]["tg_username"];
         document.getElementById("subtitle").textContent = wishes[0]["tg_chat_name"];
 
-        function backToUsersCallback() {
-            let chats = document.getElementById("chats");
-            if (!chats) {
-                Telegram.WebApp.BackButton.hide();
-            }
-            cardsContainer.remove();
-            document.getElementById("title").textContent = wishes[0]["tg_chat_name"];
-            document.getElementById("subtitle").textContent = null;
-            openTab("users");
-            Telegram.WebApp.BackButton.offClick(backToUsersCallback);
-        }
-
         Telegram.WebApp.BackButton.onClick(backToUsersCallback);
         Telegram.WebApp.BackButton.show();
     }
@@ -1403,4 +1383,26 @@ async function openUserWishes(wishes, containerId) {
 
         buildBottomBar(Wish.from(wish), card);
     });
+}
+
+
+function backToChatsCallback() {
+    Telegram.WebApp.BackButton.hide();
+    document.getElementById("users").remove();
+    openTab("chats", document.getElementById("tabChats"));
+    Telegram.WebApp.BackButton.offClick(backToChatsCallback);
+}
+
+
+function backToUsersCallback() {
+    let chats = document.getElementById("chats");
+    if (!chats) {
+        Telegram.WebApp.BackButton.hide();
+    }
+    document.getElementById("userWishes").remove();
+    document.getElementById("title").textContent = wishes[0]["tg_chat_name"];
+    document.getElementById("subtitle").textContent = null;
+    openTab("users");
+    Telegram.WebApp.BackButton.offClick(backToUsersCallback);
+    Telegram.WebApp.BackButton.onClick(backToChatsCallback);
 }
