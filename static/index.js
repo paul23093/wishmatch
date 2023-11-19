@@ -752,8 +752,7 @@ function openWish(userWish) {
     wishDescContent.innerText = userWish.description;
     wishDesc.appendChild(wishDescContent);
 
-    let bottomBar = buildBottomBar(userWish, card, true);
-    card.appendChild(bottomBar);
+    buildBottomBar(userWish, card, true);
 
     Telegram.WebApp.BackButton.onClick(function () {
         content.style.display = "block";
@@ -768,6 +767,7 @@ function buildBottomBar(wish, card, showLabels=false) {
     let initDataRaw = Telegram.WebApp.initData;
     let bottomBar = document.createElement("div");
     bottomBar.className = "bottom-bar";
+    card.appendChild(bottomBar);
 
     if (wish.tgUserId === initData.user.id) {
         let bookMark = document.createElement("div");
@@ -907,8 +907,6 @@ function buildBottomBar(wish, card, showLabels=false) {
         }
         bottomBar.appendChild(link);
     }
-
-    return bottomBar;
 }
 
 function priceFormat(x) {
@@ -1016,6 +1014,7 @@ function buildWishForm(wish=null) {
     wishTitleInput.id = "wish-title";
     wishTitleInput.setAttribute("data-index", "1");
     wishTitleInput.type = "text";
+    wishTitleInput.placeholder = "Title";
     wishTitleInput.placeholder = "Title";
     wishTitleInput.addEventListener("keyup", () => {
         if (wishTitleInput.value === null || wishTitleInput.value === "") {
@@ -1363,7 +1362,6 @@ async function openUserWishes(wishes, containerId) {
             wishPhoto.appendChild(wishPhotoImg);
         }
 
-        let bottomBar = buildBottomBar(Wish.from(wish), card);
-        card.appendChild(bottomBar);
+        buildBottomBar(Wish.from(wish), card);
     });
 }
