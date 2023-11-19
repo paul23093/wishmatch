@@ -1174,8 +1174,8 @@ function backToUsersCallback() {
         Telegram.WebApp.BackButton.hide();
     }
     document.getElementById("userWishes").remove();
-    // document.getElementById("title").textContent = wishes[0]["tg_chat_name"];
-    // document.getElementById("subtitle").textContent = null;
+    document.getElementById("title").textContent = null;
+    document.getElementById("subtitle").textContent = null;
     openTab("users");
     Telegram.WebApp.BackButton.offClick(backToUsersCallback);
     Telegram.WebApp.BackButton.onClick(backToChatsCallback);
