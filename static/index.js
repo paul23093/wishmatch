@@ -1248,9 +1248,9 @@ async function openChatUsers(chat_id) {
     if (users.length > 1) {
         subtitleText += "s";
     }
-    let subtitle = document.getElementById("subtitle");
-    subtitle.textContent = subtitleText;
-    subtitle.style.display = "flex";
+    // let subtitle = document.getElementById("subtitle");
+    // subtitle.textContent = subtitleText;
+    // subtitle.style.display = "flex";
 
     // let chatPhoto = document.getElementById("chat-photo");
     // if (chat.tg_chat_photo != null) {
@@ -1348,7 +1348,7 @@ async function openUserWishes(wishes, containerId) {
             }
             cardsContainer.remove();
             document.getElementById("title").textContent = wishes[0]["tg_chat_name"];
-            // document.getElementById("subtitle").textContent = uniqueUsers(wishes).length + " users";
+            document.getElementById("subtitle").textContent = null;
             openTab("users");
             Telegram.WebApp.BackButton.offClick(backToUsersCallback);
         }
