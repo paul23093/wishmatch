@@ -663,9 +663,9 @@ async function addWish() {
 		    })
 	    }
     ).then(function() {
+        Telegram.WebApp.MainButton.offClick(function () {addWish();});
         Telegram.WebApp.MainButton.hideProgress();
     });
-    window.location.replace(document.referrer);
 }
 
 async function editWish(id) {
@@ -707,9 +707,9 @@ async function editWish(id) {
 		    })
 	    }
     ).then(function() {
+        Telegram.WebApp.MainButton.offClick(function () {editWish(id);});
         Telegram.WebApp.MainButton.hideProgress();
     });
-    window.location.replace(document.referrer);
 }
 
 function openWish(userWish) {
@@ -1267,14 +1267,14 @@ async function openChatUsers(chat_id) {
     const chats = document.getElementById("chats");
     if (chats) {
 
-        function openWishesCallback() {
+        function backToChatsCallback() {
             Telegram.WebApp.BackButton.hide();
             cardsContainer.remove();
             openTab("chats", document.getElementById("tabChats"));
-            Telegram.WebApp.BackButton.offClick(openWishesCallback);
+            Telegram.WebApp.BackButton.offClick(backToChatsCallback);
         }
 
-        Telegram.WebApp.BackButton.onClick(openWishesCallback);
+        Telegram.WebApp.BackButton.onClick(backToChatsCallback);
         Telegram.WebApp.BackButton.show();
     }
 
@@ -1289,7 +1289,7 @@ async function openChatUsers(chat_id) {
         card.classList.add("clickable");
         card.classList.add("active");
         card.onclick = async function () {
-            Telegram.WebApp.BackButton.offClick(openWishesCallback);
+            Telegram.WebApp.BackButton.offClick(backToChatsCallback);
             await openUserWishes(userWishes, "userWishes");
         };
         cardsContainer.appendChild(card);
@@ -1336,17 +1336,17 @@ async function openUserWishes(wishes, containerId) {
     if (containerId === "userWishes") {
         document.getElementById("users").style.display = "none";
 
-        function openUsers() {
+        function backToUsersCallback() {
             let chats = document.getElementById("chats");
             if (!chats) {
                 Telegram.WebApp.BackButton.hide();
             }
             cardsContainer.remove();
             openTab("users");
-            Telegram.WebApp.BackButton.offClick(openUsers);
+            Telegram.WebApp.BackButton.offClick(backToUsersCallback);
         }
 
-        Telegram.WebApp.BackButton.onClick(openUsers);
+        Telegram.WebApp.BackButton.onClick(backToUsersCallback);
         Telegram.WebApp.BackButton.show();
     }
 
