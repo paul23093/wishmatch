@@ -180,6 +180,7 @@ async function load() {
             chatPhoto.appendChild(img);
         }
     } else {
+        document.getElementById("tabs").style.display = "flex";
         const userInfo = await getUserInfo();
         if (userInfo != null) {
             let userPhoto = document.getElementById("chat-photo");
