@@ -1289,6 +1289,7 @@ async function openChatUsers(chat_id) {
         card.classList.add("clickable");
         card.classList.add("active");
         card.onclick = async function () {
+            Telegram.WebApp.BackButton.offClick(openWishesCallback);
             await openUserWishes(userWishes, "userWishes");
         };
         cardsContainer.appendChild(card);
