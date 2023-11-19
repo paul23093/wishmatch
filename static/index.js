@@ -130,10 +130,10 @@ function openTab(tabName, el=null) {
 
     document.getElementById(tabName).style.display = "grid";
     if (el !== null) {
-        el.parentNode.style.display = "flex";
+        document.getElementById("tabs").style.display = "flex";
         el.classList.add("active");
     } else {
-        el.parentNode.style.display = "none";
+        document.getElementById("tabs").style.display = "none";
     }
 }
 
