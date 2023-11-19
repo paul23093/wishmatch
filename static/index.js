@@ -1333,11 +1333,8 @@ async function openUserWishes(wishes, containerId) {
 
     if (containerId === "userWishes") {
         document.getElementById("users").style.display = "none";
-    }
-
-    if (containerId === "userWishes") {
         Telegram.WebApp.BackButton.onClick(() => {
-            document.getElementById("users").style.display = "flex";
+            document.getElementById("users").style.display = "grid";
             openTab("users");
         });
         Telegram.WebApp.BackButton.show();
