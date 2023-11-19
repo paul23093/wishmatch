@@ -190,6 +190,8 @@ async function load() {
                 let img = document.createElement("img");
                 img.src = "data:image/png;base64," + userInfo.tg_profile_photo;
                 userPhoto.appendChild(img);
+                userPhoto.style.transform = "translateX(0)";
+                userPhoto.style.opacity = "1";
             }
         }
     }
