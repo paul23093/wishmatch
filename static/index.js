@@ -118,15 +118,15 @@ class Wish {
 
 function openTab(tabName, el=null) {
 
-    let tabContent = document.getElementsByClassName("tab-content");
-    for (let i = 0; i < tabContent.length; i++) {
-        tabContent[i].style.display = "none";
-    }
+    let tabsContent = document.querySelectorAll(".tab-content");
+    tabsContent.forEach((tabContent) => {
+        tabContent.style.display = "none";
+    });
 
-    let tabs = document.getElementsByClassName("tab");
-    for (let i = 0; i < tabs.length; i++) {
-        tabs[i].classList.remove("active");
-    }
+    let tabs = document.querySelectorAll(".tab");
+    tabs.forEach((tab) => {
+        tab.classList.remove("active");
+    });
 
     document.getElementById(tabName).style.display = "grid";
     if (el !== null) {
@@ -975,7 +975,7 @@ function buildWishForm(wish=null) {
         el.addEventListener("focusin",  (e) => {
             checkInput(e);
             if(["android", "ios"].includes(Telegram.WebApp.platform)) {
-                // document.body.style.height = (window.innerHeight + keyboardHeight).toString() + "px";
+                document.body.style.height = (window.innerHeight + keyboardHeight).toString() + "px";
                 window.scrollTo({
                     top: inputFieldRect.bottom - window.innerHeight + keyboardHeight,
                     behavior: 'smooth'
@@ -994,7 +994,6 @@ function buildWishForm(wish=null) {
                 top: 0,
                 behavior: 'smooth'
             });
-            // buttonClick = false;
         });
 
         div.querySelector("span").addEventListener("click", (e) => {
@@ -1049,9 +1048,9 @@ async function openChatUsers(chat_id) {
         Telegram.WebApp.BackButton.show();
     }
 
-    for (let j=0; j<users.length; j++) {
+    users.forEach((user) => {
         const userWishes = wishes.filter(function (wish) {
-            return wish["tg_user_id"] === users[j].tg_user_id
+            return wish["tg_user_id"] === user.tg_user_id
         });
         const userWishesCount = userWishes.length;
 
@@ -1092,7 +1091,7 @@ async function openChatUsers(chat_id) {
         wishCount.textContent = userWishesCount + "\nwish";
         wishCount.textContent += userWishesCount>1 ? "es" : "";
         userInfo.appendChild(wishCount);
-    }
+    });
 }
 
 
