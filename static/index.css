@@ -97,6 +97,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 0.5s, transform 0.5s;
 }
 
 .chat-photo img {

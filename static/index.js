@@ -178,6 +178,8 @@ async function load() {
             let img = document.createElement("img");
             img.src = "data:image/png;base64," + chat.tg_chat_photo;
             chatPhoto.appendChild(img);
+            chatPhoto.style.transform = "translateX(0)";
+            chatPhoto.style.opacity = "1";
         }
     } else {
         document.getElementById("tabs").style.display = "flex";
