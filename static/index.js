@@ -1266,11 +1266,15 @@ async function openChatUsers(chat_id) {
     openTab("users");
     const chats = document.getElementById("chats");
     if (chats) {
-        Telegram.WebApp.BackButton.onClick(() => {
+
+        function openWishesCallback() {
             Telegram.WebApp.BackButton.hide();
             cardsContainer.remove();
             openTab("chats", document.getElementById("tabChats"));
-        });
+            Telegram.WebApp.BackButton.offClick(openWishesCallback);
+        }
+
+        Telegram.WebApp.BackButton.onClick(openWishesCallback);
         Telegram.WebApp.BackButton.show();
     }
 
