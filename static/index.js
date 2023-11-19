@@ -797,6 +797,11 @@ function buildWishForm(wish=null) {
     form.id = "form";
     document.body.appendChild(form);
 
+    Telegram.WebApp.BackButton.offClick(backToChatsCallback);
+    Telegram.WebApp.BackButton.offClick(backToUsersCallback);
+    Telegram.WebApp.BackButton.offClick(hideWishDetailsCallback);
+    Telegram.WebApp.BackButton.offClick(hideWishFormCallback);
+
     Telegram.WebApp.BackButton.onClick(hideWishFormCallback);
     Telegram.WebApp.BackButton.show();
 
