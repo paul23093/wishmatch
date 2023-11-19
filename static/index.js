@@ -1335,14 +1335,13 @@ async function openUserWishes(wishes, containerId) {
         document.getElementById("users").style.display = "none";
     }
 
-    Telegram.WebApp.BackButton.onClick(() => {
-        document.getElementById("users").style.display = "flex";
-        openTab("users");
-        if (containerId === "myWishes") {
-            Telegram.WebApp.BackButton.hide();
-        }
-    });
-    Telegram.WebApp.BackButton.show();
+    if (containerId === "userWishes") {
+        Telegram.WebApp.BackButton.onClick(() => {
+            document.getElementById("users").style.display = "flex";
+            openTab("users");
+        });
+        Telegram.WebApp.BackButton.show();
+    }
 
     wishes.forEach(wish => {
 
