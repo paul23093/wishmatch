@@ -834,7 +834,7 @@ function buildBottomBar(wish, card, showLabels=false) {
         let bookIcon = document.createElement("span");
         bookIcon.classList.add("material-symbols-outlined");
         bookMark.appendChild(bookIcon);
-        if (wish["is_booked"] === false) {
+        if (wish.isBooked === false) {
             bookIcon.textContent = "hand_gesture";
             bookMark.parentElement.parentElement.classList.add("active");
         } else {
@@ -843,7 +843,7 @@ function buildBottomBar(wish, card, showLabels=false) {
         }
 
         bookMark.addEventListener("click", async function () {
-            if (wish["is_booked"] === false) {
+            if (wish.isBooked === false) {
                 Telegram.WebApp.HapticFeedback.notificationOccurred("success");
                 await fetch(
                     "/book",
@@ -855,7 +855,7 @@ function buildBottomBar(wish, card, showLabels=false) {
                         },
                         body: JSON.stringify({
                             init_data: initDataRaw,
-                            wish_id: wish["id"],
+                            wish_id: wish.id,
                             tg_user_id: initData.user.id
                         })
                     }
@@ -879,13 +879,13 @@ function buildBottomBar(wish, card, showLabels=false) {
                         })
                     }
                 );
-                wish["is_booked"] = false;
+                wish.isBooked = false;
                 card.classList.remove("booked");
                 card.classList.add("active");
                 bookMark.getElementsByTagName("span")[0].textContent = "hand_gesture";
             }
         });
-    } else if (wish["is_booked"] === true && wish["booked_by"] !== initData.user.id) {
+    } else if (wish.isBooked === true && wish.bookedBy !== initData.user.id) {
         bottomBar.parentElement.classList.add("booked");
     }
 
