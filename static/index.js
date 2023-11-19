@@ -1058,9 +1058,10 @@ async function openChatUsers(chat_id) {
         card.classList.add("card");
         card.classList.add("clickable");
         card.classList.add("active");
-        card.onclick = async function () {
+        card.addEventListener("click", async () => {
+            Telegram.WebApp.BackButton.offClick(backToChatsCallback);
             await openUserWishes(userWishes, "userWishes");
-        };
+        });
         cardsContainer.appendChild(card);
 
         let header = document.createElement("div");
@@ -1121,6 +1122,7 @@ async function openUserWishes(wishes, containerId) {
         cardsContainer.appendChild(card);
 
         card.addEventListener("click", function(event) {
+            Telegram.WebApp.BackButton.offClick(backToUsersCallback);
             if (!event.target.parentNode.parentNode.classList.contains("bottom-bar") &&
                 !event.target.parentNode.classList.contains("bottom-bar") &&
                 !event.target.classList.contains("bottom-bar")) {
@@ -1187,8 +1189,13 @@ function backToUsersCallback() {
 function hideWishDetailsCallback() {
     document.getElementById("content").style.display = "block";;
     document.getElementById("wishDetails").remove();
-    Telegram.WebApp.BackButton.hide();
     Telegram.WebApp.BackButton.offClick(hideWishDetailsCallback);
+    let chats = document.getElementById("chats");
+    if (!chats) {
+        Telegram.WebApp.BackButton.onClick(backToUsersCallback);
+    } else {
+        Telegram.WebApp.BackButton.hide();
+    }
 }
 
 
