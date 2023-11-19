@@ -178,6 +178,7 @@ async function load() {
             let img = document.createElement("img");
             img.src = "data:image/png;base64," + chat.tg_chat_photo;
             chatPhoto.appendChild(img);
+            chatPhoto.style.height = "80%";
             chatPhoto.style.transform = "translateX(0)";
             chatPhoto.style.opacity = "1";
         }
@@ -192,6 +193,7 @@ async function load() {
                 let img = document.createElement("img");
                 img.src = "data:image/png;base64," + userInfo.tg_profile_photo;
                 userPhoto.appendChild(img);
+                userPhoto.style.height = "80%";
                 userPhoto.style.transform = "translateX(0)";
                 userPhoto.style.opacity = "1";
             }
