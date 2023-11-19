@@ -1338,12 +1338,17 @@ async function openUserWishes(wishes, containerId) {
     if (containerId === "userWishes") {
         document.getElementById("users").style.display = "none";
 
+        document.getElementById("title").textContent = wishes[0]["tg_username"];
+        document.getElementById("subtitle").textContent = wishes[0]["tg_chat_name"];
+
         function backToUsersCallback() {
             let chats = document.getElementById("chats");
             if (!chats) {
                 Telegram.WebApp.BackButton.hide();
             }
             cardsContainer.remove();
+            document.getElementById("title").textContent = wishes[0]["tg_chat_name"];
+            document.getElementById("subtitle").textContent = uniqueUsers(wishes) + " users";
             openTab("users");
             Telegram.WebApp.BackButton.offClick(backToUsersCallback);
         }
