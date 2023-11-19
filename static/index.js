@@ -193,7 +193,7 @@ async function load() {
     }
     let title = document.getElementById("title");
     title.textContent = titleText;
-    title.style.transform = "translate(0)";
+    title.style.transform = "translateY(0)";
     title.style.opacity = "1";
 
     if (wishes.length === 0) {
