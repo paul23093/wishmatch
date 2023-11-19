@@ -197,6 +197,10 @@ async function load() {
             }
         }
     }
+    let iconAddWish = document.getElementById("addWish");
+    iconAddWish.style.transform = "translateX(0)";
+    iconAddWish.style.opacity = "1";
+
     let title = document.getElementById("title");
     title.textContent = titleText;
     title.style.transform = "translateY(0)";
