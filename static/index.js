@@ -1265,15 +1265,15 @@ async function openChatUsers(chat_id) {
     cardsContainer.classList.add("tab-content");
     content.appendChild(cardsContainer);
     openTab("users");
-    Telegram.WebApp.BackButton.onClick(() => {
-        Telegram.WebApp.BackButton.hide();
-        cardsContainer.remove();
-        pageTitle.style.display = "none";
-        tabs.style.display = "flex";
-        openTab("chats", document.getElementById("tabChats"));
-    });
     const chats = document.getElementById("chats");
     if (chats) {
+        Telegram.WebApp.BackButton.onClick(() => {
+            Telegram.WebApp.BackButton.hide();
+            cardsContainer.remove();
+            pageTitle.style.display = "none";
+            tabs.style.display = "flex";
+            openTab("chats", document.getElementById("tabChats"));
+        });
         Telegram.WebApp.BackButton.show();
     }
 
@@ -1335,7 +1335,6 @@ async function openUserWishes(wishes, containerId) {
         document.getElementById("users").style.display = "none";
         Telegram.WebApp.BackButton.onClick(() => {
             cardsContainer.remove();
-            document.getElementById("users").style.display = "grid";
             openTab("users");
         });
         Telegram.WebApp.BackButton.show();
