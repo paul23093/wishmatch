@@ -930,6 +930,7 @@ function buildWishForm(wish=null) {
         wishImageLinkInput.value = wish.image;
         wishPriceInput.value = wish.price;
         wishCurrencyInput.value = wish.currency;
+
         Telegram.WebApp.MainButton.text = "Save";
         Telegram.WebApp.MainButton.onClick(function () {editWish(wish.id);});
     } else {

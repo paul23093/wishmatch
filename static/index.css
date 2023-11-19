@@ -150,6 +150,10 @@ body {
     -webkit-user-select: none;
 }
 
+.price-block .input input {
+    padding: 12px;
+}
+
 .input span {
     position: absolute;
     justify-content: center;
