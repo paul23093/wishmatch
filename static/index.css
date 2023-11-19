@@ -101,8 +101,7 @@ body {
     align-items: center;
     opacity: 0;
     transform: translateX(20%);
-    height: 0%;
-    transition: opacity 0.5s, transform 0.5s, height 0.5s;
+    transition: opacity 0.5s, transform 0.5s;
 }
 
 .chat-photo img {
