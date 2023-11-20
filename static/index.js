@@ -195,14 +195,14 @@ async function load() {
             img.src = "data:image/png;base64," + chat.tg_chat_photo;
             chatPhoto.appendChild(img);
             chatPhoto.style.transform = "translateX(0)";
-            chatPhoto.style.height = "100vh";
+            chatPhoto.style.maxHeight = "100vh";
             chatPhoto.style.opacity = "1";
         }
     } else {
         let tabs = document.getElementById("tabs");
         tabs.style.display = "flex";
         setTimeout(() => {
-            tabs.style.height = "100vh";
+            tabs.style.maxHeight = "100vh";
             tabs.style.opacity = "1";
         }, 0);
         const userInfo = await getUserInfo();
@@ -213,14 +213,14 @@ async function load() {
                 img.src = "data:image/png;base64," + userInfo.tg_profile_photo;
                 userPhoto.appendChild(img);
                 userPhoto.style.transform = "translateX(0)";
-                userPhoto.style.height = "100vh";
+                userPhoto.style.maxHeight = "100vh";
                 userPhoto.style.opacity = "1";
             }
         }
     }
     let iconAddWish = document.getElementById("addWish");
     iconAddWish.style.transform = "translateX(0)";
-    iconAddWish.style.height = "100vh";
+    iconAddWish.style.maxHeight = "100vh";
     iconAddWish.style.opacity = "1";
 
     let title = document.getElementById("title");
