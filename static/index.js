@@ -201,7 +201,6 @@ async function load() {
         let tabs = document.getElementById("tabs");
         tabs.style.display = "flex";
         setTimeout(() => {
-            tabs.style.transform = "translateY(0)";
             tabs.style.opacity = "1";
         }, 0);
         const userInfo = await getUserInfo();
