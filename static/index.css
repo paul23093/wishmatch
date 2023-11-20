@@ -6,6 +6,11 @@ body {
     overscroll-behavior-y: auto;
 }
 
+.center {
+    display: flex;
+    flex-direction: column;
+}
+
 .tabs {
     margin: auto;
     overflow: hidden;
