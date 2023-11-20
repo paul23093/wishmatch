@@ -130,14 +130,22 @@ function openTab(tabName, el=null) {
 
     document.getElementById(tabName).style.display = "grid";
     if (el !== null) {
+        document.getElementById("tabs").style.display = "flex";
         document.getElementById("tabs").style.opacity = "1";
         document.getElementById("tabs").style.transform = "translateY(0)";
         document.getElementById("pageTitle").style.opacity = "0";
         document.getElementById("pageTitle").style.transform = "translateY(20%)";
+        setTimeout(() => {
+          document.getElementById("pageTitle").style.display = 'none';
+        }, 500);
         el.classList.add("active");
     } else {
         document.getElementById("tabs").style.opacity = "0";
         document.getElementById("tabs").style.transform = "translateY(-20%)";
+        setTimeout(() => {
+          document.getElementById("tabs").style.display = 'none';
+        }, 500);
+        document.getElementById("pageTitle").style.display = "flex";
         document.getElementById("pageTitle").style.opacity = "1";
         document.getElementById("pageTitle").style.transform = "translateY(0)";
     }
@@ -187,6 +195,7 @@ async function load() {
         }
     } else {
         let tabs = document.getElementById("tabs");
+        tabs.style.display = "flex";
         tabs.style.transform = "translateY(0)";
         tabs.style.opacity = "1";
         const userInfo = await getUserInfo();
