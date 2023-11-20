@@ -202,7 +202,7 @@ async function load() {
         let tabs = document.getElementById("tabs");
         tabs.style.display = "flex";
         setTimeout(() => {
-            tabs.style.maxHeight = "100vh";
+            tabs.style.maxHeight = "25px";
             tabs.style.opacity = "1";
         }, 0);
         const userInfo = await getUserInfo();
