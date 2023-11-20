@@ -24,7 +24,7 @@ body {
     height: 20vh;
     opacity: 0;
     transform: translateY(0);
-    -webkit-transition: opacity 0.5s, transform 0.5s;
+    -webkit-transition: opacity 0.5s, transform 0.5s, height 0.5s;
 }
 
 .tabs .tab {
