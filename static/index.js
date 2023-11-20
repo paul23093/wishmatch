@@ -130,12 +130,16 @@ function openTab(tabName, el=null) {
 
     document.getElementById(tabName).style.display = "grid";
     if (el !== null) {
-        document.getElementById("tabs").style.display = "flex";
-        document.getElementById("pageTitle").style.display = "none";
+        document.getElementById("tabs").style.opacity = "1";
+        document.getElementById("tabs").style.transform = "translateY(0)";
+        document.getElementById("pageTitle").style.opacity = "0";
+        document.getElementById("pageTitle").style.transform = "translateY(-100%)";
         el.classList.add("active");
     } else {
-        document.getElementById("tabs").style.display = "none";
-        document.getElementById("pageTitle").style.display = "flex";
+        document.getElementById("tabs").style.opacity = "0";
+        document.getElementById("tabs").style.transform = "translateY(100%)";
+        document.getElementById("pageTitle").style.opacity = "1";
+        document.getElementById("pageTitle").style.transform = "translateY(0)";
     }
 }
 
