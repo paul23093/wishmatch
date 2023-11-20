@@ -21,7 +21,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 20%;
+    height: 20vh;
     opacity: 0;
     transform: translateY(0);
     -webkit-transition: opacity 0.5s, transform 0.5s;
@@ -116,7 +116,7 @@ body {
     justify-content: center;
     align-items: center;
     opacity: 0;
-    height: 20%;
+    height: 20vh;
     transform: translateX(20%);
     -webkit-transition: opacity 0.5s, transform 0.5s, height 0.5s;
 }
@@ -133,7 +133,7 @@ body {
     user-select: none;
     cursor: pointer;
     opacity: 0;
-    height: 20%;
+    height: 20vh;
     transform: translateX(-20%);
     -webkit-transition: opacity 0.5s, transform 0.5s, height 0.5s;
 }
