@@ -187,7 +187,7 @@ async function load() {
         }
     } else {
         let tabs = document.getElementById("tabs");
-        tabs.style.display = "flex";
+        tabs.style.transform = "translateY(0)";
         tabs.style.opacity = "1";
         const userInfo = await getUserInfo();
         if (userInfo != null) {
