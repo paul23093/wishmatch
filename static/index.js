@@ -133,11 +133,11 @@ function openTab(tabName, el=null) {
         document.getElementById("tabs").style.opacity = "1";
         document.getElementById("tabs").style.transform = "translateY(0)";
         document.getElementById("pageTitle").style.opacity = "0";
-        document.getElementById("pageTitle").style.transform = "translateY(-100%)";
+        document.getElementById("pageTitle").style.transform = "translateY(-20%)";
         el.classList.add("active");
     } else {
         document.getElementById("tabs").style.opacity = "0";
-        document.getElementById("tabs").style.transform = "translateY(100%)";
+        document.getElementById("tabs").style.transform = "translateY(20%)";
         document.getElementById("pageTitle").style.opacity = "1";
         document.getElementById("pageTitle").style.transform = "translateY(0)";
     }

@@ -13,7 +13,7 @@ body {
     justify-content: center;
     align-items: center;
     opacity: 0;
-    transform: translateX(20%);
+    transform: translateY(20%);
     -webkit-transition: opacity 0.5s, transform 0.5s;
 }
 
@@ -60,7 +60,7 @@ body {
     justify-content: center;
     align-items: center;
     opacity: 0;
-    transform: translateY(100%);
+    transform: translateY(20%);
     transition: opacity 0.5s, transform 0.5s;
 }
 
