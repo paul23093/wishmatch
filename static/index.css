@@ -21,7 +21,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 5px;
+    height: 0;
     opacity: 0;
     transform: translateY(0);
     -webkit-transition: opacity 0.5s, transform 0.5s, height 0.5s;
