@@ -7,6 +7,7 @@ body {
 }
 
 .center {
+    width: 80vw;
     margin: auto;
     position: relative;
     display: flex;
@@ -21,7 +22,7 @@ body {
     justify-content: center;
     align-items: center;
     opacity: 0;
-    transform: translateY(50%);
+    transform: translateY(20%);
     -webkit-transition: opacity 0.5s, transform 0.5s;
 }
 
@@ -69,7 +70,7 @@ body {
     justify-content: center;
     align-items: center;
     opacity: 0;
-    transform: translateY(50%);
+    transform: translateY(20%);
     transition: opacity 0.5s, transform 0.5s;
     z-index: 1;
 }

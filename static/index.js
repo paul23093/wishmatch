@@ -136,14 +136,14 @@ function openTab(tabName, el=null) {
             document.getElementById("tabs").style.transform = "translateY(0)";
         }, 0);
         document.getElementById("pageTitle").style.opacity = "0";
-        document.getElementById("pageTitle").style.transform = "translateY(50%)";
+        document.getElementById("pageTitle").style.transform = "translateY(20%)";
         setTimeout(() => {
           document.getElementById("pageTitle").style.display = 'none';
         }, 500);
         el.classList.add("active");
     } else {
         document.getElementById("tabs").style.opacity = "0";
-        document.getElementById("tabs").style.transform = "translateY(-50%)";
+        document.getElementById("tabs").style.transform = "translateY(-20%)";
         setTimeout(() => {
           document.getElementById("tabs").style.display = 'none';
         }, 500);
