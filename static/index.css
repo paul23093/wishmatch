@@ -9,7 +9,6 @@ body {
 .center {
     margin: auto;
     position: relative;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
