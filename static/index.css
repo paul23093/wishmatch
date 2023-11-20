@@ -7,6 +7,7 @@ body {
 }
 
 .center {
+    width: 80vw;
     margin: auto;
     position: relative;
     display: flex;
@@ -20,11 +21,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 0;
-    width: 0;
     opacity: 0;
     transform: translateY(0);
-    -webkit-transition: opacity 0.5s, transform 0.5s, height 0.5s, width 0.5s;
+    -webkit-transition: opacity 0.5s, transform 0.5s;
 }
 
 .tabs .tab {
@@ -116,9 +115,8 @@ body {
     justify-content: center;
     align-items: center;
     opacity: 0;
-    max-height: 20vh;
     transform: translateX(20%);
-    -webkit-transition: opacity 0.5s, transform 0.5s, max-height 0.5s;
+    -webkit-transition: opacity 0.5s, transform 0.5s;
 }
 
 .chat-photo img {
@@ -133,9 +131,8 @@ body {
     user-select: none;
     cursor: pointer;
     opacity: 0;
-    max-height: 20vh;
     transform: translateX(-20%);
-    -webkit-transition: opacity 0.5s, transform 0.5s, max-height 0.5s;
+    -webkit-transition: opacity 0.5s, transform 0.5s;
 }
 
 .price-block {
