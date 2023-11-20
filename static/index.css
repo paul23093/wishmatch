@@ -16,7 +16,6 @@ body {
 }
 
 .tabs {
-    margin: auto;
     position: absolute;
     display: flex;
     justify-content: center;
