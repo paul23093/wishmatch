@@ -8,6 +8,8 @@ body {
 
 .center {
     margin: auto;
+    position: relative;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,7 +18,7 @@ body {
 
 .tabs {
     margin: auto;
-    overflow: hidden;
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,6 +65,7 @@ body {
 
 .page-title {
     margin: auto;
+    position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -70,6 +73,7 @@ body {
     opacity: 0;
     transform: translateY(20%);
     transition: opacity 0.5s, transform 0.5s;
+    z-index: 1;
 }
 
 .page-title #title {
