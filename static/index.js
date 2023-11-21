@@ -514,8 +514,7 @@ async function editWish(id) {
 		    })
 	    }
     ).then(function() {
-        let editWishCallback = () => editWish(id);
-        Telegram.WebApp.MainButton.offClick(editWishCallback);
+        Telegram.WebApp.MainButton.offClick(function () {editWish(id);});
         Telegram.WebApp.MainButton.hideProgress();
     });
     window.location.replace(document.referrer);
@@ -821,6 +820,8 @@ function buildWishForm(wish=null) {
     Telegram.WebApp.BackButton.offClick(backToUsersCallback);
     Telegram.WebApp.BackButton.offClick(hideWishDetailsCallback);
     Telegram.WebApp.BackButton.offClick(hideWishFormCallback);
+    Telegram.WebApp.MainButton.offClick(addWish);
+    Telegram.WebApp.MainButton.onClick(function () {editWish(wish.id);});
 
     Telegram.WebApp.BackButton.onClick(hideWishFormCallback);
     Telegram.WebApp.BackButton.show();
@@ -952,8 +953,7 @@ function buildWishForm(wish=null) {
         wishCurrencyInput.value = wish.currency;
 
         Telegram.WebApp.MainButton.text = "Save";
-        let editWishCallback = () => editWish(wish.id);
-        Telegram.WebApp.MainButton.onClick(editWishCallback);
+        Telegram.WebApp.MainButton.onClick(function () {editWish(wish.id);});
     } else {
         Telegram.WebApp.MainButton.text = "Add";
         Telegram.WebApp.MainButton.onClick(addWish);
