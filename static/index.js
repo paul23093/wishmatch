@@ -469,7 +469,7 @@ async function addWish() {
 		    })
 	    }
     ).then(function() {
-        Telegram.WebApp.MainButton.offClick(function () {addWish();});
+        Telegram.WebApp.MainButton.offClick(addWish);
         Telegram.WebApp.MainButton.hideProgress();
     });
     window.location.replace(document.referrer);
@@ -514,7 +514,7 @@ async function editWish(id) {
 		    })
 	    }
     ).then(function() {
-        Telegram.WebApp.MainButton.offClick(function () {editWish(id);});
+        Telegram.WebApp.MainButton.offClick(editWish, id);
         Telegram.WebApp.MainButton.hideProgress();
     });
     window.location.replace(document.referrer);
@@ -951,10 +951,10 @@ function buildWishForm(wish=null) {
         wishCurrencyInput.value = wish.currency;
 
         Telegram.WebApp.MainButton.text = "Save";
-        Telegram.WebApp.MainButton.onClick(function () {editWish(wish.id);});
+        Telegram.WebApp.MainButton.onClick(editWish, wish.id);
     } else {
         Telegram.WebApp.MainButton.text = "Add";
-        Telegram.WebApp.MainButton.onClick(function () {addWish();});
+        Telegram.WebApp.MainButton.onClick(addWish);
     }
 
     if (wishTitleInput.value === null || wishTitleInput.value === "") {
