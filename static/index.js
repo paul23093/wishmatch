@@ -1038,14 +1038,14 @@ async function openChatUsers(chat_id) {
     title.style.transform = "translateY(0)";
     title.style.opacity = "1";
 
-    let subtitleText = users.length + " user";
-    if (users.length > 1) {
-        subtitleText += "s";
-    }
-    let subtitle = document.getElementById("subtitle");
-    subtitle.textContent = subtitleText;
-    subtitle.style.transform = "translateY(0)";
-    subtitle.style.opacity = "1";
+    // let subtitleText = users.length + " user";
+    // if (users.length > 1) {
+    //     subtitleText += "s";
+    // }
+    // let subtitle = document.getElementById("subtitle");
+    // subtitle.textContent = subtitleText;
+    // subtitle.style.transform = "translateY(0)";
+    // subtitle.style.opacity = "1";
 
     // let chatPhoto = document.getElementById("chat-photo");
     // if (chat.tg_chat_photo != null) {
