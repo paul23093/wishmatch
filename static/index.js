@@ -156,6 +156,11 @@ function openTab(tabName, el=null) {
 }
 
 
+function onTelegramAuth(user) {
+    alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
+  }
+
+
 async function load() {
     Telegram.WebApp.ready();
     Telegram.WebApp.disableClosingConfirmation();
